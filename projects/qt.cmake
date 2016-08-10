@@ -45,7 +45,6 @@ set(qt_options
     -skip qtcanvas3d
     -skip qtserialport
     -skip qtwayland
-    -skip qttest
 )
 
 if(BUILD_OS_OSX)
