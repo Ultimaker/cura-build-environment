@@ -1,0 +1,13 @@
+diff -r adb1d5716a84 cx_Freeze/freezer.py
+--- a/cx_Freeze/freezer.py	Tue Jul 19 21:59:30 2016 -0600
++++ b/cx_Freeze/freezer.py	Thu Aug 11 01:30:34 2016 +0200
+@@ -285,6 +285,9 @@
+                     if len(parts) != 2:
+                         continue
+                     dependentFile = parts[dependentFileIndex].strip()
++                    if dependentFile == os.path.basename(path):
++                        continue
++
+                     if dependentFile in ("not found", "(file not found)"):
+                         fileName = parts[0]
+                         if fileName not in self.linkerWarnings:
