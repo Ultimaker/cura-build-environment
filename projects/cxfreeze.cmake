@@ -1,5 +1,5 @@
 ExternalProject_Add(cx_Freeze
-    HG_REPOSITORY https://bitbucket.org/anthony_tuininga/cx_freeze
+    URL https://bitbucket.org/anthony_tuininga/cx_freeze/get/4.3.4.tar.gz
     CONFIGURE_COMMAND ""
     PATCH_COMMAND hg import --no-commit ${CMAKE_CURRENT_LIST_DIR}/cxfreeze_exclude_self.patch
     BUILD_COMMAND ${PYTHON_EXECUTABLE} setup.py build
