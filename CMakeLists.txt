@@ -13,7 +13,14 @@ include(SetProjectDependencies)
 # Build projects step
 add_custom_target(projects ALL COMMENT "Building Projects...")
 
-set(PYTHON_EXECUTABLE PATH=${CMAKE_INSTALL_PREFIX}/bin/:$ENV{PATH} LD_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/lib/ PYTHONPATH=${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages/:${CMAKE_INSTALL_PREFIX}/lib/python3.5 python3)
+set(ENV{PATH} ${CMAKE_INSTALL_PREFIX}/bin/:$ENV{PATH} CACHE STRING "PATH" FORCE)
+set(ENV{LD_LIBRARY_PATH} ${CMAKE_INSTALL_PREFIX}/lib/)
+if(EXISTS $ENV{PYTHONPATH})
+    set(ENV{PYTHONPATH} ${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages/:${CMAKE_INSTALL_PREFIX}/lib/python3.5:${CMAKE_INSTALL_PREFIX}/lib/python3.5/site-packages:$ENV{PYTHONPATH})
+else()
+    set(ENV{PYTHONPATH} ${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages/:${CMAKE_INSTALL_PREFIX}/lib/python3.5:${CMAKE_INSTALL_PREFIX}/lib/python3.5/site-packages)
+endif()
+set(PYTHON_EXECUTABLE python3)
 
 file(GLOB _projects projects/*.cmake)
 foreach(_project ${_projects})
