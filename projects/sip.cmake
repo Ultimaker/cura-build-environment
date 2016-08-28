@@ -1,4 +1,3 @@
-set(sip_command "")
 if(BUILD_OS_WINDOWS)
     set(sip_command
         ${PYTHON_EXECUTABLE}
@@ -16,12 +15,14 @@ elseif(BUILD_OS_LINUX)
         ${PYTHON_EXECUTABLE}
         configure.py
         --bindir=${CMAKE_INSTALL_PREFIX}/bin
-        --destdir=${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages
+        --destdir=${CMAKE_INSTALL_PREFIX}/lib/python3.5/site-packages
         --incdir=${CMAKE_INSTALL_PREFIX}/include
         --sipdir=${CMAKE_INSTALL_PREFIX}/share/sip
     )
 elseif(BUILD_OS_OSX)
     set(sip_command ${PYTHON_EXECUTABLE} configure.py --sysroot=${CMAKE_INSTALL_PREFIX})
+else()
+    set(sip_command "")
 endif()
 
 ExternalProject_Add(Sip
