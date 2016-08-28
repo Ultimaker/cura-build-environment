@@ -3,7 +3,7 @@ ExternalProject_Add(PySerial
     URL_MD5 2f72100de3e410b36d575e12e82e9d27
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ${PYTHON_EXECUTABLE} setup.py build
-    INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install
+    INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --old-and-unmanageable
     BUILD_IN_SOURCE 1
 )
 
