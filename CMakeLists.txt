@@ -20,7 +20,7 @@ if(EXISTS $ENV{PYTHONPATH})
 else()
     set(ENV{PYTHONPATH} ${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages/:${CMAKE_INSTALL_PREFIX}/lib/python3.5:${CMAKE_INSTALL_PREFIX}/lib/python3.5/site-packages)
 endif()
-set(PYTHON_EXECUTABLE python3)
+set(PYTHON_EXECUTABLE LD_LIBRARY_PATH=$ENV{LD_LIBRARY_PATH} PATH=$ENV{PATH} PYTHONPATH=$ENV{PYTHONPATH} python3)
 
 file(GLOB _projects projects/*.cmake)
 foreach(_project ${_projects})
