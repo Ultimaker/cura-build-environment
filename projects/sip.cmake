@@ -1,6 +1,6 @@
 if(BUILD_OS_WINDOWS)
     set(sip_command
-        ${PYTHON_EXECUTABLE}
+        ${PYTHON_EXECUTABLE_PREFIXED}
         configure.py
         --platform win32-g++
         --bindir=${CMAKE_INSTALL_PREFIX}/bin
@@ -12,7 +12,7 @@ if(BUILD_OS_WINDOWS)
     )
 elseif(BUILD_OS_LINUX)
     set(sip_command
-        ${PYTHON_EXECUTABLE}
+        ${PYTHON_EXECUTABLE_PREFIXED}
         configure.py
         --bindir=${CMAKE_INSTALL_PREFIX}/bin
         --destdir=${CMAKE_INSTALL_PREFIX}/lib/python3.5/site-packages
@@ -20,7 +20,11 @@ elseif(BUILD_OS_LINUX)
         --sipdir=${CMAKE_INSTALL_PREFIX}/share/sip
     )
 elseif(BUILD_OS_OSX)
-    set(sip_command ${PYTHON_EXECUTABLE} configure.py --sysroot=${CMAKE_INSTALL_PREFIX})
+    set(sip_command
+        ${PYTHON_EXECUTABLE_PREFIXED}
+        configure.py
+        --sysroot=${CMAKE_INSTALL_PREFIX}
+    )
 else()
     set(sip_command "")
 endif()

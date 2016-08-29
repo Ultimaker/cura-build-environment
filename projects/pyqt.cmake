@@ -1,7 +1,7 @@
 set(pyqt_command "")
 if(BUILD_OS_WINDOWS)
     set(pyqt_command
-        ${PYTHON_EXECUTABLE} configure.py
+        ${PYTHON_EXECUTABLE_PREFIXED} configure.py
         --sip ${CMAKE_INSTALL_PREFIX}/bin/sip.exe
         --confirm-license
         --spec win32-g++
@@ -13,7 +13,7 @@ if(BUILD_OS_WINDOWS)
     )
 elseif(BUILD_OS_LINUX)
     set(pyqt_command
-        ${PYTHON_EXECUTABLE} configure.py
+        ${PYTHON_EXECUTABLE_PREFIXED} configure.py
         --sip ${CMAKE_INSTALL_PREFIX}/bin/sip
         --qmake ${CMAKE_INSTALL_PREFIX}/bin/qmake
         --confirm-license
@@ -23,7 +23,7 @@ elseif(BUILD_OS_LINUX)
     )
 elseif(BUILD_OS_OSX)
     set(pyqt_command
-        ${PYTHON_EXECUTABLE} configure.py
+        ${PYTHON_EXECUTABLE_PREFIXED} configure.py
         --sysroot ${CMAKE_INSTALL_PREFIX}
         --qmake ${CMAKE_INSTALL_PREFIX}/bin/qmake
         --sip ${CMAKE_INSTALL_PREFIX}/bin/sip
