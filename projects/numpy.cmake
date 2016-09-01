@@ -7,4 +7,4 @@ ExternalProject_Add(NumPy
     BUILD_IN_SOURCE 1
 )
 
-SetProjectDependencies(TARGET NumPy DEPENDS Python OpenBLAS)
+SetProjectDependencies(TARGET NumPy DEPENDS setuptools OpenBLAS)

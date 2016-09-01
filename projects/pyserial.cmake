@@ -7,4 +7,4 @@ ExternalProject_Add(PySerial
     BUILD_IN_SOURCE 1
 )
 
-SetProjectDependencies(TARGET PySerial DEPENDS Python)
+SetProjectDependencies(TARGET PySerial DEPENDS setuptools)
