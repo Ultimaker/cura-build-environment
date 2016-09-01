@@ -7,4 +7,4 @@ ExternalProject_Add(PythonNetifaces
     BUILD_IN_SOURCE 1
 )
 
-SetProjectDependencies(TARGET PythonNetifaces DEPENDS Python) 
+SetProjectDependencies(TARGET PythonNetifaces DEPENDS setuptools)

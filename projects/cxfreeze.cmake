@@ -7,4 +7,4 @@ ExternalProject_Add(cx_Freeze
     BUILD_IN_SOURCE 1
 )
 
-SetProjectDependencies(TARGET cx_Freeze DEPENDS Python)
+SetProjectDependencies(TARGET cx_Freeze DEPENDS setuptools)

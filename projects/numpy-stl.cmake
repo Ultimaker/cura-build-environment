@@ -7,4 +7,4 @@ ExternalProject_Add(NumpySTL
     BUILD_IN_SOURCE 1
 )
 
-SetProjectDependencies(TARGET NumpySTL DEPENDS Python NumPy)
+SetProjectDependencies(TARGET NumpySTL DEPENDS setuptools NumPy)
