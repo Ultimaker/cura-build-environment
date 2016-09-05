@@ -1,10 +1,10 @@
-set(qt_url http://download.qt.io/official_releases/qt/5.6/5.6.1-1/single/qt-everywhere-opensource-src-5.6.1-1.tar.gz)
-set(qt_md5 8fdec6d657bc370bd3183d8fe8e9c47a)
-
 # Qt uses different sources for Windows
 if(BUILD_OS_WINDOWS)
     set(qt_url http://download.qt.io/official_releases/qt/5.6/5.6.1-1/single/qt-everywhere-opensource-src-5.6.1-1.zip)
     set(qt_md5 9d7ea0cadcec7b5a63e8e83686756978)
+else()
+    set(qt_url http://download.qt.io/official_releases/qt/5.6/5.6.1-1/single/qt-everywhere-opensource-src-5.6.1-1.tar.gz)
+    set(qt_md5 8fdec6d657bc370bd3183d8fe8e9c47a)
 endif()
 
 set(qt_options
