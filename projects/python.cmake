@@ -11,7 +11,7 @@ endif()
 
 if(BUILD_OS_LINUX)
     # Set a proper RPATH so everything depending on Python does not need LD_LIBRARY_PATH
-    set(python_configure_command LDFLAG=-rpath=${CMAKE_INSTALL_PREFIX}/lib ${python_configure_command})
+    set(python_configure_command LDFLAGS=-Wl,-rpath=${CMAKE_INSTALL_PREFIX}/lib ${python_configure_command})
 endif()
 
 ExternalProject_Add(Python
