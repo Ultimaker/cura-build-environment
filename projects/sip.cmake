@@ -11,16 +11,7 @@ if(BUILD_OS_WINDOWS)
         "CFLAGS+=${CMAKE_C_FLAGS}"
         "CXXFLAGS+=${CMAKE_CXX_FLAGS}"
     )
-elseif(BUILD_OS_LINUX)
-    set(sip_command
-        ${PYTHON_EXECUTABLE}
-        configure.py
-        --bindir=${CMAKE_INSTALL_PREFIX}/bin
-        --destdir=${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages
-        --incdir=${CMAKE_INSTALL_PREFIX}/include
-        --sipdir=${CMAKE_INSTALL_PREFIX}/share/sip
-    )
-elseif(BUILD_OS_OSX)
+else()
     set(sip_command ${PYTHON_EXECUTABLE} configure.py --sysroot=${CMAKE_INSTALL_PREFIX})
 endif()
 
