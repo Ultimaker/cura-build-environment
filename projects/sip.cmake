@@ -22,4 +22,9 @@ ExternalProject_Add(Sip
     BUILD_IN_SOURCE 1
 )
 
-SetProjectDependencies(TARGET Sip DEPENDS Python)
+if(BUILD_OS_WINDOWS)
+    # Building Sip on Windows without Python just to provide headers to build Arcus...
+    SetProjectDependencies(TARGET Sip)
+else()
+    SetProjectDependencies(TARGET Sip DEPENDS Python)
+endif()
