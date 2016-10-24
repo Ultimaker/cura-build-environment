@@ -1,10 +1,11 @@
-set(qt_url http://download.qt.io/official_releases/qt/5.6/5.6.1-1/single/qt-everywhere-opensource-src-5.6.1-1.tar.gz)
-set(qt_md5 8fdec6d657bc370bd3183d8fe8e9c47a)
+set(qt_url http://download.qt.io/official_releases/qt/5.6/5.6.2/single/qt-everywhere-opensource-src-5.6.2.tar.gz)
+set(qt_md5 1b1b1f929d0cd83680354a0c83d8e945)
 
 # Qt uses different sources for Windows
+# However, not used anyway, because PyQt5 already comes with it's own Qt libraries
 if(BUILD_OS_WINDOWS)
-    set(qt_url http://download.qt.io/official_releases/qt/5.6/5.6.1-1/single/qt-everywhere-opensource-src-5.6.1-1.zip)
-    set(qt_md5 9d7ea0cadcec7b5a63e8e83686756978)
+    set(qt_url http://download.qt.io/official_releases/qt/5.6/5.6.2/single/qt-everywhere-opensource-src-5.6.2.zip)
+    set(qt_md5 b684a2f37b1beebd421b3b7d1eca15dc)
 endif()
 
 set(qt_options
@@ -55,11 +56,15 @@ elseif(BUILD_OS_LINUX)
     list(APPEND qt_options -no-rpath -qt-xcb)
 endif()
 
-ExternalProject_Add(Qt
-    URL ${qt_url}
-    URL_MD5 ${qt_md5}
-    CONFIGURE_COMMAND ./configure ${qt_options}
-    BUILD_IN_SOURCE 1
-)
-
-SetProjectDependencies(TARGET Qt)
+# Using Qt libraries shipped via PyQt on Windows
+# (For more details take a look at the PyQt recipe)
+# Other OSs will build it manually...
+if(NOT BUILD_OS_WINDOWS)
+    ExternalProject_Add(Qt
+        URL ${qt_url}
+        URL_MD5 ${qt_md5}
+        CONFIGURE_COMMAND ${qt_configure_command} ${qt_options}
+        BUILD_IN_SOURCE 1
+    )
+    SetProjectDependencies(TARGET Qt)
+endif()
