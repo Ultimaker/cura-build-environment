@@ -7,6 +7,8 @@ ExternalProject_Add(python-utils
     BUILD_IN_SOURCE 1
 )
 
+SetProjectDependencies(TARGET python-utils DEPENDS Python)
+
 ExternalProject_Add(NumpySTL
     URL https://github.com/WoLpH/numpy-stl/archive/v1.9.0.tar.gz
     URL_MD5 cda2531edecff4468a4bbe78c6a2833b
@@ -16,4 +18,4 @@ ExternalProject_Add(NumpySTL
     BUILD_IN_SOURCE 1
 )
 
-SetProjectDependencies(TARGET NumpySTL DEPENDS Python NumPy python-utils)
+SetProjectDependencies(TARGET NumpySTL DEPENDS NumPy python-utils)
