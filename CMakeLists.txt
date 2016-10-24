@@ -10,7 +10,11 @@ include(GNUInstallDirs)
 include(BuildPlatformDetection)
 include(SetProjectDependencies)
 
-set(PYTHON_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/python3)
+if(BUILD_OS_WINDOWS)
+    set(PYTHON_EXECUTABLE python)
+else()
+    set(PYTHON_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/python3)
+endif()
 
 # Build projects step
 add_custom_target(projects ALL COMMENT "Building Projects...")
