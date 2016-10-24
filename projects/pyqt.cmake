@@ -21,11 +21,15 @@ else()
     )
 endif()
 
-ExternalProject_Add(PyQt
-    URL http://downloads.sourceforge.net/project/pyqt/PyQt5/PyQt-5.6/PyQt5_gpl-5.6.tar.gz
-    URL_MD5 dbfc885c0548e024ba5260c4f44e0481
-    CONFIGURE_COMMAND ${pyqt_command}
-    BUILD_IN_SOURCE 1
-)
-
-SetProjectDependencies(TARGET PyQt DEPENDS Qt Sip)
+# Using PyQt installed via pip on Windows
+# Eg. "pip3 install PyQt"
+# Other OSs will build it manually...
+if(NOT BUILD_OS_WINDOWS)
+    ExternalProject_Add(PyQt
+        URL http://downloads.sourceforge.net/project/pyqt/PyQt5/PyQt-5.6/PyQt5_gpl-5.6.tar.gz
+        URL_MD5 dbfc885c0548e024ba5260c4f44e0481
+        CONFIGURE_COMMAND ${pyqt_command}
+        BUILD_IN_SOURCE 1
+    )
+    SetProjectDependencies(TARGET PyQt DEPENDS Qt Sip)
+endif()
