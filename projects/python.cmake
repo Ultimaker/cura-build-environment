@@ -14,9 +14,10 @@ if(BUILD_OS_LINUX)
     set(python_configure_command LDFLAGS=-Wl,-rpath=${CMAKE_INSTALL_PREFIX}/lib ${python_configure_command})
 endif()
 
-if(BUILD_OS_WINDOWS)
-    add_custom_target(Python)
-else()
+# Using Python pre-installed on Windows
+# -> Visit https://www.python.org/downloads/
+# Other OSs will build it manually...
+if(NOT BUILD_OS_WINDOWS)
     ExternalProject_Add(Python
         URL https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz
         URL_MD5 3fe8434643a78630c61c6464fe2e7e72
@@ -24,6 +25,7 @@ else()
         CONFIGURE_COMMAND ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --with-threads --without-pymalloc
         BUILD_IN_SOURCE 1
     )
+    SetProjectDependencies(TARGET Python)
 endif()
 
-SetProjectDependencies(TARGET Python)
+
