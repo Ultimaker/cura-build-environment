@@ -1,4 +1,4 @@
-project(cura-build-environment)
+project(cura-build-environment NONE)
 
 cmake_minimum_required(VERSION 2.8.12)
 
