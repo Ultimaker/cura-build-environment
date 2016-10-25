@@ -63,7 +63,7 @@ if(NOT BUILD_OS_WINDOWS)
     ExternalProject_Add(Qt
         URL ${qt_url}
         URL_MD5 ${qt_md5}
-        CONFIGURE_COMMAND ${qt_configure_command} ${qt_options}
+        CONFIGURE_COMMAND ./configure ${qt_options}
         BUILD_IN_SOURCE 1
     )
     SetProjectDependencies(TARGET Qt)
