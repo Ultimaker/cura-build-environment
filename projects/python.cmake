@@ -27,5 +27,3 @@ if(NOT BUILD_OS_WINDOWS)
     )
     SetProjectDependencies(TARGET Python)
 endif()
-
-

@@ -1,5 +1,5 @@
-set(scipy_build_command ${PYTHON_EXECUTABLE} setup.py build)
-set(scipy_install_command ${PYTHON_EXECUTABLE} setup.py install)
+set(scipy_build_command ${PYTHON_EXECUTABLE_PREFIXED} setup.py build)
+set(scipy_install_command ${PYTHON_EXECUTABLE_PREFIXED} setup.py install)
 
 if(BUILD_OS_OSX)
     set(scipy_build_command env LDFLAGS="-undefined dynamic_lookup" ${scipy_build_command})
