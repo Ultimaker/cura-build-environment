@@ -22,4 +22,6 @@ if(BUILD_OS_LINUX)
         COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/AppImageKit-prefix/src/AppImageKit/AppImageMonitor   ${CMAKE_INSTALL_PREFIX}/bin/
         COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/AppImageKit-prefix/src/AppImageKit/AppRun            ${CMAKE_INSTALL_PREFIX}/bin/
     )
+
+    SetProjectDependencies(TARGET AppImageKit)
 endif()
