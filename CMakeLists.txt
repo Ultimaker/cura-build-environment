@@ -33,7 +33,7 @@ if(BUILD_OS_LINUX)
 elseif(BUILD_OS_WINDOWS)
     # Minimalistic preinstalled Python on Windows:
     set(PYTHON_EXECUTABLE python)
-    set(PYTHON_EXECUTABLE_PREFIXED PYTHONPATH=$ENV{PYTHONPATH} ${PYTHON_EXECUTABLE})
+    set(PYTHON_EXECUTABLE_PREFIXED ${PYTHON_EXECUTABLE})
 else()
     # All other OSs like OSX
     set(PYTHON_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/python3)
