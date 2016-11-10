@@ -1,7 +1,7 @@
 set(pyqt_command "")
 if(BUILD_OS_WINDOWS)
     set(pyqt_command
-        ${PYTHON_EXECUTABLE_PREFIXED} configure.py
+        ${PYTHON_EXECUTABLE} configure.py
         --sip ${CMAKE_INSTALL_PREFIX}/bin/sip.exe
         --confirm-license
         --spec win32-g++
@@ -11,20 +11,9 @@ if(BUILD_OS_WINDOWS)
         "CFLAGS+=${CMAKE_C_FLAGS}"
         "CXXFLAGS+=${CMAKE_CXX_FLAGS}"
     )
-# HAS THIS BEEN REMOVED BEFORE?
-#elseif(BUILD_OS_LINUX)
-#    set(pyqt_command
-#        ${PYTHON_EXECUTABLE_PREFIXED} configure.py
-#        --sip ${CMAKE_INSTALL_PREFIX}/bin/sip
-#        --qmake ${CMAKE_INSTALL_PREFIX}/bin/qmake
-#        --confirm-license
-#        --destdir ${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages
-#        --bindir ${CMAKE_INSTALL_PREFIX}/bin
-#        --sipdir ${CMAKE_INSTALL_PREFIX}/share/sip
-#    )
 else()
     set(pyqt_command
-        ${PYTHON_EXECUTABLE_PREFIXED} configure.py
+        ${PYTHON_EXECUTABLE} configure.py
         --sysroot ${CMAKE_INSTALL_PREFIX}
         --qmake ${CMAKE_INSTALL_PREFIX}/bin/qmake
         --sip ${CMAKE_INSTALL_PREFIX}/bin/sip

@@ -20,11 +20,9 @@ include(SetProjectDependencies)
 if(BUILD_OS_WINDOWS)
     # Minimalistic preinstalled Python on Windows:
     find_package(PythonInterp)
-    set(PYTHON_EXECUTABLE_PREFIXED ${PYTHON_EXECUTABLE})
 else()
     # All other OSs like OSX
     set(PYTHON_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/python3)
-    set(PYTHON_EXECUTABLE_PREFIXED PYTHONPATH=$ENV{PYTHONPATH} ${PYTHON_EXECUTABLE})
 endif()
 
 # Build projects step

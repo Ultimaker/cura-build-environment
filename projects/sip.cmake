@@ -1,6 +1,6 @@
 if(BUILD_OS_WINDOWS)
     set(sip_command
-        ${PYTHON_EXECUTABLE_PREFIXED}
+        ${PYTHON_EXECUTABLE}
         configure.py
         --platform win32-g++
         --bindir=${CMAKE_INSTALL_PREFIX}/bin
@@ -12,7 +12,7 @@ if(BUILD_OS_WINDOWS)
     )
 elseif(BUILD_OS_LINUX)
     set(sip_command
-        ${PYTHON_EXECUTABLE_PREFIXED}
+        ${PYTHON_EXECUTABLE}
         configure.py
         --bindir=${CMAKE_INSTALL_PREFIX}/bin
         --destdir=${CMAKE_INSTALL_PREFIX}/lib/python3.5/site-packages
@@ -21,7 +21,7 @@ elseif(BUILD_OS_LINUX)
     )
 elseif(BUILD_OS_OSX)
     set(sip_command
-        ${PYTHON_EXECUTABLE_PREFIXED}
+        ${PYTHON_EXECUTABLE}
         configure.py
         --sysroot=${CMAKE_INSTALL_PREFIX}
     )
@@ -37,8 +37,7 @@ ExternalProject_Add(Sip
 )
 
 if(BUILD_OS_WINDOWS)
-    # Building Sip on Windows without Python just to provide headers to build Arcus...
-    SetProjectDependencies(TARGET Sip)
+    message(STATUS "Building Sip on Windows without Python just to provide headers to build Arcus...")
 else()
     SetProjectDependencies(TARGET Sip DEPENDS Python)
 endif()
