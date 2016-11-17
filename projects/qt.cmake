@@ -3,8 +3,8 @@ set(qt_md5 9a46cce61fc64c20c3ac0a0e0fa41b42)
 
 # Qt uses different sources for Windows
 if(BUILD_OS_WINDOWS)
-    set(qt_url http://download.qt.io/official_releases/qt/5.6/5.6.1-1/single/qt-everywhere-opensource-src-5.6.1-1.zip)
-    set(qt_md5 9d7ea0cadcec7b5a63e8e83686756978)
+    set(qt_url http://download.qt.io/official_releases/qt/5.7/5.7.0/single/qt-everywhere-opensource-src-5.7.0.zip)
+    set(qt_md5 c5d4bb1d015c2cfd37d183e5d201051f)
 endif()
 
 set(qt_options
