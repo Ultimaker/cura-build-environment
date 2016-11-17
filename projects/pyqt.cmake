@@ -24,8 +24,8 @@ else()
 endif()
 
 ExternalProject_Add(PyQt
-    URL http://downloads.sourceforge.net/project/pyqt/PyQt5/PyQt-5.6/PyQt5_gpl-5.6.tar.gz
-    URL_MD5 dbfc885c0548e024ba5260c4f44e0481
+    URL http://downloads.sourceforge.net/project/pyqt/PyQt5/PyQt-5.7/PyQt5_gpl-5.7.tar.gz
+    URL_MD5 e3dc21f31fd714659f0688e1eb31bacf
     CONFIGURE_COMMAND ${pyqt_command}
     BUILD_IN_SOURCE 1
 )
