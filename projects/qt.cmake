@@ -1,5 +1,5 @@
-set(qt_url http://download.qt.io/official_releases/qt/5.6/5.6.1-1/single/qt-everywhere-opensource-src-5.6.1-1.tar.gz)
-set(qt_md5 8fdec6d657bc370bd3183d8fe8e9c47a)
+set(qt_url http://download.qt.io/official_releases/qt/5.7/5.7.0/single/qt-everywhere-opensource-src-5.7.0.tar.gz)
+set(qt_md5 9a46cce61fc64c20c3ac0a0e0fa41b42)
 
 # Qt uses different sources for Windows
 if(BUILD_OS_WINDOWS)
@@ -14,6 +14,7 @@ set(qt_options
     -datadir ${CMAKE_INSTALL_PREFIX}/share
     -opensource
     -confirm-license
+    -no-gtk
     -nomake examples
     -nomake tests
     -nomake tools
@@ -29,7 +30,6 @@ set(qt_options
     -no-sql-tds
     -skip qtconnectivity
     -skip qtdoc
-    -skip qtenginio
     -skip qtlocation
     -skip qtmultimedia
     -skip qtscript
