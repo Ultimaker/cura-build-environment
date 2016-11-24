@@ -56,15 +56,9 @@ elseif(BUILD_OS_LINUX)
     list(APPEND qt_options -no-rpath -qt-xcb)
 endif()
 
-# Using Qt libraries shipped via PyQt on Windows
-# (For more details take a look at the PyQt recipe)
-# Other OSs will build it manually...
-if(NOT BUILD_OS_WINDOWS)
-    ExternalProject_Add(Qt
-        URL ${qt_url}
-        URL_MD5 ${qt_md5}
-        CONFIGURE_COMMAND ./configure ${qt_options}
-        BUILD_IN_SOURCE 1
-    )
-    SetProjectDependencies(TARGET Qt)
-endif()
+ExternalProject_Add(Qt
+    URL ${qt_url}
+    URL_MD5 ${qt_md5}
+    CONFIGURE_COMMAND ./configure ${qt_options}
+    BUILD_IN_SOURCE 1
+)
