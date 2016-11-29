@@ -23,7 +23,7 @@ if(BUILD_OS_WINDOWS)
 
     ExternalProject_Add_Step(Python ensurepip
         COMMAND ${CMAKE_INSTALL_PREFIX}/python/bin/python -m ensurepip
-        DEPENDEES install
+        DEPENDS install
     )
 
     SetProjectDependencies(TARGET Python DEPENDS OpenSSL)
