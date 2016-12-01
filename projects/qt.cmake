@@ -15,7 +15,6 @@ set(qt_options
     -datadir ${CMAKE_INSTALL_PREFIX}/share
     -opensource
     -confirm-license
-    -no-gtk
     -nomake examples
     -nomake tests
     -nomake tools
@@ -53,7 +52,7 @@ if(BUILD_OS_OSX)
 elseif(BUILD_OS_WINDOWS)
     list(APPEND qt_options -opengl desktop)
 elseif(BUILD_OS_LINUX)
-    list(APPEND qt_options -no-rpath -qt-xcb)
+    list(APPEND qt_options -no-gtk -no-rpath -qt-xcb)
 endif()
 
 ExternalProject_Add(Qt
