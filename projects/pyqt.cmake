@@ -3,9 +3,10 @@ if(BUILD_OS_WINDOWS)
     set(pyqt_command
         ${PYTHON_EXECUTABLE} configure.py
         --sip ${CMAKE_INSTALL_PREFIX}/bin/sip.exe
+        --qmake ${CMAKE_INSTALL_PREFIX}/bin/qmake.exe
         --confirm-license
-        --spec win32-g++
-        --destdir ${CMAKE_INSTALL_PREFIX}/lib/python3.4/site-packages
+        --spec win32-msvc2015
+        --destdir ${CMAKE_INSTALL_PREFIX}/lib/python3.5/site-packages
         --bindir ${CMAKE_INSTALL_PREFIX}/bin
         --sipdir ${CMAKE_INSTALL_PREFIX}/share/sip
         "CFLAGS+=${CMAKE_C_FLAGS}"
