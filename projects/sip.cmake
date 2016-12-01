@@ -2,7 +2,7 @@ if(BUILD_OS_WINDOWS)
     set(sip_command
         ${PYTHON_EXECUTABLE}
         configure.py
-        --platform win32-g++
+        --platform win32-msvc2015
         --bindir=${CMAKE_INSTALL_PREFIX}/bin
         --destdir=${CMAKE_INSTALL_PREFIX}/lib/python3.5/site-packages
         --incdir=${CMAKE_INSTALL_PREFIX}/include
