@@ -19,7 +19,7 @@ include(SetProjectDependencies)
 # OS-specific changes
 if(BUILD_OS_WINDOWS)
     # Minimalistic preinstalled Python on Windows:
-    set(PYTHON_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/python/bin/python.exe)
+    set(PYTHON_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/python.exe)
 else()
     # All other OSs like OSX
     set(PYTHON_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/python3)
