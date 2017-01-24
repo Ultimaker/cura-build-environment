@@ -1,0 +1,12 @@
+call "C:\Program Files\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86
+set _root=@CMAKE_INSTALL_PREFIX@\Qt-prefix\src\Qt
+set PATH=%_root%\qtbase\bin;%_root%\gnuwin32\bin;@CMAKE_INSTALL_PREFIX@\bin;@CMAKE_INSTALL_PREFIX@\python\bin;%PATH%
+set QMAKESPEC=win32-msvc2015
+set _root=
+
+set QTDIR=
+set QTSRC=
+
+set
+
+%*

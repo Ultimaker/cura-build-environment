@@ -1,0 +1,13 @@
+diff --git a/numpy/distutils/fcompiler/gnu.py b/numpy/distutils/fcompiler/gnu.py
+index 9ba5759..93bc0d2 100644
+--- a/numpy/distutils/fcompiler/gnu.py
++++ b/numpy/distutils/fcompiler/gnu.py
+@@ -328,8 +328,6 @@ class Gnu95FCompiler(GnuFCompiler):
+             if c_compiler and c_compiler.compiler_type == "msvc":
+                 if "gcc" in opt:
+                     i = opt.index("gcc")
+-                    opt.insert(i+1, "mingwex")
+-                    opt.insert(i+1, "mingw32")
+             # XXX: fix this mess, does not work for mingw
+             if is_win64():
+                 c_compiler = self.c_compiler
