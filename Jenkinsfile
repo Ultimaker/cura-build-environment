@@ -23,9 +23,15 @@ for(int i = 0; i < nodes.size(); ++i) {
             stage('Build') {
                 dir('build') {
                     if(isUnix()) {
+                        // Clean up the previous installation
+                        sh "rm -r /opt/ultimaker/cura-build-environment"
+                        // Build and install the new environment
                         sh "cmake .. -DCMAKE_INSTALL_PREFIX=/opt/ultimaker/cura-build-environment -DCMAKE_BUILD_TYPE=Release"
                         sh "make"
                     } else {
+                        // Clean up the previous installation
+                        bat "del /S /F /Q C:/cura-build-environment"
+                        // Build and install
                         bat "../env_win64.bat && cmake .. -DCMAKE_INSTALL_PREFIX=C:/cura-build-environment -DCMAKE_BUILD_TYPE=Release -G 'NMake Makefiles'"
                         bat "nmake"
                     }
