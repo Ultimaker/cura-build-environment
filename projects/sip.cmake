@@ -24,8 +24,8 @@ else()
 endif()
 
 ExternalProject_Add(Sip
-    URL http://downloads.sourceforge.net/project/pyqt/sip/sip-4.18/sip-4.18.zip
-    URL_MD5 e860d06782962fa02f81aeecba3d82a7
+    URL http://downloads.sourceforge.net/project/pyqt/sip/sip-4.19/sip-4.19.zip
+    URL_MD5 55f1903946a891164cf39ed00bbbc61c
     CONFIGURE_COMMAND ${sip_command}
     BUILD_IN_SOURCE 1
 )
