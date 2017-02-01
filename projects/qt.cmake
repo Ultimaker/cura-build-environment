@@ -44,6 +44,8 @@ set(qt_options
     -skip qtcanvas3d
     -skip qtserialport
     -skip qtwayland
+    -skip qtgamepad
+    -skip qtscxml
 )
 
 if(BUILD_OS_OSX)
