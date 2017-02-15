@@ -14,12 +14,29 @@ if(BUILD_OS_LINUX)
     set(python_configure_command LDFLAGS=-Wl,-rpath=${CMAKE_INSTALL_PREFIX}/lib ${python_configure_command})
 endif()
 
-ExternalProject_Add(Python
-    URL https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz
-    URL_MD5 3fe8434643a78630c61c6464fe2e7e72
-    PATCH_COMMAND ${python_patch_command}
-    CONFIGURE_COMMAND ${python_configure_command}
-    BUILD_IN_SOURCE 1
-)
+if(BUILD_OS_WINDOWS)
+    # Build Python using the CMake build system and msbuild
+    ExternalProject_Add(Python
+        # Note: Using zip download to prevent CMake continuously rebuilding Python
+        URL https://github.com/python-cmake-buildsystem/python-cmake-buildsystem/archive/master.zip
+        CMAKE_GENERATOR "Visual Studio 14 2015"
+        CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} -DPYTHON_VERSION=3.5.2 -DINSTALL_TEST=OFF -DINSTALL_MANUAL=OFF -DBUILD_TESTING=OFF -DBUILD_LIBPYTHON_SHARED=ON -DIS_PY3=TRUE -DOPENSSL_ROOT_DIR=${CMAKE_INSTALL_PREFIX} -DCMAKE_SHARED_LINKER_FLAGS=/SAFESEH:NO
+        BUILD_COMMAND ${CMAKE_COMMAND} --build <BINARY_DIR> --config Release
+        INSTALL_COMMAND ${CMAKE_COMMAND} --build <BINARY_DIR> --config Release --target INSTALL
+    )
 
-SetProjectDependencies(TARGET Python)
+    ExternalProject_Add_Step(Python ensurepip
+        COMMAND ${CMAKE_INSTALL_PREFIX}/bin/python -m ensurepip
+        DEPENDEES install
+    )
+
+    SetProjectDependencies(TARGET Python DEPENDS OpenSSL)
+else()
+    ExternalProject_Add(Python
+        URL https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz
+        URL_MD5 3fe8434643a78630c61c6464fe2e7e72
+        PATCH_COMMAND ${python_patch_command}
+        CONFIGURE_COMMAND ${python_configure_command}
+        BUILD_IN_SOURCE 1
+    )
+endif()

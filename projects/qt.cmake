@@ -1,10 +1,10 @@
 set(qt_url http://download.qt.io/official_releases/qt/5.7/5.7.0/single/qt-everywhere-opensource-src-5.7.0.tar.gz)
 set(qt_md5 9a46cce61fc64c20c3ac0a0e0fa41b42)
 
-# Qt uses different sources for Windows
 if(BUILD_OS_WINDOWS)
-    set(qt_url http://download.qt.io/official_releases/qt/5.7/5.7.0/single/qt-everywhere-opensource-src-5.7.0.zip)
-    set(qt_md5 c5d4bb1d015c2cfd37d183e5d201051f)
+    # For some as of yet unknown reason, building Qt on Windows fails because it does not create moc targets.
+    # Due to that we install the PyQt wheel into the built Python manually.
+    return()
 endif()
 
 set(qt_options
@@ -14,7 +14,6 @@ set(qt_options
     -datadir ${CMAKE_INSTALL_PREFIX}/share
     -opensource
     -confirm-license
-    -no-gtk
     -nomake examples
     -nomake tests
     -nomake tools
@@ -52,7 +51,7 @@ if(BUILD_OS_OSX)
 elseif(BUILD_OS_WINDOWS)
     list(APPEND qt_options -opengl desktop)
 elseif(BUILD_OS_LINUX)
-    list(APPEND qt_options -no-rpath -qt-xcb)
+    list(APPEND qt_options -no-gtk -no-rpath -qt-xcb)
 endif()
 
 ExternalProject_Add(Qt
@@ -61,5 +60,3 @@ ExternalProject_Add(Qt
     CONFIGURE_COMMAND ./configure ${qt_options}
     BUILD_IN_SOURCE 1
 )
-
-SetProjectDependencies(TARGET Qt)
