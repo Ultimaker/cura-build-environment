@@ -16,10 +16,16 @@ endif()
 
 if(BUILD_OS_WINDOWS)
     # Build Python using the CMake build system and msbuild
+    if(BUILD_OS_WIN64)
+        set(_python_generator "Visual Studio 14 2015 Win64")
+    else()
+        set(_python_generator "Visual Studio 14 2015")
+    endif()
+
     ExternalProject_Add(Python
         # Note: Using zip download to prevent CMake continuously rebuilding Python
         URL https://github.com/python-cmake-buildsystem/python-cmake-buildsystem/archive/master.zip
-        CMAKE_GENERATOR "Visual Studio 14 2015"
+        CMAKE_GENERATOR ${_python_generator}
         CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} -DPYTHON_VERSION=3.5.2 -DINSTALL_TEST=OFF -DINSTALL_MANUAL=OFF -DBUILD_TESTING=OFF -DBUILD_LIBPYTHON_SHARED=ON -DIS_PY3=TRUE -DOPENSSL_ROOT_DIR=${CMAKE_INSTALL_PREFIX} -DCMAKE_SHARED_LINKER_FLAGS=/SAFESEH:NO
         BUILD_COMMAND ${CMAKE_COMMAND} --build <BINARY_DIR> --config Release
         INSTALL_COMMAND ${CMAKE_COMMAND} --build <BINARY_DIR> --config Release --target INSTALL
