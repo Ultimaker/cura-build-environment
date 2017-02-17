@@ -29,7 +29,7 @@ if(BUILD_OS_WINDOWS)
         INSTALL_COMMAND mingw32-make install
     )
 
-    SetProjectDependencies(TARGET Arcus-MinGW DEPENDS Sip Protobuf-MinGW)
+    SetProjectDependencies(TARGET Arcus-MinGW DEPENDS Sip Protobuf-MinGW Arcus)
 endif()
 
 
