@@ -1,7 +1,7 @@
 if(BUILD_OS_WINDOWS)
     if(BUILD_OS_WIN32)
         set(_openssl_os "VC-WIN32")
-        set(_openssl_build ms\\do_ms.bat && nmake -f ms\\nt.mak)
+        set(_openssl_build ms\\do_nasm.bat && nmake -f ms\\nt.mak)
     else()
         set(_openssl_os "VC-WIN64A")
         set(_openssl_build ms\\do_win64a.bat && nmake -f ms\\nt.mak)
