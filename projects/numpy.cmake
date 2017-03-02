@@ -4,7 +4,7 @@ if(NOT BUILD_OS_WINDOWS)
         URL_MD5 2f44a895a8104ffac140c3a70edbd450
         CONFIGURE_COMMAND ""
         BUILD_COMMAND ${PYTHON_EXECUTABLE} setup.py build
-        INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install
+        INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=numpy-install.log
         BUILD_IN_SOURCE 1
     )
 else()
