@@ -21,7 +21,7 @@ for(int i = 0; i < nodes.size(); ++i) {
                 if(isUnix()) {
                     sh "rm -r /opt/ultimaker/cura-build-environment"
                 } else {
-                    bat "del /S /F /Q C:/ultimaker/cura-build-environment"
+                    bat "del /S /F /Q C:\ultimaker\cura-build-environment"
                 }
 
                 checkout scm
