@@ -18,10 +18,14 @@ for(int i = 0; i < nodes.size(); ++i) {
                 step([$class: 'WsCleanup'])
 
                 // Clean up the previous installation
-                if(isUnix()) {
-                    sh "rm -r /opt/ultimaker/cura-build-environment"
-                } else {
-                    bat "del /S /F /Q C:\\ultimaker\\cura-build-environment"
+                try {
+                    if(isUnix()) {
+                        sh "rm -r /opt/ultimaker/cura-build-environment"
+                    } else {
+                        bat "del /S /F /Q C:\\ultimaker\\cura-build-environment"
+                    }
+                } catch(e) {
+                    // Ignore
                 }
 
                 checkout scm
