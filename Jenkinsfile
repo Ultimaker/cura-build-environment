@@ -39,7 +39,7 @@ for(int i = 0; i < nodes.size(); ++i) {
                         sh "make"
                     } else {
                         // Build and install
-                        bat "..\\env_win64.bat && cmake .. -DCMAKE_INSTALL_PREFIX=C:/ultimaker/cura-build-environment -DCMAKE_BUILD_TYPE=Release -G 'NMake Makefiles' -DINCLUDE_DEVEL=ON"
+                        bat "..\\env_win64.bat && cmake .. -DCMAKE_INSTALL_PREFIX=C:/ultimaker/cura-build-environment -DCMAKE_BUILD_TYPE=Release -G \"NMake Makefiles\" -DINCLUDE_DEVEL=ON"
                         bat "nmake"
                     }
                 }
