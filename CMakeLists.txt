@@ -1,6 +1,6 @@
 project(cura-build-environment)
 
-cmake_minimum_required(VERSION 3.2.0)
+cmake_minimum_required(VERSION 2.8.12)
 
 # This should care that our CMAKE_INSTALL_PREFIX is absolute at the end...
 get_filename_component(CMAKE_INSTALL_PREFIX
