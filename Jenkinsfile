@@ -21,7 +21,7 @@ for(int i = 0; i < nodes.size(); ++i) {
                 if(isUnix()) {
                     sh "rm -r /opt/ultimaker/cura-build-environment"
                 } else {
-                    bat "del /S /F /Q C:/cura-build-environment"
+                    bat "del /S /F /Q C:/ultimaker/cura-build-environment"
                 }
 
                 checkout scm
@@ -35,7 +35,7 @@ for(int i = 0; i < nodes.size(); ++i) {
                         sh "make"
                     } else {
                         // Build and install
-                        bat "../env_win64.bat && cmake .. -DCMAKE_INSTALL_PREFIX=C:/cura-build-environment -DCMAKE_BUILD_TYPE=Release -G 'NMake Makefiles' -DINCLUDE_DEVEL=ON"
+                        bat "../env_win64.bat && cmake .. -DCMAKE_INSTALL_PREFIX=C:/ultimaker/cura-build-environment -DCMAKE_BUILD_TYPE=Release -G 'NMake Makefiles' -DINCLUDE_DEVEL=ON"
                         bat "nmake"
                     }
                 }
