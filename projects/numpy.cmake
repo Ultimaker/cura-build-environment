@@ -12,28 +12,18 @@ else()
     # It is currently effectively impossible to build SciPy on Windows without a proprietary compiler (ifort).
     # This means we need to use a pre-compiled binary version of Scipy. Since the only version of SciPy for
     # Windows available depends on numpy with MKL, we also need the binary package for that.
-    if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
-        set(arch_dir "win-64")
+    if( BUILD_OS_WIN32 )
+        add_custom_target(SciPy
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install hhttp://software.ultimaker.com/cura-binary-dependencies/numpy-1.11.3+mkl-cp35-cp35m-win32.whl
+            COMMENT "Installing SciPy"
+        )
+    SetProjectDependencies(TARGET PyQt DEPENDS Python)
     else()
-        set(arch_dir "win-32")
+        add_custom_target(SciPy
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/numpy-1.11.3+mkl-cp35-cp35m-win_amd64.whl
+            COMMENT "Installing SciPy"
+        )
     endif()
-
-    ExternalProject_Add(NumPy
-        URL https://repo.continuum.io/pkgs/free/${arch_dir}/numpy-1.11.3-py35_0.tar.bz2
-        CONFIGURE_COMMAND ""
-        BUILD_COMMAND ""
-        INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory Lib/site-packages ${CMAKE_INSTALL_PREFIX}/Lib/site-packages
-        BUILD_IN_SOURCE 1
-    )
-
-    ExternalProject_Add(MKL
-        URL https://repo.continuum.io/pkgs/free/${arch_dir}/mkl-2017.0.1-0.tar.bz2
-        DEPENDS NumPy
-        CONFIGURE_COMMAND ""
-        BUILD_COMMAND ""
-        INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory Library/bin ${CMAKE_INSTALL_PREFIX}/Lib/site-packages/numpy/core
-        BUILD_IN_SOURCE 1
-    )
 endif()
 
 SetProjectDependencies(TARGET NumPy DEPENDS Python OpenBLAS)

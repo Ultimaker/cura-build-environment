@@ -19,19 +19,18 @@ else()
     ### MASSSIVE HACK TIME!!!!
     # It is currently effectively impossible to build SciPy on Windows without a proprietary compiler (ifort).
     # This means we need to use a pre-compiled binary version of Scipy.
-    if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
-        set(arch_dir "win-64")
+    if( BUILD_OS_WIN32 )
+        add_custom_target(SciPy
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy-0.19.0-cp35-cp35m-win32.whl
+            COMMENT "Installing SciPy"
+        )
+    SetProjectDependencies(TARGET PyQt DEPENDS Python)
     else()
-        set(arch_dir "win-32")
+        add_custom_target(SciPy
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy-0.19.0-cp35-cp35m-win_amd64.whl
+            COMMENT "Installing SciPy"
+        )
     endif()
-
-    ExternalProject_Add(SciPy
-        URL https://repo.continuum.io/pkgs/free/${arch_dir}/scipy-0.18.1-np111py35_1.tar.bz2
-        CONFIGURE_COMMAND ""
-        BUILD_COMMAND ""
-        INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory Lib/site-packages ${CMAKE_INSTALL_PREFIX}/Lib/site-packages
-        BUILD_IN_SOURCE 1
-    )
 endif()
 
 SetProjectDependencies(TARGET SciPy DEPENDS NumPy)
