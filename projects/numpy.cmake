@@ -13,15 +13,15 @@ else()
     # This means we need to use a pre-compiled binary version of Scipy. Since the only version of SciPy for
     # Windows available depends on numpy with MKL, we also need the binary package for that.
     if( BUILD_OS_WIN32 )
-        add_custom_target(SciPy
-            COMMAND ${PYTHON_EXECUTABLE} -m pip install hhttp://software.ultimaker.com/cura-binary-dependencies/numpy-1.11.3+mkl-cp35-cp35m-win32.whl
-            COMMENT "Installing SciPy"
+        add_custom_target(NumPy
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/numpy-1.11.3+mkl-cp35-cp35m-win32.whl
+            COMMENT "Installing NumPy"
         )
     SetProjectDependencies(TARGET PyQt DEPENDS Python)
     else()
-        add_custom_target(SciPy
+        add_custom_target(NumPy
             COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/numpy-1.11.3+mkl-cp35-cp35m-win_amd64.whl
-            COMMENT "Installing SciPy"
+            COMMENT "Installing NumPy"
         )
     endif()
 endif()
