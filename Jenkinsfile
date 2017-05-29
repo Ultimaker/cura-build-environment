@@ -35,11 +35,11 @@ for(int i = 0; i < nodes.size(); ++i) {
                 dir('build') {
                     if(isUnix()) {
                         // Build and install the new environment
-                        sh "cmake .. -DCMAKE_INSTALL_PREFIX=/opt/ultimaker/cura-build-environment -DCMAKE_BUILD_TYPE=Release -DINCLUDE_DEVEL=ON"
+                        sh "cmake .. -DCMAKE_INSTALL_PREFIX=/opt/ultimaker/cura-build-environment/${env.BRANCH_NAME} -DCMAKE_BUILD_TYPE=Release -DINCLUDE_DEVEL=ON"
                         sh "make"
                     } else {
                         // Build and install
-                        bat "..\\env_win64.bat && cmake .. -DCMAKE_INSTALL_PREFIX=C:/ultimaker/cura-build-environment -DCMAKE_BUILD_TYPE=Release -G \"NMake Makefiles\" -DINCLUDE_DEVEL=ON && nmake"
+                        bat "..\\env_win64.bat && cmake .. -DCMAKE_INSTALL_PREFIX=C:/ultimaker/cura-build-environment/${env.BRANCH_NAME} -DCMAKE_BUILD_TYPE=Release -G \"NMake Makefiles\" -DINCLUDE_DEVEL=ON && nmake"
                     }
                 }
             }
