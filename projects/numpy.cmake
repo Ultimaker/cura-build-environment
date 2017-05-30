@@ -17,7 +17,6 @@ else()
             COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/numpy-1.11.3+mkl-cp35-cp35m-win32.whl
             COMMENT "Installing NumPy"
         )
-    SetProjectDependencies(TARGET PyQt DEPENDS Python)
     else()
         add_custom_target(NumPy
             COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/numpy-1.11.3+mkl-cp35-cp35m-win_amd64.whl
