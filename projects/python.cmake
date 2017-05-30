@@ -1,5 +1,5 @@
 set(python_patch_command "")
-set(python_configure_command "")
+set(python_configure_command "./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --with-threads --without-pymalloc")
 set(python_build_command "make")
 set(python_install_command "make install")
 
@@ -20,24 +20,28 @@ endif()
 if(BUILD_OS_WINDOWS)
     # Otherwise Python will not be able to get external dependencies.
     find_package(Subversion REQUIRED)
+    
+    set(python_configure_command )
 
     # Python has a bunch of custom .bat scripts to build on Windows
     set(python_build_command "<SOURCE_DIR>/PCbuild/build.bat --no-tkinter -c Release -e")
     if(BUILD_OS_WIN32)
-        set(python_build_command "${PYTHON_BUILD_COMMAND} -p Win32")
+        set(python_build_command "${python_build_command} -p Win32")
     else()
-        set(python_build_command "${PYTHON_BUILD_COMMAND} -p x64")
+        set(python_build_command "${python_build_command} -p x64")
     endif()
+    
+    set(python_build_command cmd /c "${python_build_command}")
 
     # Custom installation script because Python does not have one
-    set(python_install_command "${CMAKE_SOURCE_DIR}/install_python_windows.bat <SOURCE_DIR> <INSTALL_DIR>")
+    set(python_install_command cmd /c "${CMAKE_SOURCE_DIR}/install_python_windows.bat <SOURCE_DIR> <INSTALL_DIR>")
 endif()
 
 ExternalProject_Add(Python
     URL https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz
     URL_MD5 3fe8434643a78630c61c6464fe2e7e72
     PATCH_COMMAND ${python_patch_command}
-    CONFIGURE_COMMAND ${python_configure_command}
+    CONFIGURE_COMMAND "${python_configure_command}"
     BUILD_COMMAND ${python_build_command}
     INSTALL_COMMAND ${python_install_command}
     BUILD_IN_SOURCE 1
