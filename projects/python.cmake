@@ -23,18 +23,13 @@ if(BUILD_OS_WINDOWS)
     
     set(python_configure_command )
 
-    # Python has a bunch of custom .bat scripts to build on Windows
-    set(python_build_command "<SOURCE_DIR>/PCbuild/build.bat --no-tkinter -c Release -e")
     if(BUILD_OS_WIN32)
-        set(python_build_command "${python_build_command} -p Win32")
+        set(python_build_command cmd /c "<SOURCE_DIR>/PCbuild/build.bat --no-tkinter -c Release -e -p Win32")
+        set(python_install_command cmd /c "${CMAKE_SOURCE_DIR}/projects/install_python_windows.bat win32 <SOURCE_DIR> <INSTALL_DIR>")
     else()
-        set(python_build_command "${python_build_command} -p x64")
+    set(python_build_command cmd /c "<SOURCE_DIR>/PCbuild/build.bat --no-tkinter -c Release -e -p amd64")
+        set(python_install_command cmd /c "${CMAKE_SOURCE_DIR}/projects/install_python_windows.bat amd64 <SOURCE_DIR> <INSTALL_DIR>")
     endif()
-    
-    set(python_build_command cmd /c "${python_build_command}")
-
-    # Custom installation script because Python does not have one
-    set(python_install_command cmd /c "${CMAKE_SOURCE_DIR}/install_python_windows.bat <SOURCE_DIR> <INSTALL_DIR>")
 endif()
 
 ExternalProject_Add(Python
