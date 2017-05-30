@@ -1,4 +1,7 @@
-set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --with-threads --without-pymalloc)
+set(python_patch_command "")
+set(python_configure_command "")
+set(python_build_command "make")
+set(python_install_command "make install")
 
 if(BUILD_OS_OSX)
     # See http://bugs.python.org/issue21381
@@ -15,34 +18,35 @@ if(BUILD_OS_LINUX)
 endif()
 
 if(BUILD_OS_WINDOWS)
-    # Build Python using the CMake build system and msbuild
-    if(BUILD_OS_WIN64)
-        set(_python_generator "Visual Studio 14 2015 Win64")
+    # Otherwise Python will not be able to get external dependencies.
+    find_package(Subversion REQUIRED)
+
+    # Python has a bunch of custom .bat scripts to build on Windows
+    set(python_build_command "<SOURCE_DIR>/PCbuild/build.bat --no-tkinter -c Release -e")
+    if(BUILD_OS_WIN32)
+        set(python_build_command "${PYTHON_BUILD_COMMAND} -p Win32")
     else()
-        set(_python_generator "Visual Studio 14 2015")
+        set(python_build_command "${PYTHON_BUILD_COMMAND} -p x64")
     endif()
 
-    ExternalProject_Add(Python
-        # Note: Using zip download to prevent CMake continuously rebuilding Python
-        URL https://github.com/python-cmake-buildsystem/python-cmake-buildsystem/archive/9cce62ea7c31f8a4db912a034b345a8a3177a45f.zip
-        CMAKE_GENERATOR ${_python_generator}
-        CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} -DPYTHON_VERSION=3.5.2 -DINSTALL_TEST=OFF -DINSTALL_MANUAL=OFF -DBUILD_TESTING=OFF -DBUILD_LIBPYTHON_SHARED=ON -DIS_PY3=TRUE -DOPENSSL_ROOT_DIR=${CMAKE_INSTALL_PREFIX} -DCMAKE_SHARED_LINKER_FLAGS=/SAFESEH:NO
-        BUILD_COMMAND ${CMAKE_COMMAND} --build <BINARY_DIR> --config Release
-        INSTALL_COMMAND ${CMAKE_COMMAND} --build <BINARY_DIR> --config Release --target INSTALL
-    )
+    # Custom installation script because Python does not have one
+    set(python_install_command "${CMAKE_SOURCE_DIR}/install_python_windows.bat <SOURCE_DIR> <INSTALL_DIR>")
+endif()
 
+ExternalProject_Add(Python
+    URL https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz
+    URL_MD5 3fe8434643a78630c61c6464fe2e7e72
+    PATCH_COMMAND ${python_patch_command}
+    CONFIGURE_COMMAND ${python_configure_command}
+    BUILD_COMMAND ${python_build_command}
+    INSTALL_COMMAND ${python_install_command}
+    BUILD_IN_SOURCE 1
+)
+
+if(BUILD_OS_WINDOWS)
+    # Make sure pip and setuptools are installed into our new Python
     ExternalProject_Add_Step(Python ensurepip
         COMMAND ${CMAKE_INSTALL_PREFIX}/bin/python -m ensurepip
         DEPENDEES install
-    )
-
-    SetProjectDependencies(TARGET Python DEPENDS OpenSSL)
-else()
-    ExternalProject_Add(Python
-        URL https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz
-        URL_MD5 3fe8434643a78630c61c6464fe2e7e72
-        PATCH_COMMAND ${python_patch_command}
-        CONFIGURE_COMMAND ${python_configure_command}
-        BUILD_IN_SOURCE 1
     )
 endif()
