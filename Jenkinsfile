@@ -20,9 +20,9 @@ for(int i = 0; i < nodes.size(); ++i) {
                 // Clean up the previous installation
                 try {
                     if(isUnix()) {
-                        sh "rm -r /opt/ultimaker/cura-build-environment"
+                        sh "rm -r /opt/ultimaker/cura-build-environment/${env.BRANCH_NAME}"
                     } else {
-                        bat "del /S /F /Q C:\\ultimaker\\cura-build-environment"
+                        bat "del /S /F /Q C:\\ultimaker\\cura-build-environment\\${env.BRANCH_NAME}"
                     }
                 } catch(e) {
                     // Ignore
