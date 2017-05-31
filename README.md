@@ -5,7 +5,6 @@ This is a CMake-based project that will build the dependencies for Cura.
 
 It will download and build the following projects:
 
-- OpenSSL (Only on Windows)
 - Python (Version 3.5)
 - Qt (Not on Windows)
 - Sip
@@ -93,9 +92,9 @@ make
 
 Building the environment on Windows requires both MinGW (version 4.9 or
 higher) and Visual C++ 2015. Visual C++ is required for building Python
-and MinGW for building the Cura Engine. In addition, NASM and ActivePerl
-are required for building OpenSSL. Please make sure all required tools
-are accessible through your path.
+and MinGW for building the Cura Engine. In addition, Subversion is 
+required for building Python. Please make sure all required tools are 
+accessible through your path.
 
 The `env_win32.bat` and `env_win64.bat` will make sure to set a few
 environment variables that are required. Most importantly, they call the
