@@ -31,10 +31,6 @@ set BINDIR=%SOURCEDIR%\PCbuild\%ARCH%
 
 echo bindir %BINDIR%
 
-echo Clean anything in DESTDIR
-
-del /S /F /Q %DESTDIR%
-
 echo Install binaries to DESTDIR/bin
 
 mkdir %DESTDIR%\bin
