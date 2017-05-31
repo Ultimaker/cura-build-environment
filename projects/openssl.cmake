@@ -1,3 +1,5 @@
+return()
+
 if(BUILD_OS_WINDOWS)
     if(BUILD_OS_WIN32)
         set(_openssl_os "VC-WIN32")
