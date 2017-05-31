@@ -60,6 +60,8 @@ mkdir %DESTDIR%\include
 
 copy /Y %SOURCEDIR%\include\* %DESTDIR%\include
 
+copy /Y %SOURCEDIR%\PC\pyconfig.h %DESTDIR%\include
+
 exit /B 0
 
 :invalid_arch
