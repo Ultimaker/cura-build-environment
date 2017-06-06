@@ -22,7 +22,7 @@ for(int i = 0; i < nodes.size(); ++i) {
                     if(isUnix()) {
                         sh "rm -r /opt/ultimaker/cura-build-environment/${env.BRANCH_NAME}"
                     } else {
-                        bat "del /S /F /Q C:\\ultimaker\\cura-build-environment\\${env.BRANCH_NAME}"
+                        bat "rmdir /S /Q C:\\ultimaker\\cura-build-environment\\${env.BRANCH_NAME}"
                     }
                 } catch(e) {
                     // Ignore
