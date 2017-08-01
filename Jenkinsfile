@@ -8,7 +8,7 @@ timeout(time: 5, unit: 'DAYS')
 // label 'cura'. This is done because we need cura-build-environment working on
 // all the slaves since it contains all the dependencies for the other projects.
 def jobs = [:]
-def nodes = nodeNames('cura')
+def nodes = node_names('cura')
 for(int i = 0; i < nodes.size(); ++i) {
     def name = nodes[i];
 
@@ -56,8 +56,3 @@ for(int i = 0; i < nodes.size(); ++i) {
 }
 
 parallel jobs
-
-@NonCPS
-def nodeNames(label) {
-    return Jenkins.instance.nodes.findAll({ node -> node.labelString.contains(label) }).collect({ node -> node.name })
-}
