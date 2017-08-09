@@ -21,7 +21,7 @@ if(BUILD_OS_WINDOWS)
         URL https://github.com/google/protobuf/archive/v3.0.2.tar.gz
         URL_MD5 845b39e4b7681a2ddfd8c7f528299fbb
         DEPENDS Protobuf
-        CONFIGURE_COMMAND ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} -DCMAKE_INSTALL_LIBDIR=lib-mingw -Dprotobuf_BUILD_TESTS=OFF -DCMAKE_CXX_FLAGS="--std=c++11" -Dprotobuf_BUILD_SHARED_LIBS=OFF -Dprotobuf_WITH_ZLIB=OFF -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -G "MinGW Makefiles" ../Protobuf-MinGW/cmake
+        CONFIGURE_COMMAND ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} -DCMAKE_INSTALL_LIBDIR=lib-mingw -DCMAKE_INSTALL_BINDIR=lib-mingw -Dprotobuf_BUILD_TESTS=OFF -DCMAKE_CXX_FLAGS="--std=c++11" -Dprotobuf_BUILD_SHARED_LIBS=OFF -Dprotobuf_WITH_ZLIB=OFF -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -G "MinGW Makefiles" ../Protobuf-MinGW/cmake
         BUILD_COMMAND mingw32-make
         INSTALL_COMMAND mingw32-make install
     )
