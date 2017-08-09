@@ -1,8 +1,6 @@
-if (NOT BUILD_OS_WINDOWS)
-    ExternalProject_Add(CppUnit
-        URL https://sourceforge.net/projects/cppunit/files/cppunit/1.12.1/cppunit-1.12.1.tar.gz
-        URL_MD5 bd30e9cf5523cdfc019b94f5e1d7fd19
-        CONFIGURE_COMMAND ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-doxygen=no --enable-dot=no --enable-html-docs=no LDFLAGS=-ldl
-        BUILD_IN_SOURCE 1
-    )
-endif()
+ExternalProject_Add(CppUnit
+    GIT_REPOSITORY https://github.com/Ultimaker/CppUnit.git
+    GIT_TAG cmake
+    BUILD_IN_SOURCE 1
+    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+)
