@@ -1,6 +1,6 @@
 ExternalProject_Add(PythonRequests
     URL https://github.com/requests/requests/archive/v2.18.4.tar.gz
-    URL_MD5 b48a65baede6ba78d276ff32a13a0671
+    URL_MD5 ee668fdec015db44b3a85ae8c877d3d7
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ${PYTHON_EXECUTABLE} setup.py build
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=zeroconf-install.log
