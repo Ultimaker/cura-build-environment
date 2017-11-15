@@ -77,6 +77,14 @@ versions of Mac OS. The "env_osx.sh" will set it to 10.7 and ensure the
 right compiler is still used. It also add the relevant directories for
 OpenSSL installed through Brew.
 
+On newer versions of MacOS, the zlib headers cannot be found unless
+XCode Command Line Tools are installed first. To install those, please
+run the following first:
+
+```
+xcode-select --install
+```
+
 To build, run the following:
 
 ```
