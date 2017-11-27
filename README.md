@@ -23,6 +23,7 @@ It will download and build the following projects:
 - AppImageKit (Only on Linux)
 - python-utils
 - Numpy-STL
+- Subversion (To fetch some sources)
 
 In addition, there is an option "INCLUDE_DEVEL", which, when set to ON, will
 also download and install a set of development tools. The following projects
