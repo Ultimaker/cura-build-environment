@@ -24,6 +24,7 @@ It will download and build the following projects:
 - python-utils
 - Numpy-STL
 - Subversion (To fetch some sources)
+- Mercurial aka "hg" (Needed for Python build - the build scripts are calling it..)
 
 In addition, there is an option "INCLUDE_DEVEL", which, when set to ON, will
 also download and install a set of development tools. The following projects
