@@ -111,7 +111,7 @@ environment variables that are required. Most importantly, they call the
 To build, run the following:
 
 ```
-cd $SOURCE_DIR
+cd %SOURCE_DIR%
 mkdir build
 cd build
 ..\env_win64.bat
