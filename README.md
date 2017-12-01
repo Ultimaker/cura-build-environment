@@ -111,12 +111,12 @@ environment variables that are required. Most importantly, they call the
 To build, run the following:
 
 ```
-cd $SOURCE_DIR
+cd %SOURCE_DIR%
 mkdir build
 cd build
 ..\env_win64.bat
-cmake .. -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR -DCMAKE_BUILD_TYPE=Release \
-            -G "NMake Makefiles"
+cmake .. -DCMAKE_INSTALL_PREFIX=%INSTALL_DIR% -DCMAKE_BUILD_TYPE=Release ^
+         -G "NMake Makefiles"
 nmake
 ```
 
