@@ -26,6 +26,7 @@ It will download and build the following projects:
 
 To build these dependencies of Cura, the following software needs to be installed on your system:
 
+- **CMake** Once CMake is installed make sure it is available on your `%PATH%`. Check this by running `cmake --version` in the Windows console. (http://www.cmake.org/)
 - **git for windows** - The `git` command should be available on your `%PATH%`. Make sure that the `cmd` directory in the git for windows installation directory is on the `%PATH%` and *not* its `bin` directory, otherwise mingw32 will complain about `sh.exe` being on the path. (https://git-for-windows.github.io/)
 - **Subversion aka "svn"** - To fetch some sources
 - **Mercurial aka "hg"** - Needed for Python build - the build scripts are calling it..
