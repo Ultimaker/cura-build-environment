@@ -23,6 +23,9 @@ It will download and build the following projects:
 - AppImageKit (Only on Linux)
 - python-utils
 - Numpy-STL
+
+To build these dependencies of Cura, the following software needs to be installed on your system:
+
 - Subversion (To fetch some sources)
 - Mercurial aka "hg" (Needed for Python build - the build scripts are calling it..)
 
