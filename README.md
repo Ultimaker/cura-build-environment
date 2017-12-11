@@ -99,9 +99,9 @@ make
 ### Windows
 
 Building the environment on Windows requires both MinGW (version 4.9 or
-higher) and Visual C++ 2015. Visual C++ is required for building Python
-and MinGW for building the Cura Engine. In addition, Subversion is 
-required for building Python. Please make sure all required tools are 
+higher) and Visual C++ 2015 or Visual Studio 2017 with Windows 8.1 SDK.
+Visual C++ is required for building Python and MinGW for building the Cura Engine.
+In addition, Subversion is required for building Python. Please make sure all required tools are 
 accessible through your path.
 
 The `env_win32.bat` and `env_win64.bat` will make sure to set a few
