@@ -4,8 +4,8 @@ if(BUILD_OS_LINUX)
     set(openblas_options DYNAMIC_ARCH=1 NO_STATIC=1)
 
     ExternalProject_Add(OpenBLAS
-        URL https://github.com/xianyi/OpenBLAS/archive/v0.2.15.tar.gz
-        URL_MD5 b1190f3d3471685f17cfd1ec1d252ac9
+        URL https://github.com/xianyi/OpenBLAS/archive/v0.2.20.tar.gz
+        URL_MD5 48637eb29f5b492b91459175dcc574b1
         CONFIGURE_COMMAND ""
         BUILD_COMMAND make ${openblas_options}
         INSTALL_COMMAND make PREFIX=${CMAKE_INSTALL_PREFIX} ${openblas_options} install
