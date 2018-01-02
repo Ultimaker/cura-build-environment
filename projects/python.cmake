@@ -33,8 +33,8 @@ if(BUILD_OS_WINDOWS)
 endif()
 
 ExternalProject_Add(Python
-    URL https://www.python.org/ftp/python/3.5.4/Python-3.5.4.tgz
-    URL_MD5 2ed4802b7a2a7e40d2e797272bf388ec
+    URL https://www.python.org/ftp/python/3.6.4/Python-3.6.4.tgz
+    URL_MD5 9de6494314ea199e3633211696735f65
     PATCH_COMMAND ${python_patch_command}
     CONFIGURE_COMMAND "${python_configure_command}"
     BUILD_COMMAND ${python_build_command}
