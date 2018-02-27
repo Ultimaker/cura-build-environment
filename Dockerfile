@@ -1,13 +1,13 @@
 FROM centos:7
 
 # Environment vars for easy configuration
-ENV BUILD_TYPE=Release
-ENV GIT_DIR=/usr/git
-ENV INSTALL_DIR=/usr/cura
-ENV LIB_INSTALL_DIR=$INSTALL_DIR/libs
-ENV APP_INSTALL_DIR=$INSTALL_DIR/app
+ENV CURA_BENV_BUILD_TYPE=Release
+ENV CURA_BENV_GIT_DIR=/usr/git
+ENV CURA_BENV_INSTALL_DIR=/usr/cura
+ENV CURA_BENV_LIB_INSTALL_DIR=$CURA_BENV_INSTALL_DIR/libs
+ENV CURA_BENV_APP_INSTALL_DIR=$CURA_BENV_INSTALL_DIR/app
 
-# Step 0: Install build environment dependencies
+# Install build environment dependencies
 RUN yum -y update
 RUN yum install -y \
     centos-release-scl \
@@ -30,16 +30,15 @@ RUN curl http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7
 RUN rpm -Uvh epel-release-7-11.noarch.rpm
 RUN yum install -y cmake3
 
-# Step 1: Set up the build environment
-RUN mkdir $GIT_DIR
-WORKDIR $GIT_DIR
+# Set up the build environment
+RUN mkdir $CURA_BENV_GIT_DIR
+WORKDIR $CURA_BENV_GIT_DIR
 RUN git clone https://github.com/Ultimaker/cura-build-environment
-WORKDIR $GIT_DIR/cura-build-environment
-RUN mkdir build
-WORKDIR $GIT_DIR/cura-build-environment/build
+RUN mkdir $CURA_BENV_GIT_DIR/cura-build-environment/build
+WORKDIR $CURA_BENV_GIT_DIR/cura-build-environment/build
 RUN cmake3 .. \
-    -DCMAKE_INSTALL_PREFIX=$LIB_INSTALL_DIR \
-    -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+    -DCMAKE_INSTALL_PREFIX=$CURA_BENV_LIB_INSTALL_DIR \
+    -DCMAKE_BUILD_TYPE=$CURA_BENV_BUILD_TYPE \
     -DCMAKE_C_COMPILER=gcc \
     -DCMAKE_CXX_COMPILER=g++ \
     -DCMAKE_Fortran_COMPILER=gfortran
