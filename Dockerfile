@@ -2,10 +2,7 @@ FROM centos:7
 
 # Environment vars for easy configuration
 ENV CURA_BENV_BUILD_TYPE=Release
-ENV CURA_BENV_GIT_DIR=/usr/git
-ENV CURA_BENV_INSTALL_DIR=/usr/cura
-ENV CURA_BENV_LIB_INSTALL_DIR=$CURA_BENV_INSTALL_DIR/libs
-ENV CURA_BENV_APP_INSTALL_DIR=$CURA_BENV_INSTALL_DIR/app
+ENV CURA_BENV_GIT_DIR=/srv/cura-build-environment
 
 # Install build environment dependencies
 RUN yum -y update
@@ -17,10 +14,10 @@ RUN yum install -y \
     gcc-c++ \
     gcc-gfortran \
     git \
-    openssl-devel \
     make \
     mesa-libGL \
     mesa-libGL-devel \
+    openssl-devel \
     tar \
     which \
     xz
@@ -34,12 +31,20 @@ RUN yum install -y cmake3
 RUN mkdir $CURA_BENV_GIT_DIR
 WORKDIR $CURA_BENV_GIT_DIR
 RUN git clone https://github.com/Ultimaker/cura-build-environment
+
+# We remove appImageKit as we don't need it and depends on too many things
+RUN rm $CURA_BENV_GIT_DIR/cura-build-environment/projects/appimagekit.cmake
+
+# Build the build environment
 RUN mkdir $CURA_BENV_GIT_DIR/cura-build-environment/build
 WORKDIR $CURA_BENV_GIT_DIR/cura-build-environment/build
 RUN cmake3 .. \
-    -DCMAKE_INSTALL_PREFIX=$CURA_BENV_LIB_INSTALL_DIR \
     -DCMAKE_BUILD_TYPE=$CURA_BENV_BUILD_TYPE \
     -DCMAKE_C_COMPILER=gcc \
     -DCMAKE_CXX_COMPILER=g++ \
     -DCMAKE_Fortran_COMPILER=gfortran
 RUN make
+
+# Cleanup
+WORKDIR /
+RUN rm -R $CURA_BENV_GIT_DIR
