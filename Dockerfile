@@ -1,4 +1,4 @@
-FROM centos:7
+FROM centos:centos7
 
 # Environment vars for easy configuration
 ENV CURA_BENV_BUILD_TYPE=Release
@@ -7,7 +7,10 @@ ENV CURA_BENV_GIT_DIR=/srv/cura-build-environment
 # Install build environment dependencies
 RUN yum -y update
 RUN yum install -y \
+    epel-release
+RUN yum install -y \
     centos-release-scl \
+    cmake3 \
     curl \
     devtoolset-7 \
     gcc \
@@ -20,12 +23,22 @@ RUN yum install -y \
     openssl-devel \
     tar \
     which \
-    xz
+    xz \
+    x11vnc \
+    xorg-x11-server-Xvfb \
+    xorg-x11-twm \
+    tigervnc-server \
+    xterm \
+    xorg-x11-font \
+    xdotool
 
-# Manually install cmake3 as it's not availabe in yum by default
-RUN curl http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm -O
-RUN rpm -Uvh epel-release-7-11.noarch.rpm
-RUN yum install -y cmake3
+# Init xstartup
+ADD ./xstartup /
+RUN mkdir /.vnc
+RUN x11vnc -storepasswd 123456 /.vnc/passwd
+RUN  \cp -f ./xstartup /.vnc/.
+RUN chmod -v +x /.vnc/xstartup
+EXPOSE 5901
 
 # Set up the build environment
 RUN mkdir $CURA_BENV_GIT_DIR
