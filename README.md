@@ -129,3 +129,7 @@ the build systems of the sub-projects that are built.
 Building the environment in Docker is very easy using the Dockerfile in this repository.
 We handle all cloning and compiling in the Dockerfile, so no dependencies are needed on the host OS.
 The resulting image can be used as a `FROM` for building Cura itself.
+
+```bash
+docker build -t cura-build-env:local .
+```
