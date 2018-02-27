@@ -123,3 +123,9 @@ nmake
 Note: Using the NMake Makefiles generator is important, since the normal
 Visual Studio generator does not work well in combination with some of
 the build systems of the sub-projects that are built.
+
+
+### Docker
+Building the environment in Docker is very easy using the Dockerfile in this repository.
+We handle all cloning and compiling in the Dockerfile, so no dependencies are needed on the host OS.
+The resulting image can be used as a `FROM` for building Cura itself.
