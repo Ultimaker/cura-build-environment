@@ -8,14 +8,20 @@ ENV CURA_BENV_GIT_DIR=/srv/cura-build-environment
 RUN yum -y update
 RUN yum install -y \
     epel-release
+RUN yum update -y
+RUN yum install -y \
+    centos-release-scl-rh
+RUN yum update -y
 RUN yum install -y \
     centos-release-scl \
     cmake3 \
     curl \
-    devtoolset-7 \
     gcc \
     gcc-c++ \
     gcc-gfortran \
+    devtoolset-3-gcc \
+    devtoolset-3-gcc-c++ \
+    devtoolset-3-gcc-gfortran \
     git \
     make \
     mesa-libGL \
@@ -23,22 +29,12 @@ RUN yum install -y \
     openssl-devel \
     tar \
     which \
-    xz \
-    x11vnc \
     xorg-x11-server-Xvfb \
-    xorg-x11-twm \
-    tigervnc-server \
-    xterm \
-    xorg-x11-font \
-    xdotool
+    xz
 
-# Init xstartup
-ADD ./xstartup /
-RUN mkdir /.vnc
-RUN x11vnc -storepasswd 123456 /.vnc/passwd
-RUN  \cp -f ./xstartup /.vnc/.
-RUN chmod -v +x /.vnc/xstartup
-EXPOSE 5901
+# Init virtual display
+RUN Xvfb :1 -screen 0 1600x1200x16 &
+ENV DISPLAY=:1.0
 
 # Set up the build environment
 RUN mkdir $CURA_BENV_GIT_DIR

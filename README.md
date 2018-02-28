@@ -131,5 +131,5 @@ We handle all cloning and compiling in the Dockerfile, so no dependencies are ne
 The resulting image can be used as a `FROM` for building Cura itself.
 
 ```bash
-docker build -t cura-build-env:local .
+docker build -t ultimaker/cura-build-environment:1 .
 ```
