@@ -16,9 +16,6 @@ RUN yum install -y \
     centos-release-scl \
     cmake3 \
     curl \
-    gcc \
-    gcc-c++ \
-    gcc-gfortran \
     devtoolset-3-gcc \
     devtoolset-3-gcc-c++ \
     devtoolset-3-gcc-gfortran \
@@ -30,11 +27,24 @@ RUN yum install -y \
     tar \
     which \
     xorg-x11-server-Xvfb \
+    tigervnc-server \
+    xterm \
+    xdotool \
     xz
 
-# Init virtual display
-RUN Xvfb :1 -screen 0 1600x1200x16 &
-ENV DISPLAY=:1.0
+# Init xstartup
+ADD ./xstartup /
+RUN mkdir /.vnc
+RUN x11vnc -storepasswd 123456 /.vnc/passwd
+RUN  \cp -f ./xstartup /.vnc/.
+RUN chmod -v +x /.vnc/xstartup
+
+# Note: make sure to run the following lines before your UI application:
+#   Xvfb :1 -screen 0 1600x1200x16 &
+#   export DISPLAY=:1.0
+
+# Make sure we can use the correct gcc toolchain
+RUN scl enable devtoolset-3 bash
 
 # Set up the build environment
 RUN mkdir $CURA_BENV_GIT_DIR
