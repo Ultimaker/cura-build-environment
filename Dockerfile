@@ -70,4 +70,4 @@ RUN make
 # Cleanup
 WORKDIR /
 RUN rm -Rf $CURA_BENV_GIT_DIR
-RUN rm -Rf /var/cache/yum
+RUN rm -Rf /var/cache
