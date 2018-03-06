@@ -46,7 +46,7 @@ ENV PATH=${PATH}:/opt/rh/devtoolset-3/root/usr/bin
 ADD ./xstartup /
 RUN mkdir /.vnc
 RUN x11vnc -storepasswd 123456 /.vnc/passwd
-RUN  \cp -f ./xstartup /.vnc/.
+RUN cp -f ./xstartup /.vnc/.
 RUN chmod -v +x /.vnc/xstartup
 
 # Note: make sure to run the following lines before your UI application:
