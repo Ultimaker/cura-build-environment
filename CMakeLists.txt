@@ -27,6 +27,16 @@ else()
     set(PYTHON_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/python3)
 endif()
 
+if(BUILD_OS_WIN64)
+    set(CMAKE_MINGWC_COMPILER_ARG1 "-m64")
+    set(CMAKE_MINGW_CXX_COMPILER_ARG1 "-m64")
+else(BUILD_OS_WIN64)
+    if(BUILD_OS_WIN32)
+        set(CMAKE_MINGWC_COMPILER_ARG1 "-m32")
+        set(CMAKE_MINGW_CXX_COMPILER_ARG1 "-m32")
+    endif(BUILD_OS_WIN32)
+endif(BUILD_OS_WIN64)
+
 # Build projects step
 add_custom_target(projects ALL COMMENT "Building Projects...")
 
