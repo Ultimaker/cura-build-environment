@@ -17,9 +17,8 @@ if(BUILD_OS_LINUX)
         DEPENDS AppImageKit
         COMMENT "Installing AppImageKit tools to ${CMAKE_INSTALL_PREFIX}/bin/"
         COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/bin/
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/AppImageKit-prefix/src/AppImageKit/AppImageAssistant ${CMAKE_INSTALL_PREFIX}/bin/
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/AppImageKit-prefix/src/AppImageKit/AppImageExtract   ${CMAKE_INSTALL_PREFIX}/bin/
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/AppImageKit-prefix/src/AppImageKit/AppImageMonitor   ${CMAKE_INSTALL_PREFIX}/bin/
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/AppImageKit-prefix/src/AppImageKit/AppRun            ${CMAKE_INSTALL_PREFIX}/bin/
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/AppImageKit-prefix/src/AppImageKit/src/appimaged    ${CMAKE_INSTALL_PREFIX}/bin/
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/AppImageKit-prefix/src/AppImageKit/src/appimagetool ${CMAKE_INSTALL_PREFIX}/bin/
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/AppImageKit-prefix/src/AppImageKit/src/AppRun       ${CMAKE_INSTALL_PREFIX}/bin/
     )
 endif()
