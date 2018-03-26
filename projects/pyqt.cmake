@@ -1,7 +1,7 @@
 set(pyqt_command "")
 if(BUILD_OS_WINDOWS)
     add_custom_target(PyQt
-        COMMAND ${PYTHON_EXECUTABLE} -m pip install PyQt5==5.10
+        COMMAND ${PYTHON_EXECUTABLE} -m pip install PyQt5==5.8.2
         COMMENT "Installing PyQt5"
     )
 
@@ -18,8 +18,8 @@ else()
     )
 
     ExternalProject_Add(PyQt
-        URL https://downloads.sourceforge.net/project/pyqt/PyQt5/PyQt-5.10/PyQt5_gpl-5.10.tar.gz
-        URL_MD5 4874c5985246fdeb4c3c7843a3e6ef53
+        URL https://downloads.sourceforge.net/project/pyqt/PyQt5/PyQt-5.8.2/PyQt5_gpl-5.8.2.tar.gz
+        URL_MD5 c3048e9d242f3e72fd393630da1d971a
         CONFIGURE_COMMAND ${pyqt_command}
         BUILD_IN_SOURCE 1
     )
