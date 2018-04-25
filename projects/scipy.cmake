@@ -21,13 +21,13 @@ else()
     # This means we need to use a pre-compiled binary version of Scipy.
     if( BUILD_OS_WIN32 )
         add_custom_target(SciPy
-            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy-0.19.0-cp35-cp35m-win32.whl
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy-1.0.1-cp35-cp35m-win32.whl
             COMMENT "Installing SciPy"
         )
     SetProjectDependencies(TARGET PyQt DEPENDS Python)
     else()
         add_custom_target(SciPy
-            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy-0.19.0-cp35-cp35m-win_amd64.whl
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy-1.0.1-cp35-cp35m-win_amd64.whl
             COMMENT "Installing SciPy"
         )
     endif()
