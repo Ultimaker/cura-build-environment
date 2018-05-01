@@ -8,8 +8,8 @@ if(NOT BUILD_OS_WINDOWS)
     endif()
 
     ExternalProject_Add(SciPy
-        URL https://github.com/scipy/scipy/releases/download/v0.17.1/scipy-0.17.1.tar.gz
-        URL_MD5 8987b9a3e3cd79218a0a423b21c8e4de
+        URL https://github.com/scipy/scipy/releases/download/v1.0.1/scipy-1.0.1.tar.gz
+        URL_MD5 47e90ddfb5af8f23890c02a967e9a029
         CONFIGURE_COMMAND ""
         BUILD_COMMAND ${scipy_build_command}
         INSTALL_COMMAND ${scipy_install_command}
