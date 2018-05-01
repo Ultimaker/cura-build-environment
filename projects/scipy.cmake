@@ -8,8 +8,8 @@ if(NOT BUILD_OS_WINDOWS)
     endif()
 
     ExternalProject_Add(SciPy
-        URL https://github.com/scipy/scipy/releases/download/v0.17.1/scipy-0.17.1.tar.gz
-        URL_MD5 8987b9a3e3cd79218a0a423b21c8e4de
+        URL https://github.com/scipy/scipy/releases/download/v1.0.1/scipy-1.0.1.tar.gz
+        URL_MD5 47e90ddfb5af8f23890c02a967e9a029
         CONFIGURE_COMMAND ""
         BUILD_COMMAND ${scipy_build_command}
         INSTALL_COMMAND ${scipy_install_command}
@@ -21,13 +21,13 @@ else()
     # This means we need to use a pre-compiled binary version of Scipy.
     if( BUILD_OS_WIN32 )
         add_custom_target(SciPy
-            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy-0.19.0-cp35-cp35m-win32.whl
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy-1.0.1-cp35-cp35m-win32.whl
             COMMENT "Installing SciPy"
         )
     SetProjectDependencies(TARGET PyQt DEPENDS Python)
     else()
         add_custom_target(SciPy
-            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy-0.19.0-cp35-cp35m-win_amd64.whl
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy-1.0.1-cp35-cp35m-win_amd64.whl
             COMMENT "Installing SciPy"
         )
     endif()
