@@ -6,4 +6,4 @@ ExternalProject_Add(PythonZeroconf
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=zeroconf-install.log
     BUILD_IN_SOURCE 1
 )
-SetProjectDependencies(TARGET PythonZeroconf DEPENDS PythonNetifaces PythonSix)
+SetProjectDependencies(TARGET PythonZeroconf DEPENDS PythonPip PythonNetifaces PythonSix)

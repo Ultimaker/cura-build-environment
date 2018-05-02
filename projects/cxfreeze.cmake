@@ -16,5 +16,5 @@ ExternalProject_Add(cx_Freeze
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=cxfreeze-install.log
     BUILD_IN_SOURCE 1
 )
-SetProjectDependencies(TARGET cx_Freeze DEPENDS Python)
+SetProjectDependencies(TARGET cx_Freeze DEPENDS Python PythonPip)
 

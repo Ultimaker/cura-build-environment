@@ -6,4 +6,4 @@ ExternalProject_Add(python-utils
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=pythonutils-install.log
     BUILD_IN_SOURCE 1
 )
-SetProjectDependencies(TARGET python-utils DEPENDS Python)
+SetProjectDependencies(TARGET python-utils DEPENDS Python PythonPip)

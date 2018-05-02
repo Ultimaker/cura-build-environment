@@ -5,7 +5,7 @@ if(BUILD_OS_WINDOWS)
         COMMENT "Installing PyQt5"
     )
 
-    SetProjectDependencies(TARGET PyQt DEPENDS Python)
+    SetProjectDependencies(TARGET PyQt DEPENDS Python PythonPip)
 else()
     set(pyqt_command
         # On Linux, PyQt configure fails because it creates an executable that does not respect RPATH

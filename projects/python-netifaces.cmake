@@ -6,4 +6,4 @@ ExternalProject_Add(PythonNetifaces
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=netifaces-install.log
     BUILD_IN_SOURCE 1
 )
-SetProjectDependencies(TARGET PythonNetifaces DEPENDS Python)
+SetProjectDependencies(TARGET PythonNetifaces DEPENDS Python PythonPip)

@@ -5,4 +5,4 @@ ExternalProject_Add(PythonSix
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=six-install.log
     BUILD_IN_SOURCE 1
 )
-SetProjectDependencies(TARGET PythonSix DEPENDS Python)
+SetProjectDependencies(TARGET PythonSix DEPENDS Python PythonPip)

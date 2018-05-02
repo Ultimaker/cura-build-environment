@@ -7,5 +7,5 @@ if(BUILD_OS_WINDOWS)
         INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=comtypes-install.log
         BUILD_IN_SOURCE 1
     )
-    SetProjectDependencies(TARGET PythonComtypes DEPENDS Python)
+    SetProjectDependencies(TARGET PythonComtypes DEPENDS Python PythonPip)
 endif()
