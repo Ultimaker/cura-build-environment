@@ -6,4 +6,8 @@ ExternalProject_Add(PythonCryptography
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=cryptography-install.log
     BUILD_IN_SOURCE 1
 )
-SetProjectDependencies(TARGET PythonCryptography DEPENDS Python PythonPip OpenSSL PythonIdna PythonSix PythonPycparser PythonAsn1crypto PythonCffi)
+if(BUILD_OS_WINDOWS)
+    SetProjectDependencies(TARGET PythonCryptography DEPENDS Python PythonPip OpenSSL PythonIdna PythonSix PythonPycparser PythonAsn1crypto PythonCffi)
+else()
+    SetProjectDependencies(TARGET PythonCryptography DEPENDS Python PythonPip PythonIdna PythonSix PythonPycparser PythonAsn1crypto PythonCffi)
+endif()
