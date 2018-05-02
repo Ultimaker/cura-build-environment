@@ -6,4 +6,4 @@ ExternalProject_Add(PythonCryptography
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=cryptography-install.log
     BUILD_IN_SOURCE 1
 )
-SetProjectDependencies(TARGET PythonCryptography DEPENDS Python PythonPip)
+SetProjectDependencies(TARGET PythonCryptography DEPENDS Python PythonPip PythonIdna PythonSix PythonPycparser PythonAsn1crypto PythonCffi)
