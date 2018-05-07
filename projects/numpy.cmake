@@ -25,4 +25,4 @@ else()
     endif()
 endif()
 
-SetProjectDependencies(TARGET NumPy DEPENDS Python PythonPip OpenBLAS)
+SetProjectDependencies(TARGET NumPy DEPENDS Python OpenBLAS)

@@ -6,4 +6,4 @@ ExternalProject_Add(PySerial
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=pyserial-install.log
     BUILD_IN_SOURCE 1
 )
-SetProjectDependencies(TARGET PySerial DEPENDS Python PythonPip)
+SetProjectDependencies(TARGET PySerial DEPENDS Python)

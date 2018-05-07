@@ -30,4 +30,4 @@ ExternalProject_Add(Sip
     BUILD_IN_SOURCE 1
 )
 
-SetProjectDependencies(TARGET Sip DEPENDS Python PythonPip)
+SetProjectDependencies(TARGET Sip DEPENDS Python)

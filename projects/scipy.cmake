@@ -33,4 +33,4 @@ else()
     endif()
 endif()
 
-SetProjectDependencies(TARGET SciPy DEPENDS NumPy PythonPip)
+SetProjectDependencies(TARGET SciPy DEPENDS NumPy)

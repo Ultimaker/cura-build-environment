@@ -6,4 +6,4 @@ ExternalProject_Add(NumpySTL
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=numpystl-install.log
     BUILD_IN_SOURCE 1
 )
-SetProjectDependencies(TARGET NumpySTL DEPENDS PythonPip NumPy python-utils)
+SetProjectDependencies(TARGET NumpySTL DEPENDS NumPy python-utils)
