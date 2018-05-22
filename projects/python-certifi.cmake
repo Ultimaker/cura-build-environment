@@ -6,4 +6,4 @@ ExternalProject_Add(PythonCertifi
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=certifi-install.log
     BUILD_IN_SOURCE 1
 )
-SetProjectDependencies(TARGET PythonCertifi DEPENDS Python PythonPip)
+SetProjectDependencies(TARGET PythonCertifi DEPENDS Python)

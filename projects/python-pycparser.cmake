@@ -6,4 +6,4 @@ ExternalProject_Add(PythonPycparser
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=pycparser-install.log
     BUILD_IN_SOURCE 1
 )
-SetProjectDependencies(TARGET PythonPycparser DEPENDS Python PythonPip)
+SetProjectDependencies(TARGET PythonPycparser DEPENDS Python)

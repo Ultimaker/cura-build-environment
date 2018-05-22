@@ -6,4 +6,4 @@ ExternalProject_Add(PythonIdna
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=idna-install.log
     BUILD_IN_SOURCE 1
 )
-SetProjectDependencies(TARGET PythonIdna DEPENDS Python PythonPip)
+SetProjectDependencies(TARGET PythonIdna DEPENDS Python)

@@ -6,4 +6,4 @@ ExternalProject_Add(PythonChardet
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=chardet-install.log
     BUILD_IN_SOURCE 1
 )
-SetProjectDependencies(TARGET PythonChardet DEPENDS Python PythonPip)
+SetProjectDependencies(TARGET PythonChardet DEPENDS Python)

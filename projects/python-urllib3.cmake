@@ -6,4 +6,4 @@ ExternalProject_Add(PythonUrllib3
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=urllib3-install.log
     BUILD_IN_SOURCE 1
 )
-SetProjectDependencies(TARGET PythonUrllib3 DEPENDS Python PythonPip)
+SetProjectDependencies(TARGET PythonUrllib3 DEPENDS Python)
