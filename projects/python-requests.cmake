@@ -6,4 +6,4 @@ ExternalProject_Add(PythonRequests
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=requests-install.log
     BUILD_IN_SOURCE 1
 )
-SetProjectDependencies(TARGET PythonRequests DEPENDS Python)
+SetProjectDependencies(TARGET PythonRequests DEPENDS Python PythonIdna PythonChardet PythonCertifi PythonUrllib3)
