@@ -1,4 +1,4 @@
-set(qt_url http://download.qt.io/official_releases/qt/5.8/5.8.0/single/qt-everywhere-opensource-src-5.8.0.tar.xz)
+set(qt_url http://software.ultimaker.com/cura-binary-dependencies/qt-everywhere-opensource-src-5.8.0.tar.xz)
 set(qt_md5 66660cd3d9e1a6fed36e88adcb72e9fe)
 
 if(BUILD_OS_WINDOWS)
