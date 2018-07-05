@@ -1,6 +1,6 @@
 ExternalProject_Add(MyPy
-    URL https://pypi.python.org/packages/a5/69/619d595becd335b3324174d565e2b219172da8b0fc5f93ed94d482738062/mypy-0.470.zip
-    URL_MD5 ac4212fafb1de0abf30b7f1aace57c28
+    URL https://files.pythonhosted.org/packages/d3/11/933d4f64d95bb3dae16162a115980293a9060f37af17e90e2b6bc848e508/mypy-0.610.tar.gz
+    URL_HASH SHA256=f472645347430282d62d1f97d12ccb8741f19f1572b7cf30b58280e4e0818739
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ${PYTHON_EXECUTABLE} setup.py build
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install
