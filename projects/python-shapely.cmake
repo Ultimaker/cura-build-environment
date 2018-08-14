@@ -8,7 +8,7 @@ if(NOT BUILD_OS_WINDOWS)
         BUILD_IN_SOURCE 1
     )
 
-    SetProjectDependencies(TARGET PythonShapely DEPENDS Python NumPy PythonGeos)
+    SetProjectDependencies(TARGET PythonShapely DEPENDS Python NumPy Geos)
 
 else()
     ### MASSSIVE HACK TIME!!!!
