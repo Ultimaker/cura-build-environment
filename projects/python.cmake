@@ -42,10 +42,16 @@ ExternalProject_Add(Python
     BUILD_IN_SOURCE 1
 )
 
-if(BUILD_OS_WINDOWS)
-    # Make sure pip and setuptools are installed into our new Python
-    ExternalProject_Add_Step(Python ensurepip
-        COMMAND ${CMAKE_INSTALL_PREFIX}/bin/python -m ensurepip
-        DEPENDEES install
-    )
-endif()
+# Make sure pip and setuptools are installed into our new Python
+ExternalProject_Add_Step(Python ensurepip
+    COMMAND ${PYTHON_EXECUTABLE} -m ensurepip
+    DEPENDEES install
+)
+
+ExternalProject_Add_Step(Python upgrade_packages
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install pip==18.0
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install setuptools==40.0.0
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest==3.7.1
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest-cov==2.5.1
+    DEPENDEES ensurepip
+)
