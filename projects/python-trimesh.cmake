@@ -6,4 +6,4 @@ ExternalProject_Add(PythonTrimesh
     INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=trimesh-install.log
     BUILD_IN_SOURCE 1
 )
-SetProjectDependencies(TARGET PythonTrimesh DEPENDS Python NumPy Scipy PythonNetworkX)
+SetProjectDependencies(TARGET PythonTrimesh DEPENDS Python NumPy SciPy PythonNetworkX)
