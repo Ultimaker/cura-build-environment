@@ -53,5 +53,8 @@ ExternalProject_Add_Step(Python upgrade_packages
     COMMAND ${PYTHON_EXECUTABLE} -m pip install setuptools==40.0.0
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest==3.7.1
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest-cov==2.5.1
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install decorator==4.3.0
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install packaging==17.1
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install pyparsing==2.2.1
     DEPENDEES ensurepip
 )
