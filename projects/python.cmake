@@ -42,6 +42,8 @@ ExternalProject_Add(Python
     BUILD_IN_SOURCE 1
 )
 
+SetProjectDependencies(TARGET Python DEPENDS OpenBLAS Geos)
+
 # Make sure pip and setuptools are installed into our new Python
 ExternalProject_Add_Step(Python ensurepip
     COMMAND ${PYTHON_EXECUTABLE} -m ensurepip
@@ -50,11 +52,72 @@ ExternalProject_Add_Step(Python ensurepip
 
 ExternalProject_Add_Step(Python upgrade_packages
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pip==18.0
-    COMMAND ${PYTHON_EXECUTABLE} -m pip install setuptools==40.0.0
-    COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest==3.7.1
-    COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest-cov==2.5.1
-    COMMAND ${PYTHON_EXECUTABLE} -m pip install decorator==4.3.0
-    COMMAND ${PYTHON_EXECUTABLE} -m pip install packaging==17.1
-    COMMAND ${PYTHON_EXECUTABLE} -m pip install pyparsing==2.2.1
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install setuptools==40.2.0
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest==3.8.1
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest-cov==2.6.0
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install mypy==0.630
     DEPENDEES ensurepip
 )
+
+# Numpy, Scipy, Shapely
+if(NOT BUILD_OS_WINDOWS)
+    ExternalProject_Add_Step(Python add_numpy_scipy_shapely
+        COMMAND ${PYTHON_EXECUTABLE} -m pip install numpy==1.15.2
+        COMMAND ${PYTHON_EXECUTABLE} -m pip install scipy==1.1.0
+        COMMAND ${PYTHON_EXECUTABLE} -m pip install "shapely[vectorized]==1.6.4.post2"
+        DEPENDEES upgrade_packages
+    )
+else()
+    ### MASSSIVE HACK TIME!!!!
+    # It is currently effectively impossible to build SciPy on Windows without a proprietary compiler (ifort).
+    # This means we need to use a pre-compiled binary version of Scipy. Since the only version of SciPy for
+    # Windows available depends on numpy with MKL, we also need the binary package for that.
+    if(BUILD_OS_WIN32)
+        ExternalProject_Add_Step(Python add_numpy_scipy_shapely
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/numpy-1.15.2+mkl-cp35-cp35m-win32.whl
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy‑1.1.0‑cp35‑cp35m‑win32.whl
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/Shapely‑1.6.4.post1‑cp35‑cp35m‑win32.whl
+            COMMENT "Install Numpy, Scipy, and Shapely"
+            DEPENDEES upgrade_packages
+        )
+    else()
+        ExternalProject_Add_Step(Python add_numpy_scipy_shapely
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/numpy-1.15.2+mkl-cp35-cp35m-win_amd64.whl
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy‑1.1.0‑cp35‑cp35m‑win_amd64.whl
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/Shapely‑1.6.4.post1‑cp35‑cp35m‑win_amd64.whl
+            COMMENT "Install Numpy, Scipy, and Shapely"
+            DEPENDEES upgrade_packages
+        )
+    endif()
+endif()
+
+# Other Python Packages
+ExternalProject_Add_Step(Python add_other_python_packages
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install certifi==2018.8.24
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install chardet==3.0.4
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install decorator==4.3.0
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install idna==2.7
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install netifaces==0.10.7
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install networkx==2.2
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install numpy-stl==2.7.0
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install packaging==17.1
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install pycparser==2.19
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install pyparsing==2.2.1
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install pyserial==3.4
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install python-utils==2.3.0
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install requests==2.19.1
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install six==1.11.0
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install trimesh==2.33.39
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install typing==3.6.6
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install urllib3==1.23
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install zeroconf==0.19.1
+    DEPENDEES add_numpy_scipy_shapely
+)
+
+# OS-specific Packages
+if(BUILD_OS_WINDOWS)
+    ExternalProject_Add_Step(Python os_specific_packages
+        COMMAND ${PYTHON_EXECUTABLE} -m pip install comtypes==1.1.7
+        DEPENDEES add_other_python_packages
+    )
+endif()
