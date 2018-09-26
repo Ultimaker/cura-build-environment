@@ -1,11 +1,6 @@
 if(NOT BUILD_OS_WINDOWS)
     ExternalProject_Add(NumPy
-        URL https://github.com/numpy/numpy/releases/download/v1.15.0/numpy-1.15.0.tar.gz
-        URL_MD5 5cf4daff88042326334266f80ad38884
-        CONFIGURE_COMMAND ""
-        BUILD_COMMAND ${PYTHON_EXECUTABLE} setup.py build
-        INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=numpy-install.log
-        BUILD_IN_SOURCE 1
+        COMMAND ${PYTHON_EXECUTABLE} -m pip install numpy==1.15.2
     )
 else()
     ### MASSSIVE HACK TIME!!!!
