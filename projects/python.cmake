@@ -42,7 +42,12 @@ ExternalProject_Add(Python
     BUILD_IN_SOURCE 1
 )
 
-SetProjectDependencies(TARGET Python DEPENDS OpenBLAS Geos)
+# Only build geos on Linux
+if(BUILD_OS_LINUX)
+    SetProjectDependencies(TARGET Python DEPENDS OpenBLAS Geos)
+else()
+    SetProjectDependencies(TARGET Python DEPENDS OpenBLAS)
+endif()
 
 # Make sure pip and setuptools are installed into our new Python
 ExternalProject_Add_Step(Python ensurepip
