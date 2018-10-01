@@ -66,11 +66,39 @@ ExternalProject_Add_Step(Python upgrade_packages
 
 # Numpy, Scipy, Shapely
 if(NOT BUILD_OS_WINDOWS)
-    ExternalProject_Add_Step(Python add_numpy_scipy_shapely
+    # On Mac, building with gfortran can be a problem. If we install scipy via pip, it will compile Fortran code
+    # using gfortran by default, but if we install it manually, it will use f2py from numpy to convert Fortran
+    # code to Python code and then compile, which solves this problem.
+    # So, for non-Windows builds, we install scipy manually.
+
+    # Numpy
+    ExternalProject_Add_Step(Python add_numpy
         COMMAND ${PYTHON_EXECUTABLE} -m pip install numpy==1.15.2
-        COMMAND ${PYTHON_EXECUTABLE} -m pip install scipy==1.1.0
-        COMMAND ${PYTHON_EXECUTABLE} -m pip install "shapely[vectorized]==1.6.4.post2"
         DEPENDEES upgrade_packages
+    )
+
+    set(scipy_build_command ${PYTHON_EXECUTABLE} setup.py build)
+    set(scipy_install_command ${PYTHON_EXECUTABLE} setup.py install)
+    if(BUILD_OS_OSX)
+        set(scipy_build_command env LDFLAGS="-undefined dynamic_lookup" ${scipy_build_command})
+        set(scipy_install_command env LDFLAGS="-undefined dynamic_lookup" ${scipy_install_command})
+    endif()
+
+    # Scipy
+    ExternalProject_Add_Step(Python add_scipy
+        URL https://github.com/scipy/scipy/releases/download/v1.1.0/scipy-1.1.0.tar.gz
+        URL_MD5 aa6bcc85276b6f25e17bcfc4dede8718
+        CONFIGURE_COMMAND ""
+        BUILD_COMMAND ${scipy_build_command}
+        INSTALL_COMMAND ${scipy_install_command}
+BUILD_IN_SOURCE 1
+        DEPENDEES add_numpy
+    )
+
+    # Shapely
+    ExternalProject_Add_Step(Python add_numpy_scipy_shapely
+        COMMAND ${PYTHON_EXECUTABLE} -m pip install "shapely[vectorized]==1.6.4.post2"
+        DEPENDEES add_scipy
     )
 else()
     ### MASSSIVE HACK TIME!!!!
