@@ -57,7 +57,7 @@ ExternalProject_Add_Step(Python ensurepip
 
 ExternalProject_Add_Step(Python upgrade_packages
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pip==18.0
-    COMMAND ${PYTHON_EXECUTABLE} -m pip install setuptools==40.2.0
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install setuptools==40.4.3
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest==3.8.1
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest-cov==2.6.0
     COMMAND ${PYTHON_EXECUTABLE} -m pip install mypy==0.630
@@ -134,14 +134,14 @@ ExternalProject_Add_Step(Python add_other_python_packages
     COMMAND ${PYTHON_EXECUTABLE} -m pip install netifaces==0.10.7
     COMMAND ${PYTHON_EXECUTABLE} -m pip install networkx==2.2
     COMMAND ${PYTHON_EXECUTABLE} -m pip install numpy-stl==2.7.0
-    COMMAND ${PYTHON_EXECUTABLE} -m pip install packaging==17.1
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install packaging==18.0
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pycparser==2.19
-    COMMAND ${PYTHON_EXECUTABLE} -m pip install pyparsing==2.2.1
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install pyparsing==2.2.2
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pyserial==3.4
     COMMAND ${PYTHON_EXECUTABLE} -m pip install python-utils==2.3.0
     COMMAND ${PYTHON_EXECUTABLE} -m pip install requests==2.19.1
     COMMAND ${PYTHON_EXECUTABLE} -m pip install six==1.11.0
-    COMMAND ${PYTHON_EXECUTABLE} -m pip install trimesh==2.33.39
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install trimesh==2.34.3
     COMMAND ${PYTHON_EXECUTABLE} -m pip install typing==3.6.6
     COMMAND ${PYTHON_EXECUTABLE} -m pip install urllib3==1.23
     COMMAND ${PYTHON_EXECUTABLE} -m pip install zeroconf==0.19.1
