@@ -126,6 +126,7 @@ endif()
 
 # Other Python Packages
 ExternalProject_Add_Step(Python add_other_python_packages
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install appdirs==1.4.3
     COMMAND ${PYTHON_EXECUTABLE} -m pip install certifi==2018.8.24
     COMMAND ${PYTHON_EXECUTABLE} -m pip install chardet==3.0.4
     COMMAND ${PYTHON_EXECUTABLE} -m pip install decorator==4.3.0
