@@ -21,7 +21,7 @@ SetProjectDependencies(TARGET Arcus DEPENDS Sip Protobuf)
 if(BUILD_OS_WINDOWS)
     ExternalProject_Add(Arcus-MinGW
         GIT_REPOSITORY https://github.com/ultimaker/libArcus.git
-        GIT_TAG origin/master
+        GIT_TAG origin/${CURA_ARCUS_BRANCH_OR_TAG}
         CMAKE_COMMAND ${arcus_cmake_command}
         CMAKE_GENERATOR "MinGW Makefiles"
         CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX} -DCMAKE_INSTALL_LIBDIR=lib-mingw -DBUILD_STATIC=ON -DBUILD_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DPROTOBUF_LIBRARY=${CMAKE_INSTALL_PREFIX}/lib-mingw/libprotobuf.a -DBUILD_PYTHON=OFF

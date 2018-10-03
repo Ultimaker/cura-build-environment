@@ -2,6 +2,13 @@ project(cura-build-environment)
 
 cmake_minimum_required(VERSION 2.8.12)
 
+if(NOT CURA_ARCUS_BRANCH_OR_TAG)
+    set(CURA_ARCUS_BRANCH_OR_TAG "master")
+endif()
+if(NOT CURA_SAVITAR_BRANCH_OR_TAG)
+    set(CURA_SAVITAR_BRANCH_OR_TAG "master")
+endif()
+
 # This should care that our CMAKE_INSTALL_PREFIX is absolute at the end...
 get_filename_component(CMAKE_INSTALL_PREFIX
                        ${CMAKE_INSTALL_PREFIX}
