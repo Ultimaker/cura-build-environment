@@ -8,6 +8,7 @@ if(BUILD_OS_WINDOWS)
     return()
 endif()
 
+set(_qt_configure_cmd "./configure")
 set(qt_options
     -release
     -prefix ${CMAKE_INSTALL_PREFIX}
@@ -51,15 +52,29 @@ set(qt_options
 
 if(BUILD_OS_OSX)
     list(APPEND qt_options -no-framework)
+    if(CURA_OSX_SDK_VERSION)
+        list(APPEND qt_options -sdk macosx${CURA_OSX_SDK_VERSION})
+    endif()
+    set(_qt_config_cmd ${CMAKE_SOURCE_DIR}/projects/qt-patch-macosx-target.sh && ${_qt_configure_cmd})
 elseif(BUILD_OS_WINDOWS)
     list(APPEND qt_options -opengl desktop)
 elseif(BUILD_OS_LINUX)
     list(APPEND qt_options -no-gtk -no-rpath -qt-xcb)
 endif()
 
-ExternalProject_Add(Qt
-    URL ${qt_url}
-    URL_MD5 ${qt_md5}
-    CONFIGURE_COMMAND ./configure ${qt_options}
-    BUILD_IN_SOURCE 1
-)
+if(BUILD_OS_OSX)
+    ExternalProject_Add(Qt
+        URL ${qt_url}
+        URL_MD5 ${qt_md5}
+        CONFIGURE_COMMAND ${_qt_configure_cmd} ${qt_options}
+        BUILD_IN_SOURCE 1
+        DEPENDS OpenSSL
+    )
+else()
+    ExternalProject_Add(Qt
+        URL ${qt_url}
+        URL_MD5 ${qt_md5}
+        CONFIGURE_COMMAND ./configure ${qt_options}
+        BUILD_IN_SOURCE 1
+    )
+endif()

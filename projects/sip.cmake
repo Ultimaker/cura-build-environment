@@ -17,7 +17,6 @@ elseif(BUILD_OS_OSX)
     set(sip_command
         ${PYTHON_EXECUTABLE}
         configure.py
-        --sysroot=${CMAKE_INSTALL_PREFIX}
     )
 else()
     set(sip_command "")
