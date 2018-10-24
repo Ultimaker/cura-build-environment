@@ -7,9 +7,11 @@ if(BUILD_OS_OSX)
     # See http://bugs.python.org/issue21381
     # The interpreter crashes when MACOSX_DEPLOYMENT_TARGET=10.7 due to the increased stack size.
     set(python_patch_command sed -i".bak" "9271,9271d" <SOURCE_DIR>/configure)
-    # OS X 10.11 removed OpenSSL. Brew now refuses to link so we need to manually tell Python's build system
-    # to use the right linker flags.
-    set(python_configure_command CPPFLAGS=-I/usr/local/opt/openssl/include LDFLAGS=-L/usr/local/opt/openssl/lib ${python_configure_command})
+    if(CMAKE_OSX_SYSROOT)
+        set(python_configure_command ${python_configure_command} --enable-universalsdk=${CMAKE_OSX_SYSROOT})
+    else()
+        set(python_configure_command ${python_configure_command} --enable-universalsdk)
+    endif()
 endif()
 
 if(BUILD_OS_LINUX)
@@ -45,6 +47,8 @@ ExternalProject_Add(Python
 # Only build geos on Linux
 if(BUILD_OS_LINUX)
     SetProjectDependencies(TARGET Python DEPENDS OpenBLAS Geos)
+elseif(BUILD_OS_OSX)
+    SetProjectDependencies(TARGET Python DEPENDS OpenBLAS Geos OpenSSL xz)
 else()
     SetProjectDependencies(TARGET Python DEPENDS OpenBLAS)
 endif()

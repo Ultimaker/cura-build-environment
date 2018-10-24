@@ -7,6 +7,17 @@ endif()
 set(extra_cmake_args "")
 if(BUILD_OS_WINDOWS)
     set(extra_cmake_args -DPYTHON_LIBRARY=${CMAKE_INSTALL_PREFIX}/libs/python35.lib -DPYTHON_INCLUDE_DIR=${CMAKE_INSTALL_PREFIX}/include -DPYTHON_SITE_PACKAGES_DIR=lib/site-packages -DMSVC_STATIC_RUNTIME=ON)
+elseif(BUILD_OS_OSX)
+    if(CMAKE_OSX_DEPLOYMENT_TARGET)
+        list(APPEND extra_cmake_args
+            -DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
+        )
+    endif()
+    if(CMAKE_OSX_SYSROOT)
+        list(APPEND extra_cmake_args
+            -DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}
+        )
+    endif()
 endif()
 
 ExternalProject_Add(Arcus
