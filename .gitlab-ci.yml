@@ -2,7 +2,7 @@ image: docker:stable
 
 variables:
   # Needed for Docker access in the container.
-  DOCKER_HOST: tcp://0.0.0.0:2375
+  DOCKER_HOST: tcp://docker:2375
   DOCKER_DRIVER: overlay2
   GITLAB_IMAGE_NAME: $CI_REGISTRY/ultimaker/cura/$CI_PROJECT_NAME:$CI_COMMIT_SHA
 
@@ -16,6 +16,7 @@ build docker:
     - docker:dind
   script:
     - docker build -t $GITLAB_IMAGE_NAME .
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker push $GITLAB_IMAGE_NAME
   only:
     - master
