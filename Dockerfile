@@ -28,6 +28,7 @@ RUN yum install -y \
     openssl-devel \
     tar \
     which \
+    xz \
     zlib-devel
 
 # Enable devtools-3

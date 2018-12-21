@@ -1,0 +1,20 @@
+image: docker:stable
+
+variables:
+  # Needed for Docker access in the container.
+  DOCKER_HOST: tcp://0.0.0.0:2375
+  DOCKER_DRIVER: overlay2
+  GITLAB_IMAGE_NAME: $CI_REGISTRY/ultimaker/cura/$CI_PROJECT_NAME:$CI_COMMIT_SHA
+
+stages:
+  - build
+
+# Builds the Docker image and uploads it to the local registry of GitLab so we can use it later on as base image.
+build docker:
+  stage: build
+  script:
+    - docker build GITLAB_IMAGE_NAME
+    - docker push GITLAB_IMAGE_NAME
+  only:
+    - master
+    - optimize-docker-builds
