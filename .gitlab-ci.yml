@@ -12,6 +12,8 @@ stages:
 # Builds the Docker image and uploads it to the local registry of GitLab so we can use it later on as base image.
 build docker:
   stage: build
+  services:
+    - docker:dind
   script:
     - docker build -t $GITLAB_IMAGE_NAME .
     - docker push $GITLAB_IMAGE_NAME
