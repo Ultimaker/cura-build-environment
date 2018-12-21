@@ -13,7 +13,7 @@ stages:
 build docker:
   stage: build
   script:
-    - docker build $GITLAB_IMAGE_NAME
+    - docker build -t $GITLAB_IMAGE_NAME .
     - docker push $GITLAB_IMAGE_NAME
   only:
     - master
