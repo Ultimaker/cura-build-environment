@@ -7,7 +7,12 @@ if(BUILD_OS_OSX)
         INSTALL_COMMAND make install
         BUILD_IN_SOURCE 1
     )
-    SetProjectDependencies(TARGET libxml xz)
+    SetProjectDependencies(TARGET libxml xz Python)
+
+    ExternalProject_Add_Step(libxml install_lxml
+        COMMAND ${PYTHON_EXECUTABLE} -m pip install lxml==4.3.0
+        DEPENDEES install
+    )
 elseif(BUILD_OS_LINUX)
     ExternalProject_Add(libxml
         URL ftp://xmlsoft.org/libxml2/libxml2-2.9.9.tar.gz
@@ -17,5 +22,15 @@ elseif(BUILD_OS_LINUX)
         INSTALL_COMMAND make install
         BUILD_IN_SOURCE 1
     )
-    SetProjectDependencies(TARGET libxml xz)
+    SetProjectDependencies(TARGET libxml xz Python)
+
+    ExternalProject_Add_Step(libxml install_lxml
+        COMMAND ${PYTHON_EXECUTABLE} -m pip install lxml==4.3.0
+        DEPENDEES install
+    )
+else()
+    ExternalProject_Add(Python
+        COMMAND ${PYTHON_EXECUTABLE} -m pip install lxml==4.3.0
+        DEPENDEES upgrade_packages
+    )
 endif()
