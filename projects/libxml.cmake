@@ -1,8 +1,8 @@
 if(BUILD_OS_OSX)
     ExternalProject_Add(libxml
-        URL https://github.com/GNOME/libxml2/archive/v2.9.9.tar.gz
-        URL_HASH SHA256=d673f0284cec867ee00872a8152e0c3c09852f17fd9aa93f07579a37534f0bfe
-        CONFIGURE_COMMAND ./autogen.sh --disable-debug --disable-dependency-tracking --disable-silent-rules --prefix=${CMAKE_INSTALL_PREFIX} --with-lzma=${CMAKE_INSTALL_PREFIX} --with-sysroot=${CMAKE_OSX_SYSROOT}
+        URL ftp://xmlsoft.org/libxml2/libxml2-2.9.9.tar.gz
+        URL_HASH SHA256=94fb70890143e3c6549f265cee93ec064c80a84c42ad0f23e85ee1fd6540a871
+        CONFIGURE_COMMAND ./configure --disable-debug --disable-dependency-tracking --disable-silent-rules --prefix=${CMAKE_INSTALL_PREFIX} --with-lzma=${CMAKE_INSTALL_PREFIX} --with-sysroot=${CMAKE_OSX_SYSROOT}
         BUILD_COMMAND make
         INSTALL_COMMAND make install
         BUILD_IN_SOURCE 1
@@ -10,9 +10,9 @@ if(BUILD_OS_OSX)
     SetProjectDependencies(TARGET libxml xz)
 elseif(BUILD_OS_LINUX)
     ExternalProject_Add(libxml
-        URL https://github.com/GNOME/libxml2/archive/v2.9.9.tar.gz
-        URL_HASH SHA256=d673f0284cec867ee00872a8152e0c3c09852f17fd9aa93f07579a37534f0bfe
-        CONFIGURE_COMMAND ./autogen.sh --disable-debug --disable-dependency-tracking --disable-silent-rules --prefix=${CMAKE_INSTALL_PREFIX} --with-lzma=${CMAKE_INSTALL_PREFIX}
+        URL ftp://xmlsoft.org/libxml2/libxml2-2.9.9.tar.gz
+        URL_HASH SHA256=94fb70890143e3c6549f265cee93ec064c80a84c42ad0f23e85ee1fd6540a871
+        CONFIGURE_COMMAND ./configure --disable-debug --disable-dependency-tracking --disable-silent-rules --prefix=${CMAKE_INSTALL_PREFIX} --with-lzma=${CMAKE_INSTALL_PREFIX}
         BUILD_COMMAND make
         INSTALL_COMMAND make install
         BUILD_IN_SOURCE 1
