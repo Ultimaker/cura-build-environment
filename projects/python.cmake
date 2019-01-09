@@ -135,6 +135,7 @@ ExternalProject_Add_Step(Python add_other_python_packages
     COMMAND ${PYTHON_EXECUTABLE} -m pip install chardet==3.0.4
     COMMAND ${PYTHON_EXECUTABLE} -m pip install decorator==4.3.0
     COMMAND ${PYTHON_EXECUTABLE} -m pip install idna==2.7
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install lxml==4.3.0
     COMMAND ${PYTHON_EXECUTABLE} -m pip install netifaces==0.10.7
     COMMAND ${PYTHON_EXECUTABLE} -m pip install networkx==2.2
     COMMAND ${PYTHON_EXECUTABLE} -m pip install numpy-stl==2.7.0
