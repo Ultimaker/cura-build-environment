@@ -7,7 +7,7 @@ if(BUILD_OS_OSX)
         INSTALL_COMMAND make install
         BUILD_IN_SOURCE 1
     )
-    SetProjectDependencies(TARGET libxml xz Python)
+    SetProjectDependencies(TARGET libxml DEPENDS xz Python)
 
     ExternalProject_Add_Step(libxml install_lxml
         COMMAND ${PYTHON_EXECUTABLE} -m pip install lxml==4.3.0
@@ -22,7 +22,7 @@ elseif(BUILD_OS_LINUX)
         INSTALL_COMMAND make install
         BUILD_IN_SOURCE 1
     )
-    SetProjectDependencies(TARGET libxml xz Python)
+    SetProjectDependencies(TARGET libxml DEPENDS xz Python)
 
     ExternalProject_Add_Step(libxml install_lxml
         COMMAND ${PYTHON_EXECUTABLE} -m pip install lxml==4.3.0
