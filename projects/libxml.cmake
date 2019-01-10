@@ -5,6 +5,7 @@ if(BUILD_OS_OSX)
         CONFIGURE_COMMAND PKG_CONFIG_PATH=${CMAKE_INSTALL_PREFIX}/lib/pkgconfig
             ./configure --disable-debug --disable-dependency-tracking --disable-silent-rules
             --prefix=${CMAKE_INSTALL_PREFIX} --with-lzma=${CMAKE_INSTALL_PREFIX}
+            --with-python=${CMAKE_INSTALL_PREFIX}
             --with-sysroot=${CMAKE_OSX_SYSROOT}
         BUILD_COMMAND make
         INSTALL_COMMAND make install
@@ -23,6 +24,7 @@ elseif(BUILD_OS_LINUX)
         CONFIGURE_COMMAND PKG_CONFIG_PATH=${CMAKE_INSTALL_PREFIX}/lib/pkgconfig
             ./configure --disable-debug --disable-dependency-tracking --disable-silent-rules
             --prefix=${CMAKE_INSTALL_PREFIX} --with-lzma=${CMAKE_INSTALL_PREFIX}
+            --with-python=${CMAKE_INSTALL_PREFIX}
         BUILD_COMMAND make
         INSTALL_COMMAND make install
         BUILD_IN_SOURCE 1
