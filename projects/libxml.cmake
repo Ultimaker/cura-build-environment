@@ -16,7 +16,20 @@ if(BUILD_OS_OSX)
     )
     SetProjectDependencies(TARGET libxml DEPENDS xz Python)
 
-    ExternalProject_Add_Step(libxml install_lxml
+    ExternalProject_Add(libxslt
+        URL ftp://xmlsoft.org/libxml2/libxslt-1.1.33.tar.gz
+        URL_HASH SHA256=8e36605144409df979cab43d835002f63988f3dc94d5d3537c12796db90e38c8
+        CONFIGURE_COMMAND
+            ./configure --disable-debug --disable-dependency-tracking --disable-silent-rules
+            --prefix=${CMAKE_INSTALL_PREFIX} --without-python
+            --with-sysroot=${CMAKE_OSX_SYSROOT}
+        BUILD_COMMAND make
+        INSTALL_COMMAND make install
+        BUILD_IN_SOURCE 1
+    )
+    SetProjectDependencies(TARGET libxslt DEPENDS libxml)
+
+    ExternalProject_Add_Step(libxslt install_lxml
         COMMAND ${PYTHON_EXECUTABLE} -m pip install lxml==4.3.0
         DEPENDEES install
     )
@@ -37,7 +50,19 @@ elseif(BUILD_OS_LINUX)
     )
     SetProjectDependencies(TARGET libxml DEPENDS xz Python)
 
-    ExternalProject_Add_Step(libxml install_lxml
+    ExternalProject_Add(libxslt
+        URL ftp://xmlsoft.org/libxml2/libxslt-1.1.33.tar.gz
+        URL_HASH SHA256=8e36605144409df979cab43d835002f63988f3dc94d5d3537c12796db90e38c8
+        CONFIGURE_COMMAND
+            ./configure --disable-debug --disable-dependency-tracking --disable-silent-rules
+            --prefix=${CMAKE_INSTALL_PREFIX} --without-python
+        BUILD_COMMAND make
+        INSTALL_COMMAND make install
+        BUILD_IN_SOURCE 1
+    )
+    SetProjectDependencies(TARGET libxslt DEPENDS libxml)
+
+    ExternalProject_Add_Step(libxslt install_lxml
         COMMAND ${PYTHON_EXECUTABLE} -m pip install lxml==4.3.0
         DEPENDEES install
     )
