@@ -7,7 +7,7 @@ if(NOT BUILD_OS_WINDOWS)
     if(BUILD_OS_OSX)
         if(CMAKE_OSX_SYSROOT)
             # On OS X, make sure the right OS X SDK is used.
-            list(APPEND _libxml2_config_cmd --with-sysroot=${CMAKE_OSX_SYSROOT})
+            list(APPEND _libxml2_config_cmd --without-lzma --with-sysroot=${CMAKE_OSX_SYSROOT})
         endif()
     else()
         list(APPEND _libxml2_config_cmd --with-lzma=${CMAKE_INSTALL_PREFIX})
