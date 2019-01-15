@@ -4,8 +4,10 @@ if(NOT BUILD_OS_WINDOWS)
         --prefix=${CMAKE_INSTALL_PREFIX} --without-python)
 
     if(BUILD_OS_OSX)
-        # On OS X, make sure the right OS X SDK is used.
-        list(APPEND _libxslt_config_cmd --with-sysroot=${CMAKE_OSX_SYSROOT})
+        if(CMAKE_OSX_SYSROOT)
+            # On OS X, make sure the right OS X SDK is used.
+            list(APPEND _libxslt_config_cmd --with-sysroot=${CMAKE_OSX_SYSROOT})
+        endif()
     endif()
 
     ExternalProject_Add(libxslt

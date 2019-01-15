@@ -5,8 +5,10 @@ if(NOT BUILD_OS_WINDOWS)
         --without-python)
 
     if(BUILD_OS_OSX)
-        # On OS X, make sure the right OS X SDK is used.
-        list(APPEND _libxml2_config_cmd --with-sysroot=${CMAKE_OSX_SYSROOT})
+        if(CMAKE_OSX_SYSROOT)
+            # On OS X, make sure the right OS X SDK is used.
+            list(APPEND _libxml2_config_cmd --with-sysroot=${CMAKE_OSX_SYSROOT})
+        endif()
     endif()
 
     ExternalProject_Add(libxml2
