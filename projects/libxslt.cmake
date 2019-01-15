@@ -1,7 +1,8 @@
 if(NOT BUILD_OS_WINDOWS)
     set(_libxslt_config_cmd
         ./configure --disable-debug --disable-dependency-tracking --disable-silent-rules
-        --prefix=${CMAKE_INSTALL_PREFIX} --without-python
+        --prefix=${CMAKE_INSTALL_PREFIX} --without-python)
+
     if(BUILD_OS_OSX)
         # On OS X, make sure the right OS X SDK is used.
         list(APPEND _libxslt_config_cmd --with-sysroot=${CMAKE_OSX_SYSROOT})
