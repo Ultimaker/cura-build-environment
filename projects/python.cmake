@@ -77,7 +77,7 @@ if(NOT BUILD_OS_WINDOWS)
 
     # Numpy
     ExternalProject_Add_Step(Python add_numpy
-        COMMAND ${PYTHON_EXECUTABLE} -m pip install numpy==1.16.0
+        COMMAND ${PYTHON_EXECUTABLE} -m pip install numpy==1.15.4
         DEPENDEES upgrade_packages
     )
 
@@ -111,7 +111,7 @@ else()
     # Windows available depends on numpy with MKL, we also need the binary package for that.
     if(BUILD_OS_WIN32)
         ExternalProject_Add_Step(Python add_numpy_scipy_shapely
-            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/numpy-1.16.0+mkl-cp35-cp35m-win32.whl
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/numpy-1.15.4+mkl-cp35-cp35m-win32.whl
             COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy-1.2.0-cp35-cp35m-win32.whl
             COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/Shapely-1.6.4.post1-cp35-cp35m-win32.whl
             COMMENT "Install Numpy, Scipy, and Shapely"
@@ -119,7 +119,7 @@ else()
         )
     else()
         ExternalProject_Add_Step(Python add_numpy_scipy_shapely
-            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/numpy-1.16.0+mkl-cp35-cp35m-win_amd64.whl
+            COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/numpy-1.15.4+mkl-cp35-cp35m-win_amd64.whl
             COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy-1.2.0-cp35-cp35m-win_amd64.whl
             COMMAND ${PYTHON_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/Shapely-1.6.4.post1-cp35-cp35m-win_amd64.whl
             COMMENT "Install Numpy, Scipy, and Shapely"
