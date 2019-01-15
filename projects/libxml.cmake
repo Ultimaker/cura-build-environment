@@ -1,14 +1,16 @@
 if(NOT BUILD_OS_WINDOWS)
     set(_libxml2_config_cmd
         ./configure --disable-debug --disable-dependency-tracking --disable-silent-rules
-        --prefix=${CMAKE_INSTALL_PREFIX} --with-lzma=${CMAKE_INSTALL_PREFIX}
-        --without-python)
+        --prefix=${CMAKE_INSTALL_PREFIX} --without-python
+        )
 
     if(BUILD_OS_OSX)
         if(CMAKE_OSX_SYSROOT)
             # On OS X, make sure the right OS X SDK is used.
             list(APPEND _libxml2_config_cmd --with-sysroot=${CMAKE_OSX_SYSROOT})
         endif()
+    else()
+        list(APPEND _libxml2_config_cmd --with-lzma=${CMAKE_INSTALL_PREFIX})
     endif()
 
     ExternalProject_Add(libxml2
