@@ -64,7 +64,7 @@ ExternalProject_Add_Step(Python upgrade_packages
     COMMAND ${PYTHON_EXECUTABLE} -m pip install setuptools==40.6.3
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest==4.1.1
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest-cov==2.6.1
-    COMMAND ${PYTHON_EXECUTABLE} -m pip install mypy==0.650
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install mypy==0.660
     DEPENDEES ensurepip
 )
 
@@ -145,7 +145,7 @@ ExternalProject_Add_Step(Python add_other_python_packages
     COMMAND ${PYTHON_EXECUTABLE} -m pip install python-utils==2.3.0
     COMMAND ${PYTHON_EXECUTABLE} -m pip install requests==2.21.0
     COMMAND ${PYTHON_EXECUTABLE} -m pip install six==1.12.0
-    COMMAND ${PYTHON_EXECUTABLE} -m pip install trimesh==2.36.6
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install trimesh==2.36.9
     COMMAND ${PYTHON_EXECUTABLE} -m pip install typing==3.6.6
     COMMAND ${PYTHON_EXECUTABLE} -m pip install urllib3==1.24.1
     COMMAND ${PYTHON_EXECUTABLE} -m pip install zeroconf==0.17.6
