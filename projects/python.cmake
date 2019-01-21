@@ -63,6 +63,7 @@ ExternalProject_Add_Step(Python upgrade_packages
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pip==18.1
     COMMAND ${PYTHON_EXECUTABLE} -m pip install setuptools==40.6.3
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest==4.1.1
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest-benchmark==3.2.2
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest-cov==2.6.1
     COMMAND ${PYTHON_EXECUTABLE} -m pip install mypy==0.660
     DEPENDEES ensurepip
