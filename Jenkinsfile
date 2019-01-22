@@ -35,7 +35,7 @@ for(int i = 0; i < nodes.size(); ++i) {
                 if(isUnix()) {
                     dir('build') {
                         // Build and install the new environment
-                        sh "cmake .. -DCMAKE_INSTALL_PREFIX=/opt/ultimaker/cura-build-environment/${env.BRANCH_NAME} -DCMAKE_BUILD_TYPE=Release -DINCLUDE_DEVEL=ON"
+                        sh "cmake .. -DCMAKE_INSTALL_PREFIX=/opt/ultimaker/cura-build-environment/${env.BRANCH_NAME} -DCMAKE_PREFIX_PATH=/opt/ultimaker/cura-build-environment/${env.BRANCH_NAME} -DCMAKE_BUILD_TYPE=Release -DINCLUDE_DEVEL=ON"
                         sh "make"
                     }
                 } else {
@@ -44,7 +44,7 @@ for(int i = 0; i < nodes.size(); ++i) {
                         Q:
                         mkdir build && cd build
                         call ../env_win64.bat
-                        cmake .. -DCMAKE_INSTALL_PREFIX=C:/ultimaker/cura-build-environment/${env.BRANCH_NAME} -DCMAKE_BUILD_TYPE=Release -G "NMake Makefiles" -DINCLUDE_DEVEL=ON
+                        cmake .. -DCMAKE_INSTALL_PREFIX=C:/ultimaker/cura-build-environment/${env.BRANCH_NAME} -DCMAKE_PREFIX_PATH=/opt/ultimaker/cura-build-environment/${env.BRANCH_NAME} -DCMAKE_BUILD_TYPE=Release -G "NMake Makefiles" -DINCLUDE_DEVEL=ON
                         nmake
                         C:
                         subst /D Q:
