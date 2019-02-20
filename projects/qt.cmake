@@ -1,4 +1,3 @@
-#set(qt_url http://software.ultimaker.com/cura-binary-dependencies/qt-everywhere-src-5.10.1.tar.xz)
 set(qt_url https://download.qt.io/archive/qt/5.10/5.10.1/single/qt-everywhere-src-5.10.1.tar.xz)
 set(qt_md5 7e167b9617e7bd64012daaacb85477af)
 
@@ -59,7 +58,17 @@ if(BUILD_OS_OSX)
 elseif(BUILD_OS_WINDOWS)
     list(APPEND qt_options -opengl desktop)
 elseif(BUILD_OS_LINUX)
-    list(APPEND qt_options -no-gtk -no-rpath -qt-xcb)
+    list(APPEND qt_options
+	 -rpath
+	 -pkg-config
+	 -opengl desktop -no-gtk
+	 -qt-xcb
+	 -fontconfig
+	 -system-freetype
+	 -system-zlib
+	 -ssl -openssl-runtime
+	 -I "${CMAKE_INSTALL_PREFIX}/include"
+	 -L "${CMAKE_INSTALL_PREFIX}/lib")
 endif()
 
 if(BUILD_OS_OSX)
