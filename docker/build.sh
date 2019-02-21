@@ -20,8 +20,8 @@ fi
 
 # Set up environment variables
 source /opt/rh/devtoolset-7/enable
-export PATH="${INSTALL_PATH}/bin:${PATH}"
-export PKG_CONFIG_PATH="${INSTALL_PATH}/lib/pkgconfig:${PKG_CONFIG_PATH}"
+export PATH="${CURA_BUILD_ENV_PATH}/bin:${PATH}"
+export PKG_CONFIG_PATH="${CURA_BUILD_ENV_PATH}/lib/pkgconfig:${PKG_CONFIG_PATH}"
 
 # Build
 cmake3 "${SRC_PATH}" \
