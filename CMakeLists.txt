@@ -1,6 +1,6 @@
 project(cura-build-environment)
 
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.6)
 
 if(NOT CURA_ARCUS_BRANCH_OR_TAG)
     set(CURA_ARCUS_BRANCH_OR_TAG "master")
@@ -25,7 +25,13 @@ include(SetProjectDependencies)
 
 option(INCLUDE_DEVEL "Include development tools" OFF)
 
-# OS-specific changes
+# Hard-code the python executable to use later because all find_package()
+# commands are executed when the Makefiles are generated. Because we need to
+# compile Python first, all other projects that requires Python must use out
+# compiled one. Because we cannot use find_package() to find Python at runtime,
+# we have to hard-code the Python executable that will be created later. All
+# projects that requires Python must use the variable PYTHON_EXECUTABLE so they
+# will use the right Python.
 if(BUILD_OS_WINDOWS)
     # Minimalistic preinstalled Python on Windows:
     set(PYTHON_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/python.exe)
