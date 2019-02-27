@@ -1,6 +1,6 @@
 project(cura-build-environment)
 
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.6)
 
 if(NOT CURA_ARCUS_BRANCH_OR_TAG)
     set(CURA_ARCUS_BRANCH_OR_TAG "master")
