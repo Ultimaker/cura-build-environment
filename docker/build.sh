@@ -14,7 +14,7 @@ set -e
 # Check and set arguments
 SRC_PATH="$1"
 if [[ -z "${SRC_PATH}" ]]; then
-    echo "Missing <scr_path>."
+    echo "Missing <src_path>."
     exit 1
 fi
 
