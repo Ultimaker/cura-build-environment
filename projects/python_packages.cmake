@@ -90,6 +90,6 @@ add_custom_target(PythonPackages ALL
 if(BUILD_OS_WINDOWS)
     add_custom_command(TARGET PythonPackages POST_BUILD
         COMMAND ${PYTHON_EXECUTABLE} -m pip install comtypes==1.1.7
-        COMMENT "Install comptypes"
+        COMMENT "Install comtypes"
     )
 endif()
