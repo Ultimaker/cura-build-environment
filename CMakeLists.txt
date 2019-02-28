@@ -25,13 +25,13 @@ include(SetProjectDependencies)
 
 option(INCLUDE_DEVEL "Include development tools" OFF)
 
-# Hard-code the python executable to use later because all find_package()
+# Hard-code the CPython executable to use later because all find_package()
 # commands are executed when the Makefiles are generated. Because we need to
-# compile Python first, all other projects that requires Python must use out
+# compile CPython first, all other projects that require Python must use our
 # compiled one. Because we cannot use find_package() to find Python at runtime,
-# we have to hard-code the Python executable that will be created later. All
+# we have to hard-code the CPython executable that will be created later. All
 # projects that requires Python must use the variable PYTHON_EXECUTABLE so they
-# will use the right Python.
+# will use the right CPython.
 if(BUILD_OS_WINDOWS)
     # Minimalistic preinstalled Python on Windows:
     set(PYTHON_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/python.exe)
