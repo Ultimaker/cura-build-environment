@@ -150,7 +150,7 @@ ExternalProject_Add_Step(Python add_other_python_packages
     COMMAND ${PYTHON_EXECUTABLE} -m pip install typing==3.6.6
     COMMAND ${PYTHON_EXECUTABLE} -m pip install urllib3==1.24.1
     COMMAND ${PYTHON_EXECUTABLE} -m pip install PyYAML==3.13
-    COMMAND ${PYTHON_EXECUTABLE} -m pip install zeroconf==0.17.6
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install zeroconf==0.17.7
     DEPENDEES add_numpy_scipy_shapely
 )
 
