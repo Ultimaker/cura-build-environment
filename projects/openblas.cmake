@@ -7,7 +7,7 @@ if(NOT BUILD_OS_WINDOWS)
         URL https://github.com/xianyi/OpenBLAS/archive/v0.3.5.tar.gz
         URL_MD5 579bda57f68ea6e9074bf5780e8620bb
         CONFIGURE_COMMAND ""
-        BUILD_COMMAND make ${openblas_options}
+        BUILD_COMMAND make PREFIX=${CMAKE_INSTALL_PREFIX} ${openblas_options}
         INSTALL_COMMAND make PREFIX=${CMAKE_INSTALL_PREFIX} ${openblas_options} install
         BUILD_IN_SOURCE 1
     )
