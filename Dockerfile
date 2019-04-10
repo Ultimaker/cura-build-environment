@@ -76,7 +76,7 @@ RUN "${CURA_BUILD_ENV_WORK_DIR}"/src/docker/build.sh \
         "${CURA_BUILD_ENV_WORK_DIR}"/src
 
 # -------------------------------
-# Stage 2: Create a cleaner image with cur-build-environment installed
+# Stage 2: Create a cleaner image with cura-build-environment installed
 #
 FROM centos:centos7
 
