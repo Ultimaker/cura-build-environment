@@ -7,6 +7,7 @@ if(BUILD_OS_OSX)
         INSTALL_COMMAND make install
         BUILD_IN_SOURCE 1
     )
+    SetProjectDependencies(TARGET sqlite3 DEPENDS zlib)
 elseif(BUILD_OS_LINUX)
     ExternalProject_Add(sqlite3
         URL https://sqlite.org/2018/sqlite-autoconf-3260000.tar.gz
@@ -17,4 +18,5 @@ elseif(BUILD_OS_LINUX)
         INSTALL_COMMAND make install
         BUILD_IN_SOURCE 1
     )
+    SetProjectDependencies(TARGET sqlite3 DEPENDS zlib)
 endif()
