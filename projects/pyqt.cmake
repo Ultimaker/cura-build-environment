@@ -1,7 +1,7 @@
 set(pyqt_command "")
 if(BUILD_OS_WINDOWS)
     add_custom_target(PyQt
-        COMMAND ${PYTHON_EXECUTABLE} -m pip install PyQt5==5.10
+        COMMAND ${Python3_EXECUTABLE} -m pip install PyQt5==5.10
         COMMENT "Installing PyQt5"
     )
 
@@ -10,7 +10,7 @@ else()
     if(BUILD_OS_OSX)
         set(pyqt_command
             "DYLD_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/lib"
-            ${PYTHON_EXECUTABLE} configure.py
+            ${Python3_EXECUTABLE} configure.py
             --sysroot ${CMAKE_INSTALL_PREFIX}
             --qmake ${CMAKE_INSTALL_PREFIX}/bin/qmake
             --sip ${CMAKE_INSTALL_PREFIX}/bin/sip
@@ -20,7 +20,7 @@ else()
         set(pyqt_command
             # On Linux, PyQt configure fails because it creates an executable that does not respect RPATH
             "LD_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/lib"
-            ${PYTHON_EXECUTABLE} configure.py
+            ${Python3_EXECUTABLE} configure.py
             --sysroot ${CMAKE_INSTALL_PREFIX}
             --qmake ${CMAKE_INSTALL_PREFIX}/bin/qmake
             --sip ${CMAKE_INSTALL_PREFIX}/bin/sip

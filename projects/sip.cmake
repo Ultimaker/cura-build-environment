@@ -1,17 +1,17 @@
 if(BUILD_OS_WINDOWS)
     set(sip_command
-        ${PYTHON_EXECUTABLE}
+        ${Python3_EXECUTABLE}
         configure.py
         --platform win32-msvc2015
     )
 elseif(BUILD_OS_LINUX)
     set(sip_command
-        ${PYTHON_EXECUTABLE}
+        ${Python3_EXECUTABLE}
         configure.py
     )
 elseif(BUILD_OS_OSX)
     set(sip_command
-        ${PYTHON_EXECUTABLE}
+        ${Python3_EXECUTABLE}
         configure.py
     )
 else()

@@ -30,14 +30,14 @@ option(INCLUDE_DEVEL "Include development tools" OFF)
 # compile CPython first, all other projects that require Python must use our
 # compiled one. Because we cannot use find_package() to find Python at runtime,
 # we have to hard-code the CPython executable that will be created later. All
-# projects that requires Python must use the variable PYTHON_EXECUTABLE so they
+# projects that requires Python must use the variable Python3_EXECUTABLE so they
 # will use the right CPython.
 if(BUILD_OS_WINDOWS)
     # Minimalistic preinstalled Python on Windows:
-    set(PYTHON_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/python.exe)
+    set(Python3_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/python.exe)
 else()
     # All other OSs like OSX
-    set(PYTHON_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/python3)
+    set(Python3_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/python3)
 endif()
 
 # Build projects step

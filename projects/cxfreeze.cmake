@@ -12,8 +12,8 @@ ExternalProject_Add(cx_Freeze
     URL ${_url}
     PATCH_COMMAND ${_patch_command}
     CONFIGURE_COMMAND ""
-    BUILD_COMMAND ${PYTHON_EXECUTABLE} setup.py build
-    INSTALL_COMMAND ${PYTHON_EXECUTABLE} setup.py install --single-version-externally-managed --record=cxfreeze-install.log
+    BUILD_COMMAND ${Python3_EXECUTABLE} setup.py build
+    INSTALL_COMMAND ${Python3_EXECUTABLE} setup.py install --single-version-externally-managed --record=cxfreeze-install.log
     BUILD_IN_SOURCE 1
 )
 SetProjectDependencies(TARGET cx_Freeze DEPENDS Python)
