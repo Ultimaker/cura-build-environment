@@ -43,6 +43,18 @@ endif()
 # Build projects step
 add_custom_target(projects ALL COMMENT "Building Projects...")
 
+# On Linux, make sure that we use "lib" for libraries and create a symlink "lib64" pointing to "lib".
+if(BUILD_OS_LINUX)
+    message(STATUS "Prepare lib and lib64 on Linux...")
+    execute_process(
+        COMMAND mkdir -p "${CMAKE_INSTALL_PREFIX}/lib"
+    )
+    execute_process(
+        COMMAND ln -s "lib" "lib64"
+        WORKING_DIRECTORY "${CMAKE_INSTALL_PREFIX}"
+    )
+endif()
+
 file(GLOB _projects projects/*.cmake)
 foreach(_project ${_projects})
     include(${_project})
