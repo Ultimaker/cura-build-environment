@@ -32,6 +32,13 @@ To build these dependencies of Cura, the following software needs to be installe
   - (LINUX) Check your package management system for the term `git`. You should be able to find easily there.
 - **Subversion aka "svn"** - To fetch some sources
 
+On Linux, the following dependencies are required in order to build Qt:
+- pkg-config
+- freetype
+- xcb
+- opengl-desktop
+- fontconfig
+
 In addition, there is an option "INCLUDE_DEVEL", which, when set to ON, will
 also download and install a set of development tools. The following projects
 are currently installed as development tools:
