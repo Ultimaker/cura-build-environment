@@ -1,25 +1,13 @@
 if(BUILD_OS_LINUX)
-    ExternalProject_Add(AppImageKit
-        #GIT_REPOSITORY https://github.com/probonopd/AppImageKit.git
-        #GIT_TAG origin/master
-        URL https://github.com/probonopd/AppImageKit/archive/6.tar.gz
-        CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-        INSTALL_COMMAND ""
-        BUILD_IN_SOURCE 1
-    )
+    set(_appimagetool_path "${CMAKE_INSTALL_PREFIX}/bin/appimagetool.AppImage")
+    set(_apprun_path "${CMAKE_INSTALL_PREFIX}/bin/AppRun")
 
-    # Copying all AppImageKit tools into our prefix manually
-    # AppImageKit doesn't provide its own install routine...
-    # (https://github.com/probonopd/AppImageKit/issues/222)
-    add_custom_command(
-        TARGET AppImageKit
-        POST_BUILD
-        DEPENDS AppImageKit
+    add_custom_target(AppImageKit ALL
         COMMENT "Installing AppImageKit tools to ${CMAKE_INSTALL_PREFIX}/bin/"
         COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/bin/
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/AppImageKit-prefix/src/AppImageKit/AppImageAssistant ${CMAKE_INSTALL_PREFIX}/bin/
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/AppImageKit-prefix/src/AppImageKit/AppImageExtract   ${CMAKE_INSTALL_PREFIX}/bin/
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/AppImageKit-prefix/src/AppImageKit/AppImageMonitor   ${CMAKE_INSTALL_PREFIX}/bin/
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/AppImageKit-prefix/src/AppImageKit/AppRun            ${CMAKE_INSTALL_PREFIX}/bin/
+	COMMAND curl -o "${_appimagetool_path}" -SL https://github.com/AppImage/AppImageKit/releases/download/11/appimagetool-x86_64.AppImage
+	COMMAND chmod a+x "${_appimagetool_path}"
+	COMMAND curl -o "${_apprun_path}" -SL https://github.com/AppImage/AppImageKit/releases/download/11/AppRun-x86_64
+	COMMAND chmod a+x "${_apprun_path}"
     )
 endif()

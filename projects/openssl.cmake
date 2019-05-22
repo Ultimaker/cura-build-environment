@@ -5,7 +5,19 @@ if(BUILD_OS_OSX)
     ExternalProject_Add(OpenSSL
         URL https://www.openssl.org/source/openssl-1.0.2p.tar.gz
         URL_HASH SHA256=50a98e07b1a89eb8f6a99477f262df71c6fa7bef77df4dc83025a2845c827d00
-        CONFIGURE_COMMAND perl Configure --prefix=${CMAKE_INSTALL_PREFIX} ${_openssl_args} ${_openssl_os}
+        CONFIGURE_COMMAND perl Configure --prefix=${CMAKE_INSTALL_PREFIX} --openssldir=${CMAKE_INSTALL_PREFIX} ${_openssl_args} ${_openssl_os}
+        BUILD_COMMAND make depend && make
+        INSTALL_COMMAND make install
+        BUILD_IN_SOURCE 1
+    )
+elseif(BUILD_OS_LINUX)
+    set(_openssl_os linux-x86_64 enable-ec_nistp_64_gcc_128)
+    set(_openssl_args no-ssl2 no-ssl3 no-zlib shared enable-cms)
+
+    ExternalProject_Add(OpenSSL
+        URL https://www.openssl.org/source/openssl-1.0.2p.tar.gz
+        URL_HASH SHA256=50a98e07b1a89eb8f6a99477f262df71c6fa7bef77df4dc83025a2845c827d00
+        CONFIGURE_COMMAND perl Configure --prefix=${CMAKE_INSTALL_PREFIX} --openssldir=${CMAKE_INSTALL_PREFIX} ${_openssl_args} ${_openssl_os}
         BUILD_COMMAND make depend && make
         INSTALL_COMMAND make install
         BUILD_IN_SOURCE 1

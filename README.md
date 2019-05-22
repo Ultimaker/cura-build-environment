@@ -67,6 +67,45 @@ This will be referred to as $INSTALL_DIR below.
 
 On all platforms, you will need CMake and Git installed.
 
+### Build with docker
+
+The main `Dockerfile` is the same as `Dockerfile.centos`, which uses `centos7`
+as the base image to build the cura-build-environment.
+
+To build the cura-build-environment docker image, run:
+
+```
+docker build -t cura-build-env .
+```
+
+The resulting `cura-build-env` will have the cura-build-environment installed
+in `/srv/cura-build-environment` by default. There are 2 main environment
+variables in this image:
+
+ - `CURA_BUILD_ENV_BUILD_TYPE`: The build type, either `Release` (default) or
+   `Debug`.
+ - `CURA_BUILD_ENV_PATH`: Where the cura-build-environment is installed.
+
+The default entrypoint of this image is `/bin/bash`. The default user is
+`ultimaker` with `uid=1000` and group `ultimaker` with `gid=1000`. This ensures
+if volume mounting is used, the resulting files should have the correct
+ownerships which corresponds to the default linux user on the host machine.
+
+The development tool in use is `devtoolset-7`. In order to use the build
+environment correctly in the docker container, make sure that the following
+is done before you do anything else:
+
+```
+#!/bin/bash
+
+# Enable devtoolset-7 with its environment variables
+source /opt/rh/devtoolset-7/enable
+# Make sure that the executables and packages in the install cura-build-environment
+# will be preferred.
+export PATH="${CURA_BUILD_ENV_PATH}/bin:${PATH}"
+export PKG_CONFIG_PATH="${CURA_BUILD_ENV_PATH}/lib/pkgconfig:${PKG_CONFIG_PATH}"
+```
+
 ### Linux
 
 Building on Linux is fairly straightforward:

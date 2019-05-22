@@ -3,7 +3,7 @@
 return()
 
 add_custom_target(lxml
-    COMMAND ${PYTHON_EXECUTABLE} -m pip install lxml==4.3.0
+    COMMAND ${Python3_EXECUTABLE} -m pip install lxml==4.3.0
     COMMENT "Install lxml"
 )
 

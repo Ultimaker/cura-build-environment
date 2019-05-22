@@ -1,0 +1,20 @@
+image: docker:stable
+
+variables:
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_DRIVER: overlay2
+  IMAGE_NAME: $CI_REGISTRY/$CI_PROJECT_PATH
+  IMAGE_VERSION: centos-$CI_COMMIT_REF_NAME-$CI_PIPELINE_IID
+  CURA_ARCUS_BRANCH_OR_TAG: fix_cmake_3.12
+  CURA_SAVITAR_BRANCH_OR_TAG: fix_cmake_3.12
+
+stages:
+  - build
+
+build:
+  stage: build
+  services:
+    - docker:dind
+  script:
+    - docker build --tag $IMAGE_NAME:$IMAGE_VERSION .
+    - docker push $IMAGE_NAME:$IMAGE_VERSION

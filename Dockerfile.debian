@@ -1,0 +1,47 @@
+# WIP
+
+FROM debian:stretch
+
+# Environment vars for easy configuration
+ARG X11VNC_PASSWORD=123456
+ARG CURA_BULID_ENV_BUILD_TYPE=Release
+ARG CURA_BUILD_ENV_WORK_DIR=/tmp/cura-build-env
+ENV CURA_BUILD_ENV_INSTALL_DIR=/srv/cura-build-environment
+
+# Update and install packages
+RUN apt update -y && \
+    apt upgrade -y && \
+    apt install -y build-essential g++ gfortran libtool make autoconf automake git curl wget cmake tar \
+                   x11vnc
+
+# Init xstartup
+ADD ./xstartup /
+RUN mkdir -p /.vnc && \
+    x11vnc -storepasswd "${X11VNC_PASSWORD}" /.vnc/passwd && \
+    cp -f ./xstartup /.vnc/ && \
+    chmod a+x /.vnc/xstartup
+
+# Note: make sure to run the following lines before your UI application:
+#   Xvfb :1 -screen 0 1600x1200x16 &
+#   export DISPLAY=:1.0
+
+# Set up the working directory
+RUN mkdir -p "${CURA_BUILD_ENV_WORK_DIR}"
+ADD . "${CURA_BUILD_ENV_WORK_DIR}"/src
+
+# FIXME: We remove appImageKit as we don't need it and depends on too many things
+RUN rm -f "${CURA_BUILD_ENV_WORK_DIR}"/src/projects/appimagekit.cmake
+
+ENV PATH="${CURA_BUILD_ENV_INSTALL_DIR}/bin:${PATH}" \
+    PKG_CONFIG_PATH="${CURA_BUILD_ENV_INSTALL_DIR}/lib/pkgconfig:${PKG_CONFIG_PATH}"
+
+# Build the build environment
+RUN mkdir -p "${CURA_BUILD_ENV_WORK_DIR}"/build
+WORKDIR "${CURA_BUILD_ENV_WORK_DIR}"/build
+RUN "${CURA_BUILD_ENV_WORK_DIR}"/src/docker/build.sh "${CURA_BUILD_ENV_BUILD_TYPE}" "${CURA_BUILD_ENV_INSTALL_DIR}" "${CURA_BUILD_ENV_WORK_DIR}"/src
+
+
+# Cleanup
+WORKDIR /
+RUN rm -rf "${CURA_BUILD_ENV_WORK_DIR}" && \
+    rm -rf /var/cache

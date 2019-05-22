@@ -9,8 +9,8 @@ ARG CURA_BUILD_ENV_BUILD_TYPE=Release
 ARG CURA_BUILD_ENV_PATH=/srv/cura-build-environment
 ARG CURA_BUILD_ENV_WORK_DIR=/tmp/cura-build-environment
 # FIXME: change to master when done
-ARG CURA_ARCUS_BRANCH_OR_TAG=master
-ARG CURA_SAVITAR_BRANCH_OR_TAG=master
+ARG CURA_ARCUS_BRANCH_OR_TAG=WIP_fix_docker
+ARG CURA_SAVITAR_BRANCH_OR_TAG=WIP_fix_docker
 
 # Create unprivileged user
 RUN groupadd -g 1000 ultimaker \
