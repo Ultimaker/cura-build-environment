@@ -36,7 +36,6 @@ set(qt_options
     -skip qtsensors
     -skip qtwebchannel
     -skip qtwebengine
-    -skip qtwebsockets
     -skip qtandroidextras
     -skip qtactiveqt
     -skip qttools
