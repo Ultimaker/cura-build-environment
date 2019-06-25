@@ -14,6 +14,7 @@ set(protobuf_configure_args
     -DCMAKE_INSTALL_CMAKEDIR=lib/cmake/protobuf
     -DCMAKE_CXX_FLAGS=${protobuf_cxx_flags}
     -Dprotobuf_BUILD_TESTS=OFF
+    -Dprotobuf_BUILD_EXAMPLES=OFF
     -Dprotobuf_BUILD_SHARED_LIBS=OFF
     -Dprotobuf_WITH_ZLIB=OFF
 )
@@ -49,6 +50,7 @@ if(BUILD_OS_WINDOWS)
         -DCMAKE_INSTALL_LIBDIR=lib-mingw
         -DCMAKE_CXX_FLAGS="--std=c++11"
         -Dprotobuf_BUILD_TESTS=OFF
+        -Dprotobuf_BUILD_EXAMPLES=OFF
         -Dprotobuf_BUILD_SHARED_LIBS=OFF
     )
 
