@@ -39,18 +39,6 @@ On Linux, the following dependencies are required in order to build Qt:
 - opengl-desktop
 - fontconfig
 
-In addition, there is an option "INCLUDE_DEVEL", which, when set to ON, will
-also download and install a set of development tools. The following projects
-are currently installed as development tools:
-
-- astroid
-- isort
-- py
-- typed-ast
-- pytest
-- pylint
-- mypy
-
 The end result of this project should be a complete build environment
 installed to CMAKE_INSTALL_PREFIX. This environment can be used in
 combination with the [cura-build] repository to produce Cura executables for
