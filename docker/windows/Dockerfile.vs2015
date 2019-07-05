@@ -1,15 +1,17 @@
 FROM mcr.microsoft.com/windows/servercore:1809-amd64
 
+LABEL windows_version="1809" \
+      architecture="amd64" \
+      vs_version="2015" \
+      windows_sdk_version="8.1" \
+      python_version="3.5.7" \
+      qt_version="5.10"
+
 ARG CURA_BUILD_ENV_BUILD_TYPE=Release
 ARG CURA_BUILD_ENV_PATH=C:\\cura-build-environment
 ARG CURA_BUILD_ENV_WORK_DIR=C:\\temp\\cura-build-environment
 ARG CURA_ARCUS_BRANCH_OR_TAG=master
 ARG CURA_SAVITAR_BRANCH_OR_TAG=master
-
-LABEL windows_version="1809" \
-      architecture="amd64" \
-      vs_version="2015" \
-      windows_sdk_version="8.1"
 
 # Install chocolatey
 RUN powershell.exe -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command \

@@ -3,6 +3,11 @@
 #
 FROM centos:centos7
 
+LABEL linux_distro="centos7" \
+      architecture="amd64" \
+      python_version="3.5.7" \
+      qt_version="5.10"
+
 # Set build time arugments
 ARG X11VNC_PASSWORD=123456
 ARG CURA_BUILD_ENV_BUILD_TYPE=Release
@@ -77,6 +82,11 @@ RUN "${CURA_BUILD_ENV_WORK_DIR}"/src/docker/linux/build_centos.sh "${CURA_BUILD_
 # Stage 2: Create a cleaner image with cura-build-environment installed
 #
 FROM centos:centos7
+
+LABEL linux_distro="centos7" \
+      architecture="amd64" \
+      python_version="3.5.7" \
+      qt_version="5.10"
 
 # Set build time arguments
 ARG X11VNC_PASSWORD=123456
