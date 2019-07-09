@@ -85,6 +85,21 @@ Major  Minor  Build  Revision
 10     0      17763  0
 ```
 
+**IMPORTANT:** There's a known issue with Windows docker images earlier than version `1809`
+that CMake git clone and submodule commands can fail due to SSL verification. In
+cura-build-environment, this can happen for `libArcus` and `libSavitar`. A workaround is
+to use the `GIT_CONFIG` option in `ExternalProject_Add()` to disable SSL verification.
+To do so, add the following line:
+
+```
+ExternalProject_Add(myProj
+  GIT_REPOSITORY  https://github.com/my/project
+  ...
+  GIT_CONFIG      http.sslVerify=false
+  ...
+)
+```
+
 The built cura-build-environment will be installed in the following paths in the
 docker images:
   - `Linux` : `/srv/cura-build-environment`
