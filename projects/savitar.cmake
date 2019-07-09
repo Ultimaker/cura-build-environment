@@ -23,6 +23,7 @@ endif()
 ExternalProject_Add(Savitar
     GIT_REPOSITORY https://github.com/ultimaker/libSavitar.git
     GIT_TAG origin/${CURA_SAVITAR_BRANCH_OR_TAG}
+    GIT_SHALLOW 1
     CMAKE_COMMAND ${savitar_cmake_command}
     CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
                -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
