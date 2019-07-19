@@ -28,3 +28,21 @@ build centos docker image:
     - docker
 #  only:
 #    - master
+
+#build windows docker image:
+#  stage: build
+#  variables:
+#    IMAGE_LATEST_TAG: windows-core-1809
+#    IMAGE_FULL_TAG: windows-core-1809-$CI_COMMIT_REF_NAME-$CI_PIPELINE_IID
+#  before_script:
+#    - echo "$env:CI_JOB_TOKEN" | docker login --username gitlab-ci-token --password-stdin "$env:CI_REGISTRY"
+#  script:
+#    - docker build -t "${env:IMAGE_NAME}:${env:IMAGE_FULL_TAG}".toLower() -t "${env:IMAGE_NAME}:${env:IMAGE_LATEST_TAG}".toLower() -f docker/windows/Dockerfile.vs2015 .
+#    - docker push "${env:IMAGE_NAME}:${env:IMAGE_FULL_TAG}".toLower()
+#    - docker push "${env:IMAGE_NAME}:${env:IMAGE_LATEST_TAG}".toLower()
+#  tags:
+#    - cura
+#    - windows
+#    - powershell
+#  only:
+#    - master
