@@ -35,7 +35,9 @@ RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
     choco install -y strawberryperl; \
     choco install -y tortoisesvn; \
     choco install -y nasm; \
-    choco install -y mingw
+    choco install -y mingw; \
+    choco install -y doxygen.install; \
+    choco install -y poedit
 
 # Build the build environment.
 RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
