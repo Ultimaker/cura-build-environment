@@ -1,20 +1,30 @@
-image: docker:stable
-
-variables:
-  DOCKER_HOST: tcp://docker:2375
-  DOCKER_DRIVER: overlay2
-  IMAGE_NAME: $CI_REGISTRY/$CI_PROJECT_PATH
-  IMAGE_VERSION: centos-$CI_COMMIT_REF_NAME-$CI_PIPELINE_IID
-  CURA_ARCUS_BRANCH_OR_TAG: fix_cmake_3.12
-  CURA_SAVITAR_BRANCH_OR_TAG: fix_cmake_3.12
-
 stages:
   - build
 
-build:
+variables:
+  IMAGE_NAME: $CI_REGISTRY/$CI_PROJECT_PATH
+
+build centos docker image:
   stage: build
+  image: docker:stable
   services:
     - docker:dind
+  variables:
+    DOCKER_HOST: tcp://localhost:2375
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
+    IMAGE_LATEST_TAG: centos7
+    IMAGE_FULL_TAG: centos7-$CI_COMMIT_REF_NAME-$CI_PIPELINE_IID
+  before_script:
+    - echo "$CI_JOB_TOKEN" | docker login --username gitlab-ci-token --password-stdin "$CI_REGISTRY"
   script:
-    - docker build --tag $IMAGE_NAME:$IMAGE_VERSION .
-    - docker push $IMAGE_NAME:$IMAGE_VERSION
+    - docker pull "$IMAGE_NAME:$IMAGE_LATEST_TAG"
+    - docker build -t "$IMAGE_NAME:$IMAGE_FULL_TAG" -t "$IMAGE_NAME:$IMAGE_LATEST_TAG" -f docker/linux/Dockerfile.centos .
+    - docker push "$IMAGE_NAME:$IMAGE_FULL_TAG"
+    - docker push "$IMAGE_NAME:$IMAGE_LATEST_TAG"
+  tags:
+    - cura
+    - linux
+    - docker
+  only:
+    - master
