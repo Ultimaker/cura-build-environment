@@ -1,4 +1,4 @@
-@@ -57,3 +57,11 @@
+@@ -57,3 +57,10 @@
  	$(CC) $(CFLAGS) -c decompress.c
  bzlib.o: bzlib.c
  	$(CC) $(CFLAGS) -c bzlib.c
