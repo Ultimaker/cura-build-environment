@@ -6,7 +6,6 @@
 +install: all
 +	if ( test ! -d $(PREFIX)/lib ) ; then mkdir -p $(PREFIX)/lib ; fi
 +	cp -f libbz2.so.1.0.8 $(PREFIX)/lib/
-+	chmod a+x $(PREFIX)/lib/libbz2.so.1.0.8
 +	ln -s -f libbz2.so.1.0.8 $(PREFIX)/lib/libbz2.so.1.0
 +	ln -s -f libbz2.so.1.0.8 $(PREFIX)/lib/libbz2.so.1
 +	ln -s -f libbz2.so.1.0.8 $(PREFIX)/lib/libbz2.so
