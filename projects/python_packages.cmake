@@ -71,13 +71,15 @@ add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install networkx==2.3
     COMMAND ${Python3_EXECUTABLE} -m pip install numpy-stl==2.10.1
     COMMAND ${Python3_EXECUTABLE} -m pip install packaging==19.1
+    COMMAND ${Python3_EXECUTABLE} -m pip install pycollada==0.6
     COMMAND ${Python3_EXECUTABLE} -m pip install pycparser==2.19
     COMMAND ${Python3_EXECUTABLE} -m pip install pyparsing==2.4.2
     COMMAND ${Python3_EXECUTABLE} -m pip install pyserial==3.4
+    COMMAND ${Python3_EXECUTABLE} -m pip install python-dateutil==2.8.0
     COMMAND ${Python3_EXECUTABLE} -m pip install python-utils==2.3.0
     COMMAND ${Python3_EXECUTABLE} -m pip install requests==2.22.0
     COMMAND ${Python3_EXECUTABLE} -m pip install six==1.12.0
-    COMMAND ${Python3_EXECUTABLE} -m pip install trimesh==3.2.3
+    COMMAND ${Python3_EXECUTABLE} -m pip install trimesh==3.2.12
     COMMAND ${Python3_EXECUTABLE} -m pip install typing==3.7.4
     COMMAND ${Python3_EXECUTABLE} -m pip install urllib3==1.25.3
     COMMAND ${Python3_EXECUTABLE} -m pip install PyYAML==5.1.2
