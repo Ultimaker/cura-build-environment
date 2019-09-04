@@ -15,6 +15,10 @@ if(BUILD_OS_OSX)
 endif()
 
 if(BUILD_OS_LINUX)
+    # CURA-6739: See Python issue #9998
+    # For CTM file loading with trimesh. Trimesh uses ctypes.util.find_library() to find libopenctm.so, but it doesn't
+    # respect LD_LIBRARY_PATH in Python 3.5.7, This patch is backported from Python 3.6 and 3.7.
+    set(python_patch_command patch Lib/ctypes/util.py ${CMAKE_SOURCE_DIR}/projects/python_ctypes_util.patch)
     # Set a proper RPATH so everything depending on Python does not need LD_LIBRARY_PATH
     set(python_configure_command LDFLAGS=-Wl,-rpath=${CMAKE_INSTALL_PREFIX}/lib ${python_configure_command})
 endif()
