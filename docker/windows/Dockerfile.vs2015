@@ -29,6 +29,7 @@ RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
 #  - perl, svn, and nasm are needed by OpenSSL for Python
 #  - MinGW64 8.1.0 posix seh.
 RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
+    choco install -y 7zip; \
     choco install -y cmake --installargs 'ADD_CMAKE_TO_PATH=System'; \
     choco install -y git --params '/GitOnlyOnPath /NoAutoCrlf /SChannel'; \
     choco install -y nsis; \
@@ -39,10 +40,13 @@ RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
     choco install -y doxygen.install; \
     choco install -y poedit
 
-# Build the build environment.
-RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
-    New-Item "%CURA_BUILD_ENV_WORK_DIR%" -ItemType "directory"
 ADD . "${CURA_BUILD_ENV_WORK_DIR}"/src
+
+# Get WiX Toolset 3.11.2
+RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
+    "%CURA_BUILD_ENV_WORK_DIR%"\\src\\docker\\windows\\install_wixtoolset.ps1
+
+# Build the build environment.
 RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
     cmd /c "%CURA_BUILD_ENV_WORK_DIR%"\\src\\docker\\windows\\build_vs2015.cmd
 
