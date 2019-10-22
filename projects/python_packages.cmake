@@ -70,7 +70,7 @@ add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install netifaces==0.10.9
     COMMAND ${Python3_EXECUTABLE} -m pip install networkx==2.3
     COMMAND ${Python3_EXECUTABLE} -m pip install numpy-stl==2.10.1
-    COMMAND ${Python3_EXECUTABLE} -m pip install packaging==19.1
+    COMMAND ${Python3_EXECUTABLE} -m pip install packaging==18.0
     COMMAND ${Python3_EXECUTABLE} -m pip install pycollada==0.6
     COMMAND ${Python3_EXECUTABLE} -m pip install pycparser==2.19
     COMMAND ${Python3_EXECUTABLE} -m pip install pyparsing==2.4.2
