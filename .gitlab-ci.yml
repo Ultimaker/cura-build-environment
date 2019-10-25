@@ -26,5 +26,5 @@ build centos docker image:
     - cura
     - linux
     - docker
-  only:
-    - master
+#  only:
+#    - master
