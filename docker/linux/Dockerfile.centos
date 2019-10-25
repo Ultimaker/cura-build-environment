@@ -46,6 +46,7 @@ RUN yum install -y \
     freetype-devel \
     fontconfig \
     fontconfig-devel \
+    patch \
     mesa-libGL \
     mesa-libGL-devel \
     xorg-x11-server-Xvfb \
@@ -138,6 +139,7 @@ RUN yum install -y \
     xorg-x11-server-Xvfb \
     libX11-devel \
     patchelf \
+    patch \
     xdotool \
     tigervnc-server \
     x11vnc \
