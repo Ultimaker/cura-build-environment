@@ -81,7 +81,8 @@ add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install python-utils==2.3.0
     COMMAND ${Python3_EXECUTABLE} -m pip install requests==2.22.0
     COMMAND ${Python3_EXECUTABLE} -m pip install six==1.12.0
-    COMMAND ${Python3_EXECUTABLE} -m pip install trimesh==3.2.34
+    # https://github.com/mikedh/trimesh/issues/575 since 3.2.34
+    COMMAND ${Python3_EXECUTABLE} -m pip install trimesh==3.2.33
     COMMAND ${Python3_EXECUTABLE} -m pip install typing==3.7.4
     COMMAND ${Python3_EXECUTABLE} -m pip install urllib3==1.25.6
     COMMAND ${Python3_EXECUTABLE} -m pip install PyYAML==5.1.2
