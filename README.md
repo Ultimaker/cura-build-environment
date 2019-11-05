@@ -39,18 +39,6 @@ On Linux, the following dependencies are required in order to build Qt:
 - opengl-desktop
 - fontconfig
 
-In addition, there is an option "INCLUDE_DEVEL", which, when set to ON, will
-also download and install a set of development tools. The following projects
-are currently installed as development tools:
-
-- astroid
-- isort
-- py
-- typed-ast
-- pytest
-- pylint
-- mypy
-
 The end result of this project should be a complete build environment
 installed to CMAKE_INSTALL_PREFIX. This environment can be used in
 combination with the [cura-build] repository to produce Cura executables for
@@ -58,44 +46,100 @@ all three supported platforms.
 
 [cura-build]: https://github.com/ultimaker/cura-build
 
-Building
---------
 
-To build this project, clone this project to a directory - referred to as
-$SOURCE_DIR below - then determine where you want to install everything.
-This will be referred to as $INSTALL_DIR below.
+# Docker Images (Linux and Windows)
 
-On all platforms, you will need CMake and Git installed.
+There are Dockerfiles for Linux and Windows. You can find them in the `docker`
+directory. The main Dockerfiles are as follows:
 
-### Build with docker
+  - `docker/linux/Dockerfile.centos`: Based on centos7
+  - `docker/windows/Dockerfile.vs2015`: Based on Windows Server Core 1809 with
+    Visual Studio 2015 Build Tools
 
-The main `Dockerfile` is the same as `Dockerfile.centos`, which uses `centos7`
-as the base image to build the cura-build-environment.
+To build a docker, you can use the commands below:
 
-To build the cura-build-environment docker image, run:
+```bash
+# Make sure that you are in the `cura-build-environment` root directory.
+
+# Build the Linux image based on centos7
+docker build -t <your-image-tag> -f docker/linux/Dockerfile.centos7 .
+```
+
+```powershell
+# Build the Windows image based on Windows Server Core 1809 with
+# Visual Studio 2015 Build Tools
+docker build -t <your-image-tag> -f docker/windows/Dockerfile.vs2015 .
+```
+
+Note that the Windows Dockerfile uses `mcr.microsoft.com/windows/servercore:1809-amd64`
+as the base image. See https://hub.docker.com/_/microsoft-windows-servercore): "Windows
+requires the host OS version to match the container OS version." So, if the `1809` base
+image doesn't work for you, try to change it to an eariler version, for example `1607`.
+To check your Windows version, you can run the PowerShell command below:
+
+```powershell
+PS > [System.Environment]::OSVersion.Version
+
+Major  Minor  Build  Revision
+-----  -----  -----  --------
+10     0      17763  0
+```
+
+**IMPORTANT:** There's a known issue with Windows docker images earlier than version `1809`
+that CMake git clone and submodule commands can fail due to SSL verification. In
+cura-build-environment, this can happen for `libArcus` and `libSavitar`. A workaround is
+to use the `GIT_CONFIG` option in `ExternalProject_Add()` to disable SSL verification.
+To do so, add the following line:
 
 ```
-docker build -t cura-build-env .
+ExternalProject_Add(myProj
+  GIT_REPOSITORY  https://github.com/my/project
+  ...
+  GIT_CONFIG      http.sslVerify=false
+  ...
+)
 ```
 
-The resulting `cura-build-env` will have the cura-build-environment installed
-in `/srv/cura-build-environment` by default. There are 2 main environment
-variables in this image:
+The built cura-build-environment will be installed in the following paths in the
+docker images:
+  - `Linux` : `/srv/cura-build-environment`
+  - `Windows` : `C:\cura-build-environment`
+
+There are 2 main environment variables in the image:
 
  - `CURA_BUILD_ENV_BUILD_TYPE`: The build type, either `Release` (default) or
    `Debug`.
  - `CURA_BUILD_ENV_PATH`: Where the cura-build-environment is installed.
 
-The default entrypoint of this image is `/bin/bash`. The default user is
-`ultimaker` with `uid=1000` and group `ultimaker` with `gid=1000`. This ensures
-if volume mounting is used, the resulting files should have the correct
-ownerships which corresponds to the default linux user on the host machine.
+You can use a number of arguments to customize the image you want to build. The
+available arugments are as follows:
+
+ - `CURA_BUILD_ENV_BUILD_TYPE`: By default `Release`, this is passed to cmake via `CMAKE_BUILD_TYPE`.
+ - `CURA_BUILD_ENV_PATH`: Where the cura-build-environment will be installed in the image.
+ - `CURA_ARCUS_BRANCH_OR_TAG`: The git branch/tag to use for building libArcus.
+ - `CURA_SAVITAR_BRANCH_OR_TAG`: The git branch/tag to use for building libSavitar.
+
+You can configure them via the example command below:
+
+```bash
+docker build \
+    --build-arg CURA_BUILD_ENV_BUILD_TYPE=Release \
+    --build-arg CURA_ARCUS_BRANCH_OR_TAG=master \
+    ...
+```
+
+## Details about the Linux CentOS 7 Docker Image
+
+The default user is `ultimaker` with `uid=1000` and group `ultimaker` with
+`gid=1000`. This ensures if volume mounting is used, the resulting files should
+have the correct ownerships which corresponds to the default linux user on the
+host machine.
 
 The development tool in use is `devtoolset-7`. In order to use the build
 environment correctly in the docker container, make sure that the following
 is done before you do anything else:
 
-```
+```bash
 #!/bin/bash
 
 # Enable devtoolset-7 with its environment variables
@@ -106,15 +150,31 @@ export PATH="${CURA_BUILD_ENV_PATH}/bin:${PATH}"
 export PKG_CONFIG_PATH="${CURA_BUILD_ENV_PATH}/lib/pkgconfig:${PKG_CONFIG_PATH}"
 ```
 
-### Linux
+Note that the default entrypoint of this image is `/docker-entrypoint.sh`,
+which executes the commands above.
+
+# Building cura-build-environment on Native Machine
+
+## Linux
 
 Building on Linux is fairly straightforward:
 
 ```
-cd $SOURCE_DIR
+cbe_src_dir=<where-your-source-dir-is>
+cbe_install_dir=<where-you-want-to-install>
+
+cd $cbe_src_dir
 mkdir build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR -DCMAKE_BUILD_TYPE=Release
+
+# Set some environment variables to make sure that the installed tools can be found.
+export PATH=$cbe_install_dir/bin:$PATH
+export PKG_CONFIG_PATH=$cbe_install_dir/lib/pkgconfig:$PKG_CONFIG_PATH
+
+cmake -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX=$cbe_install_dir \
+      -DCMAKE_PREFIX_PATH=$cbe_install_dir \
+      ..
 make
 ```
 
@@ -122,7 +182,7 @@ Note that a fairly recent C++ compiler is required, at the very least GCC
 4.9. If you are building on CentOS, you can get this from the devtoolset
 packages.
 
-### Mac OS
+## Mac OS
 
 Building on MacOS currently requires OpenSSL and a recent version of the
 development tools distributed with XCode. You may also want to set
@@ -142,21 +202,38 @@ xcode-select --install
 To build, run the following:
 
 ```
-cd $SOURCE_DIR
+cbe_src_dir=<where-your-source-dir-is>
+cbe_install_dir=<where-you-want-to-install>
+
+cd $cbe_src_dir
 mkdir build
 cd build
-../env_osx.sh
-cmake .. -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR -DCMAKE_BUILD_TYPE=Release
+
+source ../env_osx.sh
+
+# Set some environment variables to make sure that the installed tools can be found.
+export PATH=$cbe_install_dir/bin:$PATH
+export PKG_CONFIG_PATH=$cbe_install_dir/lib/pkgconfig:$PKG_CONFIG_PATH
+
+cmake -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX=$cbe_install_dir \
+      -DCMAKE_PREFIX_PATH=$cbe_install_dir \
+      ..
 make
 ```
 
-### Windows
+## Windows
 
-Building the environment on Windows requires both MinGW (version 4.9 or
-higher) and Visual C++ 2015 or Visual Studio 2017 with Windows 8.1 SDK.
-Visual C++ is required for building Python and MinGW for building the Cura Engine.
-In addition, Subversion is required for building Python. Please make sure all required tools are 
-accessible through your path.
+cura-build-environment on Windows requires Visual C++ 2015 (14.0) and MinGW
+(version 4.9 or higher). Python and all Python modules are compiled with VC++
+and CuraEngine is built with MinGW.
+
+The current cura-build-environment uses Python 3.5.2 which can be compiled with
+Visual C++ 2015 (14.0) with Windows 8.1 SDK. Visual Studio 2017 doesn't seem to
+be able to compile Python 3.5.* successfully.
+
+In addition, Subversion is required for building Python (for building OpenSSL).
+Please make sure all required tools are accessible through your path.
 
 The `env_win32.bat` and `env_win64.bat` will make sure to set a few
 environment variables that are required. Most importantly, they call the
@@ -165,25 +242,23 @@ environment variables that are required. Most importantly, they call the
 To build, run the following:
 
 ```
-cd %SOURCE_DIR%
+set cbe_src_dir=<where-your-source-dir-is>
+set cbe_install_dir=<where-you-want-to-install>
+
+cd %cbe_src_dir%
 mkdir build
 cd build
+
 ..\env_win64.bat
-cmake .. -DCMAKE_INSTALL_PREFIX=%INSTALL_DIR% -DCMAKE_BUILD_TYPE=Release ^
-         -G "NMake Makefiles"
+
+cmake -DCMAKE_BUILD_TYPE=Release ^
+      -DCMAKE_INSTALL_PREFIX=%cbe_install_dir% ^
+      -DCMAKE_PREFIX_PATH=%cbe_install_dir% ^
+      -G "NMake Makefiles" ^
+      ..
 nmake
 ```
 
 Note: Using the NMake Makefiles generator is important, since the normal
 Visual Studio generator does not work well in combination with some of
 the build systems of the sub-projects that are built.
-
-
-### Docker
-Building the environment in Docker is very easy using the Dockerfile in this repository.
-We handle all cloning and compiling in the Dockerfile, so no dependencies are needed on the host OS.
-The resulting image can be used as a `FROM` for building Cura itself.
-
-```bash
-docker build -t ultimaker/cura-build-environment .
-```

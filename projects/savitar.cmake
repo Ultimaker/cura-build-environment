@@ -6,7 +6,7 @@ endif()
 
 set(extra_cmake_args "")
 if(BUILD_OS_WINDOWS)
-    set(extra_cmake_args -DPYTHON_LIBRARY=${CMAKE_INSTALL_PREFIX}/libs/python35.lib -DPYTHON_INCLUDE_DIR=${CMAKE_INSTALL_PREFIX}/include -DPYTHON_SITE_PACKAGES_DIR=lib/site-packages)
+    set(extra_cmake_args -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/libs)
 elseif(BUILD_OS_OSX)
     if(CMAKE_OSX_DEPLOYMENT_TARGET)
         list(APPEND extra_cmake_args
@@ -23,11 +23,11 @@ endif()
 ExternalProject_Add(Savitar
     GIT_REPOSITORY https://github.com/ultimaker/libSavitar.git
     GIT_TAG origin/${CURA_SAVITAR_BRANCH_OR_TAG}
+    GIT_SHALLOW 1
     CMAKE_COMMAND ${savitar_cmake_command}
     CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
                -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
                -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}
-               -DCMAKE_INSTALL_LIBDIR=lib
                -DBUILD_STATIC=ON
                ${extra_cmake_args}
 )

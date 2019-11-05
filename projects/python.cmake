@@ -1,5 +1,5 @@
 set(python_patch_command "")
-set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --with-threads --without-pymalloc)
+set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --enable-ipv6 --with-threads --without-pymalloc )
 set(python_build_command make)
 set(python_install_command make install)
 
@@ -29,11 +29,14 @@ if(BUILD_OS_WINDOWS)
     
     set(python_configure_command )
 
+    # Use the Windows Batch script to pass an argument "/p:PlatformToolset=v140". The argument must have double quotes
+    # around it, otherwise it will be evaluated as "/p:PlatformToolset v140" in Windows Batch. Passing this argument
+    # in CMake via a command seems to always result in "/p:PlatformToolset v140".
     if(BUILD_OS_WIN32)
-        set(python_build_command cmd /c "<SOURCE_DIR>/PCbuild/build.bat --no-tkinter -c Release -e -M -p Win32")
+        set(python_build_command cmd /c "${CMAKE_SOURCE_DIR}/projects/build_python_windows.bat" <SOURCE_DIR>/PCbuild/build.bat --no-tkinter -c Release -e -M -p Win32)
         set(python_install_command cmd /c "${CMAKE_SOURCE_DIR}/projects/install_python_windows.bat win32 <SOURCE_DIR> ${CMAKE_INSTALL_PREFIX}")
     else()
-    set(python_build_command cmd /c "<SOURCE_DIR>/PCbuild/build.bat --no-tkinter -c Release -e -M -p x64")
+        set(python_build_command cmd /c "${CMAKE_SOURCE_DIR}/projects/build_python_windows.bat" <SOURCE_DIR>/PCbuild/build.bat --no-tkinter -c Release -e -M -p x64)
         set(python_install_command cmd /c "${CMAKE_SOURCE_DIR}/projects/install_python_windows.bat amd64 <SOURCE_DIR> ${CMAKE_INSTALL_PREFIX}")
     endif()
 endif()

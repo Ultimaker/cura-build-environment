@@ -1,7 +1,6 @@
 #!/bin/bash
 #
-# This script is used to build cura-build-environment in docker container with
-# CentOS 7 x86_64 as the base image.
+# This script builds the cura-build-environment with the CentOS 7 base docker image.
 #
 # Usage:
 #   <src_path>

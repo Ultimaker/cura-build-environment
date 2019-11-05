@@ -3,18 +3,22 @@
 #
 FROM centos:centos7
 
+LABEL linux_distro="centos7" \
+      architecture="amd64" \
+      python_version="3.5.7" \
+      qt_version="5.10"
+
 # Set build time arugments
 ARG X11VNC_PASSWORD=123456
 ARG CURA_BUILD_ENV_BUILD_TYPE=Release
 ARG CURA_BUILD_ENV_PATH=/srv/cura-build-environment
 ARG CURA_BUILD_ENV_WORK_DIR=/tmp/cura-build-environment
-# FIXME: change to master when done
 ARG CURA_ARCUS_BRANCH_OR_TAG=master
 ARG CURA_SAVITAR_BRANCH_OR_TAG=master
 
 # Create unprivileged user
-RUN groupadd -g 1000 ultimaker \
- && useradd -g ultimaker -u 1000 ultimaker -m
+RUN groupadd -g 1000 ultimaker && \
+    useradd -g ultimaker -u 1000 ultimaker -m
 
 # Install package repositories
 RUN yum -y update && \
@@ -42,6 +46,7 @@ RUN yum install -y \
     freetype-devel \
     fontconfig \
     fontconfig-devel \
+    patch \
     mesa-libGL \
     mesa-libGL-devel \
     xorg-x11-server-Xvfb \
@@ -67,26 +72,29 @@ RUN mkdir -p "${CURA_BUILD_ENV_WORK_DIR}" "${CURA_BUILD_ENV_PATH}"
 ADD . "${CURA_BUILD_ENV_WORK_DIR}"/src
 
 # Build the build environment
-RUN mkdir -p "${CURA_BUILD_ENV_WORK_DIR}"/build \
- && chown -R ultimaker:ultimaker "${CURA_BUILD_ENV_WORK_DIR}" \
- && chown -R ultimaker:ultimaker "${CURA_BUILD_ENV_PATH}"
+RUN mkdir -p "${CURA_BUILD_ENV_WORK_DIR}"/build && \
+    chown -R ultimaker:ultimaker "${CURA_BUILD_ENV_WORK_DIR}" && \
+    chown -R ultimaker:ultimaker "${CURA_BUILD_ENV_PATH}"
 WORKDIR "${CURA_BUILD_ENV_WORK_DIR}"/build
 USER ultimaker
-RUN "${CURA_BUILD_ENV_WORK_DIR}"/src/docker/build.sh \
-        "${CURA_BUILD_ENV_WORK_DIR}"/src
+RUN "${CURA_BUILD_ENV_WORK_DIR}"/src/docker/linux/build_centos.sh "${CURA_BUILD_ENV_WORK_DIR}"/src
 
 # -------------------------------
 # Stage 2: Create a cleaner image with cura-build-environment installed
 #
 FROM centos:centos7
 
+LABEL linux_distro="centos7" \
+      architecture="amd64" \
+      python_version="3.5.7" \
+      qt_version="5.10"
+
 # Set build time arguments
 ARG X11VNC_PASSWORD=123456
 ARG CURA_BUILD_ENV_BUILD_TYPE=Release
 ARG CURA_BUILD_ENV_PATH=/srv/cura-build-environment
-# FIXME: change to master when done
-ARG CURA_ARCUS_BRANCH_OR_TAG=fix_cmake_3.12
-ARG CURA_SAVITAR_BRANCH_OR_TAG=fix_cmake_3.12
+ARG CURA_ARCUS_BRANCH_OR_TAG=master
+ARG CURA_SAVITAR_BRANCH_OR_TAG=master
 
 # Set environment variables
 ENV CURA_BUILD_ENV_BUILD_TYPE="${CURA_BUILD_ENV_BUILD_TYPE}" \
@@ -95,8 +103,8 @@ ENV CURA_BUILD_ENV_BUILD_TYPE="${CURA_BUILD_ENV_BUILD_TYPE}" \
     CURA_SAVITAR_BRANCH_OR_TAG="${CURA_SAVITAR_BRANCH_OR_TAG}"
 
 # Create unprivileged user
-RUN groupadd -g 1000 ultimaker \
- && useradd -g ultimaker -u 1000 ultimaker
+RUN groupadd -g 1000 ultimaker && \
+    useradd -g ultimaker -u 1000 ultimaker
 
 # Install package repositories
 RUN yum -y update && \
@@ -131,6 +139,7 @@ RUN yum install -y \
     xorg-x11-server-Xvfb \
     libX11-devel \
     patchelf \
+    patch \
     xdotool \
     tigervnc-server \
     x11vnc \
@@ -157,3 +166,7 @@ RUN rm -rf /tmp/* && \
 # Change working directory and set user
 WORKDIR /home/ultimaker
 USER ultimaker
+
+ADD ./docker/linux/entrypoint_centos.sh /docker-entrypoint.sh
+
+ENTRYPOINT ["/docker-entrypoint.sh"]

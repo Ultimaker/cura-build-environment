@@ -23,8 +23,6 @@ include(GNUInstallDirs)
 include(BuildPlatformDetection)
 include(SetProjectDependencies)
 
-option(INCLUDE_DEVEL "Include development tools" OFF)
-
 # Hard-code the CPython executable to use later because all find_package()
 # commands are executed when the Makefiles are generated. Because we need to
 # compile CPython first, all other projects that require Python must use our
@@ -59,12 +57,5 @@ file(GLOB _projects projects/*.cmake)
 foreach(_project ${_projects})
     include(${_project})
 endforeach()
-
-if(INCLUDE_DEVEL)
-    file(GLOB _devel_projects devel/*.cmake)
-    foreach(_devel_project ${_devel_projects})
-        include(${_devel_project})
-    endforeach()
-endif()
 
 ProcessProjectDependencies(TARGET projects)
