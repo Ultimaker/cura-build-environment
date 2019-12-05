@@ -1,0 +1,20 @@
+---
+name: CI/CD for master
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout master
+      uses: actions/checkout@master
+    - name: Build and publish docker image
+      uses: HurricanKai/Publish-Docker-Github-Action@1.12.1
+      with:
+        name: ultimaker/cura-build-environment
+        dockerfile: docker/linux/Dockerfile.centos
+        snapshot: true
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
