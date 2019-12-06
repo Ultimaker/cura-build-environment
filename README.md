@@ -49,6 +49,13 @@ all three supported platforms.
 
 # Docker Images (Linux and Windows)
 
+The lastest docker images can be found on DockerHub via https://hub.docker.com/r/ultimaker/cura-build-environment.
+Currently only the CentOS-based images are available. To get the latest CentOS-base image, you can run
+
+```shell script
+docker pull ultimaker/cura-build-environment
+```
+
 There are Dockerfiles for Linux and Windows. You can find them in the `docker`
 directory. The main Dockerfiles are as follows:
 
@@ -58,7 +65,7 @@ directory. The main Dockerfiles are as follows:
 
 To build a docker, you can use the commands below:
 
-```bash
+```shell script
 # Make sure that you are in the `cura-build-environment` root directory.
 
 # Build the Linux image based on centos7
