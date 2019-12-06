@@ -20,9 +20,11 @@ ARG CURA_SAVITAR_BRANCH_OR_TAG=master
 RUN groupadd -g 1000 ultimaker && \
     useradd -g ultimaker -u 1000 ultimaker -m
 
-# Install package repositories
+# Install package repositories. Use ius to get the latest git
 RUN yum -y update && \
     yum install -y epel-release && \
+    yum remove -y git \
+    rpm -U https://centos7.iuscommunity.org/ius-release.rpm \
     yum update -y && \
     yum install -y centos-release-scl-rh centos-release-scl && \
     yum update -y
@@ -34,7 +36,7 @@ RUN yum install -y \
     devtoolset-7-gcc-gfortran \
     cmake3 \
     curl \
-    git \
+    git2u \
     libtool \
     make \
     file \
@@ -109,6 +111,8 @@ RUN groupadd -g 1000 ultimaker && \
 # Install package repositories
 RUN yum -y update && \
     yum install -y epel-release && \
+    yum remove -y git \
+    rpm -U https://centos7.iuscommunity.org/ius-release.rpm \
     yum update -y && \
     yum install -y centos-release-scl-rh centos-release-scl && \
     yum update -y
@@ -120,7 +124,7 @@ RUN yum install -y \
     devtoolset-7-gcc-gfortran \
     cmake3 \
     curl \
-    git \
+    git2u \
     gettext \
     doxygen \
     libtool \
