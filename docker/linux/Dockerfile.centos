@@ -23,8 +23,8 @@ RUN groupadd -g 1000 ultimaker && \
 # Install package repositories. Use ius to get the latest git
 RUN yum -y update && \
     yum install -y epel-release && \
-    yum remove -y git \
-    rpm -U https://centos7.iuscommunity.org/ius-release.rpm \
+    yum remove -y git && \
+    rpm -U https://centos7.iuscommunity.org/ius-release.rpm && \
     yum update -y && \
     yum install -y centos-release-scl-rh centos-release-scl && \
     yum update -y
@@ -111,8 +111,8 @@ RUN groupadd -g 1000 ultimaker && \
 # Install package repositories
 RUN yum -y update && \
     yum install -y epel-release && \
-    yum remove -y git \
-    rpm -U https://centos7.iuscommunity.org/ius-release.rpm \
+    yum remove -y git && \
+    rpm -U https://centos7.iuscommunity.org/ius-release.rpm && \
     yum update -y && \
     yum install -y centos-release-scl-rh centos-release-scl && \
     yum update -y
