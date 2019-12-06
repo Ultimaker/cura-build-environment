@@ -36,7 +36,7 @@ RUN yum install -y \
     devtoolset-7-gcc-gfortran \
     cmake3 \
     curl \
-    git2u \
+    git222 \
     libtool \
     make \
     file \
@@ -124,7 +124,7 @@ RUN yum install -y \
     devtoolset-7-gcc-gfortran \
     cmake3 \
     curl \
-    git2u \
+    git222 \
     gettext \
     doxygen \
     libtool \
