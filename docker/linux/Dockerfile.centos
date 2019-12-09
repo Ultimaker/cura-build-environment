@@ -167,9 +167,8 @@ COPY --from=0 "${CURA_BUILD_ENV_PATH}" "${CURA_BUILD_ENV_PATH}"
 RUN rm -rf /tmp/* && \
     rm -rf /var/cache
 
-# Change working directory and set user
+# Change working directory
 WORKDIR /home/ultimaker
-USER ultimaker
 
 ADD ./docker/linux/entrypoint_centos.sh /docker-entrypoint.sh
 
