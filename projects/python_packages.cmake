@@ -84,6 +84,7 @@ add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install urllib3==1.25.3
     COMMAND ${Python3_EXECUTABLE} -m pip install PyYAML==5.1.2
     COMMAND ${Python3_EXECUTABLE} -m pip install zeroconf==0.17.6
+    COMMAND ${Python3_EXECUTABLE} -m pip install sentry_sdk==0.13.2
     COMMENT "Install Python packages"
     DEPENDS NumpyScipyShapely
 )
