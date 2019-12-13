@@ -80,6 +80,7 @@ add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install python-dateutil==2.8.0
     COMMAND ${Python3_EXECUTABLE} -m pip install python-utils==2.3.0
     COMMAND ${Python3_EXECUTABLE} -m pip install requests==2.22.0
+    COMMAND ${Python3_EXECUTABLE} -m pip install sentry-sdk==0.13.5
     COMMAND ${Python3_EXECUTABLE} -m pip install six==1.12.0
     # https://github.com/mikedh/trimesh/issues/575 since 3.2.34
     COMMAND ${Python3_EXECUTABLE} -m pip install trimesh==3.2.33
