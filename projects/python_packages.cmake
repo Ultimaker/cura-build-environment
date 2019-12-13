@@ -63,7 +63,7 @@ endif()
 # Other Python Packages
 add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install appdirs==1.4.3
-    COMMAND ${Python3_EXECUTABLE} -m pip install certifi==2019.9.11
+    COMMAND ${Python3_EXECUTABLE} -m pip install certifi==2019.11.28
     COMMAND ${Python3_EXECUTABLE} -m pip install cffi==1.13.1
     COMMAND ${Python3_EXECUTABLE} -m pip install chardet==3.0.4
     COMMAND ${Python3_EXECUTABLE} -m pip install cryptography==2.8
