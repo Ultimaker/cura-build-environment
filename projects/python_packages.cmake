@@ -87,10 +87,7 @@ add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install typing==3.7.4
     COMMAND ${Python3_EXECUTABLE} -m pip install urllib3==1.25.6
     COMMAND ${Python3_EXECUTABLE} -m pip install PyYAML==5.1.2
-    # CURA-7032 Use an optimized Zeroconf 0.24.0 from
-    # https://github.com/nallath/python-zeroconf/commit/bad4f354366487e98f0123fafb89030620af6544
-    #COMMAND ${Python3_EXECUTABLE} -m pip install zeroconf==0.17.6
-    COMMAND ${Python3_EXECUTABLE} -m pip install git+https://github.com/nallath/python-zeroconf.git@bad4f354366487e98f0123fafb89030620af6544#egg=zeroconf
+    COMMAND ${Python3_EXECUTABLE} -m pip install zeroconf==0.24.1
     COMMENT "Install Python packages"
     DEPENDS NumpyScipyShapely
 )
