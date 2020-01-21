@@ -22,23 +22,23 @@ jobs:
 
     - name: Build Linux docker image
       env:
-        DOCKER_REGISTRY: registry.hub.docker.com
         DOCKER_IMAGE_NAME: ultimaker/cura-build-environment
         DOCKER_IMAGE_TAG: centos-latest
         GIT_REF: ${{ github.ref }}
-        DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_IO: docker.io
+        DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
       run: |
         GIT_REF="$(basename "${GIT_REF}")"
         docker build -t $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG -f docker/linux/Dockerfile.centos .
         docker tag $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG $DOCKER_IMAGE_NAME:$GIT_REF
-        echo "${DOCKER_PASSWORD}" | docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY
+        echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USER}" --password-stdin "${DOCKER_IO}"
         docker push $DOCKER_IMAGE_NAME:$GIT_REF
         docker push $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
         docker logout
 
   build-windows:
-    runs-on: windows-2019
+    runs-on: self-hosted
     steps:
     - name: Checkout master
       uses: actions/checkout@master
@@ -46,18 +46,10 @@ jobs:
         fetch-depth: 1
     - name: Build Windows docker image
       env:
-        DOCKER_REGISTRY: registry.hub.docker.com
         DOCKER_IMAGE_NAME: ultimaker/cura-build-environment
         DOCKER_IMAGE_TAG: win1809-latest
         GIT_REF: ${{ github.ref }}
-        DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_IO: docker.io
+        DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-      run: |
-        $gitRef = Split-Path -Path $env:GIT_REF -Leaf
-        $imageTag1 = "$env:DOCKER_IMAGE_NAME" + ":" + "$gitRef"
-        $imageTag2 = "$env:DOCKER_IMAGE_NAME" + ":" + "$env:DOCKER_IMAGE_TAG"
-        docker build -t $imageTag1 -t $imageTag2 -f docker/windows/Dockerfile.vs2015 .
-        echo "${DOCKER_PASSWORD}" | docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY
-        docker push $imageTag1
-        docker push $imageTag2
-        docker logout
+      run: .github/workflows/build.ps1
