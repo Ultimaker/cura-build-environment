@@ -23,19 +23,12 @@ jobs:
     - name: Build Linux docker image
       env:
         DOCKER_IMAGE_NAME: ultimaker/cura-build-environment
-        DOCKER_IMAGE_TAG: centos-latest
+        DOCKER_IMAGE_LATEST_TAG: centos-latest
         GIT_REF: ${{ github.ref }}
         DOCKER_IO: docker.io
         DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-      run: |
-        GIT_REF="$(basename "${GIT_REF}")"
-        docker build -t $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG -f docker/linux/Dockerfile.centos .
-        docker tag $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG $DOCKER_IMAGE_NAME:$GIT_REF
-        echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USER}" --password-stdin "${DOCKER_IO}"
-        docker push $DOCKER_IMAGE_NAME:$GIT_REF
-        docker push $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
-        docker logout
+      run: .github/workflows/build.sh
 
   build-windows:
     runs-on: self-hosted
@@ -47,7 +40,7 @@ jobs:
     - name: Build Windows docker image
       env:
         DOCKER_IMAGE_NAME: ultimaker/cura-build-environment
-        DOCKER_IMAGE_TAG: win1809-latest
+        DOCKER_IMAGE_LATEST_TAG: win1809-latest
         GIT_REF: ${{ github.ref }}
         DOCKER_IO: docker.io
         DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
