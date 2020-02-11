@@ -69,7 +69,7 @@ To build a docker, you can use the commands below:
 # Make sure that you are in the `cura-build-environment` root directory.
 
 # Build the Linux image based on centos7
-docker build -t <your-image-tag> -f docker/linux/Dockerfile.centos7 .
+docker build -t <your-image-tag> -f docker/linux/Dockerfile.centos .
 ```
 
 ```powershell
