@@ -231,9 +231,16 @@ make
 
 ## Windows
 
+
+
 cura-build-environment on Windows requires Visual C++ 2015 (14.0) and MinGW
 (version 4.9 or higher). Python and all Python modules are compiled with VC++
 and CuraEngine is built with MinGW.
+
+**Microsoft Visual Studio 2015 (Recommended)**
+1. Download Microsoft Visual Studio from [here (Web Installer)](https://go.microsoft.com/fwlink/?LinkId=532606&clcid=0x409) or 
+[here (ISO Image)](https://go.microsoft.com/fwlink/?LinkId=615448&clcid=0x409).
+2. Run the installer. To save on space, Custom can be selected with only `Visual C++` selected in Programming Languages. The complete installation will be large (>12 GB) and will take a while to complete.
 
 The current cura-build-environment uses Python 3.5.2 which can be compiled with
 Visual C++ 2015 (14.0) with Windows 8.1 SDK. Visual Studio 2017 doesn't seem to
