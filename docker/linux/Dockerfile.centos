@@ -51,23 +51,7 @@ RUN yum install -y \
     patch \
     mesa-libGL \
     mesa-libGL-devel \
-    xorg-x11-server-Xvfb \
-    libX11-devel \
-    xdotool \
-    tigervnc-server \
-    x11vnc \
-    xterm
-
-# Init xstartup
-ADD ./xstartup /
-RUN mkdir -p /.vnc && \
-    x11vnc -storepasswd "${X11VNC_PASSWORD}" /.vnc/passwd && \
-    cp -f ./xstartup /.vnc/ && \
-    chmod a+x /.vnc/xstartup
-
-# Note: make sure to run the following lines before your UI application:
-#   Xvfb :1 -screen 0 1600x1200x16 &
-#   export DISPLAY=:1.0
+    libX11-devel
 
 # Set up the build environment
 RUN mkdir -p "${CURA_BUILD_ENV_WORK_DIR}" "${CURA_BUILD_ENV_PATH}"
