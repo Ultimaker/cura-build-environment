@@ -1,6 +1,10 @@
 #Copyright (c) 2020 Ultimaker B.V.
 #cura-build-environment is released under the terms of the AGPLv3 or higher.
 
+include(${CMAKE_CURRENT_SOURCE_DIR}/projects/boost_headers.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/projects/nlopt.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/projects/clipper.cmake)
+
 #libnest2d (dependency of pynest2d).
 ExternalProject_Add(libnest2d
     GIT_REPOSITORY https://github.com/tamasmeszaros/libnest2d.git
