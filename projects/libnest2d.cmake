@@ -6,7 +6,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/projects/nlopt.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/projects/clipper.cmake)
 
 # The find script in libnest2d doesn't find the clipper headers from the installation path properly. Point it out to them.
-set(_cmake_command_find_clipper CLIPPER_PATH=${CMAKE_INSTALL_PREFIX} ${CMAKE_COMMAND})
+set(ENV{CLIPPER_PATH} ${CMAKE_INSTALL_PREFIX})
 
 #libnest2d (dependency of pynest2d).
 ExternalProject_Add(libnest2d
