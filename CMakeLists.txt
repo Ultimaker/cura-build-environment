@@ -1,3 +1,6 @@
+#Copyright (c) 2020 Ultimaker B.V.
+#cura-build-environment is released under the terms of the AGPLv3 or higher.
+
 project(cura-build-environment)
 
 cmake_minimum_required(VERSION 3.6)
