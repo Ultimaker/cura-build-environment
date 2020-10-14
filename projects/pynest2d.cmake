@@ -21,8 +21,6 @@ elseif(BUILD_OS_OSX)
             -DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}
         )
     endif()
-else()  # Linux.
-    set(extra_cmake_args -DCMAKE_CXX_ARGS=-fPIC)
 endif()
 
 ExternalProject_Add(pynest2d
