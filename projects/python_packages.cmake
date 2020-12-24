@@ -90,8 +90,9 @@ add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install urllib3==1.25.6
     COMMAND ${Python3_EXECUTABLE} -m pip install PyYAML==5.1.2
     COMMAND ${Python3_EXECUTABLE} -m pip install zeroconf==0.24.1
-    COMMAND ${Python3_EXECUTABLE} -m pip install keyring==21.5.0
-    
+    # For handling cached authentication values when doing backups and the like (20.0.1 is the latest version that still supports Python 3.5.x):
+    COMMAND ${Python3_EXECUTABLE} -m pip install keyring==20.0.1
+
     COMMENT "Install Python packages"
     DEPENDS NumpyScipyShapely
 )
