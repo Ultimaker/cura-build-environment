@@ -1,5 +1,5 @@
 set(python_patch_command "")
-set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --enable-ipv6 --with-threads --without-pymalloc )
+set(python_configure_command ./configure --prefix="${CMAKE_INSTALL_PREFIX}" --enable-shared --enable-ipv6 --with-threads --without-pymalloc )
 set(python_build_command make)
 set(python_install_command make install)
 
@@ -18,9 +18,9 @@ if(BUILD_OS_LINUX)
     # CURA-6739: See Python issue #9998
     # For CTM file loading with trimesh. Trimesh uses ctypes.util.find_library() to find libopenctm.so, but it doesn't
     # respect LD_LIBRARY_PATH in Python 3.5.7, This patch is backported from Python 3.6 and 3.7.
-    set(python_patch_command patch Lib/ctypes/util.py ${CMAKE_SOURCE_DIR}/projects/python_ctypes_util.patch)
+    set(python_patch_command patch Lib/ctypes/util.py "${CMAKE_SOURCE_DIR}/projects/python_ctypes_util.patch")
     # Set a proper RPATH so everything depending on Python does not need LD_LIBRARY_PATH
-    set(python_configure_command LDFLAGS=-Wl,-rpath=${CMAKE_INSTALL_PREFIX}/lib ${python_configure_command})
+    set(python_configure_command LDFLAGS=-Wl,-rpath="${CMAKE_INSTALL_PREFIX}/lib" "${python_configure_command}")
 endif()
 
 if(BUILD_OS_WINDOWS)
@@ -34,10 +34,10 @@ if(BUILD_OS_WINDOWS)
     # in CMake via a command seems to always result in "/p:PlatformToolset v140".
     if(BUILD_OS_WIN32)
         set(python_build_command cmd /c "${CMAKE_SOURCE_DIR}/projects/build_python_windows.bat" "<SOURCE_DIR>/PCbuild/build.bat" --no-tkinter -c Release -e -M -p Win32)
-        set(python_install_command cmd /c "${CMAKE_SOURCE_DIR}/projects/install_python_windows.bat win32 <SOURCE_DIR> ${CMAKE_INSTALL_PREFIX}")
+        set(python_install_command cmd /c "${CMAKE_SOURCE_DIR}/projects/install_python_windows.bat" win32 <SOURCE_DIR> "${CMAKE_INSTALL_PREFIX}")
     else()
         set(python_build_command cmd /c "${CMAKE_SOURCE_DIR}/projects/build_python_windows.bat" "<SOURCE_DIR>/PCbuild/build.bat" --no-tkinter -c Release -e -M -p x64)
-        set(python_install_command cmd /c "${CMAKE_SOURCE_DIR}/projects/install_python_windows.bat amd64 <SOURCE_DIR> ${CMAKE_INSTALL_PREFIX}")
+        set(python_install_command cmd /c "${CMAKE_SOURCE_DIR}/projects/install_python_windows.bat" amd64 <SOURCE_DIR> "${CMAKE_INSTALL_PREFIX}")
     endif()
 endif()
 
