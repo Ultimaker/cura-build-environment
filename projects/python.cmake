@@ -36,7 +36,7 @@ endif()
 
 ExternalProject_Add(Python
     URL https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tgz
-    URL_SHA256 7899e8a6f7946748830d66739f2d8f2b30214dad956e56b9ba216b3de5581519
+    URL_HASH SHA256=7899e8a6f7946748830d66739f2d8f2b30214dad956e56b9ba216b3de5581519
     PATCH_COMMAND ${python_patch_command}
     CONFIGURE_COMMAND "${python_configure_command}"
     BUILD_COMMAND ${python_build_command}
