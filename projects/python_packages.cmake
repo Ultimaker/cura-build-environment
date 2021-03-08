@@ -86,7 +86,7 @@ add_custom_target(PythonPackages ALL
     # https://github.com/mikedh/trimesh/issues/575 since 3.2.34
     COMMAND ${Python3_EXECUTABLE} -m pip install trimesh==3.2.33
     # For testing HTTP requests
-    COMMAND ${Python3_EXECUTABLE} -m pip install twisted==20.3.0
+    COMMAND ${Python3_EXECUTABLE} -m pip install twisted==21.2.0
     COMMAND ${Python3_EXECUTABLE} -m pip install urllib3==1.25.6
     COMMAND ${Python3_EXECUTABLE} -m pip install PyYAML==5.1.2
     COMMAND ${Python3_EXECUTABLE} -m pip install zeroconf==0.24.1
