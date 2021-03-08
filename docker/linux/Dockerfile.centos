@@ -30,9 +30,9 @@ RUN yum -y update && \
 
 # Install dependencies
 RUN yum install -y \
-    devtoolset-7-gcc \
-    devtoolset-7-gcc-c++ \
-    devtoolset-7-gcc-gfortran \
+    devtoolset-8-gcc \
+    devtoolset-8-gcc-c++ \
+    devtoolset-8-gcc-gfortran \
     cmake3 \
     curl \
     git222 \
@@ -101,9 +101,9 @@ RUN yum -y update && \
 
 # Install dependencies
 RUN yum install -y \
-    devtoolset-7-gcc \
-    devtoolset-7-gcc-c++ \
-    devtoolset-7-gcc-gfortran \
+    devtoolset-8-gcc \
+    devtoolset-8-gcc-c++ \
+    devtoolset-8-gcc-gfortran \
     cmake3 \
     curl \
     git222 \
