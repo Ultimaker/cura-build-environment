@@ -5,15 +5,15 @@ set(python_install_command make install)
 
 if(BUILD_OS_OSX)
     if(CMAKE_OSX_SYSROOT)
-        set(python_configure_command ${python_configure_command} --enable-universalsdk=${CMAKE_OSX_SYSROOT})
+        set(python_configure_command ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX} --enable-universalsdk=${CMAKE_OSX_SYSROOT})
     else()
-        set(python_configure_command ${python_configure_command} --enable-universalsdk)
+        set(python_configure_command ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX} --enable-universalsdk)
     endif()
 endif()
 
 if(BUILD_OS_LINUX)
     # Set a proper RPATH so everything depending on Python does not need LD_LIBRARY_PATH
-    set(python_configure_command LDFLAGS=-Wl,-rpath=${CMAKE_INSTALL_PREFIX}/lib ${python_configure_command})
+    set(python_configure_command LDFLAGS=-Wl,-rpath=${CMAKE_INSTALL_PREFIX}/lib ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX})
 endif()
 
 if(BUILD_OS_WINDOWS)
