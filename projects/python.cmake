@@ -1,5 +1,5 @@
 set(python_patch_command "")
-set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --enable-ipv6 --with-threads --without-pymalloc )
+set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --enable-ipv6 --without-pymalloc )
 set(python_build_command make)
 set(python_install_command make install)
 
