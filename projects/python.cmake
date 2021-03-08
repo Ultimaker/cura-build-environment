@@ -4,9 +4,6 @@ set(python_build_command make)
 set(python_install_command make install)
 
 if(BUILD_OS_OSX)
-    # See http://bugs.python.org/issue21381
-    # The interpreter crashes when MACOSX_DEPLOYMENT_TARGET=10.7 due to the increased stack size.
-    set(python_patch_command sed -i".bak" "9271,9271d" <SOURCE_DIR>/configure)
     if(CMAKE_OSX_SYSROOT)
         set(python_configure_command ${python_configure_command} --enable-universalsdk=${CMAKE_OSX_SYSROOT})
     else()
@@ -15,10 +12,6 @@ if(BUILD_OS_OSX)
 endif()
 
 if(BUILD_OS_LINUX)
-    # CURA-6739: See Python issue #9998
-    # For CTM file loading with trimesh. Trimesh uses ctypes.util.find_library() to find libopenctm.so, but it doesn't
-    # respect LD_LIBRARY_PATH in Python 3.5.7, This patch is backported from Python 3.6 and 3.7.
-    set(python_patch_command patch Lib/ctypes/util.py ${CMAKE_SOURCE_DIR}/projects/python_ctypes_util.patch)
     # Set a proper RPATH so everything depending on Python does not need LD_LIBRARY_PATH
     set(python_configure_command LDFLAGS=-Wl,-rpath=${CMAKE_INSTALL_PREFIX}/lib ${python_configure_command})
 endif()
@@ -42,8 +35,8 @@ if(BUILD_OS_WINDOWS)
 endif()
 
 ExternalProject_Add(Python
-    URL https://www.python.org/ftp/python/3.5.7/Python-3.5.7.tgz
-    URL_MD5 92f4c16c55429bf986f5ab45fe3a6659
+    URL https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tgz
+    URL_SHA256 7899e8a6f7946748830d66739f2d8f2b30214dad956e56b9ba216b3de5581519
     PATCH_COMMAND ${python_patch_command}
     CONFIGURE_COMMAND "${python_configure_command}"
     BUILD_COMMAND ${python_build_command}

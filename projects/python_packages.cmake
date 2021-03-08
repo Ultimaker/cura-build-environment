@@ -33,7 +33,7 @@ if(NOT BUILD_OS_WINDOWS)
 
     # Shapely
     add_custom_target(Shapely ALL
-        COMMAND ${Python3_EXECUTABLE} -m pip install "shapely[vectorized]==1.6.4.post2"
+        COMMAND ${Python3_EXECUTABLE} -m pip install "shapely[vectorized]==1.7.1"
         DEPENDS Scipy
     )
 
@@ -64,9 +64,9 @@ endif()
 add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install appdirs==1.4.3
     COMMAND ${Python3_EXECUTABLE} -m pip install certifi==2019.11.28
-    COMMAND ${Python3_EXECUTABLE} -m pip install cffi==1.13.1
+    COMMAND ${Python3_EXECUTABLE} -m pip install cffi==1.14.1
     COMMAND ${Python3_EXECUTABLE} -m pip install chardet==3.0.4
-    COMMAND ${Python3_EXECUTABLE} -m pip install cryptography==2.8
+    COMMAND ${Python3_EXECUTABLE} -m pip install cryptography==3.3.1
     COMMAND ${Python3_EXECUTABLE} -m pip install decorator==4.4.0
     COMMAND ${Python3_EXECUTABLE} -m pip install idna==2.8
     COMMAND ${Python3_EXECUTABLE} -m pip install netifaces==0.10.9
@@ -84,7 +84,6 @@ add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install six==1.12.0
     # https://github.com/mikedh/trimesh/issues/575 since 3.2.34
     COMMAND ${Python3_EXECUTABLE} -m pip install trimesh==3.2.33
-    COMMAND ${Python3_EXECUTABLE} -m pip install typing==3.7.4
     # For testing HTTP requests
     COMMAND ${Python3_EXECUTABLE} -m pip install twisted==20.3.0
     COMMAND ${Python3_EXECUTABLE} -m pip install urllib3==1.25.6
