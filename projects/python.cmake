@@ -61,7 +61,7 @@ ExternalProject_Add_Step(Python ensurepip
 )
 
 ExternalProject_Add_Step(Python upgrade_packages
-    COMMAND ${Python3_EXECUTABLE} -m pip install pip==19.3.1
+    COMMAND ${Python3_EXECUTABLE} -m pip install pip==21.0.1
     COMMAND ${Python3_EXECUTABLE} -m pip install setuptools==41.4.0
     COMMAND ${Python3_EXECUTABLE} -m pip install pytest==5.2.1
     COMMAND ${Python3_EXECUTABLE} -m pip install pytest-benchmark==3.2.2
