@@ -60,9 +60,12 @@ ExternalProject_Add_Step(Python ensurepip
     DEPENDEES install
 )
 
+# Use fixed versions for the packages required in our build environment to build and test other packages.
 ExternalProject_Add_Step(Python upgrade_packages
     COMMAND ${Python3_EXECUTABLE} -m pip install pip==21.0.1
     COMMAND ${Python3_EXECUTABLE} -m pip install setuptools==41.4.0
+    COMMAND ${Python3_EXECUTABLE} -m pip install Cython==0.29.22  #Required to build Scipy.
+    COMMAND ${Python3_EXECUTABLE} -m pip install pybind11==2.6.2
     COMMAND ${Python3_EXECUTABLE} -m pip install pytest==5.2.1
     COMMAND ${Python3_EXECUTABLE} -m pip install pytest-benchmark==3.2.2
     COMMAND ${Python3_EXECUTABLE} -m pip install pytest-cov==2.8.1
