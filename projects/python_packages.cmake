@@ -9,7 +9,7 @@ if(NOT BUILD_OS_WINDOWS)
 
     # Numpy
     add_custom_target(Numpy ALL
-        COMMAND ${Python3_EXECUTABLE} -m pip install numpy==1.15.4
+        COMMAND ${Python3_EXECUTABLE} -m pip install numpy==1.20.1
         DEPENDS Python
     )
 
@@ -22,8 +22,9 @@ if(NOT BUILD_OS_WINDOWS)
 
     # Scipy
     ExternalProject_Add(Scipy
-        URL https://github.com/scipy/scipy/releases/download/v1.2.0/scipy-1.2.0.tar.gz
-        URL_MD5 e57011507865b0b702aff6077d412e03
+        GIT_REPOSITORY https://github.com/scipy/scipy.git
+        GIT_TAG v1.6.1
+        GIT_SHALLOW TRUE
         CONFIGURE_COMMAND ""
         BUILD_COMMAND ${scipy_build_command}
         INSTALL_COMMAND ${scipy_install_command}
@@ -45,16 +46,16 @@ else()
     # Windows available depends on numpy with MKL, we also need the binary package for that.
     if(BUILD_OS_WIN32)
         add_custom_command(TARGET NumpyScipyShapely PRE_BUILD
-            COMMAND ${Python3_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/numpy-1.15.4+mkl-cp35-cp35m-win32.whl
-            COMMAND ${Python3_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy-1.2.0-cp35-cp35m-win32.whl
-            COMMAND ${Python3_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/Shapely-1.6.4.post1-cp35-cp35m-win32.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/numpy-1.20.1+mkl-cp39-cp39-win32.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/scipy-1.6.1-cp39-cp39-win32.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/Shapely-1.7.1-cp39-cp39-win32.whl
             COMMENT "Install Numpy, Scipy, and Shapely"
         )
     else()
         add_custom_command(TARGET NumpyScipyShapely PRE_BUILD
-            COMMAND ${Python3_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/numpy-1.15.4+mkl-cp35-cp35m-win_amd64.whl
-            COMMAND ${Python3_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy-1.2.0-cp35-cp35m-win_amd64.whl
-            COMMAND ${Python3_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/Shapely-1.6.4.post1-cp35-cp35m-win_amd64.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/numpy-1.20.1+mkl-cp39-cp39-win_amd64.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/scipy-1.6.1-cp39-cp39-win_amd64.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/Shapely-1.7.1-cp39-cp39-win_amd64.whl
             COMMENT "Install Numpy, Scipy, and Shapely"
         )
     endif()
