@@ -67,7 +67,7 @@ add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install certifi==2019.11.28
     COMMAND ${Python3_EXECUTABLE} -m pip install cffi==1.14.1
     COMMAND ${Python3_EXECUTABLE} -m pip install chardet==3.0.4
-    COMMAND ${Python3_EXECUTABLE} -m pip install cryptography==3.3.1
+    COMMAND ${Python3_EXECUTABLE} -m pip install cryptography==3.4.6
     COMMAND ${Python3_EXECUTABLE} -m pip install decorator==4.4.0
     COMMAND ${Python3_EXECUTABLE} -m pip install idna==2.8
     COMMAND ${Python3_EXECUTABLE} -m pip install netifaces==0.10.9
