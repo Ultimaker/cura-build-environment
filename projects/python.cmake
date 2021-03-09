@@ -1,26 +1,19 @@
 set(python_patch_command "")
-set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --enable-ipv6 --with-threads --without-pymalloc )
+set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --enable-ipv6 --without-pymalloc )
 set(python_build_command make)
 set(python_install_command make install)
 
 if(BUILD_OS_OSX)
-    # See http://bugs.python.org/issue21381
-    # The interpreter crashes when MACOSX_DEPLOYMENT_TARGET=10.7 due to the increased stack size.
-    set(python_patch_command sed -i".bak" "9271,9271d" <SOURCE_DIR>/configure)
     if(CMAKE_OSX_SYSROOT)
-        set(python_configure_command ${python_configure_command} --enable-universalsdk=${CMAKE_OSX_SYSROOT})
+        set(python_configure_command ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX} --enable-universalsdk=${CMAKE_OSX_SYSROOT})
     else()
-        set(python_configure_command ${python_configure_command} --enable-universalsdk)
+        set(python_configure_command ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX} --enable-universalsdk)
     endif()
 endif()
 
 if(BUILD_OS_LINUX)
-    # CURA-6739: See Python issue #9998
-    # For CTM file loading with trimesh. Trimesh uses ctypes.util.find_library() to find libopenctm.so, but it doesn't
-    # respect LD_LIBRARY_PATH in Python 3.5.7, This patch is backported from Python 3.6 and 3.7.
-    set(python_patch_command patch Lib/ctypes/util.py ${CMAKE_SOURCE_DIR}/projects/python_ctypes_util.patch)
     # Set a proper RPATH so everything depending on Python does not need LD_LIBRARY_PATH
-    set(python_configure_command LDFLAGS=-Wl,-rpath=${CMAKE_INSTALL_PREFIX}/lib ${python_configure_command})
+    set(python_configure_command LDFLAGS=-Wl,-rpath=${CMAKE_INSTALL_PREFIX}/lib ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX})
 endif()
 
 if(BUILD_OS_WINDOWS)
@@ -42,8 +35,8 @@ if(BUILD_OS_WINDOWS)
 endif()
 
 ExternalProject_Add(Python
-    URL https://www.python.org/ftp/python/3.5.7/Python-3.5.7.tgz
-    URL_MD5 92f4c16c55429bf986f5ab45fe3a6659
+    URL https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tgz
+    URL_HASH SHA256=7899e8a6f7946748830d66739f2d8f2b30214dad956e56b9ba216b3de5581519
     PATCH_COMMAND ${python_patch_command}
     CONFIGURE_COMMAND "${python_configure_command}"
     BUILD_COMMAND ${python_build_command}
@@ -67,9 +60,12 @@ ExternalProject_Add_Step(Python ensurepip
     DEPENDEES install
 )
 
+# Use fixed versions for the packages required in our build environment to build and test other packages.
 ExternalProject_Add_Step(Python upgrade_packages
-    COMMAND ${Python3_EXECUTABLE} -m pip install pip==19.3.1
+    COMMAND ${Python3_EXECUTABLE} -m pip install pip==21.0.1
     COMMAND ${Python3_EXECUTABLE} -m pip install setuptools==41.4.0
+    COMMAND ${Python3_EXECUTABLE} -m pip install Cython==0.29.22  #Required to build Scipy.
+    COMMAND ${Python3_EXECUTABLE} -m pip install pybind11==2.6.2
     COMMAND ${Python3_EXECUTABLE} -m pip install pytest==5.2.1
     COMMAND ${Python3_EXECUTABLE} -m pip install pytest-benchmark==3.2.2
     COMMAND ${Python3_EXECUTABLE} -m pip install pytest-cov==2.8.1
