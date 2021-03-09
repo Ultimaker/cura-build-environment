@@ -4,11 +4,7 @@ set(python_build_command make)
 set(python_install_command make install)
 
 if(BUILD_OS_OSX)
-    if(CMAKE_OSX_SYSROOT)
-        set(python_configure_command ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX} --enable-universalsdk=${CMAKE_OSX_SYSROOT})
-    else()
-        set(python_configure_command ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX} --enable-universalsdk)
-    endif()
+    set(python_configure_command ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX})
 endif()
 
 if(BUILD_OS_LINUX)
@@ -19,7 +15,7 @@ endif()
 if(BUILD_OS_WINDOWS)
     # Otherwise Python will not be able to get external dependencies.
     find_package(Subversion REQUIRED)
-    
+
     set(python_configure_command )
 
     # Use the Windows Batch script to pass an argument "/p:PlatformToolset=v140". The argument must have double quotes
