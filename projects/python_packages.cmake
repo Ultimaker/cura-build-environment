@@ -70,6 +70,7 @@ add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install cryptography==3.4.6
     COMMAND ${Python3_EXECUTABLE} -m pip install decorator==4.4.0
     COMMAND ${Python3_EXECUTABLE} -m pip install idna==2.8
+    COMMAND ${Python3_EXECUTABLE} -m pip install importlib-metadata==3.7.2  # Dependency of cx_Freeze
     COMMAND ${Python3_EXECUTABLE} -m pip install netifaces==0.10.9
     COMMAND ${Python3_EXECUTABLE} -m pip install networkx==2.3
     COMMAND ${Python3_EXECUTABLE} -m pip install numpy-stl==2.10.1
