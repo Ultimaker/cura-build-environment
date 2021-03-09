@@ -77,6 +77,7 @@ add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install pycollada==0.6
     COMMAND ${Python3_EXECUTABLE} -m pip install pycparser==2.19
     COMMAND ${Python3_EXECUTABLE} -m pip install pyparsing==2.4.2
+    COMMAND ${Python3_EXECUTABLE} -m pip install PyQt5-sip==12.8.1
     COMMAND ${Python3_EXECUTABLE} -m pip install pyserial==3.4
     COMMAND ${Python3_EXECUTABLE} -m pip install python-dateutil==2.8.0
     COMMAND ${Python3_EXECUTABLE} -m pip install python-utils==2.3.0
