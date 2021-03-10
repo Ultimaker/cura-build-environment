@@ -46,16 +46,16 @@ else()
     # Windows available depends on numpy with MKL, we also need the binary package for that.
     if(BUILD_OS_WIN32)
         add_custom_command(TARGET NumpyScipyShapely PRE_BUILD
-            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/numpy-1.20.1+mkl-cp39-cp39-win32.whl
-            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/scipy-1.6.1-cp39-cp39-win32.whl
-            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/Shapely-1.7.1-cp39-cp39-win32.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/numpy-1.20.1+mkl-cp38-cp38-win32.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/scipy-1.6.1-cp38-cp38-win32.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/Shapely-1.7.1-cp38-cp38-win32.whl
             COMMENT "Install Numpy, Scipy, and Shapely"
         )
     else()
         add_custom_command(TARGET NumpyScipyShapely PRE_BUILD
-            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/numpy-1.20.1+mkl-cp39-cp39-win_amd64.whl
-            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/scipy-1.6.1-cp39-cp39-win_amd64.whl
-            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/Shapely-1.7.1-cp39-cp39-win_amd64.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/numpy-1.20.1+mkl-cp38-cp38-win_amd64.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/scipy-1.6.1-cp38-cp38-win_amd64.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/w4tscw6k/Shapely-1.7.1-cp38-cp38-win_amd64.whl
             COMMENT "Install Numpy, Scipy, and Shapely"
         )
     endif()
