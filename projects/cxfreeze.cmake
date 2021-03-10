@@ -4,9 +4,9 @@ if(BUILD_OS_OSX)
 endif()
 
 set(_url "https://github.com/anthony-tuininga/cx_Freeze/archive/6.5.3.tar.gz")
-if(BUILD_OS_WINDOWS)
-    set(_url https://github.com/anthony-tuininga/cx_Freeze/archive/5.0.1.tar.gz)
-endif()
+#if(BUILD_OS_WINDOWS)
+#    set(_url https://github.com/anthony-tuininga/cx_Freeze/archive/5.0.1.tar.gz)
+#endif()
 
 ExternalProject_Add(cx_Freeze
     URL ${_url}

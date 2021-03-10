@@ -58,7 +58,7 @@ echo Install headers into DESTDIR/include
 
 mkdir %DESTDIR%\include
 
-copy /Y %SOURCEDIR%\include\* %DESTDIR%\include
+xcopy /Y /E %SOURCEDIR%\include\* %DESTDIR%\include
 
 copy /Y %SOURCEDIR%\PC\pyconfig.h %DESTDIR%\include
 
