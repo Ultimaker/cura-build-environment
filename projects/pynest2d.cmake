@@ -9,7 +9,7 @@ else()
 endif()
 set(extra_cmake_args "")
 if(BUILD_OS_WINDOWS)
-    set(extra_cmake_args -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/libs)
+    set(extra_cmake_args -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/libs -DCMAKE_PREFIX_PATH=${CMAKE_INSTALL_PREFIX})
 elseif(BUILD_OS_OSX)
     if(CMAKE_OSX_DEPLOYMENT_TARGET)
         list(APPEND extra_cmake_args
