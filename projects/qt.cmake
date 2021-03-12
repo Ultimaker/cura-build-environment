@@ -65,6 +65,7 @@ elseif(BUILD_OS_LINUX)
 	 -system-freetype
 	 -system-zlib
 	 -ssl -openssl-runtime
+	 -xcb -xcb-xlib -bundled-xcb-input  # To build the xcb platform plug-in, found in https://forum.qt.io/topic/115827/build-on-linux-qt-xcb-option/16
 	 -I "${CMAKE_INSTALL_PREFIX}/include"
 	 -L "${CMAKE_INSTALL_PREFIX}/lib")
 endif()
