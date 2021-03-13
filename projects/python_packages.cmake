@@ -59,6 +59,14 @@ else()
             COMMENT "Install Numpy, Scipy, and Shapely"
         )
     endif()
+    # An additional hack, as the DLLs are correctly generated, but not where subsequent machinations expect them:
+    # (They're kind of massive, so move instead of copy.)
+    file(TO_NATIVE_PATH "${CMAKE_INSTALL_PREFIX}/lib/site-packages/numpy/DLLs/*.dll" _NUMPY_DLLS_SRC)
+    file(TO_NATIVE_PATH "${CMAKE_INSTALL_PREFIX}/lib/site-packages/numpy/core/." _NUMPY_DLLS_DST)
+    add_custom_command(TARGET NumpyScipyShapely POST_BUILD
+        COMMAND move ${_NUMPY_DLLS_SRC} ${_NUMPY_DLLS_DST}
+        COMMENT "Move Numpy et-al DLLs to the expected location"
+    )
 endif()
 
 # Other Python Packages
