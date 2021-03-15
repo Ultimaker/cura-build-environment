@@ -3,9 +3,8 @@ if(BUILD_OS_OSX)
     set(_openssl_args no-ssl2 no-ssl3 no-zlib shared enable-cms)
 
     ExternalProject_Add(OpenSSL
-        GIT_REPOSITORY git://git.openssl.org/openssl.git
-        GIT_TAG OpenSSL_1_1_1j
-        GIT_SHALLOW TRUE
+        URL https://www.openssl.org/source/openssl-1.1.1j.tar.gz
+        URL_HASH SHA256=aaf2fcb575cdf6491b98ab4829abf78a3dec8402b8b81efc8f23c00d443981bf
         CONFIGURE_COMMAND perl Configure --prefix=${CMAKE_INSTALL_PREFIX} --openssldir=${CMAKE_INSTALL_PREFIX} ${_openssl_args} ${_openssl_os}
         BUILD_COMMAND make depend && make
         INSTALL_COMMAND make install
@@ -16,9 +15,8 @@ elseif(BUILD_OS_LINUX)
     set(_openssl_args no-ssl2 no-ssl3 no-zlib shared enable-cms)
 
     ExternalProject_Add(OpenSSL
-        GIT_REPOSITORY git://git.openssl.org/openssl.git
-        GIT_TAG OpenSSL_1_1_1j
-        GIT_SHALLOW TRUE
+        URL https://www.openssl.org/source/openssl-1.1.1j.tar.gz
+        URL_HASH SHA256=aaf2fcb575cdf6491b98ab4829abf78a3dec8402b8b81efc8f23c00d443981bf
         CONFIGURE_COMMAND perl Configure --prefix=${CMAKE_INSTALL_PREFIX} --openssldir=${CMAKE_INSTALL_PREFIX} ${_openssl_args} ${_openssl_os}
         BUILD_COMMAND make depend && make
         INSTALL_COMMAND make install
@@ -38,9 +36,8 @@ if(BUILD_OS_WINDOWS)
     endif()
 
     ExternalProject_Add(OpenSSL
-        GIT_REPOSITORY git://git.openssl.org/openssl.git
-        GIT_TAG OpenSSL_1_1_1j
-        GIT_SHALLOW TRUE
+        URL https://www.openssl.org/source/openssl-1.1.1j.tar.gz
+        URL_HASH SHA256=aaf2fcb575cdf6491b98ab4829abf78a3dec8402b8b81efc8f23c00d443981bf
         CONFIGURE_COMMAND perl Configure ${_openssl_os} --prefix=${CMAKE_INSTALL_PREFIX}
         BUILD_COMMAND ${_openssl_build}
         INSTALL_COMMAND nmake -f ms\\nt.mak install
