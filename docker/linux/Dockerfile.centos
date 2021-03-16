@@ -127,6 +127,7 @@ RUN yum install -y \
     libX11-devel \
     patchelf \
     patch \
+    libX11-devel \
     libxkbcommon-devel \
     libxkbcommon-x11-devel
 
