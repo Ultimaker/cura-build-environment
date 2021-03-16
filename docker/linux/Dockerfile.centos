@@ -51,6 +51,12 @@ RUN yum install -y \
     mesa-libGL \
     mesa-libGL-devel \
     libX11-devel \
+    libxcb-devel \
+    xcb-util-devel \
+    xcb-util-image-devel \
+    xcb-util-keysyms-devel \
+    xcb-util-renderutil-devel \
+    xcb-util-wm-devel \
     libxkbcommon-devel \
     libxkbcommon-x11-devel
 
@@ -102,6 +108,7 @@ RUN yum -y update && \
     yum update -y
 
 # Install dependencies
+# Note: In this cleaner image, install ONLY dependencies that Cura links dynamically to!
 RUN yum install -y \
     devtoolset-8-gcc \
     devtoolset-8-gcc-c++ \
@@ -128,6 +135,12 @@ RUN yum install -y \
     patchelf \
     patch \
     libX11-devel \
+    libxcb-devel \
+    xcb-util-devel \
+    xcb-util-image-devel \
+    xcb-util-keysyms-devel \
+    xcb-util-renderutil-devel \
+    xcb-util-wm-devel \
     libxkbcommon-devel \
     libxkbcommon-x11-devel
 
