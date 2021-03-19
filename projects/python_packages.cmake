@@ -2,10 +2,10 @@ add_custom_target(NumpyScipyShapely ALL DEPENDS Python)
 
 # Numpy, Scipy, Shapely
 if(NOT BUILD_OS_WINDOWS)
-    # On Mac, building with gfortran can be a problem. If we install scipy via pip, it will compile Fortran code
-    # using gfortran by default, but if we install it manually, it will use f2py from numpy to convert Fortran
-    # code to Python code and then compile, which solves this problem.
-    # So, for non-Windows builds, we install scipy manually.
+    # On macOS (Catalina), building from source can be a problem, because scipy is compiled using the cmath files 
+    # within the XCode CommandLineTools /usr/include directory, which are apparently missing some functions.
+    # Thus, for macOS we install scipy via pip on Catalina.
+    # On Linux we continue installing scipy manually from source.
 
     # Numpy
     add_custom_target(Numpy ALL
@@ -13,14 +13,16 @@ if(NOT BUILD_OS_WINDOWS)
         DEPENDS Python
     )
 
+    if(BUILD_OS_OSX)
+        # Scipy on macOS
+        add_custom_target(Scipy ALL
+        COMMAND ${Python3_EXECUTABLE} -m pip install scipy==1.6.1
+        DEPENDS Numpy
+    )
+    else()
+    # Scipy on Linux
     set(scipy_build_command ${Python3_EXECUTABLE} setup.py build)
     set(scipy_install_command ${Python3_EXECUTABLE} setup.py install)
-    if(BUILD_OS_OSX)
-        set(scipy_build_command env LDFLAGS="-undefined dynamic_lookup" ${scipy_build_command})
-        set(scipy_install_command env LDFLAGS="-undefined dynamic_lookup" ${scipy_install_command})
-    endif()
-
-    # Scipy
     ExternalProject_Add(Scipy
         GIT_REPOSITORY https://github.com/scipy/scipy.git
         GIT_TAG v1.6.1
@@ -31,6 +33,7 @@ if(NOT BUILD_OS_WINDOWS)
         BUILD_IN_SOURCE 1
         DEPENDS Numpy
     )
+    endif()
 
     # Shapely
     add_custom_target(Shapely ALL
