@@ -48,7 +48,9 @@ else()
             COMMAND ${Python3_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/numpy-1.15.4+mkl-cp35-cp35m-win32.whl
             COMMAND ${Python3_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy-1.2.0-cp35-cp35m-win32.whl
             COMMAND ${Python3_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/Shapely-1.6.4.post1-cp35-cp35m-win32.whl
-            COMMENT "Install Numpy, Scipy, and Shapely"
+            # pywin32 is required to provide the keyring library with access to the Windows Credential Manager
+            COMMAND ${Python3_EXECUTABLE} -m pip install pywin32==300
+            COMMENT "Install Numpy, Scipy, Shapely, and pywin32"
         )
     else()
         add_custom_command(TARGET NumpyScipyShapely PRE_BUILD
@@ -91,7 +93,7 @@ add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install PyYAML==5.1.2
     COMMAND ${Python3_EXECUTABLE} -m pip install zeroconf==0.24.1
     # For handling cached authentication values when doing backups and the like (20.0.1 is the latest version that still supports Python 3.5.x):
-    COMMAND ${Python3_EXECUTABLE} -m pip install keyring==20.0.1
+    COMMAND ${Python3_EXECUTABLE} -m pip install keyring==23.0.1
 
     COMMENT "Install Python packages"
     DEPENDS NumpyScipyShapely
