@@ -20,8 +20,8 @@ if(NOT BUILD_OS_WINDOWS)
     endif()
 
     ExternalProject_Add(Geos
-        URL http://download.osgeo.org/geos/geos-3.7.1.tar.bz2
-        URL_HASH SHA256=0006c7b49eaed016b9c5c6f872417a7d7dc022e069ddd683335793d905a8228c
+        URL https://download.osgeo.org/geos/geos-3.7.3.tar.bz2
+        URL_HASH SHA256=02035ae4e0ad711fa5a5556d7712530029edacac364b5b9c3ade0ded865fca7e
         CONFIGURE_COMMAND ${CMAKE_COMMAND} ${geos_configure_args} -G ${CMAKE_GENERATOR} ../Geos
     )
 endif()
