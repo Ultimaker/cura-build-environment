@@ -48,9 +48,7 @@ else()
             COMMAND ${Python3_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/numpy-1.15.4+mkl-cp35-cp35m-win32.whl
             COMMAND ${Python3_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy-1.2.0-cp35-cp35m-win32.whl
             COMMAND ${Python3_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/Shapely-1.6.4.post1-cp35-cp35m-win32.whl
-            # pywin32 is required to provide the keyring library with access to the Windows Credential Manager
-            COMMAND ${Python3_EXECUTABLE} -m pip install pywin32==300
-            COMMENT "Install Numpy, Scipy, Shapely, and pywin32"
+            COMMENT "Install Numpy, Scipy and Shapely"
         )
     else()
         add_custom_command(TARGET NumpyScipyShapely PRE_BUILD
@@ -103,6 +101,8 @@ add_custom_target(PythonPackages ALL
 if(BUILD_OS_WINDOWS)
     add_custom_command(TARGET PythonPackages POST_BUILD
         COMMAND ${Python3_EXECUTABLE} -m pip install comtypes==1.1.7
-        COMMENT "Install comtypes"
+        # pywin32 is required to provide the keyring library with access to the Windows Credential Manager
+        COMMAND ${Python3_EXECUTABLE} -m pip install pywin32==300
+        COMMENT "Install Windows-specific py-packages: comtypes, pywin32"
     )
 endif()
