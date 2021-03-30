@@ -88,8 +88,10 @@ add_custom_target(PythonPackages ALL
     # For testing HTTP requests
     COMMAND ${Python3_EXECUTABLE} -m pip install twisted==20.3.0
     COMMAND ${Python3_EXECUTABLE} -m pip install urllib3==1.25.6
-    COMMAND ${Python3_EXECUTABLE} -m pip install PyYAML==5.1.2
     COMMAND ${Python3_EXECUTABLE} -m pip install zeroconf==0.24.1
+    # For handling cached authentication values when doing backups and the like:
+    COMMAND ${Python3_EXECUTABLE} -m pip install keyring==23.0.1
+
     COMMENT "Install Python packages"
     DEPENDS NumpyScipyShapely
 )
@@ -98,6 +100,8 @@ add_custom_target(PythonPackages ALL
 if(BUILD_OS_WINDOWS)
     add_custom_command(TARGET PythonPackages POST_BUILD
         COMMAND ${Python3_EXECUTABLE} -m pip install comtypes==1.1.7
-        COMMENT "Install comtypes"
+        # pywin32 is required to provide the keyring library with access to the Windows Credential Manager
+        COMMAND ${Python3_EXECUTABLE} -m pip install pywin32==300
+        COMMENT "Install Windows-specific py-packages: comtypes, pywin32"
     )
 endif()
