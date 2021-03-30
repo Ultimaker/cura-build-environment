@@ -1,7 +1,7 @@
 set(pyqt_command "")
 if(BUILD_OS_WINDOWS)
     add_custom_target(PyQt
-        COMMAND ${Python3_EXECUTABLE} -m pip install PyQt5==5.15
+        COMMAND ${Python3_EXECUTABLE} -m pip install PyQt5==5.15.2
         COMMENT "Installing PyQt5"
     )
 
