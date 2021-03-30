@@ -11,7 +11,7 @@ if [[ -z "${CURA_BUILD_ENV_PATH}" ]]; then
 fi
 
 # Sets up the environment variables.
-source /opt/rh/devtoolset-7/enable
+source /opt/rh/devtoolset-8/enable
 export PATH="${CURA_BUILD_ENV_PATH}/bin:${PATH}"
 export PKG_CONFIG_PATH="${CURA_BUILD_ENV_PATH}/lib/pkgconfig:${PKG_CONFIG_PATH}"
 

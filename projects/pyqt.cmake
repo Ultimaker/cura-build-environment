@@ -1,7 +1,9 @@
 set(pyqt_command "")
 if(BUILD_OS_WINDOWS)
+    # Building PyQt on Windows is problematic due to linking against specific Windows libraries.
+    # Instead, we'll use the less favourable approach of installation via Pip, which drags PyPI into the circle of trust.
     add_custom_target(PyQt
-        COMMAND ${Python3_EXECUTABLE} -m pip install PyQt5==5.10
+        COMMAND ${Python3_EXECUTABLE} -m pip install PyQt5==5.15.2
         COMMENT "Installing PyQt5"
     )
 
@@ -29,8 +31,8 @@ else()
     endif()
 
     ExternalProject_Add(PyQt
-        URL https://downloads.sourceforge.net/project/pyqt/PyQt5/PyQt-5.10/PyQt5_gpl-5.10.tar.gz
-        URL_MD5 4874c5985246fdeb4c3c7843a3e6ef53
+        URL https://files.pythonhosted.org/packages/28/6c/640e3f5c734c296a7193079a86842a789edb7988dca39eab44579088a1d1/PyQt5-5.15.2.tar.gz
+        URL_MD5 b94576e9e013210dc5aba061913e4bd4
         CONFIGURE_COMMAND ${pyqt_command}
         BUILD_IN_SOURCE 1
     )
