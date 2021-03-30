@@ -48,7 +48,7 @@ else()
             COMMAND ${Python3_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/numpy-1.15.4+mkl-cp35-cp35m-win32.whl
             COMMAND ${Python3_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/scipy-1.2.0-cp35-cp35m-win32.whl
             COMMAND ${Python3_EXECUTABLE} -m pip install http://software.ultimaker.com/cura-binary-dependencies/Shapely-1.6.4.post1-cp35-cp35m-win32.whl
-            COMMENT "Install Numpy, Scipy and Shapely"
+            COMMENT "Install Numpy, Scipy, and Shapely"
         )
     else()
         add_custom_command(TARGET NumpyScipyShapely PRE_BUILD
@@ -88,7 +88,6 @@ add_custom_target(PythonPackages ALL
     # For testing HTTP requests
     COMMAND ${Python3_EXECUTABLE} -m pip install twisted==20.3.0
     COMMAND ${Python3_EXECUTABLE} -m pip install urllib3==1.25.6
-    COMMAND ${Python3_EXECUTABLE} -m pip install PyYAML==5.1.2
     COMMAND ${Python3_EXECUTABLE} -m pip install zeroconf==0.24.1
     # For handling cached authentication values when doing backups and the like:
     COMMAND ${Python3_EXECUTABLE} -m pip install keyring==23.0.1
