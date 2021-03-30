@@ -1,5 +1,7 @@
 set(pyqt_command "")
 if(BUILD_OS_WINDOWS)
+    # Building PyQt on Windows is problematic due to linking against specific Windows libraries.
+    # Instead, we'll use the less favourable approach of installation via Pip, which drags PyPI into the circle of trust.
     add_custom_target(PyQt
         COMMAND ${Python3_EXECUTABLE} -m pip install PyQt5==5.15.2
         COMMENT "Installing PyQt5"
