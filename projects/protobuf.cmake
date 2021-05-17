@@ -1,5 +1,5 @@
-set(_cura_protobuf_url https://github.com/google/protobuf/archive/v3.0.2.tar.gz)
-set(_cura_protobuf_md5 7349a7f43433d72c6d805c6ca22b7eeb)
+set(_cura_protobuf_url https://github.com/protocolbuffers/protobuf/archive/refs/tags/v3.17.0.tar.gz)
+set(_cura_protobuf_md5 37aa9d339dd9b45bb54cb5ed0ee8857c)
 
 if(BUILD_OS_OSX)
     set(protobuf_cxx_flags "-fPIC -std=c++11 -stdlib=libc++")
