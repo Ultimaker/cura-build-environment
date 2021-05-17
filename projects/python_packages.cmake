@@ -74,6 +74,7 @@ endif()
 
 # Other Python Packages
 add_custom_target(PythonPackages ALL
+    COMMAND ${Python3_EXECUTABLE} -m pip install cx-Freeze==6.5.3
     COMMAND ${Python3_EXECUTABLE} -m pip install appdirs==1.4.3
     COMMAND ${Python3_EXECUTABLE} -m pip install certifi==2019.11.28
     COMMAND ${Python3_EXECUTABLE} -m pip install cffi==1.14.1
@@ -82,7 +83,7 @@ add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install decorator==4.4.0
     COMMAND ${Python3_EXECUTABLE} -m pip install idna==2.8
     COMMAND ${Python3_EXECUTABLE} -m pip install importlib-metadata==3.7.2  # Dependency of cx_Freeze
-    COMMAND ${Python3_EXECUTABLE} -m pip install netifaces==0.10.9
+    COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/q4trcu4l/netifaces-0.10.9-cp38-cp38-win_amd64.whl
     COMMAND ${Python3_EXECUTABLE} -m pip install networkx==2.3
     COMMAND ${Python3_EXECUTABLE} -m pip install numpy-stl==2.10.1
     COMMAND ${Python3_EXECUTABLE} -m pip install packaging==18.0
