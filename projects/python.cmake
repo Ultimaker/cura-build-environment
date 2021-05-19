@@ -31,8 +31,8 @@ if(BUILD_OS_WINDOWS)
 endif()
 
 ExternalProject_Add(Python
-    URL https://www.python.org/ftp/python/3.8.8/Python-3.8.8.tgz
-    URL_HASH SHA256=76c0763f048e4f9b861d24da76b7dd5c7a3ba7ec086f40caedeea359263276f7
+    URL https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz
+    URL_HASH SHA256=b37ac74d2cbad2590e7cd0dd2b3826c29afe89a734090a87bf8c03c45066cb65
     PATCH_COMMAND ${python_patch_command}
     CONFIGURE_COMMAND "${python_configure_command}"
     BUILD_COMMAND ${python_build_command}
