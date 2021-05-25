@@ -1,7 +1,7 @@
 if(NOT BUILD_OS_WINDOWS)
     # Fortran compiler is needed for OpenBLAS, but it does no check whether it is available.
     enable_language(Fortran)
-    set(openblas_options DYNAMIC_ARCH=1 NO_STATIC=1 TARGET=HASWELL)
+    set(openblas_options DYNAMIC_ARCH=1 DYNAMIC_OLDER=1 NO_STATIC=1 TARGET=GENERIC)
 
     ExternalProject_Add(OpenBLAS
         URL https://github.com/xianyi/OpenBLAS/archive/v0.3.13.tar.gz
