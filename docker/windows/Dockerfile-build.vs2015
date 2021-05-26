@@ -1,4 +1,4 @@
-FROM ultimaker/cura-build-environment:win1809-python3.8-qt5.15.2-base
+FROM ultimaker/cura-build-environment:win1809-base
 
 ARG CURA_BUILD_ENV_BUILD_TYPE=Release
 ARG CURA_BUILD_ENV_PATH=C:\\cura-build-environment
