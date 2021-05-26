@@ -13,7 +13,7 @@ on:
     - 'xstartup'
 jobs:
   build-linux:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     - name: Checkout master
       uses: actions/checkout@master
