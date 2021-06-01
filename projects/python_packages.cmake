@@ -49,16 +49,16 @@ else()
     # Windows available depends on numpy with MKL, we also need the binary package for that.
     if(BUILD_OS_WIN32)
         add_custom_command(TARGET NumpyScipyShapely PRE_BUILD
-            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/q4trcu4l/numpy-1.20.3+mkl-cp38-cp38-win32.whl
-            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/q4trcu4l/scipy-1.6.3-cp38-cp38-win32.whl
-            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/q4trcu4l/Shapely-1.7.1-cp38-cp38-win32.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://software.ultimaker.com/cura-binary-dependencies/numpy-1.20.2+mkl-cp38-cp38-win32.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://software.ultimaker.com/cura-binary-dependencies/scipy-1.6.3-cp38-cp38-win32.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://software.ultimaker.com/cura-binary-dependencies/Shapely-1.7.1-cp38-cp38-win32.whl
             COMMENT "Install Numpy, Scipy, and Shapely"
         )
     else()
         add_custom_command(TARGET NumpyScipyShapely PRE_BUILD
-            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/q4trcu4l/numpy-1.20.3+mkl-cp38-cp38-win_amd64.whl
-            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/q4trcu4l/scipy-1.6.3-cp38-cp38-win_amd64.whl
-            COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/q4trcu4l/Shapely-1.7.1-cp38-cp38-win_amd64.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://software.ultimaker.com/cura-binary-dependencies/numpy-1.20.2+mkl-cp38-cp38-win_amd64.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://software.ultimaker.com/cura-binary-dependencies/scipy-1.6.3-cp38-cp38-win_amd64.whl
+            COMMAND ${Python3_EXECUTABLE} -m pip install https://software.ultimaker.com/cura-binary-dependencies/Shapely-1.7.1-cp38-cp38-win_amd64.whl
             COMMENT "Install Numpy, Scipy, and Shapely"
         )
     endif()
