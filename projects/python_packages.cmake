@@ -101,7 +101,7 @@ add_custom_target(PythonPackages ALL
     # For testing HTTP requests
     COMMAND ${Python3_EXECUTABLE} -m pip install twisted==21.2.0
     COMMAND ${Python3_EXECUTABLE} -m pip install urllib3==1.25.6
-    COMMAND ${Python3_EXECUTABLE} -m pip install zeroconf==0.24.1
+    COMMAND ${Python3_EXECUTABLE} -m pip install zeroconf==0.31.0
     # For handling cached authentication values when doing backups and the like:
     COMMAND ${Python3_EXECUTABLE} -m pip install keyring==23.0.1
 
