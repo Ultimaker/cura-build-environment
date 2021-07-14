@@ -13,7 +13,7 @@ on:
     - 'xstartup'
 jobs:
   build-linux:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux]
     steps:
     - name: Checkout master
       uses: actions/checkout@master
@@ -31,7 +31,7 @@ jobs:
       run: .github/workflows/build.sh
 
   build-windows:
-    runs-on: self-hosted
+    runs-on: [self-hosted, Windows]
     steps:
     - name: Checkout master
       uses: actions/checkout@master

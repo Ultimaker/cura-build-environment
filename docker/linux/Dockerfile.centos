@@ -5,7 +5,7 @@ FROM centos:centos7
 
 LABEL linux_distro="centos7" \
       architecture="amd64" \
-      python_version="3.8.8" \
+      python_version="3.8.10" \
       qt_version="5.15.2"
 
 # Set build time arugments
@@ -79,7 +79,7 @@ FROM centos:centos7
 
 LABEL linux_distro="centos7" \
       architecture="amd64" \
-      python_version="3.8.8" \
+      python_version="3.8.10" \
       qt_version="5.15.2"
 
 # Set build time arguments
