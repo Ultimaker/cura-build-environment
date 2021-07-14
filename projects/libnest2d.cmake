@@ -5,6 +5,13 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/projects/boost_headers.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/projects/nlopt.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/projects/clipper.cmake)
 
+set(extra_cmake_args "")
+if(BUILD_OS_WINDOWS)
+    set(extra_cmake_args -DCMAKE_CXX_FLAGS="/std:c++17")
+else()
+    set(extra_cmake_args -DCMAKE_CXX_FLAGS="-std=c++17")
+endif()
+
 #libnest2d (dependency of pynest2d).
 ExternalProject_Add(libnest2d
     GIT_REPOSITORY https://github.com/Ultimaker/libnest2d.git
@@ -14,5 +21,7 @@ ExternalProject_Add(libnest2d
     CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
                -DCMAKE_PREFIX_PATH=${CMAKE_INSTALL_PREFIX}
                -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+               -DCMAKE_CXX_STANDARD=17
+               ${extra_cmake_args}
     DEPENDS BoostHeaders nlopt Clipper
 )

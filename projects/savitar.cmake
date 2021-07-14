@@ -6,8 +6,15 @@ endif()
 
 set(extra_cmake_args "")
 if(BUILD_OS_WINDOWS)
-    set(extra_cmake_args -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/libs)
-elseif(BUILD_OS_OSX)
+    set(extra_cmake_args
+      -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/libs
+      -DCMAKE_CXX_FLAGS="/std:c++17"
+    )
+else()
+  set(extra_cmake_args
+    -DCMAKE_CXX_FLAGS="-std=c++17"
+  )
+  if(BUILD_OS_OSX)
     if(CMAKE_OSX_DEPLOYMENT_TARGET)
         list(APPEND extra_cmake_args
             -DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
@@ -18,6 +25,7 @@ elseif(BUILD_OS_OSX)
             -DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}
         )
     endif()
+  endif()
 endif()
 
 ExternalProject_Add(Savitar
@@ -28,6 +36,7 @@ ExternalProject_Add(Savitar
     CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
                -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
                -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}
+               -DCMAKE_CXX_STANDARD=17
                -DBUILD_STATIC=ON
                ${extra_cmake_args}
 )
