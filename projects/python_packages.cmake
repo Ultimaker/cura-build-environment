@@ -64,11 +64,12 @@ else()
     endif()
     # An additional hack, as the DLLs are correctly generated, but not where subsequent machinations expect them:
     # (They're kind of massive, so move instead of copy.)
+    # UPDATE: Now it seems they may be generated in the correct location again. Rather than removing this, the step has been made optional with an '... || exit(0)'.
     file(TO_NATIVE_PATH "${CMAKE_INSTALL_PREFIX}/lib/site-packages/numpy/DLLs/*.dll" _NUMPY_DLLS_SRC)
     file(TO_NATIVE_PATH "${CMAKE_INSTALL_PREFIX}/lib/site-packages/numpy/core/." _NUMPY_DLLS_DST)
     add_custom_command(TARGET NumpyScipyShapely POST_BUILD
-        COMMAND move ${_NUMPY_DLLS_SRC} ${_NUMPY_DLLS_DST}
-        COMMENT "Move Numpy et-al DLLs to the expected location"
+        COMMAND move ${_NUMPY_DLLS_SRC} ${_NUMPY_DLLS_DST} || (exit 0)
+        COMMENT "Move Numpy et-al DLLs to the expected location. (Will continue on error.)"
     )
 endif()
 
@@ -83,7 +84,7 @@ add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install decorator==4.4.0
     COMMAND ${Python3_EXECUTABLE} -m pip install idna==2.8
     COMMAND ${Python3_EXECUTABLE} -m pip install importlib-metadata==3.7.2  # Dependency of cx_Freeze
-    COMMAND ${Python3_EXECUTABLE} -m pip install https://download.lfd.uci.edu/pythonlibs/q4trcu4l/netifaces-0.10.9-cp38-cp38-win_amd64.whl
+    COMMAND ${Python3_EXECUTABLE} -m pip install netifaces==0.10.9
     COMMAND ${Python3_EXECUTABLE} -m pip install networkx==2.3
     COMMAND ${Python3_EXECUTABLE} -m pip install numpy-stl==2.10.1
     COMMAND ${Python3_EXECUTABLE} -m pip install packaging==18.0
