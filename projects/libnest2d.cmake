@@ -6,11 +6,6 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/projects/nlopt.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/projects/clipper.cmake)
 
 set(extra_cmake_args "")
-if(BUILD_OS_WINDOWS)
-    set(extra_cmake_args -DCMAKE_CXX_FLAGS="/std:c++17")
-else()
-    set(extra_cmake_args -DCMAKE_CXX_FLAGS="-std=c++17")
-endif()
 
 #libnest2d (dependency of pynest2d).
 ExternalProject_Add(libnest2d

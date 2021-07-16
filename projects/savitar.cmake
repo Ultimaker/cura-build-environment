@@ -8,12 +8,8 @@ set(extra_cmake_args "")
 if(BUILD_OS_WINDOWS)
     set(extra_cmake_args
       -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/libs
-      -DCMAKE_CXX_FLAGS="/std:c++17"
     )
 else()
-  set(extra_cmake_args
-    -DCMAKE_CXX_FLAGS="-std=c++17"
-  )
   if(BUILD_OS_OSX)
     if(CMAKE_OSX_DEPLOYMENT_TARGET)
         list(APPEND extra_cmake_args

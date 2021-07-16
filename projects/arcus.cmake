@@ -3,7 +3,6 @@ if(BUILD_OS_WINDOWS)
     set(extra_cmake_args
         -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/libs
         -DMSVC_STATIC_RUNTIME=ON
-        -DCMAKE_CXX_FLAGS="/std:c++17"
         -DCMAKE_EXE_LINKER_FLAGS=/LIBPATH:"${CMAKE_INSTALL_PREFIX}/libs" /machine:x64
         -DCMAKE_EXE_LINKER_FLAGS_RELEASE=/LIBPATH:"${CMAKE_INSTALL_PREFIX}/libs" /machine:x64
         -DCMAKE_MODULE_LINKER_FLAGS=/LIBPATH:"${CMAKE_INSTALL_PREFIX}/libs" /machine:x64
@@ -14,9 +13,6 @@ if(BUILD_OS_WINDOWS)
         -DCMAKE_STATIC_LINKER_FLAGS_RELEASE=/LIBPATH:"${CMAKE_INSTALL_PREFIX}/libs" /machine:x64
     )
 else()
-  list(APPEND extra_cmake_args
-    -DCMAKE_CXX_FLAGS="-std=c++17"
-  )
   if(BUILD_OS_OSX)
     if(CMAKE_OSX_DEPLOYMENT_TARGET)
         list(APPEND extra_cmake_args
@@ -57,7 +53,6 @@ if(BUILD_OS_WINDOWS)
                    -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
                    -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/lib-mingw
                    -DCMAKE_CXX_STANDARD=17
-                   -DCMAKE_CXX_FLAGS="-std=c++17"
                    -DBUILD_STATIC=ON
                    -DBUILD_PYTHON=OFF
                    -DBUILD_EXAMPLES=OFF
