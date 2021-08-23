@@ -108,7 +108,8 @@ add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install keyring==23.0.1
 
     # For creating the local profile database
-    COMMAND ${Python3_EXECUTABLE} -m pip install apsw==3.9.2.post1
+    # See https://rogerbinns.github.io/apsw/download.html#i-really-want-to-use-pip for some info as to why we do it like this.
+    COMMAND ${Python3_EXECUTABLE} -m pip install --user https://github.com/rogerbinns/apsw/releases/download/3.36.0-r1/apsw-3.36.0-r1.zip --global-option=fetch --global-option=--version --global-option=3.36.0 --global-option=--all --global-option=build --global-option=--enable-all-extensions
 
     COMMENT "Install Python packages"
     DEPENDS NumpyScipyShapely
