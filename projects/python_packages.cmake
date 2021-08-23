@@ -107,6 +107,9 @@ add_custom_target(PythonPackages ALL
     # For handling cached authentication values when doing backups and the like:
     COMMAND ${Python3_EXECUTABLE} -m pip install keyring==23.0.1
 
+    # For creating the local profile database
+    COMMAND ${Python3_EXECUTABLE} -m pip install apsw==3.9.2.post1
+
     COMMENT "Install Python packages"
     DEPENDS NumpyScipyShapely
 )
