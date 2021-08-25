@@ -9,14 +9,14 @@ if(NOT BUILD_OS_WINDOWS)
 
     # Numpy
     add_custom_target(Numpy ALL
-        COMMAND ${Python3_EXECUTABLE} -m pip install numpy==1.20.2
+        COMMAND ${Python3_EXECUTABLE} -m pip install --require-hashes -r ../projects/requirements/requirements_numpy.txt
         DEPENDS Python
     )
 
     if(BUILD_OS_OSX)
         # Scipy on macOS
         add_custom_target(Scipy ALL
-        COMMAND ${Python3_EXECUTABLE} -m pip install scipy==1.6.2
+        COMMAND ${Python3_EXECUTABLE} -m pip install --require-hashes -r ../projects/requirements/requirements_scipy.txt
         DEPENDS Numpy
     )
     else()
@@ -37,7 +37,7 @@ if(NOT BUILD_OS_WINDOWS)
 
     # Shapely
     add_custom_target(Shapely ALL
-        COMMAND ${Python3_EXECUTABLE} -m pip install "shapely[vectorized]==1.7.1"
+        COMMAND ${Python3_EXECUTABLE} -m pip install install --require-hashes -r ../projects/requirements/requirements_shapely.txt
         DEPENDS Scipy
     )
 
@@ -75,37 +75,7 @@ endif()
 
 # Other Python Packages
 add_custom_target(PythonPackages ALL
-    COMMAND ${Python3_EXECUTABLE} -m pip install cx-Freeze==6.5.3
-    COMMAND ${Python3_EXECUTABLE} -m pip install appdirs==1.4.3
-    COMMAND ${Python3_EXECUTABLE} -m pip install certifi==2019.11.28
-    COMMAND ${Python3_EXECUTABLE} -m pip install cffi==1.14.1
-    COMMAND ${Python3_EXECUTABLE} -m pip install chardet==3.0.4
-    COMMAND ${Python3_EXECUTABLE} -m pip install cryptography==3.4.6
-    COMMAND ${Python3_EXECUTABLE} -m pip install decorator==4.4.0
-    COMMAND ${Python3_EXECUTABLE} -m pip install idna==2.8
-    COMMAND ${Python3_EXECUTABLE} -m pip install importlib-metadata==3.7.2  # Dependency of cx_Freeze
-    COMMAND ${Python3_EXECUTABLE} -m pip install netifaces==0.10.9
-    COMMAND ${Python3_EXECUTABLE} -m pip install networkx==2.3
-    COMMAND ${Python3_EXECUTABLE} -m pip install numpy-stl==2.10.1
-    COMMAND ${Python3_EXECUTABLE} -m pip install packaging==18.0
-    COMMAND ${Python3_EXECUTABLE} -m pip install pycollada==0.6
-    COMMAND ${Python3_EXECUTABLE} -m pip install pycparser==2.19
-    COMMAND ${Python3_EXECUTABLE} -m pip install pyparsing==2.4.2
-    COMMAND ${Python3_EXECUTABLE} -m pip install PyQt5-sip==12.8.1
-    COMMAND ${Python3_EXECUTABLE} -m pip install pyserial==3.4
-    COMMAND ${Python3_EXECUTABLE} -m pip install python-dateutil==2.8.0
-    COMMAND ${Python3_EXECUTABLE} -m pip install python-utils==2.3.0
-    COMMAND ${Python3_EXECUTABLE} -m pip install requests==2.22.0
-    COMMAND ${Python3_EXECUTABLE} -m pip install sentry-sdk==0.13.5
-    COMMAND ${Python3_EXECUTABLE} -m pip install six==1.12.0
-    # https://github.com/mikedh/trimesh/issues/575 since 3.2.34
-    COMMAND ${Python3_EXECUTABLE} -m pip install trimesh==3.2.33
-    # For testing HTTP requests
-    COMMAND ${Python3_EXECUTABLE} -m pip install twisted==21.2.0
-    COMMAND ${Python3_EXECUTABLE} -m pip install urllib3==1.25.6
-    COMMAND ${Python3_EXECUTABLE} -m pip install zeroconf==0.31.0
-    # For handling cached authentication values when doing backups and the like:
-    COMMAND ${Python3_EXECUTABLE} -m pip install keyring==23.0.1
+    COMMAND ${Python3_EXECUTABLE} -m pip install --require-hashes -r ../projects/requirements/requirements_default.txt
 
     COMMENT "Install Python packages"
     DEPENDS NumpyScipyShapely
