@@ -179,9 +179,8 @@ Shapely[vectorized]==1.7.1; \
     --hash=sha256:a3774516c8a83abfd1ddffb8b6ec1b0935d7fe6ea0ff5c31a18bfdae567b4eba
 
 # Windows specific requirements
-pywin32==300; \
-    sys_platform=="win32" \
-    --hash=sha256:60a8fa361091b2eea27f15718f8eb7f9297e8d51b54dbc4f55f3d238093d5190 ;\
+pywin32==301 \
+    --hash=sha256:8c9d33968aa7fcddf44e47750e18f3d034c3e443a707688a008a2e52bbef7e96
 comtypes==1.1.7; \
     sys_platform=="win32" \
     --hash=sha256:c9d59f57d559613940f22da54d70add066faa23b4fa9b5cd95facdc501a63b0b
