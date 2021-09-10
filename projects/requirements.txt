@@ -120,6 +120,8 @@ zeroconf==0.31.0 \
 keyring==23.0.1 \
     --hash=sha256:045703609dd3fccfcdb27da201684278823b72af515aedec1a8515719a038cb8 \
     --hash=sha256:8f607d7d1cc502c43a932a275a56fe47db50271904513a379d39df1af277ac48
+lxml==4.3.0 \
+    --hash=sha256:d1e111b3ab98613115a208c1017f266478b0ab224a67bc8eac670fa0bad7d488
 
 # On Windows we use a custom compile Numpy wheel (MKL)
 https://software.ultimaker.com/cura-binary-dependencies/numpy-1.20.2+mkl-cp38-cp38-win_amd64.whl; \
