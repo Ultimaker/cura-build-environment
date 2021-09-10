@@ -185,4 +185,8 @@ pywin32==300; \
 comtypes==1.1.7; \
     sys_platform=="win32" \
     --hash=sha256:c9d59f57d559613940f22da54d70add066faa23b4fa9b5cd95facdc501a63b0b
+PyQt5==5.15.2; \
+    sys_platform=="win32" \
+    --hash=sha256:372b08dc9321d1201e4690182697c5e7ffb2e0770e6b4a45519025134b12e4fc
+
 
