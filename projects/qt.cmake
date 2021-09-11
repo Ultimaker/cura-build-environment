@@ -72,7 +72,7 @@ endif()
 
 ExternalProject_Add(Qt
     URL ${qt_url}
-    URL_HASH ${qt_SHA256}
+    URL_HASH SHA256=${qt_SHA256}
     CONFIGURE_COMMAND ${_qt_configure_cmd} ${qt_options}
     BUILD_IN_SOURCE 1
     DEPENDS OpenSSL
