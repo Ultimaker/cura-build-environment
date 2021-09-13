@@ -94,9 +94,6 @@ trimesh==3.2.33 \
 urllib3==1.25.9 \
     --hash=sha256:3018294ebefce6572a474f0604c2021e33b3fd8006ecd11d62107a5d2a963527 \
     --hash=sha256:88206b0eb87e6d677d424843ac5209e3fb9d0190d0ee169599165ec25e9d9115
-zeroconf==0.31.0 \
-    --hash=sha256:53a180248471c6f81bd1fffcbce03ed93d7d8eaf10905c9121ac1ea996d19844 \
-    --hash=sha256:5a468da018bc3f04bbce77ae247924d802df7aeb4c291bbbb5a9616d128800b0
 keyring==23.0.1 \
     --hash=sha256:045703609dd3fccfcdb27da201684278823b72af515aedec1a8515719a038cb8 \
     --hash=sha256:8f607d7d1cc502c43a932a275a56fe47db50271904513a379d39df1af277ac48
@@ -179,6 +176,14 @@ Twisted==21.2.0 \
 constantly==15.1.0 \
     --hash=sha256:586372eb92059873e29eba4f9dec8381541b4d3834660707faf8ba59146dfc35 \
     --hash=sha256:dd2fa9d6b1a51a83f0d7dd76293d734046aa176e384bf6e33b7e44880eb37c5d
+
+# zeroconf
+zeroconf==0.31.0 \
+    --hash=sha256:53a180248471c6f81bd1fffcbce03ed93d7d8eaf10905c9121ac1ea996d19844 \
+    --hash=sha256:5a468da018bc3f04bbce77ae247924d802df7aeb4c291bbbb5a9616d128800b0
+ifaddr==0.1.7 \
+    --hash=sha256:1f9e8a6ca6f16db5a37d3356f07b6e52344f6f9f7e806d618537731669eb1a94 \
+    --hash=sha256:d1f603952f0a71c9ab4e705754511e4e03b02565bc4cec7188ad6415ff534cd3
 
 # On Windows we use a custom compile Numpy wheel (MKL)
 https://software.ultimaker.com/cura-binary-dependencies/numpy-1.20.2+mkl-cp38-cp38-win_amd64.whl; \
