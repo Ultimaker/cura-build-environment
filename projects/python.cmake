@@ -23,6 +23,10 @@ if(BUILD_OS_WINDOWS)
     # in CMake via a command seems to always result in "/p:PlatformToolset v140".
     set(python_build_command cmd /c "${CMAKE_SOURCE_DIR}/projects/build_python_windows.bat" "<SOURCE_DIR>/PCbuild/build.bat" --no-tkinter -c Release -e -M -p x64)
     set(python_install_command cmd /c "${CMAKE_SOURCE_DIR}/projects/install_python_windows.bat amd64 <SOURCE_DIR> ${CMAKE_INSTALL_PREFIX}")
+
+    # The python3.8 build configuration still refers to libffi-7.lib instead of libffi-8.lib which is in the cpython-bin-deps repository it downloads.
+    # We patch their .props file to make it refer to libffi-8.lib.
+    set(python_patch_command ${CMAKE_COMMAND} -E copy "${CMAKE_SOURCE_DIR}/projects/python_libffi_patch.props" "${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/libffi.props")
 endif()
 
 ExternalProject_Add(Python
