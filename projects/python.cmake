@@ -54,3 +54,9 @@ ExternalProject_Add_Step(Python ensurepip
     COMMAND ${Python3_EXECUTABLE} -m ensurepip
     DEPENDEES install
 )
+
+add_custom_target(PythonPackagesBase ALL
+        COMMAND ${Python3_EXECUTABLE} -m pip install --require-hashes -r  ${CMAKE_SOURCE_DIR}/projects/base_requirements.txt
+        COMMENT "Install Base Python packages"
+        DEPENDS Python
+        )
