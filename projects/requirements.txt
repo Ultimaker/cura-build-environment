@@ -38,9 +38,6 @@ networkx==2.6.2 \
     --hash=sha256:5fcb7004be69e8fbdf07dcb502efa5c77cadcaad6982164134eeb9721f826c2e
 numpy-stl==2.10.1 \
     --hash=sha256:f6b529b8a8112dfe456d4f7697c7aee0aca62be5a873879306afe4b26fca963c
-packaging==18.0 \
-    --hash=sha256:0886227f54515e592aaa2e5a553332c73962917f2831f1b0f9b9f4380a4b9807 \
-    --hash=sha256:f95a1e147590f204328170981833854229bb2912ac3d5f89e2a8ccd2834800c9
 pycollada==0.6 \
     --hash=sha256:fcd6f38fd981e350f9ec754d9671834017accd600e967d6d299a6cfdae5ba4f4
 pycparser==2.19 \
