@@ -10,7 +10,9 @@ if(BUILD_OS_OSX)
         INSTALL_COMMAND make install
         BUILD_IN_SOURCE 1
     )
-elseif(BUILD_OS_LINUX)
+endif()
+
+if(BUILD_OS_LINUX)
     set(_openssl_os linux-x86_64 enable-ec_nistp_64_gcc_128)
     set(_openssl_args no-ssl2 no-ssl3 no-zlib shared enable-cms)
 
@@ -23,8 +25,6 @@ elseif(BUILD_OS_LINUX)
         BUILD_IN_SOURCE 1
     )
 endif()
-
-return()
 
 if(BUILD_OS_WINDOWS)
     if(BUILD_OS_WIN32)
