@@ -1,6 +1,6 @@
 if(BUILD_OS_WINDOWS)
-    set(_openssl_build ms\\do_win64a.bat && nmake -f ms\\nt.mak)
-    set(_openssl_install nmake -f ms\\nt.mak install)
+    set(_openssl_build nmake)
+    set(_openssl_install nmake install)
     set(_openssl_configure perl Configure VC-WIN64A --prefix=${CMAKE_INSTALL_PREFIX})
 else()
     set(_openssl_build make depend && make)
