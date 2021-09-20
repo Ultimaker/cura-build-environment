@@ -119,7 +119,7 @@ sys_platform=="darwin" \
 
 cryptography==3.4.8; \
 sys_platform=="win32" \
-    --hash=sha256:94cc5ed4ceaefcbe5bf38c8fba6a21fc1d365bb8fb826ea1688e3370b2e24a1c
+    --hash=sha256:3520667fda779eb788ea00080124875be18f2d8f0848ec00733c0ec3bb8219fc
 
 cryptography==3.4.8; \
 sys_platform=="linux" \
