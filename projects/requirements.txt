@@ -96,7 +96,7 @@ Automat==20.2.0 \
     --hash=sha256:7979803c74610e11ef0c0d68a2942b152df52da55336e0c9d58daf1831cbdf33 \
     --hash=sha256:b6feb6455337df834f6c9962d6ccf771515b7d939bca142b29c20c2376bc6111
 twisted-iocpsupport==1.0.2; \
-    sys_platform!="linux" \
+    sys_platform=="win32" \
     --hash=sha256:306becd6e22ab6e8e4f36b6bdafd9c92e867c98a5ce517b27fdd27760ee7ae41 \
     --hash=sha256:3c61742cb0bc6c1ac117a7e5f422c129832f0c295af49e01d8a6066df8cfc04d \
     --hash=sha256:72068b206ee809c9c596b57b5287259ea41ddb4774d86725b19f35bf56aa32a9 \
@@ -164,8 +164,12 @@ Shapely[vectorized]==1.7.1; \
     --hash=sha256:a3774516c8a83abfd1ddffb8b6ec1b0935d7fe6ea0ff5c31a18bfdae567b4eba
 
 lxml==4.6.3; \
-    sys_platform!="win32" \
+    sys_platform=="linux" \
     --hash=sha256:1b38116b6e628118dea5b2186ee6820ab138dbb1e24a13e478490c7db2f326ae
+
+lxml==4.6.3; \
+    sys_platform=="darwin" \
+    --hash=sha256:b007cbb845b28db4fb8b6a5cdcbf65bacb16a8bd328b53cbc0698688a68e1caa
 
 https://download.lfd.uci.edu/pythonlibs/y2rycu7g/lxml-4.6.3-cp38-cp38-win_amd64.whl; \
     sys_platform=="win32" \
