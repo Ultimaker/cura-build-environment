@@ -33,6 +33,10 @@ ExternalProject_Add(Python
     URL https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz
     URL_HASH SHA256=b37ac74d2cbad2590e7cd0dd2b3826c29afe89a734090a87bf8c03c45066cb65
     PATCH_COMMAND ${python_patch_command}
+    # The python3.8 build configuration still downloads and installs OpenSSL v1.1.1k  from the cpython-bin-deps repository.
+    # Thus, we have to force it to use OpenSSL v1.1.1l, as it fixes several security risks
+    COMMAND powershell -Command "(gc ${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/get_externals.bat) | Foreach-Object { $_ -replace 'openssl-1.1.1k', 'openssl-1.1.1l' -replace 'openssl-bin-1.1.1k-1', 'openssl-bin-1.1.1l' }  | Out-File -encoding ASCII ${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/get_externals.bat"
+    COMMAND powershell -Command "(gc ${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/python.props) | Foreach-Object { $_ -replace 'openssl-1.1.1k', 'openssl-1.1.1l' -replace 'openssl-bin-1.1.1k-1', 'openssl-bin-1.1.1l' }  | Out-File -encoding ASCII ${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/python.props"
     CONFIGURE_COMMAND "${python_configure_command}"
     BUILD_COMMAND ${python_build_command}
     INSTALL_COMMAND ${python_install_command}
@@ -56,6 +60,6 @@ ExternalProject_Add_Step(Python ensurepip
 )
 
 ExternalProject_Add_Step(Python baserequirements
-        COMMAND ${Python3_EXECUTABLE} -m pip install --require-hashes -r  ${CMAKE_SOURCE_DIR}/projects/base_requirements.txt
-        DEPENDEES ensurepip
-        )
+    COMMAND ${Python3_EXECUTABLE} -m pip install --require-hashes -r  ${CMAKE_SOURCE_DIR}/projects/base_requirements.txt
+    DEPENDEES ensurepip
+)
