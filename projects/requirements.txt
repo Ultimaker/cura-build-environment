@@ -163,14 +163,13 @@ Shapely[vectorized]==1.7.1; \
     --hash=sha256:90a3e2ae0d6d7d50ff2370ba168fbd416a53e7d8448410758c5d6a5920646c1d \
     --hash=sha256:a3774516c8a83abfd1ddffb8b6ec1b0935d7fe6ea0ff5c31a18bfdae567b4eba
 
-lxml==4.3.0; \
+lxml==4.6.3; \
     sys_platform!="win32" \
-    --hash=sha256:d1e111b3ab98613115a208c1017f266478b0ab224a67bc8eac670fa0bad7d488
+    --hash=sha256:1b38116b6e628118dea5b2186ee6820ab138dbb1e24a13e478490c7db2f326ae
 
 https://download.lfd.uci.edu/pythonlibs/y2rycu7g/lxml-4.6.3-cp38-cp38-win_amd64.whl; \
     sys_platform=="win32" \
     --hash=sha256:0e6ec5bf47388c9fb490f3b75b6c8e966a3f221ef5c431c48db42aa6f7dbe587
-
 
 # Windows specific requirements
 pywin32==301; \
