@@ -13,13 +13,6 @@ appdirs==1.4.3 \
 certifi==2019.11.28 \
     --hash=sha256:017c25db2a153ce562900032d5bc68e9f191e44e9a0f762f373977de9df1fbb3 \
     --hash=sha256:25b64c7da4cd7479594d035c08c2d809eb4aab3a26e5a990ea98cc450c320f1f
-cffi==1.14.1 \
-    --hash=sha256:267adcf6e68d77ba154334a3e4fc921b8e63cbb38ca00d33d40655d4228502bc \
-    --hash=sha256:6923d077d9ae9e8bacbdb1c07ae78405a9306c8fd1af13bfa06ca891095eb995 \
-    --hash=sha256:98be759efdb5e5fa161e46d404f4e0ce388e72fbf7d9baf010aff16689e22abe \
-    --hash=sha256:b1d6ebc891607e71fd9da71688fcf332a6630b7f5b7f5549e6e631821c0e5d90 \
-    --hash=sha256:b2a2b0d276a136146e012154baefaea2758ef1f56ae9f4e01c612b0831e0bd2f \
-    --hash=sha256:d3148b6ba3923c5850ea197a91a42683f946dba7e8eb82dfa211ab7e708de939
 chardet==3.0.4 \
     --hash=sha256:84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae \
     --hash=sha256:fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691
@@ -38,8 +31,6 @@ numpy-stl==2.10.1 \
     --hash=sha256:f6b529b8a8112dfe456d4f7697c7aee0aca62be5a873879306afe4b26fca963c
 pycollada==0.6 \
     --hash=sha256:fcd6f38fd981e350f9ec754d9671834017accd600e967d6d299a6cfdae5ba4f4
-pycparser==2.19 \
-    --hash=sha256:a988718abfad80b6b157acce7bf130a30876d27603738ac39f140993246b25b3
 PyQt5-sip==12.8.1 \
     --hash=sha256:2f35e82fd7ec1e1f6716e9154721c7594956a4f5bd4f826d8c6a6453833cc2f0 \
     --hash=sha256:30e944db9abee9cc757aea16906d4198129558533eb7fadbe48c5da2bd18e0bd \
@@ -66,14 +57,6 @@ trimesh==3.2.33 \
 urllib3==1.25.9 \
     --hash=sha256:3018294ebefce6572a474f0604c2021e33b3fd8006ecd11d62107a5d2a963527 \
     --hash=sha256:88206b0eb87e6d677d424843ac5209e3fb9d0190d0ee169599165ec25e9d9115
-keyring==23.0.1 \
-    --hash=sha256:045703609dd3fccfcdb27da201684278823b72af515aedec1a8515719a038cb8 \
-    --hash=sha256:8f607d7d1cc502c43a932a275a56fe47db50271904513a379d39df1af277ac48
-#lxml==4.3.0 \
-#    --hash=sha256:d1e111b3ab98613115a208c1017f266478b0ab224a67bc8eac670fa0bad7d488
-https://download.lfd.uci.edu/pythonlibs/y2rycu7g/lxml-4.6.3-cp38-cp38-win_amd64.whl \
-    --hash=sha256:0e6ec5bf47388c9fb490f3b75b6c8e966a3f221ef5c431c48db42aa6f7dbe587
-
 # importlib-metadata
 importlib-metadata==3.7.2 \
     --hash=sha256:18d5ff601069f98d5d605b6a4b50c18a34811d655c55548adc833e687289acde \
@@ -81,6 +64,13 @@ importlib-metadata==3.7.2 \
 zipp==3.5.0 \
     --hash=sha256:957cfda87797e389580cb8b9e3870841ca991e2125350677b2ca83a0e99390a3 \
     --hash=sha256:f5812b1e007e48cff63449a5e9f4e7ebea716b4111f9c4f9a645f91d579bf0c4
+jeepney==0.7.1 \
+    --hash=sha256:1b5a0ea5c0e7b166b2f5895b91a08c14de8915afda4407fb5022a195224958ac
+SecretStorage==3.3.1 \
+    --hash=sha256:422d82c36172d88d6a0ed5afdec956514b189ddbfb72fefab0c8a1cee4eaf71f
+keyring==23.0.1 \
+    --hash=sha256:045703609dd3fccfcdb27da201684278823b72af515aedec1a8515719a038cb8 \
+    --hash=sha256:8f607d7d1cc502c43a932a275a56fe47db50271904513a379d39df1af277ac48
 
 # twisted
 Twisted==21.2.0 \
@@ -105,19 +95,19 @@ zope.interface==5.4.0 \
 Automat==20.2.0 \
     --hash=sha256:7979803c74610e11ef0c0d68a2942b152df52da55336e0c9d58daf1831cbdf33 \
     --hash=sha256:b6feb6455337df834f6c9962d6ccf771515b7d939bca142b29c20c2376bc6111
-twisted-iocpsupport==1.0.2 \
-    --hash=sha256:306becd6e22ab6e8e4f36b6bdafd9c92e867c98a5ce517b27fdd27760ee7ae41 \
-    --hash=sha256:3c61742cb0bc6c1ac117a7e5f422c129832f0c295af49e01d8a6066df8cfc04d \
-    --hash=sha256:72068b206ee809c9c596b57b5287259ea41ddb4774d86725b19f35bf56aa32a9 \
-    --hash=sha256:7d972cfa8439bdcb35a7be78b7ef86d73b34b808c74be56dfa785c8a93b851bf \
-    --hash=sha256:81b3abe3527b367da0220482820cb12a16c661672b7bcfcde328902890d63323 \
-    --hash=sha256:851b3735ca7e8102e661872390e3bce88f8901bece95c25a0c8bb9ecb8a23d32 \
-    --hash=sha256:985c06a33f5c0dae92c71a036d1ea63872ee86a21dd9b01e1f287486f15524b4 \
-    --hash=sha256:9dbb8823b49f06d4de52721b47de4d3b3026064ef4788ce62b1a21c57c3fff6f \
-    --hash=sha256:b435857b9efcbfc12f8c326ef0383f26416272260455bbca2cd8d8eca470c546 \
-    --hash=sha256:b76b4eed9b27fd63ddb0877efdd2d15835fdcb6baa745cb85b66e5d016ac2878 \
-    --hash=sha256:b9fed67cf0f951573f06d560ac2f10f2a4bbdc6697770113a2fc396ea2cb2565 \
-    --hash=sha256:bf4133139d77fc706d8f572e6b7d82871d82ec7ef25d685c2351bdacfb701415
+#twisted-iocpsupport==1.0.2 \
+#    --hash=sha256:306becd6e22ab6e8e4f36b6bdafd9c92e867c98a5ce517b27fdd27760ee7ae41 \
+#    --hash=sha256:3c61742cb0bc6c1ac117a7e5f422c129832f0c295af49e01d8a6066df8cfc04d \
+#    --hash=sha256:72068b206ee809c9c596b57b5287259ea41ddb4774d86725b19f35bf56aa32a9 \
+#    --hash=sha256:7d972cfa8439bdcb35a7be78b7ef86d73b34b808c74be56dfa785c8a93b851bf \
+#    --hash=sha256:81b3abe3527b367da0220482820cb12a16c661672b7bcfcde328902890d63323 \
+#    --hash=sha256:851b3735ca7e8102e661872390e3bce88f8901bece95c25a0c8bb9ecb8a23d32 \
+#    --hash=sha256:985c06a33f5c0dae92c71a036d1ea63872ee86a21dd9b01e1f287486f15524b4 \
+#    --hash=sha256:9dbb8823b49f06d4de52721b47de4d3b3026064ef4788ce62b1a21c57c3fff6f \
+#    --hash=sha256:b435857b9efcbfc12f8c326ef0383f26416272260455bbca2cd8d8eca470c546 \
+#    --hash=sha256:b76b4eed9b27fd63ddb0877efdd2d15835fdcb6baa745cb85b66e5d016ac2878 \
+#    --hash=sha256:b9fed67cf0f951573f06d560ac2f10f2a4bbdc6697770113a2fc396ea2cb2565 \
+#    --hash=sha256:bf4133139d77fc706d8f572e6b7d82871d82ec7ef25d685c2351bdacfb701415
 
 # zeroconf
 zeroconf==0.31.0 \
@@ -172,6 +162,15 @@ Shapely[vectorized]==1.7.1; \
     --hash=sha256:90a3e2ae0d6d7d50ff2370ba168fbd416a53e7d8448410758c5d6a5920646c1d \
     --hash=sha256:a3774516c8a83abfd1ddffb8b6ec1b0935d7fe6ea0ff5c31a18bfdae567b4eba
 
+lxml==4.3.0; \
+    sys_platform!="win32" \
+    --hash=sha256:d1e111b3ab98613115a208c1017f266478b0ab224a67bc8eac670fa0bad7d488
+
+https://download.lfd.uci.edu/pythonlibs/y2rycu7g/lxml-4.6.3-cp38-cp38-win_amd64.whl; \
+    sys_platform=="win32" \
+    --hash=sha256:0e6ec5bf47388c9fb490f3b75b6c8e966a3f221ef5c431c48db42aa6f7dbe587
+
+
 # Windows specific requirements
 pywin32==301; \
     sys_platform=="win32" \
@@ -190,5 +189,3 @@ PyQt5==5.15.2; \
     --hash=sha256:894ca4ae767a8d6cf5903784b71f755073c78cb8c167eecf6e4ed6b3b055ac6a \
     --hash=sha256:ea24f24b7679bf393dd2e4f53fe0ce65021be18304c1ff7a226c2fc5c356d0da \
     --hash=sha256:faaecb76ec65e12673a968e7f5bc02495957e6996f0a3fa0d98895f9e4113746
-
-
