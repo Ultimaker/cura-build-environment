@@ -11,7 +11,7 @@ if(BUILD_OS_LINUX)
 	COMMAND echo "${_appimagetool_sha256}  ${_appimagetool_path}" | sha256sum --check
 	COMMAND chmod a+x "${_appimagetool_path}"
 	COMMAND curl -o "${_apprun_path}" -SL https://github.com/AppImage/AppImageKit/releases/download/12/AppRun-x86_64
-	COMMAND echo "${_apprun_sha256}  ${_apprun_sha256}" | sha256sum --check
+	COMMAND echo "${_apprun_sha256}  ${_apprun_path}" | sha256sum --check
 	COMMAND chmod a+x "${_apprun_path}"
     )
 endif()
