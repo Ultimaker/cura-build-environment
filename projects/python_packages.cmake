@@ -7,6 +7,6 @@ add_custom_target(PythonPackagesGeneral ALL
 add_custom_command(
     TARGET PythonPackagesGeneral POST_BUILD
     COMMAND powershell -Command "(gc hooks.py) -replace 'libffi-7.dll', 'libffi-8.dll' | Out-File -encoding ASCII hooks.py"
-		COMMENT "Make libffi-8.dll visible to cx_Freeze"
-		WORKING_DIRECTORY ${CMAKE_INSTALL_PREFIX}/lib/site-packages/cx_Freeze
+    COMMENT "Make libffi-8.dll visible to cx_Freeze"
+    WORKING_DIRECTORY ${CMAKE_INSTALL_PREFIX}/lib/site-packages/cx_Freeze
 )
