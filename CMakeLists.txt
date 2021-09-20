@@ -56,6 +56,17 @@ if(BUILD_OS_LINUX)
     )
 endif()
 
+# Some extra post build additions are needed on macOS, as the eventual Cura build will fail, because otool
+# throws an error while copying pynest2d.so and libgeos_c.1.dylib to the Ultimaker Cura.app bundle.
+if(BUILD_OS_OSX)
+    add_custom_command(
+        TARGET projects POST_BUILD
+        COMMAND /Library/Developer/CommandLineTools/usr/bin/install_name_tool -change @rpath/libgeos.3.7.3.dylib "${CMAKE_INSTALL_PREFIX}/lib/libgeos.3.7.3.dylib" "${CMAKE_INSTALL_PREFIX}/lib/libgeos_c.1.dylib"
+        COMMAND /Library/Developer/CommandLineTools/usr/bin/install_name_tool -change @rpath/libnlopt.0.dylib "${CMAKE_INSTALL_PREFIX}/lib/libnlopt.0.dylib" "${CMAKE_INSTALL_PREFIX}/lib/python3.8/site-packages/pynest2d.so"
+        COMMENT "Changing the RPATH of Geos and pynest2d"
+    )
+endif()
+
 file(GLOB _projects projects/*.cmake)
 foreach(_project ${_projects})
     include(${_project})
