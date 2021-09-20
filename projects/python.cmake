@@ -3,15 +3,6 @@ set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enab
 set(python_build_command make)
 set(python_install_command make install)
 
-if(BUILD_OS_OSX)
-    set(python_configure_command ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX})
-endif()
-
-if(BUILD_OS_LINUX)
-    # Set a proper RPATH so everything depending on Python does not need LD_LIBRARY_PATH
-    set(python_configure_command LDFLAGS=-Wl,-rpath=${CMAKE_INSTALL_PREFIX}/lib ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX})
-endif()
-
 if(BUILD_OS_WINDOWS)
     # Otherwise Python will not be able to get external dependencies.
     find_package(Subversion REQUIRED)
@@ -27,23 +18,41 @@ if(BUILD_OS_WINDOWS)
     # The python3.8 build configuration still refers to libffi-7.lib instead of libffi-8.lib which is in the cpython-bin-deps repository it downloads.
     # We patch their .props file to make it refer to libffi-8.lib.
     set(python_patch_command ${CMAKE_COMMAND} -E copy "${CMAKE_SOURCE_DIR}/projects/python_libffi_patch.props" "${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/libffi.props")
+
+    ExternalProject_Add(Python
+        URL https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz
+        URL_HASH SHA256=b37ac74d2cbad2590e7cd0dd2b3826c29afe89a734090a87bf8c03c45066cb65
+        PATCH_COMMAND ${python_patch_command}
+        # The python3.8 build configuration still downloads and installs OpenSSL v1.1.1k from the cpython-bin-deps repository.
+        # Thus, we have to force it to use OpenSSL v1.1.1l, as it fixes several security risks
+        COMMAND powershell -Command "(gc ${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/get_externals.bat) | Foreach-Object { $_ -replace 'openssl-1.1.1k', 'openssl-1.1.1l' -replace 'openssl-bin-1.1.1k-1', 'openssl-bin-1.1.1l' }  | Out-File -encoding ASCII ${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/get_externals.bat"
+        COMMAND powershell -Command "(gc ${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/python.props) | Foreach-Object { $_ -replace 'openssl-1.1.1k', 'openssl-1.1.1l' -replace 'openssl-bin-1.1.1k-1', 'openssl-bin-1.1.1l' }  | Out-File -encoding ASCII ${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/python.props"
+        CONFIGURE_COMMAND "${python_configure_command}"
+        BUILD_COMMAND ${python_build_command}
+        INSTALL_COMMAND ${python_install_command}
+        BUILD_IN_SOURCE 1
+    )
+else()
+if(BUILD_OS_OSX)
+    set(python_configure_command ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX})
+endif()
+
+if(BUILD_OS_LINUX)
+    # Set a proper RPATH so everything depending on Python does not need LD_LIBRARY_PATH
+    set(python_configure_command LDFLAGS=-Wl,-rpath=${CMAKE_INSTALL_PREFIX}/lib ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX})
 endif()
 
 ExternalProject_Add(Python
     URL https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz
     URL_HASH SHA256=b37ac74d2cbad2590e7cd0dd2b3826c29afe89a734090a87bf8c03c45066cb65
-    PATCH_COMMAND ${python_patch_command}
-    # The python3.8 build configuration still downloads and installs OpenSSL v1.1.1k from the cpython-bin-deps repository.
-    # Thus, we have to force it to use OpenSSL v1.1.1l, as it fixes several security risks
-    COMMAND powershell -Command "(gc ${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/get_externals.bat) | Foreach-Object { $_ -replace 'openssl-1.1.1k', 'openssl-1.1.1l' -replace 'openssl-bin-1.1.1k-1', 'openssl-bin-1.1.1l' }  | Out-File -encoding ASCII ${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/get_externals.bat"
-    COMMAND powershell -Command "(gc ${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/python.props) | Foreach-Object { $_ -replace 'openssl-1.1.1k', 'openssl-1.1.1l' -replace 'openssl-bin-1.1.1k-1', 'openssl-bin-1.1.1l' }  | Out-File -encoding ASCII ${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/python.props"
     CONFIGURE_COMMAND "${python_configure_command}"
     BUILD_COMMAND ${python_build_command}
     INSTALL_COMMAND ${python_install_command}
     BUILD_IN_SOURCE 1
 )
+endif()
 
-# Only build geos on Linux
+# Only build geos on Linux and macOS
 # cryptography requires cffi, which requires libffi
 if(BUILD_OS_LINUX)
     SetProjectDependencies(TARGET Python DEPENDS OpenBLAS Geos OpenSSL bzip2-static bzip2-shared xz zlib sqlite3 libffi)
