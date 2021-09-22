@@ -20,7 +20,7 @@ endif()
 
 ExternalProject_Add(Sip
     URL https://www.riverbankcomputing.com/static/Downloads/sip/4.19.24/sip-4.19.24.tar.gz
-    URL_MD5 595e9ad6bb0a4b3a6ea92c163a05d19c
+    URL_HASH SHA256=edcd3790bb01938191eef0f6117de0bf56d1136626c0ddb678f3a558d62e41e5
     CONFIGURE_COMMAND ${sip_command}
     BUILD_IN_SOURCE 1
 )

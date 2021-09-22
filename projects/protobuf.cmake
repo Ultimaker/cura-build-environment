@@ -1,5 +1,5 @@
 set(_cura_protobuf_url https://github.com/protocolbuffers/protobuf/archive/refs/tags/v3.15.7.tar.gz)
-set(_cura_protobuf_md5 0abe621c2e846d1634192d9824e99a0d)
+set(_cura_protobuf_sha256 efdd6b932a2c0a88a90c4c80f88e4b2e1bf031e7514dbb5a5db5d0bf4f295504)
 
 if(BUILD_OS_OSX)
     set(protobuf_cxx_flags "-fPIC -std=c++11 -stdlib=libc++")
@@ -68,7 +68,7 @@ if(BUILD_OS_WINDOWS)
     # it for now.
     ExternalProject_Add(Protobuf-MinGW
         URL     ${_cura_protobuf_url}
-        URL_MD5 ${_cura_protobuf_md5}
+        URL_HASH SHA256=${_cura_protobuf_sha256}
         DEPENDS Protobuf
         CONFIGURE_COMMAND ${CMAKE_COMMAND} ${protobuf_configure_args} -G "MinGW Makefiles" ../Protobuf-MinGW/cmake
         BUILD_COMMAND mingw32-make

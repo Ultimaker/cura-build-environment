@@ -22,24 +22,24 @@ RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
 
 # Install visual studio
 RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
-    choco install -y vcredist140; \
-    choco install -y vcbuildtools --execution-timeout 18000 -ia "/Full"
+    choco install -y vcredist140 --requirechecksum; \
+    choco install -y vcbuildtools --requirechecksum --execution-timeout 18000 -ia "/Full"
 
 # Install other build tools
 #  - perl, svn, and nasm are needed by OpenSSL for Python
 #  - MinGW64 8.1.0 posix seh.
 RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
-    choco install -y 7zip; \
-    choco install -y cmake --installargs 'ADD_CMAKE_TO_PATH=System'; \
-    choco install -y git --params '/GitOnlyOnPath /NoAutoCrlf /SChannel'; \
-    choco install -y nsis; \
-    choco install -y strawberryperl; \
-    choco install -y tortoisesvn; \
-    choco install -y nasm; \
-    choco install -y mingw; \
-	choco install -y make; \
-    choco install -y doxygen.install; \
-    choco install -y poedit
+    choco install -y 7zip --requirechecksum; \
+    choco install -y cmake --requirechecksum --installargs 'ADD_CMAKE_TO_PATH=System'; \
+    choco install -y git --requirechecksum --params '/GitOnlyOnPath /NoAutoCrlf /SChannel'; \
+    choco install -y nsis --requirechecksum; \
+    choco install -y strawberryperl --requirechecksum; \
+    choco install -y tortoisesvn --requirechecksum; \
+    choco install -y nasm --requirechecksum; \
+    choco install -y mingw --requirechecksum; \
+	choco install -y make --requirechecksum; \
+    choco install -y doxygen.install --requirechecksum; \
+    choco install -y poedit --requirechecksum
 	
 ADD . "${CURA_BUILD_ENV_WORK_DIR}"/src
 

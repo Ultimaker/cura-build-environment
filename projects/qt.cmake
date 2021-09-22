@@ -1,5 +1,5 @@
 set(qt_url https://download.qt.io/archive/qt/5.15/5.15.2/single/qt-everywhere-src-5.15.2.tar.xz)
-set(qt_md5 e1447db4f06c841d8947f0a6ce83a7b5)
+set(qt_SHA256 3a530d1b243b5dec00bc54937455471aaa3e56849d2593edb8ded07228202240)
 
 if(BUILD_OS_WINDOWS)
     # For some as of yet unknown reason, building Qt on Windows fails because it does not create moc targets.
@@ -70,19 +70,10 @@ elseif(BUILD_OS_LINUX)
 	 -L "${CMAKE_INSTALL_PREFIX}/lib")
 endif()
 
-if(BUILD_OS_OSX)
-    ExternalProject_Add(Qt
-        URL ${qt_url}
-        URL_MD5 ${qt_md5}
-        CONFIGURE_COMMAND ${_qt_configure_cmd} ${qt_options}
-        BUILD_IN_SOURCE 1
-        DEPENDS OpenSSL
-    )
-else()
-    ExternalProject_Add(Qt
-        URL ${qt_url}
-        URL_MD5 ${qt_md5}
-        CONFIGURE_COMMAND ./configure ${qt_options}
-        BUILD_IN_SOURCE 1
-    )
-endif()
+ExternalProject_Add(Qt
+    URL ${qt_url}
+    URL_HASH SHA256=${qt_SHA256}
+    CONFIGURE_COMMAND ${_qt_configure_cmd} ${qt_options}
+    BUILD_IN_SOURCE 1
+    DEPENDS OpenSSL
+)
