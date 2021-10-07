@@ -179,11 +179,11 @@ lxml==4.6.3; \
     sys_platform=="linux" \
     --hash=sha256:1b38116b6e628118dea5b2186ee6820ab138dbb1e24a13e478490c7db2f326ae
 
-lxml==4.6.3; \
+https://software.ultimaker.com/cura-binary-dependencies/lxml-4.6.3-cp38-cp38-macosx_10_13_x86_64.whl; \
     sys_platform=="darwin" \
-    --hash=sha256:b007cbb845b28db4fb8b6a5cdcbf65bacb16a8bd328b53cbc0698688a68e1caa
+    --hash=sha256:bccacaba41deb4a3f099cbe63b58cdabcd77fe0c24b241b51c3ae1f82337c4eb
 
-https://download.lfd.uci.edu/pythonlibs/y2rycu7g/lxml-4.6.3-cp38-cp38-win_amd64.whl; \
+https://software.ultimaker.com/cura-binary-dependencies/lxml-4.6.3-cp38-cp38-win_amd64.whl; \
     sys_platform=="win32" \
     --hash=sha256:0e6ec5bf47388c9fb490f3b75b6c8e966a3f221ef5c431c48db42aa6f7dbe587
 
