@@ -1,7 +1,7 @@
 #!/bin/sh
 
 GIT_REF="$(basename "${GIT_REF}")"
-TAG="centos-${GIT_REF}"
+TAG="centos7-${GIT_REF}"
 
 # Only tag as the latest for master
 if [ "${GIT_REF}" = "master" ]; then
