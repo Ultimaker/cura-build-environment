@@ -6,14 +6,16 @@ ARG CURA_BUILD_ENV_WORK_DIR=C:\\temp\\cura-build-environment
 ARG CURA_ARCUS_BRANCH_OR_TAG=master
 ARG CURA_SAVITAR_BRANCH_OR_TAG=master
 
-# Set up environment variables.
-#RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
-#    "%CURA_BUILD_ENV_WORK_DIR%"\\src\\docker\\windows\\setup_envvars.ps1
+# Add the current sources to the container
+ADD . "${CURA_BUILD_ENV_WORK_DIR}"/src
 
 # Build the build environment.
 RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
     cmd /c "%CURA_BUILD_ENV_WORK_DIR%"\\src\\docker\\windows\\build_vs2019.cmd
 
 # Cleanup
+# Note: Using powershell's or cmd's native remove commands fails to remove
+# a file that resides within the BoostHeaders sources, due to a long path name.
+# Using rm.exe seems to work fine and remove everything from the temp directory.
 RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
     & 'C:\Program Files\Git\usr\bin\rm.exe' -r -f "%CURA_BUILD_ENV_WORK_DIR%"
