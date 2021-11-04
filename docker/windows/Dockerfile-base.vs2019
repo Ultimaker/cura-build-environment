@@ -7,7 +7,7 @@ SHELL ["cmd", "/S", "/C"]
 LABEL windows_version="1809" \
       architecture="amd64" \
       vs_version="2019" \
-      windows_sdk_version="8.1" \
+      windows_sdk_version="10" \
       python_version="3.8.10" \
       qt_version="5.15.2"
 
@@ -59,6 +59,10 @@ RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
 # Set up environment variables.
 RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
     "%CURA_BUILD_ENV_WORK_DIR%"\\src\\docker\\windows\\setup_envvars.ps1
+    
+# Cleanup
+RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
+    Remove-Item -Recurse -Force "%CURA_BUILD_ENV_WORK_DIR%"
 
 # Define the entry point for the docker container.
 # This entry point starts the developer command prompt and launches the PowerShell shell.
