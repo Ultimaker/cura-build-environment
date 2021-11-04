@@ -18,4 +18,4 @@ RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
 # a file that resides within the BoostHeaders sources, due to a long path name.
 # Using rm.exe seems to work fine and remove everything from the temp directory.
 RUN powershell.exe -NoLogo -ExecutionPolicy Bypass -Command \
-    & 'C:\Program Files\Git\usr\bin\rm.exe' -r -f "%CURA_BUILD_ENV_WORK_DIR%"
+    "& 'C:\Program Files\Git\usr\bin\rm.exe' -r -f "%CURA_BUILD_ENV_WORK_DIR%""
