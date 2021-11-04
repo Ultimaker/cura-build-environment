@@ -5,6 +5,7 @@ $newPath = "$env:Path"
 $newPath = "$newPath" + ";C:\Program Files (x86)\wixtoolset"
 $newPath = "$newPath" + ";C:\Program Files (x86)\NSIS"
 $newPath = "$newPath" + ";C:\Program Files (x86)\Poedit\GettextTools\bin"
+$newPath = "$newPath" + ";C:\mingw-w64-x86_64-8.4.0-7.0.0-r1\mingw64\bin"
 [Environment]::SetEnvironmentVariable("Path", "$newPath", [System.EnvironmentVariableTarget]::Machine)
 
 # Set Cura build environment variables.
