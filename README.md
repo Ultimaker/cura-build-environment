@@ -5,7 +5,7 @@ This is a CMake-based project that will build the dependencies for Cura.
 
 It will download and build the following projects:
 
-- Python (Version 3.5)
+- Python
 - Qt (Not on Windows)
 - Sip
 - PyQt (Installs Wheel on Windows)
