@@ -163,17 +163,33 @@ scipy==1.6.3; \
     --hash=sha256:a75b014d3294fce26852a9d04ea27b5671d86736beb34acdfc05859246260707
 
 # On Windows we us a custom compiled Shapely wheel. TODO: Check why
-https://software.ultimaker.com/cura-binary-dependencies/Shapely-1.7.1-cp38-cp38-win_amd64.whl; \
+https://software.ultimaker.com/cura-binary-dependencies/Shapely-1.8.0-cp38-cp38-win_amd64.whl; \
    sys_platform=="win32" \
-    --hash=sha256:c0f2818be225afc0249525e7d31dc15bd77a28c0eb5717f2d87305c59c2855f2
+    --hash=sha256:ba01bcba02bfd3bc152c65c08cf57e8dbd39b8012de36db839dae9c073de19d0
 
-Shapely[vectorized]==1.7.1; \
+shapely==1.8.0; \
     sys_platform!="win32" \
-    --hash=sha256:052eb5b9ba756808a7825e8a8020fb146ec489dd5c919e7d139014775411e688 \
-    --hash=sha256:1641724c1055459a7e2b8bbe47ba25bdc89554582e62aec23cb3f3ca25f9b129 \
-    --hash=sha256:6593026cd3f5daaea12bcc51ae5c979318070fefee210e7990cb8ac2364e79a1 \
-    --hash=sha256:90a3e2ae0d6d7d50ff2370ba168fbd416a53e7d8448410758c5d6a5920646c1d \
-    --hash=sha256:a3774516c8a83abfd1ddffb8b6ec1b0935d7fe6ea0ff5c31a18bfdae567b4eba
+    --hash=sha256:1c5632cedea6d815b61eb4c264da1c3f24a8ce2ceba2f74e30fba340ca230563 \
+    --hash=sha256:d4ce1f18a0c9bb6b483c73bd7a0eb3a5e90676bcc29b9c27120236e662195c9d \
+    --hash=sha256:4e8cdffeec6d0c47ed1eb215ec4e80c024ac05be6ded982061c1e1188034f22f \
+    --hash=sha256:83d10f8b47a7568fc90063f72da62cda201dc92ecadf80cc00c015babc48e11f \
+    --hash=sha256:78b3a46dadd47c27e658d5e8d9006b4b1eb9b7ab947b450059225dcee799a18f \
+    --hash=sha256:0e640d6da59172d679270f0dfd88128b6ae7c57df864a030dd858ff924c307fc \
+    --hash=sha256:68bdf463f7a609fbed42bbded18fa74c82a5741251984a5597d070060f4286f4 \
+    --hash=sha256:2c3cc87e66cbffd00ce0457c03969b64935752824bf43a1cd61f21cf606997d6 \
+    --hash=sha256:bd84d993a0e8e07f5ebb4c67794d5392fdd23ce59a7ccc121900f2080f57989a \
+    --hash=sha256:796b15a483ac37c2dc757654186d0e064a42fb6f43cb9d1ff65d81cd0c92a84e \
+    --hash=sha256:622f62d2b2da81dd40841a56db0f78bcf9f9af7a83c7d5f5dc9bcb234aa650ba \
+    --hash=sha256:26b43b69dfeb8a8cb27aacf5597134baf12337845c2bacb01809540c20d3d904 \
+    --hash=sha256:cfb9d72d255af1a484e3859f4c9bb737950faf1d16c21d2b949ffc4ba5f46147 \
+    --hash=sha256:f304243b1f4d7bca9b3c9fdeec6565171e1b611fb4a3d6c93efc870c8a75958c \
+    --hash=sha256:8917a91430126165cfa4bc2b4cf168121e37ff0c8657134e7398c597ca1fe934 \
+    --hash=sha256:19b54cd840883fd71cce98fd94916d1731eed8a32c115eb082b3ed24e631be02 \
+    --hash=sha256:13cbb959863cec32d48e2cffdc4bb81828bc3b0fa4256c9b2b32edac5021a0e4 \
+    --hash=sha256:7e1aebf4f1b2fbef40152fd531216387fcf6fe4ff2d777268381979b63c7c779 \
+    --hash=sha256:83145eda2e582c2046d1ecc6a0d7dbfe97f492434311124f65ea60f4e87a6b65 \
+    --hash=sha256:9b54ebd8fa4b78320f6d87032fe91363c7c1bf0f8d4a30eb93bca6413f787fd5 \
+    --hash=sha256:f5307ee14ba4199f8bbcf6532ca33064661c1433960c432c84f0daa73b47ef9c
 
 lxml==4.6.3; \
     sys_platform=="linux" \
