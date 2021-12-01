@@ -6,7 +6,7 @@ if ($gitRef -eq "master") {
 }
 
 $imageTag1 = "$env:DOCKER_IMAGE_NAME" + ":" + "$tag"
-docker build -t $imageTag1 -f docker/windows/Dockerfile-build.vs2015 .
+docker build -t $imageTag1 -f docker/windows/Dockerfile-build.vs2019 .
 if ($extraTag) {
   docker tag $imageTag1 $extraTag
 }
