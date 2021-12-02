@@ -28,7 +28,7 @@ jobs:
         DOCKER_IO: docker.io
         DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-      run: .github/workflows/build.sh
+      run: .github/workflows/build-linux.sh
 
   build-windows:
     runs-on: [self-hosted, Windows]
@@ -46,3 +46,13 @@ jobs:
         DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
       run: .github/workflows/build.ps1
+
+  build-macOS:
+    runs-on: [self-hosted, macos, Catalina]
+    steps:
+    - name: Checkout master
+      uses: actions/checkout@master
+      with:
+        fetch-depth: 1
+    - name: Build the environment on macOS
+      run: .github/workflows/build-macOS.sh
