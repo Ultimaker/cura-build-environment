@@ -5,6 +5,7 @@ on:
     branches:
     - master
     - WIP
+    - CURA-8629*
     pathes:
     - 'cmake/**'
     - 'docker/**'
