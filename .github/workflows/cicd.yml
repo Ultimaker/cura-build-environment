@@ -27,8 +27,8 @@ jobs:
         DOCKER_IMAGE_LATEST_TAG: latest
         GIT_REF: ${{ github.ref }}
         DOCKER_IO: docker.io
-        DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+        DOCKER_USER: ${{ secrets.DOCKERUSERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKERPASSWORD }}
       run: .github/workflows/build-linux.sh
 
   build-windows:
@@ -44,8 +44,8 @@ jobs:
         DOCKER_IMAGE_LATEST_TAG: win1809-latest
         GIT_REF: ${{ github.ref }}
         DOCKER_IO: docker.io
-        DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+        DOCKER_USER: ${{ secrets.DOCKERUSERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKERPASSWORD }}
       run: .github/workflows/build.ps1
 
   build-macOS:
