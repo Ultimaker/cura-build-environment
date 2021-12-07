@@ -3,7 +3,7 @@
 # Set the necessary variables
 now=$(date '+%Y%m%d_%H%M%S')
 export CURABUILDENVIRONMENT_NAME="master-${now}"
-export CURABUILDENVIRONMENT_BRANCH_OR_TAG="CURA-8629_finalize_github_runners"
+export CURABUILDENVIRONMENT_BRANCH_OR_TAG="master"
 export ARCUS_BRANCH_OR_TAG="master"
 export SAVITAR_BRANCH_OR_TAG="master"
 
