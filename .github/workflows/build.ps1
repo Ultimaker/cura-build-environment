@@ -8,11 +8,11 @@ if ($gitRef -eq "master") {
 $imageTag1 = "$env:DOCKER_IMAGE_NAME" + ":" + "$tag"
 docker build -t $imageTag1 -f docker/windows/Dockerfile-build.vs2019 .
 if ($extraTag) {
-  docker tag $imageTag1 $extraTag
+  docker tag $imageTag1 "$env:DOCKER_IMAGE_NAME" + ":" + "$extraTag"
 }
 
 $ErrorActionPreference = "Continue"
-docker login -u $env:DOCKER_USER -p $env:DOCKER_PASSWORD $env:DOCKER_IO
+echo "$env:DOCKER_PASSWORD" | docker login -u "$env:DOCKER_USER" --password-stdin $env:DOCKER_IO
 docker push "$imageTag1"
 if ($extraTag) {
   docker push "$extraTag"

@@ -6,7 +6,6 @@ if(NOT BUILD_OS_WINDOWS)
     # TODO: PyPi is already in out circle of trust why not use the same approach for the Linux and MacOS
     if(BUILD_OS_OSX)
         set(pyqt_command
-            "DYLD_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/lib"
             ${Python3_EXECUTABLE} configure.py
             --sysroot ${CMAKE_INSTALL_PREFIX}
             --qmake ${CMAKE_INSTALL_PREFIX}/bin/qmake
