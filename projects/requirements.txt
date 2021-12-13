@@ -191,7 +191,7 @@ shapely==1.8.0; \
     --hash=sha256:9b54ebd8fa4b78320f6d87032fe91363c7c1bf0f8d4a30eb93bca6413f787fd5 \
     --hash=sha256:f5307ee14ba4199f8bbcf6532ca33064661c1433960c432c84f0daa73b47ef9c
 
-lxml==4.6.3; \
+lxml==4.6.5; \
     sys_platform=="linux" \
     --hash=sha256:1b38116b6e628118dea5b2186ee6820ab138dbb1e24a13e478490c7db2f326ae
 
