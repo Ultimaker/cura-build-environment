@@ -3,7 +3,7 @@
 
 # Ensure we're linking to our previously built Python version.
 if(BUILD_OS_LINUX)
-    set(pylib_cmake_command PATH=${CMAKE_INSTALL_PREFIX}/bin/:$ENV{PATH} LD_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/lib/ PYTHONPATH=${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages/:${CMAKE_INSTALL_PREFIX}/lib/python3.8:${CMAKE_INSTALL_PREFIX}/lib/python3.8/site-packages/ ${CMAKE_COMMAND})
+    set(pylib_cmake_command PATH=${CMAKE_INSTALL_PREFIX}/bin/:$ENV{PATH} LD_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/lib/ PYTHONPATH=${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages/:${CMAKE_INSTALL_PREFIX}/lib/python3.10:${CMAKE_INSTALL_PREFIX}/lib/python3.10/site-packages/ ${CMAKE_COMMAND})
 else()
     set(pylib_cmake_command ${CMAKE_COMMAND})
 endif()
