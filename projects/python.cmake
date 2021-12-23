@@ -1,4 +1,3 @@
-set(python_patch_command "")
 set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --enable-ipv6 --without-pymalloc )
 set(python_build_command make)
 set(python_install_command make install)
@@ -14,25 +13,8 @@ if(BUILD_OS_WINDOWS)
     # in CMake via a command seems to always result in "/p:PlatformToolset v140".
     set(python_build_command cmd /c "${CMAKE_SOURCE_DIR}/projects/build_python_windows.bat" "<SOURCE_DIR>/PCbuild/build.bat" --no-tkinter -c Release -e -M -p x64)
     set(python_install_command cmd /c "${CMAKE_SOURCE_DIR}/projects/install_python_windows.bat amd64 <SOURCE_DIR> ${CMAKE_INSTALL_PREFIX}")
+endif()
 
-    # The python3.8 build configuration still refers to libffi-7.lib instead of libffi-8.lib which is in the cpython-bin-deps repository it downloads.
-    # We patch their .props file to make it refer to libffi-8.lib.
-    set(python_patch_command ${CMAKE_COMMAND} -E copy "${CMAKE_SOURCE_DIR}/projects/python_libffi_patch.props" "${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/libffi.props")
-
-    ExternalProject_Add(Python
-        URL https://www.python.org/ftp/python/3.10.0/Python-3.10.0.tgz
-        URL_HASH SHA256=c4e0cbad57c90690cb813fb4663ef670b4d0f587d8171e2c42bd4c9245bd2758
-        PATCH_COMMAND ${python_patch_command}
-        # The python3.8 build configuration still downloads and installs OpenSSL v1.1.1k from the cpython-bin-deps repository.
-        # Thus, we have to force it to use OpenSSL v1.1.1l, as it fixes several security risks
-        COMMAND powershell -Command "(gc ${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/get_externals.bat) | Foreach-Object { $_ -replace 'openssl-1.1.1k', 'openssl-1.1.1l' -replace 'openssl-bin-1.1.1k-1', 'openssl-bin-1.1.1l' }  | Out-File -encoding ASCII ${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/get_externals.bat"
-        COMMAND powershell -Command "(gc ${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/python.props) | Foreach-Object { $_ -replace 'openssl-1.1.1k', 'openssl-1.1.1l' -replace 'openssl-bin-1.1.1k-1', 'openssl-bin-1.1.1l' }  | Out-File -encoding ASCII ${CMAKE_CURRENT_BINARY_DIR}/Python-prefix/src/Python/PCbuild/python.props"
-        CONFIGURE_COMMAND "${python_configure_command}"
-        BUILD_COMMAND ${python_build_command}
-        INSTALL_COMMAND ${python_install_command}
-        BUILD_IN_SOURCE 1
-    )
-else()
 if(BUILD_OS_OSX)
     set(python_configure_command ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX})
 endif()
@@ -50,7 +32,6 @@ ExternalProject_Add(Python
     INSTALL_COMMAND ${python_install_command}
     BUILD_IN_SOURCE 1
 )
-endif()
 
 # Only build geos on Linux and macOS
 # cryptography requires cffi, which requires libffi
