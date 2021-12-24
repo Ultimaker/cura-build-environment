@@ -1,4 +1,8 @@
+#Copyright (c) 2021 Ultimaker B.V.
+#cura-build-environment is released under the terms of the AGPLv3 or higher.
+
 set(extra_cmake_args "")
+set(pylib_cmake_command ${CMAKE_COMMAND})
 if(BUILD_OS_WINDOWS)
     set(extra_cmake_args
         -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/libs
@@ -12,8 +16,9 @@ if(BUILD_OS_WINDOWS)
         -DCMAKE_STATIC_LINKER_FLAGS=/LIBPATH:"${CMAKE_INSTALL_PREFIX}/libs" /machine:x64
         -DCMAKE_STATIC_LINKER_FLAGS_RELEASE=/LIBPATH:"${CMAKE_INSTALL_PREFIX}/libs" /machine:x64
     )
-else()
-  if(BUILD_OS_OSX)
+endif()
+
+if(BUILD_OS_OSX)
     if(CMAKE_OSX_DEPLOYMENT_TARGET)
         list(APPEND extra_cmake_args
             -DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
@@ -24,13 +29,17 @@ else()
             -DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}
         )
     endif()
-  endif()
+endif()
+
+if(BUILD_OS_LINUX)
+    set(pylib_cmake_command PATH=${CMAKE_INSTALL_PREFIX}/bin/:$ENV{PATH} LD_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/lib/ PYTHONPATH=${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages/:${CMAKE_INSTALL_PREFIX}/lib/python3.10:${CMAKE_INSTALL_PREFIX}/lib/python3.10/site-packages ${CMAKE_COMMAND})
 endif()
 
 ExternalProject_Add(Arcus
     GIT_REPOSITORY https://github.com/ultimaker/libArcus.git
     GIT_TAG origin/${CURA_ARCUS_BRANCH_OR_TAG}
     GIT_SHALLOW 1
+    CMAKE_COMMAND ${pylib_cmake_command}
     CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
                -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
                -DCMAKE_PREFIX_PATH=${CMAKE_INSTALL_PREFIX}
@@ -49,6 +58,7 @@ if(BUILD_OS_WINDOWS)
         GIT_TAG origin/${CURA_ARCUS_BRANCH_OR_TAG}
         GIT_SHALLOW 1
         CMAKE_GENERATOR "MinGW Makefiles"
+        CMAKE_COMMAND ${pylib_cmake_command}
         CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
                    -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
                    -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/lib-mingw
