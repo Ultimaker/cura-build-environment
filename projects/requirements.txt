@@ -175,17 +175,8 @@ shapely==1.8.0; \
     --hash=sha256:9b54ebd8fa4b78320f6d87032fe91363c7c1bf0f8d4a30eb93bca6413f787fd5 \
     --hash=sha256:f5307ee14ba4199f8bbcf6532ca33064661c1433960c432c84f0daa73b47ef9c
 
-lxml==4.6.3; \
-    sys_platform=="linux" \
-    --hash=sha256:1b38116b6e628118dea5b2186ee6820ab138dbb1e24a13e478490c7db2f326ae
-
-https://software.ultimaker.com/cura-binary-dependencies/lxml-4.6.3-cp38-cp38-macosx_10_13_x86_64.whl; \
-    sys_platform=="darwin" \
-    --hash=sha256:bccacaba41deb4a3f099cbe63b58cdabcd77fe0c24b241b51c3ae1f82337c4eb
-
-https://software.ultimaker.com/cura-binary-dependencies/lxml-4.6.3-cp38-cp38-win_amd64.whl; \
-    sys_platform=="win32" \
-    --hash=sha256:0e6ec5bf47388c9fb490f3b75b6c8e966a3f221ef5c431c48db42aa6f7dbe587
+lxml==4.7.1; \
+    --hash=sha256:a1613838aa6b89af4ba10a0f3a972836128801ed008078f8c1244e65958f1b24
 
 # Windows specific requirements
 pywin32==301; \
