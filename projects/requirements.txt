@@ -122,7 +122,7 @@ ifaddr==0.1.7 \
 # We cache this at software.ultimaker.com since this website tends to remove older versions rather quickly.
 https://software.ultimaker.com/cura-binary-dependencies/numpy-1.21.5+mkl-cp310-cp310-win_amd64.whl; \
     sys_platform=="win32" \
-    --hash=sha256:679bf340353b286bb93b7e53ef73c32abbba040f34e15f16b02772807f7613fa
+    --hash=sha256:fbd5d5126b730a151134d21994a951fe28df06464e0c9a2cba2a4132e542a5fc
 
 numpy==1.21.5; \
     sys_platform!="win32" \
@@ -145,8 +145,8 @@ scipy==1.7.3; \
     --hash=sha256:ab5875facfdef77e0a47d5fd39ea178b58e60e454a4c85aa1e52fcb80db7babf
 
 shapely==1.8.0; \
-    --hash=sha256:1c5632cedea6d815b61eb4c264da1c3f24a8ce2ceba2f74e30fba340ca230563
-    --hash=sha256:d4ce1f18a0c9bb6b483c73bd7a0eb3a5e90676bcc29b9c27120236e662195c9d
+    --hash=sha256:1c5632cedea6d815b61eb4c264da1c3f24a8ce2ceba2f74e30fba340ca230563 \
+    --hash=sha256:d4ce1f18a0c9bb6b483c73bd7a0eb3a5e90676bcc29b9c27120236e662195c9d \
     --hash=sha256:f5307ee14ba4199f8bbcf6532ca33064661c1433960c432c84f0daa73b47ef9c
 
 lxml==4.7.1; \
