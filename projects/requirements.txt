@@ -135,7 +135,7 @@ numpy==1.20.2; \
     --hash=sha256:e8e4fbbb7e7634f263c5b0150a629342cc19b47c5eba8d1cd4363ab3455ab576 \
     --hash=sha256:edb1f041a9146dcf02cd7df7187db46ab524b9af2515f392f337c7cbbf5b52cd
 
-# Use Scipy wheel that is compiled with Intel optimisations (MKL). Obtained from https://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy
+# Use Scipy wheel that is compiled with Intel optimizations (MKL). Obtained from https://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy
 # We cache this at software.ultimaker.com since this website tends to remove older versions rather quickly.
 https://software.ultimaker.com/cura-binary-dependencies/scipy-1.7.3-cp310-cp310-win_amd64.whl; \
    sys_platform=="win32" \
@@ -146,33 +146,9 @@ scipy==1.7.3; \
     sys_platform!="win32" \
     --hash=sha256:ab5875facfdef77e0a47d5fd39ea178b58e60e454a4c85aa1e52fcb80db7babf
 
-# On Windows we us a custom compiled Shapely wheel. TODO: Check why
-https://software.ultimaker.com/cura-binary-dependencies/Shapely-1.8.0-cp38-cp38-win_amd64.whl; \
-   sys_platform=="win32" \
-    --hash=sha256:ba01bcba02bfd3bc152c65c08cf57e8dbd39b8012de36db839dae9c073de19d0
-
 shapely==1.8.0; \
-    sys_platform!="win32" \
-    --hash=sha256:1c5632cedea6d815b61eb4c264da1c3f24a8ce2ceba2f74e30fba340ca230563 \
-    --hash=sha256:d4ce1f18a0c9bb6b483c73bd7a0eb3a5e90676bcc29b9c27120236e662195c9d \
-    --hash=sha256:4e8cdffeec6d0c47ed1eb215ec4e80c024ac05be6ded982061c1e1188034f22f \
-    --hash=sha256:83d10f8b47a7568fc90063f72da62cda201dc92ecadf80cc00c015babc48e11f \
-    --hash=sha256:78b3a46dadd47c27e658d5e8d9006b4b1eb9b7ab947b450059225dcee799a18f \
-    --hash=sha256:0e640d6da59172d679270f0dfd88128b6ae7c57df864a030dd858ff924c307fc \
-    --hash=sha256:68bdf463f7a609fbed42bbded18fa74c82a5741251984a5597d070060f4286f4 \
-    --hash=sha256:2c3cc87e66cbffd00ce0457c03969b64935752824bf43a1cd61f21cf606997d6 \
-    --hash=sha256:bd84d993a0e8e07f5ebb4c67794d5392fdd23ce59a7ccc121900f2080f57989a \
-    --hash=sha256:796b15a483ac37c2dc757654186d0e064a42fb6f43cb9d1ff65d81cd0c92a84e \
-    --hash=sha256:622f62d2b2da81dd40841a56db0f78bcf9f9af7a83c7d5f5dc9bcb234aa650ba \
-    --hash=sha256:26b43b69dfeb8a8cb27aacf5597134baf12337845c2bacb01809540c20d3d904 \
-    --hash=sha256:cfb9d72d255af1a484e3859f4c9bb737950faf1d16c21d2b949ffc4ba5f46147 \
-    --hash=sha256:f304243b1f4d7bca9b3c9fdeec6565171e1b611fb4a3d6c93efc870c8a75958c \
-    --hash=sha256:8917a91430126165cfa4bc2b4cf168121e37ff0c8657134e7398c597ca1fe934 \
-    --hash=sha256:19b54cd840883fd71cce98fd94916d1731eed8a32c115eb082b3ed24e631be02 \
-    --hash=sha256:13cbb959863cec32d48e2cffdc4bb81828bc3b0fa4256c9b2b32edac5021a0e4 \
-    --hash=sha256:7e1aebf4f1b2fbef40152fd531216387fcf6fe4ff2d777268381979b63c7c779 \
-    --hash=sha256:83145eda2e582c2046d1ecc6a0d7dbfe97f492434311124f65ea60f4e87a6b65 \
-    --hash=sha256:9b54ebd8fa4b78320f6d87032fe91363c7c1bf0f8d4a30eb93bca6413f787fd5 \
+    --hash=sha256:1c5632cedea6d815b61eb4c264da1c3f24a8ce2ceba2f74e30fba340ca230563
+    --hash=sha256:d4ce1f18a0c9bb6b483c73bd7a0eb3a5e90676bcc29b9c27120236e662195c9d
     --hash=sha256:f5307ee14ba4199f8bbcf6532ca33064661c1433960c432c84f0daa73b47ef9c
 
 lxml==4.7.1; \
