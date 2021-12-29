@@ -3,10 +3,10 @@
 # make sure you use the verbose flag and personally inspect the hosts that were used when generating
 # When updating a major Python version these need to be updates as well
 
-cx-Freeze==6.5.3 \
-    --hash=sha256:7e2592fe1b65bd45c729934b391579fde5aed6b4c9e3e4d990738fc7fec718ea \
-    --hash=sha256:d3bb71349dace28e545eb1e4549255f0dd915f925f8505b1a342b3d2fbd4734b \
-    --hash=sha256:e0d03cabcdf9b9c21354807ed9f06fa9481a8fd5a0838968a830f01a70820ff1
+cx-Freeze==6.9 \
+    --hash=sha256:776d4fb68a4831691acbd3c374362b9b48ce2e568514a73c3d4cb14d5dcf1470 \
+    --hash=sha256:243f36d35a034a409cd6247d8cb5d1fbfd7374e3e668e813d0811f64d6bd5ed3 \
+    --hash=sha256:673aa3199af2ef87fc03a43a30e5d78b27ced2cedde925da89c55b5657da267b
 appdirs==1.4.3 \
     --hash=sha256:9e5896d1372858f8dd3344faf4e5014d21849c756c8d5701f78f8a103b372d92 \
     --hash=sha256:d8b24664561d0d34ddfaec54636d502d7cea6e29c3eaf68f3df6180863e2166e
