@@ -58,7 +58,9 @@ RUN yum install -y \
     xcb-util-renderutil-devel \
     xcb-util-wm-devel \
     libxkbcommon-devel \
-    libxkbcommon-x11-devel
+    libxkbcommon-x11-devel \
+    libxml2-devel \
+    libxslt-devel
 
 # Set up the build environment
 RUN mkdir -p "${CURA_BUILD_ENV_WORK_DIR}" "${CURA_BUILD_ENV_PATH}"
