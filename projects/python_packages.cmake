@@ -1,5 +1,5 @@
 add_custom_target(PythonPackagesGeneral ALL
-    COMMAND ${Python3_EXECUTABLE} -m pip install --global-option="-L${CMAKE_INSTALL_PREFIX}" --require-hashes -r  ${CMAKE_SOURCE_DIR}/projects/requirements.txt
+    COMMAND ${Python3_EXECUTABLE} -m pip install --prefix="${CMAKE_INSTALL_PREFIX}" --require-hashes -r  ${CMAKE_SOURCE_DIR}/projects/requirements.txt
     COMMENT "Install Python packages"
     DEPENDS Python
 )
