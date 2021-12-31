@@ -33,12 +33,13 @@ ExternalProject_Add(Python
     BUILD_IN_SOURCE 1
 )
 
-# Only build geos on Linux and macOS
+# CPython has a number of dependencies (OpenSSL, bzip, xz, zlib, sqlite)
 # cryptography requires cffi, which requires libffi
+# Numpy needs OpenBLAS.
 if(BUILD_OS_LINUX)
-    SetProjectDependencies(TARGET Python DEPENDS OpenBLAS Geos OpenSSL bzip2-static bzip2-shared xz zlib sqlite3 libffi)
+    SetProjectDependencies(TARGET Python DEPENDS OpenBLAS OpenSSL bzip2-static bzip2-shared xz zlib sqlite3 libffi)
 elseif(BUILD_OS_OSX)
-    SetProjectDependencies(TARGET Python DEPENDS OpenBLAS Geos OpenSSL xz zlib sqlite3 libffi)
+    SetProjectDependencies(TARGET Python DEPENDS OpenBLAS OpenSSL xz zlib sqlite3 libffi)
 else()
     SetProjectDependencies(TARGET Python DEPENDS OpenBLAS)
 endif()
