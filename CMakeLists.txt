@@ -62,7 +62,7 @@ if(BUILD_OS_OSX)
     add_custom_command(
         TARGET projects POST_BUILD
         COMMAND /Library/Developer/CommandLineTools/usr/bin/install_name_tool -change @rpath/libgeos.3.7.3.dylib "${CMAKE_INSTALL_PREFIX}/lib/libgeos.3.7.3.dylib" "${CMAKE_INSTALL_PREFIX}/lib/libgeos_c.1.dylib"
-        COMMAND /Library/Developer/CommandLineTools/usr/bin/install_name_tool -change @rpath/libnlopt.0.dylib "${CMAKE_INSTALL_PREFIX}/lib/libnlopt.0.dylib" "${CMAKE_INSTALL_PREFIX}/lib/python3.8/site-packages/pynest2d.so"
+        COMMAND /Library/Developer/CommandLineTools/usr/bin/install_name_tool -change @rpath/libnlopt.0.dylib "${CMAKE_INSTALL_PREFIX}/lib/libnlopt.0.dylib" "${CMAKE_INSTALL_PREFIX}/lib/python3.10/site-packages/pynest2d.so"
         COMMENT "Changing the RPATH of Geos and pynest2d"
     )
 endif()
