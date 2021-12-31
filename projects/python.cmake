@@ -50,6 +50,6 @@ ExternalProject_Add_Step(Python ensurepip
 )
 
 ExternalProject_Add_Step(Python baserequirements
-    COMMAND ${Python3_EXECUTABLE} -m pip install --require-hashes -r  ${CMAKE_SOURCE_DIR}/projects/base_requirements.txt
+    COMMAND ${Python3_EXECUTABLE} -m pip install --require-hashes -r ${CMAKE_SOURCE_DIR}/projects/base_requirements.txt
     DEPENDEES ensurepip
 )
