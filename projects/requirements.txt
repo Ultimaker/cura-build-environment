@@ -156,9 +156,9 @@ lxml==4.7.1; \
     --hash=sha256:a1613838aa6b89af4ba10a0f3a972836128801ed008078f8c1244e65958f1b24
 
 # Windows specific requirements
-pywin32==301; \
+pywin32==303; \
     sys_platform=="win32" \
-    --hash=sha256:8c9d33968aa7fcddf44e47750e18f3d034c3e443a707688a008a2e52bbef7e96
+    --hash=sha256:51cb52c5ec6709f96c3f26e7795b0bf169ee0d8395b2c1d7eb2c029a5008ed51
 pywin32-ctypes==0.2.0; \
     sys_platform=="win32" \
     --hash=sha256:24ffc3b341d457d48e8922352130cf2644024a4ff09762a2261fd34c36ee5942 \
