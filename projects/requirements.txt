@@ -7,8 +7,6 @@ cx-Freeze==6.9 \
     --hash=sha256:776d4fb68a4831691acbd3c374362b9b48ce2e568514a73c3d4cb14d5dcf1470 \
     --hash=sha256:243f36d35a034a409cd6247d8cb5d1fbfd7374e3e668e813d0811f64d6bd5ed3 \
     --hash=sha256:673aa3199af2ef87fc03a43a30e5d78b27ced2cedde925da89c55b5657da267b
-cx-Logging==3.0 \
-    --hash=sha256:ba8a7465facf7b98d8f494030fb481a2e8aeee29dc191e10383bb54ed42bdb34
 appdirs==1.4.3 \
     --hash=sha256:9e5896d1372858f8dd3344faf4e5014d21849c756c8d5701f78f8a103b372d92 \
     --hash=sha256:d8b24664561d0d34ddfaec54636d502d7cea6e29c3eaf68f3df6180863e2166e
@@ -179,6 +177,9 @@ pywin32-ctypes==0.2.0; \
 comtypes==1.1.7; \
     sys_platform=="win32" \
     --hash=sha256:c9d59f57d559613940f22da54d70add066faa23b4fa9b5cd95facdc501a63b0b
+cx-Logging==3.0 \
+    sys_platform=="win32" \
+    --hash=sha256:ba8a7465facf7b98d8f494030fb481a2e8aeee29dc191e10383bb54ed42bdb34
 PyQt5==5.15.6; \
     sys_platform=="win32" \
     --hash=sha256:80343bcab95ffba619f2ed2467fd828ffeb0a251ad7225be5fc06dcc333af452 \
