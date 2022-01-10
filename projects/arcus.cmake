@@ -31,10 +31,6 @@ if(BUILD_OS_OSX)
     endif()
 endif()
 
-if(BUILD_OS_LINUX)
-    set(pylib_cmake_command PATH=${CMAKE_INSTALL_PREFIX}/bin/:$ENV{PATH} LD_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/lib/ PYTHONPATH=${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages/:${CMAKE_INSTALL_PREFIX}/lib/python3.10:${CMAKE_INSTALL_PREFIX}/lib/python3.10/site-packages ${CMAKE_COMMAND})
-endif()
-
 ExternalProject_Add(Arcus
     GIT_REPOSITORY https://github.com/ultimaker/libArcus.git
     GIT_TAG origin/${CURA_ARCUS_BRANCH_OR_TAG}
@@ -73,5 +69,3 @@ if(BUILD_OS_WINDOWS)
 
     SetProjectDependencies(TARGET Arcus-MinGW DEPENDS Sip Protobuf-MinGW Arcus)
 endif()
-
-

@@ -1,8 +1,4 @@
-if(BUILD_OS_LINUX)
-    set(savitar_cmake_command PATH=${CMAKE_INSTALL_PREFIX}/bin/:$ENV{PATH} LD_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/lib/ PYTHONPATH=${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages/:${CMAKE_INSTALL_PREFIX}/lib/python3.10:${CMAKE_INSTALL_PREFIX}/lib/python3.10/site-packages/ ${CMAKE_COMMAND})
-else()
-    set(savitar_cmake_command ${CMAKE_COMMAND})
-endif()
+set(savitar_cmake_command ${CMAKE_COMMAND})
 
 set(extra_cmake_args "")
 if(BUILD_OS_WINDOWS)
