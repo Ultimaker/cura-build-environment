@@ -136,17 +136,14 @@ numpy==1.21.5; \
     --hash=sha256:dc4b2fb01f1b4ddbe2453468ea0719f4dbb1f5caa712c8b21bb3dd1480cd30d9 \
     --hash=sha256:6a5928bc6241264dce5ed509e66f33676fc97f464e7a919edc672fb5532221ee
 
-# Use Scipy wheel that is compiled with Intel optimizations (MKL). Obtained from https://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy
-# We cache this at software.ultimaker.com since this website tends to remove older versions rather quickly.
-https://software.ultimaker.com/cura-binary-dependencies/scipy-1.7.3-cp310-cp310-win_amd64.whl; \
-   sys_platform=="win32" \
-    --hash=sha256:c9eb4ba37940df83c23358a357ff933171cd93a7e5541bc4419f8ae0c75d7611
-
-# Pypi doesn't currently provide wheels for CPython3.10 of this version of Scipy. This is just the source distribution.
-scipy==1.7.3; \
-    sys_platform!="win32" \
-    --hash=sha256:f7eaea089345a35130bc9a39b89ec1ff69c208efa97b3f8b25ea5d4c41d88094 \
-    --hash=sha256:173308efba2270dcd61cd45a30dfded6ec0085b4b6eb33b5eb11ab443005e088
+scipy==1.8.0rc2; \
+    --hash=sha256:d73b13eb0452c178f946b4db60b27e400225df02e926609652ed67798054e77d \
+    --hash=sha256:8db99b6c017ab971b04a0781103a31ce745d4f0ac2b7db999523d4a94549ae15 \
+    --hash=sha256:739ee3f6688c96516248f88725bbe1f241f3e0ab708f5eda98e2a9fe5cf38fba \
+    --hash=sha256:aa31ae8d8cf0abba07bc795f75b1aacf46b6136be22eefb4435040386f0f2bec \
+    --hash=sha256:4035b0f70d1bdbfe143005bb1033938529f684c0b93b4a90c2f59bbd88bcd0d3 \
+    --hash=sha256:d6ccda8592a30120ea4c3ab669a10ab6e0c45284df9066b6583165d5092e75a7 \
+    --hash=sha256:94a33efa21cffc5c3f8d416c0c1c79914019b9e3a82b5461176e4dc1c42218ea
 
 pyclipper==1.3.0.post2; \
     --hash=sha256:c096703dc32f2e4700a1f7054e8b58c29fe86212fa7a2c2adecb0102cb639fb2 \
