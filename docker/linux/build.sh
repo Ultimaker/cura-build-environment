@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# This script builds the cura-build-environment with the CentOS 7 base docker image.
+# This script builds the cura-build-environment with the CentOS 8 or Debian Buster base docker image.
 #
 # Usage:
 #   <src_path>
