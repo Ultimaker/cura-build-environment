@@ -3,10 +3,10 @@
 # make sure you use the verbose flag and personally inspect the hosts that were used when generating
 # When updating a major Python version these need to be updates as well
 
-cx-Freeze==6.5.3 \
-    --hash=sha256:7e2592fe1b65bd45c729934b391579fde5aed6b4c9e3e4d990738fc7fec718ea \
-    --hash=sha256:d3bb71349dace28e545eb1e4549255f0dd915f925f8505b1a342b3d2fbd4734b \
-    --hash=sha256:e0d03cabcdf9b9c21354807ed9f06fa9481a8fd5a0838968a830f01a70820ff1
+cx-Freeze==6.9 \
+    --hash=sha256:776d4fb68a4831691acbd3c374362b9b48ce2e568514a73c3d4cb14d5dcf1470 \
+    --hash=sha256:243f36d35a034a409cd6247d8cb5d1fbfd7374e3e668e813d0811f64d6bd5ed3 \
+    --hash=sha256:673aa3199af2ef87fc03a43a30e5d78b27ced2cedde925da89c55b5657da267b
 appdirs==1.4.3 \
     --hash=sha256:9e5896d1372858f8dd3344faf4e5014d21849c756c8d5701f78f8a103b372d92 \
     --hash=sha256:d8b24664561d0d34ddfaec54636d502d7cea6e29c3eaf68f3df6180863e2166e
@@ -31,12 +31,12 @@ numpy-stl==2.10.1 \
     --hash=sha256:f6b529b8a8112dfe456d4f7697c7aee0aca62be5a873879306afe4b26fca963c
 pycollada==0.6 \
     --hash=sha256:fcd6f38fd981e350f9ec754d9671834017accd600e967d6d299a6cfdae5ba4f4
-PyQt5-sip==12.8.1 \
-    --hash=sha256:2f35e82fd7ec1e1f6716e9154721c7594956a4f5bd4f826d8c6a6453833cc2f0 \
-    --hash=sha256:30e944db9abee9cc757aea16906d4198129558533eb7fadbe48c5da2bd18e0bd \
-    --hash=sha256:832fd60a264de4134c2824d393320838f3ab648180c9c357ec58a74524d24507 \
-    --hash=sha256:9312ec47cac4e33c11503bc1cbeeb0bdae619620472f38e2078c5a51020a930f \
-    --hash=sha256:da9c9f1e65b9d09e73bd75befc82961b6b61b5a3b9d0a7c832168e1415f163c6
+PyQt5-sip==12.9.0 \
+    --hash=sha256:d3e4489d7c2b0ece9d203ae66e573939f7f60d4d29e089c9f11daa17cfeaae32 \
+    --hash=sha256:485972daff2fb0311013f471998f8ec8262ea381bded244f9d14edaad5f54271 \
+    --hash=sha256:0fc9aefacf502696710b36cdc9fa2a61487f55ee883dbcf2c2a6477e261546f7 \
+    --hash=sha256:d59af63120d1475b2bf94fe8062610720a9be1e8940ea146c7f42bb449d49067 \
+    --hash=sha256:6d5bca2fc222d58e8093ee8a81a6e3437067bb22bc3f86d06ec8be721e15e90a
 pyserial==3.4 \
     --hash=sha256:6e2d401fdee0eab996cf734e67773a0143b932772ca8b42451440cfed942c627 \
     --hash=sha256:e0770fadba80c31013896c7e6ef703f72e7834965954a78e71a3049488d4d7d8
@@ -52,22 +52,25 @@ requests==2.22.0 \
 sentry-sdk==0.13.5 \
     --hash=sha256:05285942901d38c7ce2498aba50d8e87b361fc603281a5902dda98f3f8c5e145 \
     --hash=sha256:c6b919623e488134a728f16326c6f0bcdab7e3f59e7f4c472a90eea4d6d8fe82
-trimesh==3.2.33 \
-    --hash=sha256:357c1d2051022fb3b03acba51bbbe45ed79350d6b143dc8622636f4d6f811a34
+trimesh==3.9.36 \
+    --hash=sha256:f01e8edab14d1999700c980c21a1546f37417216ad915a53be649d263130181e \
+    --hash=sha256:8ac8bea693b3ee119f11b022fc9b9481c9f1af06cb38bc859bf5d16bbbe49b23
 urllib3==1.25.9 \
     --hash=sha256:3018294ebefce6572a474f0604c2021e33b3fd8006ecd11d62107a5d2a963527 \
     --hash=sha256:88206b0eb87e6d677d424843ac5209e3fb9d0190d0ee169599165ec25e9d9115
 # importlib-metadata
-importlib-metadata==3.7.2 \
-    --hash=sha256:18d5ff601069f98d5d605b6a4b50c18a34811d655c55548adc833e687289acde \
-    --hash=sha256:407d13f55dc6f2a844e62325d18ad7019a436c4bfcaee34cda35f2be6e7c3e34
+importlib-metadata==4.10.0 \
+    --hash=sha256:b7cf7d3fef75f1e4c80a96ca660efbd51473d7e8f39b5ab9210febc7809012a4 \
+    --hash=sha256:92a8b58ce734b2a4494878e0ecf7d79ccd7a128b5fc6014c401e0b61f006f0f6
 zipp==3.5.0 \
     --hash=sha256:957cfda87797e389580cb8b9e3870841ca991e2125350677b2ca83a0e99390a3 \
     --hash=sha256:f5812b1e007e48cff63449a5e9f4e7ebea716b4111f9c4f9a645f91d579bf0c4
 jeepney==0.7.1 \
-    --hash=sha256:1b5a0ea5c0e7b166b2f5895b91a08c14de8915afda4407fb5022a195224958ac
+    --hash=sha256:1b5a0ea5c0e7b166b2f5895b91a08c14de8915afda4407fb5022a195224958ac \
+    --hash=sha256:fa9e232dfa0c498bd0b8a3a73b8d8a31978304dcef0515adc859d4e096f96f4f
 SecretStorage==3.3.1 \
-    --hash=sha256:422d82c36172d88d6a0ed5afdec956514b189ddbfb72fefab0c8a1cee4eaf71f
+    --hash=sha256:422d82c36172d88d6a0ed5afdec956514b189ddbfb72fefab0c8a1cee4eaf71f \
+    --hash=sha256:fd666c51a6bf200643495a04abb261f83229dcb6fd8472ec393df7ffc8b6f195
 keyring==23.0.1 \
     --hash=sha256:045703609dd3fccfcdb27da201684278823b72af515aedec1a8515719a038cb8 \
     --hash=sha256:8f607d7d1cc502c43a932a275a56fe47db50271904513a379d39df1af277ac48
@@ -118,106 +121,65 @@ ifaddr==0.1.7 \
     --hash=sha256:1f9e8a6ca6f16db5a37d3356f07b6e52344f6f9f7e806d618537731669eb1a94 \
     --hash=sha256:d1f603952f0a71c9ab4e705754511e4e03b02565bc4cec7188ad6415ff534cd3
 
-# On Windows we use a custom compile Numpy wheel (MKL)
-https://software.ultimaker.com/cura-binary-dependencies/numpy-1.20.2+mkl-cp38-cp38-win_amd64.whl; \
+# Use Numpy wheel that is compiled with Intel optimizations (MKL). Obtained from https://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy
+# We cache this at software.ultimaker.com since this website tends to remove older versions rather quickly.
+https://software.ultimaker.com/cura-binary-dependencies/numpy-1.21.5+mkl-cp310-cp310-win_amd64.whl; \
     sys_platform=="win32" \
-    --hash=sha256:679bf340353b286bb93b7e53ef73c32abbba040f34e15f16b02772807f7613fa
+    --hash=sha256:fbd5d5126b730a151134d21994a951fe28df06464e0c9a2cba2a4132e542a5fc
 
-numpy==1.20.2; \
+numpy==1.21.5; \
     sys_platform!="win32" \
-    --hash=sha256:2428b109306075d89d21135bdd6b785f132a1f5a3260c371cee1fae427e12727 \
-    --hash=sha256:471c0571d0895c68da309dacee4e95a0811d0a9f9f532a48dc1bea5f3b7ad2b7 \
-    --hash=sha256:6c915ee7dba1071554e70a3664a839fbc033e1d6528199d4621eeaaa5487ccd2 \
-    --hash=sha256:719656636c48be22c23641859ff2419b27b6bdf844b36a2447cb39caceb00935 \
-    --hash=sha256:878922bf5ad7550aa044aa9301d417e2d3ae50f0f577de92051d739ac6096cee \
-    --hash=sha256:aa046527c04688af680217fffac61eec2350ef3f3d7320c07fd33f5c6e7b4d5f \
-    --hash=sha256:c73a7975d77f15f7f68dacfb2bca3d3f479f158313642e8ea9058eea06637931 \
-    --hash=sha256:e8e4fbbb7e7634f263c5b0150a629342cc19b47c5eba8d1cd4363ab3455ab576 \
-    --hash=sha256:edb1f041a9146dcf02cd7df7187db46ab524b9af2515f392f337c7cbbf5b52cd
+    --hash=sha256:301e408a052fdcda5cdcf03021ebafc3c6ea093021bf9d1aa47c54d48bdad166 \
+    --hash=sha256:a7e8f6216f180f3fd4efb73de5d1eaefb5f5a1ee5b645c67333033e39440e63a \
+    --hash=sha256:fc7a7d7b0ed72589fd8b8486b9b42a564f10b8762be8bd4d9df94b807af4a089 \
+    --hash=sha256:58ca1d7c8aef6e996112d0ce873ac9dfa1eaf4a1196b4ff7ff73880a09923ba7 \
+    --hash=sha256:dc4b2fb01f1b4ddbe2453468ea0719f4dbb1f5caa712c8b21bb3dd1480cd30d9 \
+    --hash=sha256:6a5928bc6241264dce5ed509e66f33676fc97f464e7a919edc672fb5532221ee
 
-# We use a custom compiled Scipy wheel on Windows, and a different patch version for each OS. TODO: Check why
-https://software.ultimaker.com/cura-binary-dependencies/scipy-1.6.3-cp38-cp38-win_amd64.whl; \
-   sys_platform=="win32" \
-    --hash=sha256:a5ce19555a42e43e42cae72eb4c108c5833a0499c6b0054d81f2a877eb1d8f9a
+scipy==1.8.0rc2; \
+    --hash=sha256:d73b13eb0452c178f946b4db60b27e400225df02e926609652ed67798054e77d \
+    --hash=sha256:8db99b6c017ab971b04a0781103a31ce745d4f0ac2b7db999523d4a94549ae15 \
+    --hash=sha256:739ee3f6688c96516248f88725bbe1f241f3e0ab708f5eda98e2a9fe5cf38fba \
+    --hash=sha256:aa31ae8d8cf0abba07bc795f75b1aacf46b6136be22eefb4435040386f0f2bec \
+    --hash=sha256:4035b0f70d1bdbfe143005bb1033938529f684c0b93b4a90c2f59bbd88bcd0d3 \
+    --hash=sha256:d6ccda8592a30120ea4c3ab669a10ab6e0c45284df9066b6583165d5092e75a7 \
+    --hash=sha256:94a33efa21cffc5c3f8d416c0c1c79914019b9e3a82b5461176e4dc1c42218ea
 
-scipy==1.6.3; \
-    sys_platform!="win32" \
-    --hash=sha256:2a799714bf1f791fb2650d73222b248d18d53fd40d6af2df2c898db048189606 \
-    --hash=sha256:9e3302149a369697c6aaea18b430b216e3c88f9a61b62869f6104881e5f9ef85 \
-    --hash=sha256:b79104878003487e2b4639a20b9092b02e1bad07fc4cf924b495cf413748a777 \
-    --hash=sha256:44d452850f77e65e25b1eb1ac01e25770323a782bfe3a1a3e43847ad4266d93d \
-    --hash=sha256:b30280fbc1fd8082ac822994a98632111810311a9ece71a0e48f739df3c555a2 \
-    --hash=sha256:10dbcc7de03b8d635a1031cb18fd3eaa997969b64fdf78f99f19ac163a825445 \
-    --hash=sha256:1b21c6e0dc97b1762590b70dee0daddb291271be0580384d39f02c480b78290a \
-    --hash=sha256:1caade0ede6967cc675e235c41451f9fb89ae34319ddf4740194094ab736b88d \
-    --hash=sha256:19aeac1ad3e57338723f4657ac8520f41714804568f2e30bd547d684d72c392e \
-    --hash=sha256:ad7269254de06743fb4768f658753de47d8b54e4672c5ebe8612a007a088bd48 \
-    --hash=sha256:d647757373985207af3343301d89fe738d5a294435a4f2aafb04c13b4388c896 \
-    --hash=sha256:33d1677d46111cfa1c84b87472a0274dde9ef4a7ef2e1f155f012f5f1e995d8f \
-    --hash=sha256:d449d40e830366b4c612692ad19fbebb722b6b847f78a7b701b1e0d6cda3cc13 \
-    --hash=sha256:23995dfcf269ec3735e5a8c80cfceaf384369a47699df111a6246b83a55da582 \
-    --hash=sha256:fdf606341cd798530b05705c87779606fcdfaf768a8129c348ea94441da15b04 \
-    --hash=sha256:f68eb46b86b2c246af99fcaa6f6e37c7a7a413e1084a794990b877f2ff71f7b6 \
-    --hash=sha256:01b38dec7e9f897d4db04f8de4e20f0f5be3feac98468188a0f47a991b796055 \
-    --hash=sha256:3274ce145b5dc416c49c0cf8b6119f787f0965cd35e22058fe1932c09fe15d77 \
-    --hash=sha256:a75b014d3294fce26852a9d04ea27b5671d86736beb34acdfc05859246260707
+pyclipper==1.3.0.post2; \
+    --hash=sha256:c096703dc32f2e4700a1f7054e8b58c29fe86212fa7a2c2adecb0102cb639fb2 \
+    --hash=sha256:a1525051ced1ab74e8d32282299c24c68f3e31cd4b64e0b368720b5da65aad67 \
+    --hash=sha256:5960aaa012cb925ef44ecabe69528809564a3c95ceac874d95c6600f207138d3 \
+    --hash=sha256:d3954330c02a19f7566651a909ec4bc5733ba6c62a228ab26db4a90305748430 \
+    --hash=sha256:5175ee50772a7dcc0feaab19ccf5b979b6066f4753edb330700231cf70d0c918 \
+    --hash=sha256:19a6809d9cbd535d0fe922e9315babb8d70b5c7dcd43e0f89740d09c406b40f8 \
+    --hash=sha256:5c5d50498e335d7f969ca5ad5886e77c40088521dcabab4feb2f93727140251e
 
-# On Windows we us a custom compiled Shapely wheel. TODO: Check why
-https://software.ultimaker.com/cura-binary-dependencies/Shapely-1.8.0-cp38-cp38-win_amd64.whl; \
-   sys_platform=="win32" \
-    --hash=sha256:ba01bcba02bfd3bc152c65c08cf57e8dbd39b8012de36db839dae9c073de19d0
-
-shapely==1.8.0; \
-    sys_platform!="win32" \
-    --hash=sha256:1c5632cedea6d815b61eb4c264da1c3f24a8ce2ceba2f74e30fba340ca230563 \
-    --hash=sha256:d4ce1f18a0c9bb6b483c73bd7a0eb3a5e90676bcc29b9c27120236e662195c9d \
-    --hash=sha256:4e8cdffeec6d0c47ed1eb215ec4e80c024ac05be6ded982061c1e1188034f22f \
-    --hash=sha256:83d10f8b47a7568fc90063f72da62cda201dc92ecadf80cc00c015babc48e11f \
-    --hash=sha256:78b3a46dadd47c27e658d5e8d9006b4b1eb9b7ab947b450059225dcee799a18f \
-    --hash=sha256:0e640d6da59172d679270f0dfd88128b6ae7c57df864a030dd858ff924c307fc \
-    --hash=sha256:68bdf463f7a609fbed42bbded18fa74c82a5741251984a5597d070060f4286f4 \
-    --hash=sha256:2c3cc87e66cbffd00ce0457c03969b64935752824bf43a1cd61f21cf606997d6 \
-    --hash=sha256:bd84d993a0e8e07f5ebb4c67794d5392fdd23ce59a7ccc121900f2080f57989a \
-    --hash=sha256:796b15a483ac37c2dc757654186d0e064a42fb6f43cb9d1ff65d81cd0c92a84e \
-    --hash=sha256:622f62d2b2da81dd40841a56db0f78bcf9f9af7a83c7d5f5dc9bcb234aa650ba \
-    --hash=sha256:26b43b69dfeb8a8cb27aacf5597134baf12337845c2bacb01809540c20d3d904 \
-    --hash=sha256:cfb9d72d255af1a484e3859f4c9bb737950faf1d16c21d2b949ffc4ba5f46147 \
-    --hash=sha256:f304243b1f4d7bca9b3c9fdeec6565171e1b611fb4a3d6c93efc870c8a75958c \
-    --hash=sha256:8917a91430126165cfa4bc2b4cf168121e37ff0c8657134e7398c597ca1fe934 \
-    --hash=sha256:19b54cd840883fd71cce98fd94916d1731eed8a32c115eb082b3ed24e631be02 \
-    --hash=sha256:13cbb959863cec32d48e2cffdc4bb81828bc3b0fa4256c9b2b32edac5021a0e4 \
-    --hash=sha256:7e1aebf4f1b2fbef40152fd531216387fcf6fe4ff2d777268381979b63c7c779 \
-    --hash=sha256:83145eda2e582c2046d1ecc6a0d7dbfe97f492434311124f65ea60f4e87a6b65 \
-    --hash=sha256:9b54ebd8fa4b78320f6d87032fe91363c7c1bf0f8d4a30eb93bca6413f787fd5 \
-    --hash=sha256:f5307ee14ba4199f8bbcf6532ca33064661c1433960c432c84f0daa73b47ef9c
-
-lxml==4.6.3; \
-    sys_platform=="linux" \
-    --hash=sha256:1b38116b6e628118dea5b2186ee6820ab138dbb1e24a13e478490c7db2f326ae
-
-https://software.ultimaker.com/cura-binary-dependencies/lxml-4.6.3-cp38-cp38-macosx_10_13_x86_64.whl; \
-    sys_platform=="darwin" \
-    --hash=sha256:bccacaba41deb4a3f099cbe63b58cdabcd77fe0c24b241b51c3ae1f82337c4eb
-
-https://software.ultimaker.com/cura-binary-dependencies/lxml-4.6.3-cp38-cp38-win_amd64.whl; \
-    sys_platform=="win32" \
-    --hash=sha256:0e6ec5bf47388c9fb490f3b75b6c8e966a3f221ef5c431c48db42aa6f7dbe587
+lxml==4.7.1; \
+    --hash=sha256:a1613838aa6b89af4ba10a0f3a972836128801ed008078f8c1244e65958f1b24 \
+    --hash=sha256:b1d381f58fcc3e63fcc0ea4f0a38335163883267f77e4c6e22d7a30877218a0e \
+    --hash=sha256:67fa5f028e8a01e1d7944a9fb616d1d0510d5d38b0c41708310bd1bc45ae89f6 \
+    --hash=sha256:7b5e2acefd33c259c4a2e157119c4373c8773cf6793e225006a1649672ab47a6 \
+    --hash=sha256:a5f623aeaa24f71fce3177d7fee875371345eb9102b355b882243e33e04b7175 \
+    --hash=sha256:3e26ad9bc48d610bf6cc76c506b9e5ad9360ed7a945d9be3b5b2c8535a0145e3 \
+    --hash=sha256:4c093c571bc3da9ebcd484e001ba18b8452903cd428c0bc926d9b0141bcb710e \
+    --hash=sha256:e662c6266e3a275bdcb6bb049edc7cd77d0b0f7e119a53101d367c841afc66dc
 
 # Windows specific requirements
-pywin32==301; \
+pywin32==303; \
     sys_platform=="win32" \
-    --hash=sha256:8c9d33968aa7fcddf44e47750e18f3d034c3e443a707688a008a2e52bbef7e96
+    --hash=sha256:51cb52c5ec6709f96c3f26e7795b0bf169ee0d8395b2c1d7eb2c029a5008ed51
 pywin32-ctypes==0.2.0; \
     sys_platform=="win32" \
     --hash=sha256:24ffc3b341d457d48e8922352130cf2644024a4ff09762a2261fd34c36ee5942 \
     --hash=sha256:9dc2d991b3479cc2df15930958b674a48a227d5361d413827a4cfd0b5876fc98
-comtypes==1.1.7; \
+cx-Logging==3.0; \
     sys_platform=="win32" \
-    --hash=sha256:c9d59f57d559613940f22da54d70add066faa23b4fa9b5cd95facdc501a63b0b
-PyQt5==5.15.2; \
+    --hash=sha256:ba8a7465facf7b98d8f494030fb481a2e8aeee29dc191e10383bb54ed42bdb34
+PyQt5==5.15.6; \
     sys_platform=="win32" \
-    --hash=sha256:29889845688a54d62820585ad5b2e0200a36b304ff3d7a555e95599f110ba4ce \
-    --hash=sha256:372b08dc9321d1201e4690182697c5e7ffb2e0770e6b4a45519025134b12e4fc \
-    --hash=sha256:894ca4ae767a8d6cf5903784b71f755073c78cb8c167eecf6e4ed6b3b055ac6a \
-    --hash=sha256:ea24f24b7679bf393dd2e4f53fe0ce65021be18304c1ff7a226c2fc5c356d0da \
-    --hash=sha256:faaecb76ec65e12673a968e7f5bc02495957e6996f0a3fa0d98895f9e4113746
+    --hash=sha256:80343bcab95ffba619f2ed2467fd828ffeb0a251ad7225be5fc06dcc333af452 \
+    --hash=sha256:f411ecda52e488e1d3c5cce7563e1b2ca9cf0b7531e3c25b03d9a7e56e07e7fc \
+    --hash=sha256:9d2dcdaf82263ae56023410a7af15d1fd746c8e361733a7d0d1bd1f004ec2793
+PyQt5-Qt5==5.15.2; \
+    sys_platform=="win32" \
+    --hash=sha256:750b78e4dba6bdf1607febedc08738e318ea09e9b10aea9ff0d73073f11f6962

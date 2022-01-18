@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# This script builds the cura-build-environment with the CentOS 7 base docker image.
+# This script builds the cura-build-environment with the CentOS 8 or Debian Buster base docker image.
 #
 # Usage:
 #   <src_path>
@@ -18,12 +18,11 @@ if [[ -z "${SRC_PATH}" ]]; then
 fi
 
 # Set up environment variables
-source /opt/rh/devtoolset-8/enable
 export PATH="${CURA_BUILD_ENV_PATH}/bin:${PATH}"
 export PKG_CONFIG_PATH="${CURA_BUILD_ENV_PATH}/lib/pkgconfig:${PKG_CONFIG_PATH}"
 
 # Build
-cmake3 "${SRC_PATH}" \
+cmake "${SRC_PATH}" \
     -DCMAKE_BUILD_TYPE="${CURA_BUILD_ENV_BUILD_TYPE}" \
     -DCMAKE_INSTALL_PREFIX="${CURA_BUILD_ENV_PATH}" \
     -DCMAKE_PREFIX_PATH="${CURA_BUILD_ENV_PATH}" \

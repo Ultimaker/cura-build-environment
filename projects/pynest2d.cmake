@@ -1,12 +1,8 @@
 #Copyright (c) 2020 Ultimaker B.V.
 #cura-build-environment is released under the terms of the AGPLv3 or higher.
 
-# Ensure we're linking to our previously built Python version.
-if(BUILD_OS_LINUX)
-    set(pylib_cmake_command PATH=${CMAKE_INSTALL_PREFIX}/bin/:$ENV{PATH} LD_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/lib/ PYTHONPATH=${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages/:${CMAKE_INSTALL_PREFIX}/lib/python3.8:${CMAKE_INSTALL_PREFIX}/lib/python3.8/site-packages/ ${CMAKE_COMMAND})
-else()
-    set(pylib_cmake_command ${CMAKE_COMMAND})
-endif()
+set(pylib_cmake_command ${CMAKE_COMMAND})
+
 set(extra_cmake_args "")
 if(BUILD_OS_WINDOWS)
     set(extra_cmake_args -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/libs -DCMAKE_PREFIX_PATH=${CMAKE_INSTALL_PREFIX})

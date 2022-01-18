@@ -19,8 +19,8 @@ else()
 endif()
 
 ExternalProject_Add(Sip
-    URL https://www.riverbankcomputing.com/static/Downloads/sip/4.19.24/sip-4.19.24.tar.gz
-    URL_HASH SHA256=edcd3790bb01938191eef0f6117de0bf56d1136626c0ddb678f3a558d62e41e5
+    URL https://www.riverbankcomputing.com/static/Downloads/sip/4.19.25/sip-4.19.25.tar.gz
+    URL_HASH SHA256=b39d93e937647807bac23579edbff25fe46d16213f708370072574ab1f1b4211
     CONFIGURE_COMMAND ${sip_command}
     BUILD_IN_SOURCE 1
 )
