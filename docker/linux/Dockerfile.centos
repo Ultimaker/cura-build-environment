@@ -79,7 +79,7 @@ RUN mkdir -p "${CURA_BUILD_ENV_WORK_DIR}"/build && \
     chown -R ultimaker:ultimaker "${CURA_BUILD_ENV_PATH}"
 WORKDIR "${CURA_BUILD_ENV_WORK_DIR}"/build
 USER ultimaker
-RUN "${CURA_BUILD_ENV_WORK_DIR}"/src/docker/linux/build_centos.sh "${CURA_BUILD_ENV_WORK_DIR}"/src
+RUN "${CURA_BUILD_ENV_WORK_DIR}"/src/docker/linux/build.sh "${CURA_BUILD_ENV_WORK_DIR}"/src
 
 # -------------------------------
 # Stage 2: Create a cleaner image with cura-build-environment installed
