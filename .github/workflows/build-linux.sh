@@ -1,7 +1,7 @@
 #!/bin/sh
 
 GIT_REF="$(basename "${GIT_REF}")"
-TAG="centos7-${GIT_REF}"
+TAG="buster-${GIT_REF}"
 
 # Only tag as the latest for master
 if [ "${GIT_REF}" = "master" ]; then
@@ -12,7 +12,7 @@ if [ "${GIT_REF}" = "master" ]; then
   EXTRA_TAG="${DOCKER_IMAGE_LATEST_TAG}"
 fi
 
-docker build -t $DOCKER_IMAGE_NAME:$TAG -f docker/linux/Dockerfile.centos .
+docker build -t $DOCKER_IMAGE_NAME:$TAG -f docker/linux/Dockerfile.debian .
 if [ -n "${EXTRA_TAG}" ]; then
   docker tag $DOCKER_IMAGE_NAME:$TAG $DOCKER_IMAGE_NAME:$EXTRA_TAG
 fi
