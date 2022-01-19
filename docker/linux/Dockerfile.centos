@@ -170,6 +170,6 @@ RUN rm -rf /tmp/* && \
 # Change working directory
 WORKDIR /home/ultimaker
 
-ADD ./docker/linux/entrypoint_centos.sh /docker-entrypoint.sh
+ADD ./docker/linux/entrypoint.sh /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
