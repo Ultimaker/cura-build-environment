@@ -27,9 +27,6 @@ RUN apt update -y && \
 RUN mkdir -p "${CURA_BUILD_ENV_WORK_DIR}" "${CURA_BUILD_ENV_PATH}"
 ADD . "${CURA_BUILD_ENV_WORK_DIR}"/src
 
-# FIXME: We remove appImageKit as we don't need it and depends on too many things
-#RUN rm -f "${CURA_BUILD_ENV_WORK_DIR}"/src/projects/appimagekit.cmake
-
 ENV PATH="${CURA_BUILD_ENV_PATH}/bin:${PATH}" \
     PKG_CONFIG_PATH="${CURA_BUILD_ENV_PATH}/lib/pkgconfig:${PKG_CONFIG_PATH}"
 
@@ -43,11 +40,14 @@ RUN "${CURA_BUILD_ENV_WORK_DIR}"/src/docker/linux/build.sh "${CURA_BUILD_ENV_WOR
 
 
 # Cleanup
+USER root
 WORKDIR /
-RUN rm -rf "${CURA_BUILD_ENV_WORK_DIR}" && \
+RUN rm -rf /tmp/* && \
     rm -rf /var/cache
 
 # Change working directory
 WORKDIR /home/ultimaker
 
 ADD ./docker/linux/entrypoint.sh /docker-entrypoint.sh
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
