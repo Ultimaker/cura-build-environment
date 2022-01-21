@@ -28,7 +28,9 @@ RUN mkdir -p "${CURA_BUILD_ENV_WORK_DIR}" "${CURA_BUILD_ENV_PATH}"
 ADD . "${CURA_BUILD_ENV_WORK_DIR}"/src
 
 ENV PATH="${CURA_BUILD_ENV_PATH}/bin:${PATH}" \
-    PKG_CONFIG_PATH="${CURA_BUILD_ENV_PATH}/lib/pkgconfig:${PKG_CONFIG_PATH}"
+    PKG_CONFIG_PATH="${CURA_BUILD_ENV_PATH}/lib/pkgconfig:${PKG_CONFIG_PATH}" \
+    LD_LIBRARY_PATH="${CURA_BUILD_ENV_PATH}/lib:${LD_LIBRARY_PATH}" \
+    CURA_BUILD_ENV_PATH=/srv/cura-build-environment
 
 # Build the build environment
 RUN mkdir -p "${CURA_BUILD_ENV_WORK_DIR}"/build && \

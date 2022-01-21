@@ -13,6 +13,7 @@ fi
 # Sets up the environment variables.
 export PATH="${CURA_BUILD_ENV_PATH}/bin:${PATH}"
 export PKG_CONFIG_PATH="${CURA_BUILD_ENV_PATH}/lib/pkgconfig:${PKG_CONFIG_PATH}"
+export LD_LIBRARY_PATH="${CURA_BUILD_ENV_PATH}/lib:${LD_LIBRARY_PATH}"
 
 # Execute command
 exec "$@"
