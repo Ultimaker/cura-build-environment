@@ -33,4 +33,4 @@ ExternalProject_Add(Savitar
                ${extra_cmake_args}
 )
 
-SetProjectDependencies(TARGET Savitar DEPENDS Sip)
+SetProjectDependencies(TARGET Savitar DEPENDS Python)

@@ -31,4 +31,4 @@ ExternalProject_Add(pynest2d
                ${extra_cmake_args}
 )
 
-SetProjectDependencies(TARGET pynest2d DEPENDS Sip libnest2d)
+SetProjectDependencies(TARGET pynest2d DEPENDS Python libnest2d)

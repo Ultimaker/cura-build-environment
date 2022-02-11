@@ -127,7 +127,7 @@ sys_platform=="linux" \
 toml==0.10.2 \
     --hash=sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b \
     --hash=sha256:b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f
-sip==6.5.0 \
+sip==6.5 \
     --hash=sha256:28edf2e20db20ebf135e94e3295d8a90427e4ea461337413bf3ff2ce31bbdafe \
     --hash=sha256:71332c6f209a45bf019a352fe0374fa9d58fe1f6970c8e13dbeec62e5bab2114 \
     --hash=sha256:75ca74f5a6a2024dd984aece7ecc78676ec99be218b504744392dfbdf2d4200a \

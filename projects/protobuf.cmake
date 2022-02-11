@@ -18,7 +18,7 @@ set(protobuf_configure_args
     -DCMAKE_CXX_FLAGS=${protobuf_cxx_flags}
     -Dprotobuf_BUILD_TESTS=OFF
     -Dprotobuf_BUILD_EXAMPLES=OFF
-    -Dprotobuf_BUILD_SHARED_LIBS=OFF
+    -Dprotobuf_BUILD_SHARED_LIBS=ON
     -Dprotobuf_WITH_ZLIB=OFF
 )
 
@@ -75,3 +75,10 @@ if(BUILD_OS_WINDOWS)
         INSTALL_COMMAND mingw32-make install
     )
 endif()
+
+add_custom_command(
+        TARGET Protobuf POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_BINARY_DIR}/Protobuf-prefix/src/Protobuf/src/google/" "${CMAKE_INSTALL_PREFIX}/include/."
+        COMMENT "Protobuf: Needs more headers than can be found in the include directory. This is probably an oversight in protobuf. Just dump the intire protobuf source in the include directory then."
+    )
+

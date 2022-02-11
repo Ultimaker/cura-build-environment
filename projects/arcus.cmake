@@ -31,6 +31,7 @@ if(BUILD_OS_OSX)
     endif()
 endif()
 
+
 ExternalProject_Add(Arcus
     GIT_REPOSITORY https://github.com/ultimaker/libArcus.git
     GIT_TAG origin/${CURA_ARCUS_BRANCH_OR_TAG}
@@ -40,13 +41,18 @@ ExternalProject_Add(Arcus
                -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
                -DCMAKE_PREFIX_PATH=${CMAKE_INSTALL_PREFIX}
                -DCMAKE_CXX_STANDARD=17
-               -DBUILD_STATIC=ON
+               -DBUILD_STATIC=OFF
+               -DBUILD_MSVC_STATIC_RUNTIME=OFF
                -DBUILD_PYTHON=ON
                -DBUILD_EXAMPLES=OFF
                ${extra_cmake_args}
+    BUILD_COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
+    COMMAND ${CMAKE_MAKE_PROGRAM}
+    INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} install
+    COMMAND sip-install --target-dir ${CMAKE_INSTALL_PREFIX}/lib/site-packages
 )
 
-SetProjectDependencies(TARGET Arcus DEPENDS Sip Protobuf)
+SetProjectDependencies(TARGET Arcus DEPENDS Python Protobuf)
 
 if(BUILD_OS_WINDOWS)
     ExternalProject_Add(Arcus-MinGW
@@ -67,5 +73,5 @@ if(BUILD_OS_WINDOWS)
         INSTALL_COMMAND mingw32-make install
     )
 
-    SetProjectDependencies(TARGET Arcus-MinGW DEPENDS Sip Protobuf-MinGW Arcus)
+    SetProjectDependencies(TARGET Arcus-MinGW DEPENDS Protobuf-MinGW Arcus)
 endif()
