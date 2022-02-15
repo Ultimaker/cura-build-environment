@@ -4,9 +4,12 @@
 set(pylib_cmake_command ${CMAKE_COMMAND})
 
 set(extra_cmake_args "")
+set(run_program_command "")
 if(BUILD_OS_WINDOWS)
     set(extra_cmake_args -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/libs -DCMAKE_PREFIX_PATH=${CMAKE_INSTALL_PREFIX})
-elseif(BUILD_OS_OSX)
+else()
+    set(run_program_command "exec")
+  if(BUILD_OS_OSX)
     if(CMAKE_OSX_DEPLOYMENT_TARGET)
         list(APPEND extra_cmake_args
             -DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
@@ -17,6 +20,7 @@ elseif(BUILD_OS_OSX)
             -DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}
         )
     endif()
+  endif()
 endif()
 
 ExternalProject_Add(pynest2d
@@ -35,7 +39,7 @@ ExternalProject_Add(pynest2d
 	BUILD_COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
 	COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
 	INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} install || echo "ignore error"
-	COMMAND sip-install --target-dir ${CMAKE_INSTALL_PREFIX}/lib/site-packages
+	COMMAND ${run_program_command} ${CMAKE_INSTALL_PREFIX}/Scripts/sip-install --target-dir ${CMAKE_INSTALL_PREFIX}/lib/site-packages
 )
 # TODO: Ignoring the first error (in the 1st) build command is hacky, but functions,
 #       since any errors that are of a more permanent nature would be picked up by the 2nd identical one.

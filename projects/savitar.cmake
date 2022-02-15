@@ -1,12 +1,14 @@
 set(savitar_cmake_command ${CMAKE_COMMAND})
 
 set(extra_cmake_args "")
+set(run_program_command "")
 if(BUILD_OS_WINDOWS)
     set(extra_cmake_args
       -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/libs
 	  -DMSVC_STATIC_RUNTIME=OFF
     )
 else()
+    set(run_program_command "exec")
   if(BUILD_OS_OSX)
     if(CMAKE_OSX_DEPLOYMENT_TARGET)
         list(APPEND extra_cmake_args
@@ -36,7 +38,7 @@ ExternalProject_Add(Savitar
 	BUILD_COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
     COMMAND ${CMAKE_MAKE_PROGRAM}
     INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} install
-    COMMAND sip-install --target-dir ${CMAKE_INSTALL_PREFIX}/lib/site-packages
+    COMMAND ${run_program_command} ${CMAKE_INSTALL_PREFIX}/Scripts/sip-install --target-dir ${CMAKE_INSTALL_PREFIX}/lib/site-packages
 )
 
 SetProjectDependencies(TARGET Savitar DEPENDS Python)

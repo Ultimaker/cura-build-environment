@@ -3,6 +3,7 @@
 
 set(extra_cmake_args "")
 set(pylib_cmake_command ${CMAKE_COMMAND})
+set(run_program_command "")
 if(BUILD_OS_WINDOWS)
     set(extra_cmake_args
         -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/libs
@@ -16,6 +17,8 @@ if(BUILD_OS_WINDOWS)
         -DCMAKE_STATIC_LINKER_FLAGS=/LIBPATH:"${CMAKE_INSTALL_PREFIX}/libs" /machine:x64
         -DCMAKE_STATIC_LINKER_FLAGS_RELEASE=/LIBPATH:"${CMAKE_INSTALL_PREFIX}/libs" /machine:x64
     )
+else()
+    set(run_program_command "exec")
 endif()
 
 if(BUILD_OS_OSX)
@@ -30,7 +33,6 @@ if(BUILD_OS_OSX)
         )
     endif()
 endif()
-
 
 ExternalProject_Add(Arcus
     GIT_REPOSITORY https://github.com/ultimaker/libArcus.git
@@ -49,7 +51,7 @@ ExternalProject_Add(Arcus
     BUILD_COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
     COMMAND ${CMAKE_MAKE_PROGRAM}
     INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} install
-    COMMAND sip-install --target-dir ${CMAKE_INSTALL_PREFIX}/lib/site-packages
+    COMMAND ${run_program_command} ${CMAKE_INSTALL_PREFIX}/Scripts/sip-install --target-dir ${CMAKE_INSTALL_PREFIX}/lib/site-packages
 )
 
 SetProjectDependencies(TARGET Arcus DEPENDS Python Protobuf)
