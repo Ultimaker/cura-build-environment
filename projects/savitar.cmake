@@ -31,7 +31,7 @@ ExternalProject_Add(Savitar
                -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}
                -DCMAKE_CXX_STANDARD=17
                -DBUILD_STATIC=OFF
-			   -DPY_DEPEND_BIN_INSTALL_DIR="${CMAKE_INSTALL_PREFIX}/lib/site-packages"
+			   -DPY_DEPEND_BIN_INSTALL_DIR=${CMAKE_INSTALL_PREFIX}/Lib/site-packages
                ${extra_cmake_args}
 	BUILD_COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
     COMMAND ${CMAKE_MAKE_PROGRAM}
