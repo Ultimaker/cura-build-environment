@@ -21,16 +21,26 @@ RUN apt update -y && \
     apt upgrade -y && \
     apt install -y build-essential g++ gfortran libtool make autoconf automake git curl wget cmake tar \
         libffi-dev pkg-config libx11-xcb-dev libxcb* libfreetype6-dev libgl1-mesa-dev libegl1-mesa libxkbcommon-dev \
-        libxkbcommon-x11-dev libx11-dev libxml2-dev libxslt-dev libfontconfig1-dev patchelf
+        libxkbcommon-x11-dev libx11-dev libxml2-dev libxslt-dev libfontconfig1-dev patchelf libssl-dev
 
 # Set up the working directory
 RUN mkdir -p "${CURA_BUILD_ENV_WORK_DIR}" "${CURA_BUILD_ENV_PATH}"
 ADD . "${CURA_BUILD_ENV_WORK_DIR}"/src
 
-ENV PATH="${CURA_BUILD_ENV_PATH}/bin:${PATH}" \
+ENV PATH="${CURA_BUILD_ENV_PATH}/bin:/usr/local/bin/:${PATH}" \
     PKG_CONFIG_PATH="${CURA_BUILD_ENV_PATH}/lib/pkgconfig:${PKG_CONFIG_PATH}" \
     LD_LIBRARY_PATH="${CURA_BUILD_ENV_PATH}/lib:${LD_LIBRARY_PATH}" \
     CURA_BUILD_ENV_PATH=/srv/cura-build-environment
+
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.21.5/cmake-3.21.5.tar.gz && \
+    tar -zxvf cmake-3.21.5.tar.gz && \
+    cd cmake-3.21.5 && \
+    cmake . && \
+    make -j $(nproc) && \
+    make install && \
+    cd .. && \
+    rm -rf cmake-3.21.5 && \
+    apt-get remove -y cmake
 
 # Build the build environment
 RUN mkdir -p "${CURA_BUILD_ENV_WORK_DIR}"/build && \
