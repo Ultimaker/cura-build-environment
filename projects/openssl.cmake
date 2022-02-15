@@ -1,5 +1,5 @@
 if(NOT BUILD_OS_WINDOWS)
-    set(_openssl_build make depend && make)
+    set(_openssl_build make depend && make -j $(nproc))
     set(_openssl_install make install)
     if(BUILD_OS_LINUX)
         set(_openssl_configure perl Configure --prefix=${CMAKE_INSTALL_PREFIX} --openssldir=${CMAKE_INSTALL_PREFIX} no-ssl2 no-ssl3 no-zlib shared enable-cms linux-x86_64 enable-ec_nistp_64_gcc_128)
