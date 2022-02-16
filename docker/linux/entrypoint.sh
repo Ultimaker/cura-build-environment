@@ -11,7 +11,7 @@ if [[ -z "${CURA_BUILD_ENV_PATH}" ]]; then
 fi
 
 # Sets up the environment variables.
-export PATH="${CURA_BUILD_ENV_PATH}/bin:${PATH}"
+export PATH="${CURA_BUILD_ENV_PATH}/bin:/usr/local/bin:${PATH}"
 export PKG_CONFIG_PATH="${CURA_BUILD_ENV_PATH}/lib/pkgconfig:${PKG_CONFIG_PATH}"
 export LD_LIBRARY_PATH="${CURA_BUILD_ENV_PATH}/lib:${LD_LIBRARY_PATH}"
 
