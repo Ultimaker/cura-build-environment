@@ -1,14 +1,14 @@
 set(savitar_cmake_command ${CMAKE_COMMAND})
 
 set(extra_cmake_args "")
-set(run_program_command "")
+set(SAVITAR_pyd_copydir "")
 if(BUILD_OS_WINDOWS)
     set(extra_cmake_args
       -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/libs
 	  -DMSVC_STATIC_RUNTIME=OFF
     )
+	set(SAVITAR_pyd_copydir "lib.win-amd64-3.10")
 else()
-    set(run_program_command "exec")
   if(BUILD_OS_OSX)
     if(CMAKE_OSX_DEPLOYMENT_TARGET)
         list(APPEND extra_cmake_args
@@ -20,6 +20,9 @@ else()
             -DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}
         )
     endif()
+	set(SAVITAR_pyd_copydir "lib.osx-3.10")
+  else()
+    set(SAVITAR_pyd_copydir "lib.linux-x86_64-3.10")
   endif()
 endif()
 
@@ -38,7 +41,7 @@ ExternalProject_Add(Savitar
 	BUILD_COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
     COMMAND ${CMAKE_MAKE_PROGRAM}
     INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} install
-    COMMAND ${run_program_command} ${CMAKE_INSTALL_PREFIX}/Scripts/sip-install --target-dir ${CMAKE_INSTALL_PREFIX}/lib/site-packages
+	COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_BINARY_DIR}/Savitar-prefix/src/Savitar-build/build/Savitar/build/${SAVITAR_pyd_copy_dir}" "${CMAKE_INSTALL_PREFIX}/lib/site-packages/"
 )
 
 SetProjectDependencies(TARGET Savitar DEPENDS Python)

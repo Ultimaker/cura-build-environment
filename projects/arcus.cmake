@@ -3,7 +3,7 @@
 
 set(extra_cmake_args "")
 set(pylib_cmake_command ${CMAKE_COMMAND})
-set(run_program_command "")
+set(ARCUS_pyd_copy_dir)
 if(BUILD_OS_WINDOWS)
     set(extra_cmake_args
         -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/libs
@@ -17,21 +17,23 @@ if(BUILD_OS_WINDOWS)
         -DCMAKE_STATIC_LINKER_FLAGS=/LIBPATH:"${CMAKE_INSTALL_PREFIX}/libs" /machine:x64
         -DCMAKE_STATIC_LINKER_FLAGS_RELEASE=/LIBPATH:"${CMAKE_INSTALL_PREFIX}/libs" /machine:x64
     )
+	set(ARCUS_pyd_copy_dir "lib.win-amd64-3.10")
 else()
-    set(run_program_command "exec")
-endif()
-
-if(BUILD_OS_OSX)
-    if(CMAKE_OSX_DEPLOYMENT_TARGET)
-        list(APPEND extra_cmake_args
-            -DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
-        )
-    endif()
-    if(CMAKE_OSX_SYSROOT)
-        list(APPEND extra_cmake_args
-            -DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}
-        )
-    endif()
+	if(BUILD_OS_OSX)
+		if(CMAKE_OSX_DEPLOYMENT_TARGET)
+			list(APPEND extra_cmake_args
+				-DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
+			)
+		endif()
+		if(CMAKE_OSX_SYSROOT)
+			list(APPEND extra_cmake_args
+				-DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}
+			)
+		endif()
+		set(ARCUS_pyd_copy_dir "lib.osx-3.10")
+	else()
+		set(ARCUS_pyd_copy_dir "lib.linux-x86_64-3.10")
+	endif()
 endif()
 
 ExternalProject_Add(Arcus
@@ -51,7 +53,7 @@ ExternalProject_Add(Arcus
     BUILD_COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
     COMMAND ${CMAKE_MAKE_PROGRAM}
     INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} install
-    COMMAND ${run_program_command} ${CMAKE_INSTALL_PREFIX}/Scripts/sip-install --target-dir ${CMAKE_INSTALL_PREFIX}/lib/site-packages
+	COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_BINARY_DIR}/Arcus-prefix/src/Arcus-build/build/Arcus/build/${ARCUS_pyd_copy_dir}" "${CMAKE_INSTALL_PREFIX}/lib/site-packages/"
 )
 
 SetProjectDependencies(TARGET Arcus DEPENDS Python Protobuf)

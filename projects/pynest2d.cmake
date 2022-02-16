@@ -4,11 +4,11 @@
 set(pylib_cmake_command ${CMAKE_COMMAND})
 
 set(extra_cmake_args "")
-set(run_program_command "")
+set(PYNEST_pyd_copy_dir "")
 if(BUILD_OS_WINDOWS)
     set(extra_cmake_args -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/libs -DCMAKE_PREFIX_PATH=${CMAKE_INSTALL_PREFIX})
+	set(PYNEST_pyd_copy_dir "lib.win-amd64-3.10")
 else()
-    set(run_program_command "exec")
   if(BUILD_OS_OSX)
     if(CMAKE_OSX_DEPLOYMENT_TARGET)
         list(APPEND extra_cmake_args
@@ -20,6 +20,9 @@ else()
             -DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}
         )
     endif()
+	set(PYNEST_pyd_copy_dir "lib.osx-3.10")
+  else()
+    set(PYNEST_pyd_copy_dir "lib.linux-x86_64-3.10")
   endif()
 endif()
 
@@ -39,7 +42,7 @@ ExternalProject_Add(pynest2d
 	BUILD_COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
 	COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
 	INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} install || echo "ignore error"
-	COMMAND ${run_program_command} ${CMAKE_INSTALL_PREFIX}/Scripts/sip-install --target-dir ${CMAKE_INSTALL_PREFIX}/lib/site-packages
+	COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_BINARY_DIR}/pynest2d-prefix/src/pynest2d-build/build/pynest2d/build/${PYNEST_pyd_copy_dir}" "${CMAKE_INSTALL_PREFIX}/lib/site-packages/"
 )
 # TODO: Ignoring the first error (in the 1st) build command is hacky, but functions,
 #       since any errors that are of a more permanent nature would be picked up by the 2nd identical one.
