@@ -25,11 +25,18 @@ get_filename_component(CMAKE_INSTALL_PREFIX
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
+include(ProcessorCount)
+
 include(ExternalProject)
 include(GNUInstallDirs)
 
 include(BuildPlatformDetection)
 include(SetProjectDependencies)
+
+ProcessorCount(N_PROC)
+if(N_PROC EQUAL 0)
+  set(N_PROC 1)
+endif()
 
 # Hard-code the CPython executable to use later because all find_package()
 # commands are executed when the Makefiles are generated. Because we need to

@@ -3,7 +3,7 @@ if(BUILD_OS_LINUX)
         URL https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz
         URL_HASH SHA256=ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269
         CONFIGURE_COMMAND ""
-        BUILD_COMMAND make -j $(nproc) -f Makefile PREFIX=${CMAKE_INSTALL_PREFIX}
+        BUILD_COMMAND make -j ${N_PROC} -f Makefile PREFIX=${CMAKE_INSTALL_PREFIX}
         INSTALL_COMMAND make -f Makefile install PREFIX=${CMAKE_INSTALL_PREFIX}
         BUILD_IN_SOURCE 1
     )

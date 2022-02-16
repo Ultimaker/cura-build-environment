@@ -18,7 +18,7 @@ elseif (BUILD_OS_LINUX)
         URL      ${_cura_openctm_url}
         URL_HASH SHA256=${_cura_openctm_sha256}
         CONFIGURE_COMMAND ""
-        BUILD_COMMAND make -j $(nproc) -f Makefile.linux openctm
+        BUILD_COMMAND make -j ${N_PROC} -f Makefile.linux openctm
         INSTALL_COMMAND ${CMAKE_COMMAND} -E copy lib/libopenctm.so ${CMAKE_INSTALL_PREFIX}/lib/libopenctm.so
                 COMMAND ${CMAKE_COMMAND} -E copy lib/openctm.h     ${CMAKE_INSTALL_PREFIX}/include/openctm.h
                 COMMAND ${CMAKE_COMMAND} -E copy lib/openctmpp.h   ${CMAKE_INSTALL_PREFIX}/include/openctmpp.h
@@ -29,7 +29,7 @@ else ()  # OSX
         URL      ${_cura_openctm_url}
         URL_HASH SHA256=${_cura_openctm_sha256}
         CONFIGURE_COMMAND ""
-        BUILD_COMMAND make -f Makefile.macosx openctm
+        BUILD_COMMAND make -j ${N_PROC} -f Makefile.macosx openctm
         INSTALL_COMMAND ${CMAKE_COMMAND} -E copy lib/libopenctm.dylib ${CMAKE_INSTALL_PREFIX}/lib/libopenctm.dylib
                 COMMAND ${CMAKE_COMMAND} -E copy lib/openctm.h        ${CMAKE_INSTALL_PREFIX}/include/openctm.h
                 COMMAND ${CMAKE_COMMAND} -E copy lib/openctmpp.h      ${CMAKE_INSTALL_PREFIX}/include/openctmpp.h
