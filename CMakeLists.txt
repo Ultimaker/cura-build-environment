@@ -35,7 +35,7 @@ include(SetProjectDependencies)
 
 ProcessorCount(N_PROC)
 if(N_PROC EQUAL 0)
-  set(N_PROC 1)
+    set(N_PROC 1)
 endif()
 
 # Hard-code the CPython executable to use later because all find_package()

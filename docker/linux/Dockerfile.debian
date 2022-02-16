@@ -5,7 +5,7 @@ LABEL linux_distro="debian-buster" \
       python_version="3.10.0" \
       qt_version="5.15.2"
 
-# Set build time arugments
+# Set build time arguments
 ARG CURA_BUILD_ENV_BUILD_TYPE=Release
 ARG CURA_BUILD_ENV_PATH=/srv/cura-build-environment
 ARG CURA_BUILD_ENV_WORK_DIR=/tmp/cura-build-environment
