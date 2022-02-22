@@ -41,7 +41,7 @@ ExternalProject_Add(Savitar
 	BUILD_COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
     COMMAND ${CMAKE_MAKE_PROGRAM}
     INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} install
-	COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_BINARY_DIR}/Savitar-prefix/src/Savitar-build/build/Savitar/build/${SAVITAR_pyd_copy_dir}" "${CMAKE_INSTALL_PREFIX}/lib/site-packages/" || dir "/temp/cura-build-environment/Savitar-prefix/src/Savitar-build/build/Savitar/build"
+	#COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_BINARY_DIR}/Savitar-prefix/src/Savitar-build/build/Savitar/build/${SAVITAR_pyd_copy_dir}" "${CMAKE_INSTALL_PREFIX}/lib/site-packages/" || dir "/temp/cura-build-environment/Savitar-prefix/src/Savitar-build/build/Savitar/build"
 )
 
 SetProjectDependencies(TARGET Savitar DEPENDS Python)
