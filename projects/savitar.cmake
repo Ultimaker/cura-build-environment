@@ -1,13 +1,13 @@
 set(savitar_cmake_command ${CMAKE_COMMAND})
 
 set(extra_cmake_args "")
-set(SAVITAR_pyd_copydir "")
+set(SAVITAR_pyd_copy_dir "")
 if(BUILD_OS_WINDOWS)
     set(extra_cmake_args
       -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/libs
 	  -DMSVC_STATIC_RUNTIME=OFF
     )
-	set(SAVITAR_pyd_copydir "lib.win-amd64-3.10")
+	set(SAVITAR_pyd_copy_dir "lib.win-amd64-3.10")
 else()
   if(BUILD_OS_OSX)
     if(CMAKE_OSX_DEPLOYMENT_TARGET)
@@ -20,9 +20,9 @@ else()
             -DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}
         )
     endif()
-	set(SAVITAR_pyd_copydir "lib.osx-3.10")
+	set(SAVITAR_pyd_copy_dir "lib.osx-3.10")
   else()
-    set(SAVITAR_pyd_copydir "lib.linux-x86_64-3.10")
+    set(SAVITAR_pyd_copy_dir "lib.linux-x86_64-3.10")
   endif()
 endif()
 
