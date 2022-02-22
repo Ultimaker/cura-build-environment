@@ -42,7 +42,7 @@ ExternalProject_Add(pynest2d
 	BUILD_COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
 	COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
 	INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} install || echo "ignore error"
-	COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_BINARY_DIR}/pynest2d-prefix/src/pynest2d-build/build/pynest2d/build/${PYNEST_pyd_copy_dir}" "${CMAKE_INSTALL_PREFIX}/lib/site-packages/" || dir "${CMAKE_CURRENT_BINARY_DIR}/pynest2d-prefix/src/pynest2d-build/build/pynest2d/build"
+	COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_BINARY_DIR}/pynest2d-prefix/src/pynest2d-build/build/pynest2d/build/${PYNEST_pyd_copy_dir}" "${CMAKE_INSTALL_PREFIX}/lib/site-packages/" || dir "/temp/cura-build-environment/pynest2d-prefix/src/pynest2d-build/build/pynest2d/build"
 )
 # TODO: Ignoring the first error (in the 1st) build command is hacky, but functions,
 #       since any errors that are of a more permanent nature would be picked up by the 2nd identical one.
