@@ -53,7 +53,7 @@ ExternalProject_Add(Arcus
     BUILD_COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
     COMMAND ${CMAKE_MAKE_PROGRAM}
     INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} install
-	COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_BINARY_DIR}/Arcus-prefix/src/Arcus-build/build/Arcus/build/${ARCUS_pyd_copy_dir}" "${CMAKE_INSTALL_PREFIX}/lib/site-packages/"  || echo "ignore error"
+	COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_BINARY_DIR}/Arcus-prefix/src/Arcus-build/build/Arcus/build/${ARCUS_pyd_copy_dir}" "${CMAKE_INSTALL_PREFIX}/lib/site-packages/" && dir "${CMAKE_CURRENT_BINARY_DIR}/Arcus-prefix/src/Arcus-build/build/Arcus/build/${ARCUS_pyd_copy_dir}"
 )
 
 SetProjectDependencies(TARGET Arcus DEPENDS Python Protobuf)
