@@ -35,7 +35,7 @@ ExternalProject_Add(pynest2d
                -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
                -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}
                -DBUILD_STATIC=OFF
-			   -DPY_DEPEND_BIN_INSTALL_DIR=${CMAKE_INSTALL_PREFIX}/Lib/site-packages
+			   -DPY_DEPEND_BIN_INSTALL_DIR=${CMAKE_INSTALL_PREFIX}/lib/site-packages
 			   -DPYNEST2D_EXTRA_INCLUDES=${CMAKE_INSTALL_PREFIX}/include
 			   -DPYNEST2D_EXTRA_LIBS=${CMAKE_INSTALL_PREFIX}/bin
                ${extra_cmake_args}
