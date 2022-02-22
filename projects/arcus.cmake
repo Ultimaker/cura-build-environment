@@ -30,7 +30,7 @@ else()
 				-DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}
 			)
 		endif()
-		set(ARCUS_pyd_copy_dir "lib.osx-3.10")
+		set(ARCUS_pyd_copy_dir "lib.macosx-10.14-x86_64-3.10")
 	else()
 		set(ARCUS_pyd_copy_dir "lib.linux-x86_64-3.10")
 	endif()
