@@ -41,7 +41,6 @@ ExternalProject_Add(Arcus
                -DBUILD_STATIC=OFF
                -DBUILD_PYTHON=ON
                -DBUILD_EXAMPLES=OFF
-	       -DPY_DEPEND_BIN_INSTALL_DIR=${CMAKE_INSTALL_PREFIX}/lib/site-packages/
                ${extra_cmake_args}
 	       BUILD_COMMAND ${CMAKE_MAKE_PROGRAM}
 	       INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} install
