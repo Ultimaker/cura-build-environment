@@ -4,10 +4,8 @@
 set(pylib_cmake_command ${CMAKE_COMMAND})
 
 set(extra_cmake_args "")
-set(PYNEST_pyd_copy_dir "")
 if(BUILD_OS_WINDOWS)
     set(extra_cmake_args -DCMAKE_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/libs -DCMAKE_PREFIX_PATH=${CMAKE_INSTALL_PREFIX})
-	set(PYNEST_pyd_copy_dir "lib.win-amd64-3.10")
 else()
   if(BUILD_OS_OSX)
     if(CMAKE_OSX_DEPLOYMENT_TARGET)
@@ -20,9 +18,6 @@ else()
             -DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}
         )
     endif()
-	set(PYNEST_pyd_copy_dir "lib.macosx-10.14-x86_64-3.10")
-  else()
-    set(PYNEST_pyd_copy_dir "lib.linux-x86_64-3.10")
   endif()
 endif()
 
@@ -35,20 +30,12 @@ ExternalProject_Add(pynest2d
                -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
                -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}
                -DBUILD_STATIC=OFF
-			   -DPY_DEPEND_BIN_INSTALL_DIR=${CMAKE_INSTALL_PREFIX}/lib/site-packages
-			   -DPYNEST2D_EXTRA_INCLUDES=${CMAKE_INSTALL_PREFIX}/include
-			   -DPYNEST2D_EXTRA_LIBS=${CMAKE_INSTALL_PREFIX}/bin
+	       -DPY_DEPEND_BIN_INSTALL_DIR=${CMAKE_INSTALL_PREFIX}/lib/site-packages
+	       -DPYNEST2D_EXTRA_INCLUDES=${CMAKE_INSTALL_PREFIX}/include
+	       -DPYNEST2D_EXTRA_LIBS=${CMAKE_INSTALL_PREFIX}/bin
                ${extra_cmake_args}
-	BUILD_COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
-	COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
-	COMMAND "${CMAKE_INSTALL_PREFIX}/Scripts/sip-build" || echo "ignore error"
-	INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} install || echo "ignore error"
-	COMMAND "${CMAKE_INSTALL_PREFIX}/Scripts/sip-install" || echo "ignore error"
-	COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_BINARY_DIR}/pynest2d-prefix/src/pynest2d-build/build/pynest2d/build/${PYNEST_pyd_copy_dir}" "${CMAKE_INSTALL_PREFIX}/lib/site-packages/"
+    BUILD_COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
+    INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} install
 )
-# TODO: Ignoring the first error (in the 1st) build command is hacky, but functions,
-#       since any errors that are of a more permanent nature would be picked up by the 2nd identical one.
-#         ... ignoring the ones _after_ that is just bad.
-#       But it will make the _actual_ file we need, so do it like that for now.
 
 SetProjectDependencies(TARGET pynest2d DEPENDS Python libnest2d)
