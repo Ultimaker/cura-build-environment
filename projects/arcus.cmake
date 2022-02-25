@@ -17,23 +17,16 @@ if(BUILD_OS_WINDOWS)
         -DCMAKE_STATIC_LINKER_FLAGS=/LIBPATH:"${CMAKE_INSTALL_PREFIX}/libs" /machine:x64
         -DCMAKE_STATIC_LINKER_FLAGS_RELEASE=/LIBPATH:"${CMAKE_INSTALL_PREFIX}/libs" /machine:x64
     )
-	set(ARCUS_pyd_copy_dir "lib.win-amd64-3.10")
+
 else()
-	if(BUILD_OS_OSX)
-		if(CMAKE_OSX_DEPLOYMENT_TARGET)
-			list(APPEND extra_cmake_args
-				-DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}
-			)
-		endif()
-		if(CMAKE_OSX_SYSROOT)
-			list(APPEND extra_cmake_args
-				-DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT}
-			)
-		endif()
-		set(ARCUS_pyd_copy_dir "lib.macosx-10.14-x86_64-3.10")
-	else()
-		set(ARCUS_pyd_copy_dir "lib.linux-x86_64-3.10")
+    if(BUILD_OS_OSX)
+        if(CMAKE_OSX_DEPLOYMENT_TARGET)
+	    list(APPEND extra_cmake_args -DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET})
 	endif()
+	if(CMAKE_OSX_SYSROOT)
+	    list(APPEND extra_cmake_args -DCMAKE_OSX_SYSROOT=${CMAKE_OSX_SYSROOT})
+	endif()
+    endif()
 endif()
 
 ExternalProject_Add(Arcus
@@ -48,14 +41,10 @@ ExternalProject_Add(Arcus
                -DBUILD_STATIC=OFF
                -DBUILD_PYTHON=ON
                -DBUILD_EXAMPLES=OFF
-			   -DPY_DEPEND_BIN_INSTALL_DIR=${CMAKE_INSTALL_PREFIX}/lib/site-packages/
+	       -DPY_DEPEND_BIN_INSTALL_DIR=${CMAKE_INSTALL_PREFIX}/lib/site-packages/
                ${extra_cmake_args}
-    BUILD_COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
-    COMMAND ${CMAKE_MAKE_PROGRAM} || echo "ignore error"
-	COMMAND "${CMAKE_INSTALL_PREFIX}/Scripts/sip-build" || echo "ignore error"
-    INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} install || echo "ignore error"
-	COMMAND "${CMAKE_INSTALL_PREFIX}/Scripts/sip-install" || echo "ignore error"
-	COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_BINARY_DIR}/Arcus-prefix/src/Arcus-build/Arcus/Arcus/build/${ARCUS_pyd_copy_dir}" "${CMAKE_INSTALL_PREFIX}/lib/site-packages/"
+	       BUILD_COMMAND ${CMAKE_MAKE_PROGRAM}
+	       INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} install
 )
 
 SetProjectDependencies(TARGET Arcus DEPENDS Python Protobuf)
