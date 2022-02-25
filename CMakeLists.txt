@@ -6,13 +6,13 @@ project(cura-build-environment)
 cmake_minimum_required(VERSION 3.12)
 
 if(NOT CURA_ARCUS_BRANCH_OR_TAG)
-    set(CURA_ARCUS_BRANCH_OR_TAG "CURA-7924_update_to_sip6")
+    set(CURA_ARCUS_BRANCH_OR_TAG "CURA-7924_sip_cmake_build")
 endif()
 if(NOT CURA_SAVITAR_BRANCH_OR_TAG)
-    set(CURA_SAVITAR_BRANCH_OR_TAG "CURA-7924_update_to_sip6")
+    set(CURA_SAVITAR_BRANCH_OR_TAG "CURA-7924_sip_cmake_build")
 endif()
 if (NOT CURA_PYNEST2D_BRANCH_OR_TAG)
-    set(CURA_PYNEST2D_BRANCH_OR_TAG "CURA-7924_update_to_sip6")
+    set(CURA_PYNEST2D_BRANCH_OR_TAG "CURA-7924_sip_cmake_build")
 endif()
 # TODO: Revert this to the main branch for the top to when committing!
 # TODO: Also, don't forget these when we switch to 'main' -> perhaps better to take the _current_ branch or tag even?
