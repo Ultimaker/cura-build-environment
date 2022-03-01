@@ -68,18 +68,6 @@ if(BUILD_OS_LINUX)
     )
 endif()
 
-# Some extra post build additions are needed on macOS, as the eventual Cura build will fail, because otool
-# throws an error while copying pyArcus.so to the Ultimaker Cura.app bundle.
-if(BUILD_OS_OSX)
-    add_custom_command(
-        TARGET projects POST_BUILD
-        COMMAND /Library/Developer/CommandLineTools/usr/bin/install_name_tool -change @rpath/libnlopt.0.dylib "${CMAKE_INSTALL_PREFIX}/lib/libnlopt.0.dylib" "${CMAKE_INSTALL_PREFIX}/lib/python3.10/site-packages/pynest2d.so"
-        COMMAND /Library/Developer/CommandLineTools/usr/bin/install_name_tool -change @rpath/libprotobuf.3.15.7.0.dylib "${CMAKE_INSTALL_PREFIX}/lib/libprotobuf.3.15.7.0.dylib" "${CMAKE_INSTALL_PREFIX}/lib/python3.10/site-packages/pyArcus.so"
-        COMMAND /Library/Developer/CommandLineTools/usr/bin/install_name_tool -change @rpath/libArcus.3.dylib "${CMAKE_INSTALL_PREFIX}/lib/libArcus.3.dylib" "${CMAKE_INSTALL_PREFIX}/lib/python3.10/site-packages/pyArcus.so"
-        COMMENT "Changing the RPATH of pyArcus"
-    )
-endif()
-
 file(GLOB _projects projects/*.cmake)
 foreach(_project ${_projects})
     include(${_project})
