@@ -73,6 +73,7 @@ endif()
 if(BUILD_OS_OSX)
     add_custom_command(
         TARGET projects POST_BUILD
+        COMMAND /Library/Developer/CommandLineTools/usr/bin/install_name_tool -change @rpath/libnlopt.0.dylib "${CMAKE_INSTALL_PREFIX}/lib/libnlopt.0.dylib" "${CMAKE_INSTALL_PREFIX}/lib/python3.10/site-packages/pynest2d.so"
         COMMAND /Library/Developer/CommandLineTools/usr/bin/install_name_tool -change @rpath/libprotobuf.3.15.7.0.dylib "${CMAKE_INSTALL_PREFIX}/lib/libprotobuf.3.15.7.0.dylib" "${CMAKE_INSTALL_PREFIX}/lib/python3.10/site-packages/pyArcus.so"
         COMMAND /Library/Developer/CommandLineTools/usr/bin/install_name_tool -change @rpath/libArcus.3.dylib "${CMAKE_INSTALL_PREFIX}/lib/libArcus.3.dylib" "${CMAKE_INSTALL_PREFIX}/lib/python3.10/site-packages/pyArcus.so"
         COMMENT "Changing the RPATH of pyArcus"
