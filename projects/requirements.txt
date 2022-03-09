@@ -3,6 +3,7 @@
 # make sure you use the verbose flag and personally inspect the hosts that were used when generating
 # When updating a major Python version these need to be updates as well
 
+# pyinstaller
 pyinstaller==4.10 \
     --hash=sha256:05c21117b84199272ebd355b556af4714f6e79245e1c435d6f16653786d7d17e \
     --hash=sha256:0dcaf6557cdb2da763c46e06e95a94a7634ab03fb09d91bc77988b01ee05c907 \
@@ -15,6 +16,20 @@ pyinstaller==4.10 \
     --hash=sha256:cfed0b3a43e73550a43a094610328109564710b9514afa093ef7199d072cae87 \
     --hash=sha256:d4f79c0a774451f12baca4e476376418f011fa3039dde8fd172ea2aa8ff67bad \
     --hash=sha256:f2166ff2cd95eefb0d377ae8d1071f186fa25edd410ede65b376162d5ec41909
+altgraph==0.17.2 \
+    --hash=sha256:743628f2ac6a7c26f5d9223c91ed8ecbba535f506f4b6f558885a8a56a105857 \
+    --hash=sha256:ebf2269361b47d97b3b88e696439f6e4cbc607c17c51feb1754f90fb79839158
+pyinstaller-hooks-contrib==2022.2 \
+    --hash=sha256:7605e440ccb55904cb2a87d72e83642ef176fb7030c77e52ac4d9679bb3d1537 \
+    --hash=sha256:ab1d14fe053016fff7b0c6aea51d980bac6d02114b04063b46ef7dac70c70e1e
+pefile==2021.9.3; \
+    sys_platform=="win32" \
+    --hash=sha256:344a49e40a94e10849f0fe34dddc80f773a12b40675bf2f7be4b8be578bdd94a
+macholib==1.15.2; \
+    sys_platform=="darwin" \
+    --hash=sha256:1542c41da3600509f91c165cb897e7e54c0e74008bd8da5da7ebbee519d593d2 \
+    --hash=sha256:885613dd02d3e26dbd2b541eb4cc4ce611b841f827c0958ab98656e478b9e6f6
+
 cx-Freeze==6.10 \
     --hash=sha256:08a537681dcd1bcde9742584e91d86ef001fe798386f2834a904652d5b2a468a \
     --hash=sha256:1438db6d59be86e8483ea2bf2ff2f81374ca63d8a1d3a84706173cc1b98dd46f \
