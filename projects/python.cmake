@@ -1,4 +1,4 @@
-set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-ipv6 --without-pymalloc )
+set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --enable-ipv6 --without-pymalloc )
 set(python_build_command make -j ${N_PROC})
 set(python_install_command make install)
 
@@ -21,7 +21,7 @@ endif()
 
 if(BUILD_OS_LINUX)
     # Set a proper RPATH so everything depending on Python does not need LD_LIBRARY_PATH
-    set(python_configure_command LDFLAGS=-Wl,-rpath=${CMAKE_INSTALL_PREFIX}/lib ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX} --enable-shared )
+    set(python_configure_command LDFLAGS=-Wl,-rpath=${CMAKE_INSTALL_PREFIX}/lib ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX})
 endif()
 
 ExternalProject_Add(Python
