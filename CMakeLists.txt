@@ -1,9 +1,18 @@
-#Copyright (c) 2020 Ultimaker B.V.
-#cura-build-environment is released under the terms of the AGPLv3 or higher.
+# Copyright 2022 Ultimaker
+
+# Setting the MACOSX_DEPLOYMENT_TARGET needs to be done before the first project() call. Setting this value should also
+# take care of the CMAKE_OSX_SYSROOT. The variable is ignored on non-Apple systems.
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+include(GetFromEnvironmentOrCache)
+GetFromEnvironmentOrCache(
+        NAME
+            CMAKE_OSX_DEPLOYMENT_TARGET
+        DESCRIPTION
+            "Specify the minimum version of the target platform (e.g. macOS or iOS)")
 
 project(cura-build-environment)
 
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.18)
 
 if(NOT CURA_ARCUS_BRANCH_OR_TAG)
     set(CURA_ARCUS_BRANCH_OR_TAG "CURA-7924_sip_cmake_build")
