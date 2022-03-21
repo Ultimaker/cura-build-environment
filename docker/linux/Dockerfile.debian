@@ -60,6 +60,10 @@ RUN cmake --install "${BUILD_ENV_BUILD}"
 
 # Cleanup
 WORKDIR "${BUILD_ENV_INSTALL}"
+USER ultimaker
+RUN chown -R ultimaker:ultimaker "${BUILD_ENV_SOURCE}" && \
+    chown -R ultimaker:ultimaker "${BUILD_ENV_BUILD}" && \
+    chown -R ultimaker:ultimaker "${BUILD_ENV_INSTALL}"
 RUN rm -rf "${BUILD_ENV_SOURCE}" \
     rm -rf "${BUILD_ENV_BUILD}"
 
