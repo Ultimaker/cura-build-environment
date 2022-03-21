@@ -7,11 +7,15 @@ LABEL linux_distro="debian-buster" \
 
 # Set build time arguments
 ARG BUILD_ENV_BUILD_TYPE=Release
-ARG BUILD_ENV_PATH=/srv/cura-build-environment
-ARG BUILD_ENV_WORK_DIR=/tmp/cura-build-environment
+ARG BUILD_ENV_PATH="/srv/cura-build-environment"
+ARG BUILD_ENV_WORK_DIR="/tmp/cura-build-environment"
 ARG ARCUS_BRANCH_OR_TAG=master
 ARG SAVITAR_BRANCH_OR_TAG=master
 ARG PYNEST2D_BRANCH_OR_TAG=master
+
+ENV BUILD_ENV_BUILD_TYPE=$BUILD_ENV_BUILD_TYPE
+ENV BUILD_ENV_PATH=$BUILD_ENV_PATH
+ENV BUILD_ENV_WORK_DIR=$BUILD_ENV_WORK_DIR
 
 # Create unprivileged user
 RUN groupadd -g 1000 ultimaker && \
