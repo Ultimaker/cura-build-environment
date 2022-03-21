@@ -8,7 +8,7 @@ LABEL linux_distro="debian-buster" \
 # Set build time arguments
 ARG BUILD_ENV_BUILD_TYPE=Release
 ARG BUILD_ENV_SOURCE="/home/ultimaker/env/cura-build-environment/source"
-ARG BUILD_ENV_INSTALL"/home/ultimaker/env/cura-build-environment/install"
+ARG BUILD_ENV_INSTALL="/home/ultimaker/env/cura-build-environment/install"
 ARG BUILD_ENV_BUILD="/home/ultimaker/env/cura-build-environment/build"
 ARG ARCUS_BRANCH_OR_TAG=master
 ARG SAVITAR_BRANCH_OR_TAG=master
