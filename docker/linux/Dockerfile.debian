@@ -59,18 +59,12 @@ RUN cmake --build "${BUILD_ENV_BUILD}"
 RUN cmake --install "${BUILD_ENV_BUILD}"
 
 # Cleanup
-WORKDIR "${BUILD_ENV_INSTALL}"
-USER ultimaker
-RUN chown -R ultimaker:ultimaker "${BUILD_ENV_SOURCE}" && \
-    chown -R ultimaker:ultimaker "${BUILD_ENV_BUILD}" && \
-    chown -R ultimaker:ultimaker "${BUILD_ENV_INSTALL}"
-RUN rm -rf "${BUILD_ENV_SOURCE}" \
-    rm -rf "${BUILD_ENV_BUILD}"
-
 USER root
 WORKDIR /
 RUN rm -rf /tmp/* && \
-    rm -rf /var/cache
+    rm -rf /var/cache \
+    rm -rf "${BUILD_ENV_SOURCE}" \
+    rm -rf "${BUILD_ENV_BUILD}"
 
 # Change working directory
 WORKDIR /home/ultimaker
