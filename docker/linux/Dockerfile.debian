@@ -69,4 +69,4 @@ RUN rm -rf /tmp/* && \
 # Change working directory
 USER ultimaker
 WORKDIR /home/ultimaker/src/build
-CMD cmake
+CMD /usr/local/bin/cmake
