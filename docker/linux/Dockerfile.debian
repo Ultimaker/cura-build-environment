@@ -67,8 +67,6 @@ RUN rm -rf /tmp/* && \
     rm -rf "${BUILD_ENV_BUILD}"
 
 # Change working directory
-WORKDIR /home/ultimaker
-
-ADD ./docker/linux/entrypoint.sh /docker-entrypoint.sh
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
+USER ultimaker
+WORKDIR /home/ultimaker/src/build
+ENTRYPOINT ["cmake"]CMD["/home/ultimaker/src/"]
