@@ -1,0 +1,80 @@
+From be21706f3760bec8bd11f85ce02ed6792b07f51f Mon Sep 17 00:00:00 2001
+From: Mike Gilbert <floppymaster@gmail.com>
+Date: Mon, 11 Oct 2021 19:24:03 -0400
+Subject: [PATCH] bpo-45433: Do not link libpython against libcrypt (GH-28881)
+
+Save/restore LIBS when calling AC_SEARCH_LIBS(..., crypt). This avoid
+linking libpython with libcrypt.
+---
+ Doc/whatsnew/3.11.rst                                          | 2 ++
+ .../NEWS.d/next/Build/2021-10-11-16-08-37.bpo-45433.pVDkMV.rst | 1 +
+ configure                                                      | 3 +++
+ configure.ac                                                   | 3 +++
+ 4 files changed, 9 insertions(+)
+ create mode 100644 Misc/NEWS.d/next/Build/2021-10-11-16-08-37.bpo-45433.pVDkMV.rst
+
+diff --git a/Doc/whatsnew/3.11.rst b/Doc/whatsnew/3.11.rst
+index 0d30fe8b64..21a46b4b72 100644
+--- a/Doc/whatsnew/3.11.rst
++++ b/Doc/whatsnew/3.11.rst
+@@ -457,6 +457,8 @@ Build Changes
+ * CPython can now be built with the ThinLTO option via ``--with-lto=thin``.
+   (Contributed by Dong-hee Na and Brett Holman in :issue:`44340`.)
+ 
++* libpython is no longer linked against libcrypt.
++  (Contributed by Mike Gilbert in :issue:`45433`.)
+ 
+ C API Changes
+ =============
+diff --git a/Misc/NEWS.d/next/Build/2021-10-11-16-08-37.bpo-45433.pVDkMV.rst b/Misc/NEWS.d/next/Build/2021-10-11-16-08-37.bpo-45433.pVDkMV.rst
+new file mode 100644
+index 0000000000..27869f08fb
+--- /dev/null
++++ b/Misc/NEWS.d/next/Build/2021-10-11-16-08-37.bpo-45433.pVDkMV.rst
+@@ -0,0 +1 @@
++Avoid linking libpython with libcrypt.
+diff --git a/configure b/configure
+index 15c7c54b09..70f28b0c70 100755
+--- a/configure
++++ b/configure
+@@ -13227,6 +13227,8 @@ done
+ 
+ # We search for both crypt and crypt_r as one or the other may be defined
+ # This gets us our -lcrypt in LIBS when required on the target platform.
++# Save/restore LIBS to avoid linking libpython with libcrypt.
++LIBS_SAVE=$LIBS
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing crypt" >&5
+ $as_echo_n "checking for library containing crypt... " >&6; }
+ if ${ac_cv_search_crypt+:} false; then :
+@@ -13368,6 +13370,7 @@ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+ 
+ fi
+ 
++LIBS=$LIBS_SAVE
+ 
+ for ac_func in clock_gettime
+ do :
+diff --git a/configure.ac b/configure.ac
+index 6c65b2914b..afdc68363c 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -4085,6 +4085,8 @@ AC_CHECK_FUNCS(setpgrp,
+ 
+ # We search for both crypt and crypt_r as one or the other may be defined
+ # This gets us our -lcrypt in LIBS when required on the target platform.
++# Save/restore LIBS to avoid linking libpython with libcrypt.
++LIBS_SAVE=$LIBS
+ AC_SEARCH_LIBS(crypt, crypt)
+ AC_SEARCH_LIBS(crypt_r, crypt)
+ 
+@@ -4099,6 +4101,7 @@ char *r = crypt_r("", "", &d);
+     [AC_DEFINE(HAVE_CRYPT_R, 1, [Define if you have the crypt_r() function.])],
+     [])
+ )
++LIBS=$LIBS_SAVE
+ 
+ AC_CHECK_FUNCS(clock_gettime, [], [
+     AC_CHECK_LIB(rt, clock_gettime, [
+-- 
+2.35.1
+

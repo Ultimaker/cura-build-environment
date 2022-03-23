@@ -1,6 +1,7 @@
 set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --enable-ipv6 --without-pymalloc )
 set(python_build_command make -j ${N_PROC})
 set(python_install_command make install)
+set(patch_command )
 
 if(BUILD_OS_WINDOWS)
     # Otherwise Python will not be able to get external dependencies.
@@ -22,11 +23,15 @@ endif()
 if(BUILD_OS_LINUX)
     # Set a proper RPATH so everything depending on Python does not need LD_LIBRARY_PATH
     set(python_configure_command LDFLAGS=-Wl,-rpath=${CMAKE_INSTALL_PREFIX}/lib ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX})
+
+    # FIXME: Not longer needed when we update to Python 3.11
+    set(patch_command git apply ${CMAKE_SOURCE_DIR}/projects/0001-bpo-45433-Do-not-link-libpython-against-libcrypt-GH-.patch)
 endif()
 
 ExternalProject_Add(Python
-    URL https://www.python.org/ftp/python/3.10.2/Python-3.10.2.tgz
-    URL_HASH SHA256=3c0ede893011319f9b0a56b44953a3d52c7abf9657c23fb4bc9ced93b86e9c97
+    GIT_REPOSITORY https://github.com/python/cpython.git
+    GIT_TAG v3.10.2
+    PATCH_COMMAND ${patch_command}
     CONFIGURE_COMMAND "${python_configure_command}"
     BUILD_COMMAND ${python_build_command}
     INSTALL_COMMAND ${python_install_command}
