@@ -34,7 +34,10 @@ ADD . "${BUILD_ENV_SOURCE}"
 
 ENV PATH="${BUILD_ENV_INSTALL}/bin:/usr/local/bin/:${PATH}" \
     PKG_CONFIG_PATH="${BUILD_ENV_INSTALL}/lib/pkgconfig:${PKG_CONFIG_PATH}" \
-    LD_LIBRARY_PATH="${BUILD_ENV_INSTALL}/lib:${LD_LIBRARY_PATH}"
+    LD_LIBRARY_PATH="${BUILD_ENV_INSTALL}/lib:/home/ultimaker/src/install/lib:/lib/x86_64-linux-gnu/:/usr/lib/x86_64-linux-gnu/:${LD_LIBRARY_PATH}" \
+    PYTHONPATH=/home/ultimaker/src/install/lib/python3/dist-packages/:/home/ultimaker/env/cura-build-environment/install/lib/python3.10/site-packages/ \
+    HOME=/home/ultimaker \
+    USER=ultimaker
 
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.21.5/cmake-3.21.5.tar.gz && \
     tar -zxvf cmake-3.21.5.tar.gz && \
