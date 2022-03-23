@@ -25,13 +25,13 @@ if(BUILD_OS_LINUX)
     set(python_configure_command LDFLAGS=-Wl,-rpath=${CMAKE_INSTALL_PREFIX}/lib ${python_configure_command} --with-openssl=${CMAKE_INSTALL_PREFIX})
 
     # FIXME: Not longer needed when we update to Python 3.11
-    set(patch_command "git apply ${CMAKE_SOURCE_DIR}/projects/0001-bpo-45433-Do-not-link-libpython-against-libcrypt-GH-.patch")
+    set(patch_command git apply ${CMAKE_SOURCE_DIR}/projects/0001-bpo-45433-Do-not-link-libpython-against-libcrypt-GH-.patch)
 endif()
 
 ExternalProject_Add(Python
     GIT_REPOSITORY https://github.com/python/cpython.git
     GIT_TAG v3.10.2
-    PATCH_COMMAND ${patch_command}
+    PATCH_COMMAND "${patch_command}"
     CONFIGURE_COMMAND "${python_configure_command}"
     BUILD_COMMAND ${python_build_command}
     INSTALL_COMMAND ${python_install_command}
