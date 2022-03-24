@@ -53,6 +53,7 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.21.5/cmake-3.21.5
 WORKDIR "${BUILD_ENV_BUILD}"
 USER ultimaker
 RUN cmake -DCMAKE_BUILD_TYPE=${BUILD_ENV_BUILD_TYPE} \
+          -DCMAKE_PREFIX_PATH=${BUILD_ENV_INSTALL} \
           -DCMAKE_INSTALL_PREFIX=${BUILD_ENV_INSTALL} \
           -DARCUS_BRANCH_OR_TAG=${ARCUS_BRANCH_OR_TAG} \
           -DSAVITAR_BRANCH_OR_TAG=${SAVITAR_BRANCH_OR_TAG} \
