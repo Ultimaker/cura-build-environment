@@ -59,7 +59,7 @@ endif()
 
 if (APPLE)
     message(STATUS "Compiling against libc++")
-    add_compile_options("-stdlib=libc++")
+    set(CMAKE_CXX_FLAGS ("-stdlib=libc++")
 endif()
 
 file(GLOB _projects projects/*.cmake)
