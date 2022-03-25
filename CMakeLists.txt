@@ -57,6 +57,11 @@ if(Linux)
     )
 endif()
 
+if (APPLE)
+    message(STATUS "Compiling against libc++")
+    add_compile_options("-stdlib=libc++")
+endif()
+
 file(GLOB _projects projects/*.cmake)
 foreach(_project ${_projects})
     include(${_project})
