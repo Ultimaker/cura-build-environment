@@ -1,5 +1,5 @@
 if(BUILD_OS_OSX OR BUILD_OS_LINUX)
-    get_property(MAIN_CXX_FLAGS GLOBAL COMPILE_OPTIONS)
+    get_property(MAIN_CXX_FLAGS GLOBAL PROPERTY COMPILE_OPTIONS)
     if(NOT MAIN_CXX_FLAGS)
         message(STATUS" No CXX_FLAGS set for zlib")
         set(MAIN_CXX_FLAGS )
