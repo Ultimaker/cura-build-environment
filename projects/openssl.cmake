@@ -4,7 +4,21 @@ if(NOT BUILD_OS_WINDOWS)
     if(BUILD_OS_LINUX)
         set(_openssl_configure perl Configure --prefix=${CMAKE_INSTALL_PREFIX} --openssldir=${CMAKE_INSTALL_PREFIX} no-ssl2 no-ssl3 no-zlib shared enable-cms linux-x86_64 enable-ec_nistp_64_gcc_128)
     elseif(BUILD_OS_OSX)
-        set(_openssl_configure perl Configure --prefix=${CMAKE_INSTALL_PREFIX} --openssldir=${CMAKE_INSTALL_PREFIX} no-ssl2 no-ssl3 no-zlib shared enable-cms darwin64-x86_64-cc enable-ec_nistp_64_gcc_128)
+        GetFromEnvironmentOrCache(
+                NAME
+                    CMAKE_CXX_COMPILER
+                DEFAULT
+                    clang++
+                DESCRIPTION
+                    "Specify the CXX compiler to use")
+        GetFromEnvironmentOrCache(
+                NAME
+                    CMAKE_C_COMPILER
+                DEFAULT
+                    clang
+                DESCRIPTION
+                    "Specify the C compiler to use")
+        set(_openssl_configure CXXFLAGS="-stdlib=libc++" CXX=${CMAKE_CXX_COMPILER} CC=${CMAKE_C_COMPILER} perl Configure --prefix=${CMAKE_INSTALL_PREFIX} --openssldir=${CMAKE_INSTALL_PREFIX} no-ssl2 no-ssl3 no-zlib shared enable-cms darwin64-x86_64-cc enable-ec_nistp_64_gcc_128)
     endif()
 
     ExternalProject_Add(OpenSSL
