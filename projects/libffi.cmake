@@ -1,14 +1,28 @@
 if(NOT BUILD_OS_WINDOWS)
-    set(_libffi_config_cmd
-        ./configure --disable-dependency-tracking --disable-silent-rules --enable-portable-binary
-                    --prefix=${CMAKE_INSTALL_PREFIX}
-        )
 
     if(BUILD_OS_OSX)
+        GetFromEnvironmentOrCache(
+                NAME
+                    CMAKE_CXX_COMPILER
+                DEFAULT
+                    clang++
+                DESCRIPTION
+                    "Specify the CXX compiler to use")
+        GetFromEnvironmentOrCache(
+                NAME
+                    CMAKE_C_COMPILER
+                DEFAULT
+                    clang
+                DESCRIPTION
+                    "Specify the C compiler to use")
+
+        set(_libffi_config_cmd CXXFLAGS="-stdlib=libc++" CXX=${CMAKE_CXX_COMPILER} CC=${CMAKE_C_COMPILER} ./configure --disable-dependency-tracking --disable-silent-rules --enable-portable-binary --prefix=${CMAKE_INSTALL_PREFIX})
         if(CMAKE_OSX_SYSROOT)
             # On OS X, make sure the right OS X SDK is used.
             list(APPEND _libffi_config_cmd --with-sysroot=${CMAKE_OSX_SYSROOT})
         endif()
+    else()
+        set(_libffi_config_cmd ./configure --disable-dependency-tracking --disable-silent-rules --enable-portable-binary --prefix=${CMAKE_INSTALL_PREFIX})
     endif()
 
     ExternalProject_Add(libffi
