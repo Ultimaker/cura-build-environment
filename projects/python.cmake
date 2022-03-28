@@ -1,4 +1,23 @@
-set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --enable-ipv6 --without-pymalloc )
+if(BUILD_OS_OSX)
+    GetFromEnvironmentOrCache(
+            NAME
+                CMAKE_CXX_COMPILER
+            DEFAULT
+                clang++
+            DESCRIPTION
+                "Specify the CXX compiler to use")
+    GetFromEnvironmentOrCache(
+            NAME
+                CMAKE_C_COMPILER
+            DEFAULT
+                clang
+            DESCRIPTION
+                "Specify the C compiler to use")
+    set(python_configure_command CXXFLAGS="-stdlib=libc++" CXX=${CMAKE_CXX_COMPILER} CC=${CMAKE_C_COMPILER} ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --enable-ipv6 --without-pymalloc )
+else()
+    set(python_configure_command ./configure --prefix=${CMAKE_INSTALL_PREFIX} --enable-shared --enable-ipv6 --without-pymalloc )
+
+endif()
 set(python_build_command make -j ${N_PROC})
 set(python_install_command make install)
 set(patch_command )
