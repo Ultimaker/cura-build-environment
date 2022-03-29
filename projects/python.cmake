@@ -48,8 +48,8 @@ if(BUILD_OS_LINUX)
 endif()
 
 ExternalProject_Add(Python
-    GIT_REPOSITORY https://github.com/python/cpython.git
-    GIT_TAG v3.10.2
+    URL https://www.python.org/ftp/python/3.10.2/Python-3.10.2.tgz
+    URL_HASH SHA256=3c0ede893011319f9b0a56b44953a3d52c7abf9657c23fb4bc9ced93b86e9c97
     PATCH_COMMAND "${patch_command}"
     CONFIGURE_COMMAND "${python_configure_command}"
     BUILD_COMMAND ${python_build_command}
