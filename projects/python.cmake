@@ -25,8 +25,8 @@ if(BUILD_OS_LINUX)
 endif()
 
 ExternalProject_Add(Python
-    URL https://www.python.org/ftp/python/3.10.0/Python-3.10.0.tgz
-    URL_HASH SHA256=c4e0cbad57c90690cb813fb4663ef670b4d0f587d8171e2c42bd4c9245bd2758
+    URL https://www.python.org/ftp/python/3.10.4/Python-3.10.4.tgz
+    URL_HASH SHA256=f3bcc65b1d5f1dc78675c746c98fcee823c038168fc629c5935b044d0911ad28
     CONFIGURE_COMMAND "${python_configure_command}"
     BUILD_COMMAND ${python_build_command}
     INSTALL_COMMAND ${python_install_command}
