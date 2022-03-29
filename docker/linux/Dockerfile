@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:buster AS base_environment
 
 LABEL linux_distro="debian-buster" \
       architecture="amd64" \
@@ -27,6 +27,7 @@ RUN apt update -y && \
         libdbus-1-3 libwayland-egl1 libwayland-cursor0
 
 # Set up the working directory
+RUN git config --global http.postBuffer 100000000
 RUN mkdir -p "${BUILD_ENV_SOURCE}" "${BUILD_ENV_BUILD}" "${BUILD_ENV_INSTALL}" && \
     chown -R ultimaker:ultimaker "${BUILD_ENV_SOURCE}" && \
     chown -R ultimaker:ultimaker "${BUILD_ENV_BUILD}" && \
@@ -50,6 +51,14 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.21.5/cmake-3.21.5
     rm -rf cmake-3.21.5 && \
     apt-get remove -y cmake
 
+# Cleanup
+USER root
+WORKDIR /
+RUN rm -rf /tmp/* && \
+    rm -rf /var/cache \
+
+FROM base_environment AS cura_build_environment
+
 # Build the build environment
 WORKDIR "${BUILD_ENV_BUILD}"
 USER ultimaker:ultimaker
@@ -66,9 +75,7 @@ RUN cmake --install "${BUILD_ENV_BUILD}"
 # Cleanup
 USER root
 WORKDIR /
-RUN rm -rf /tmp/* && \
-    rm -rf /var/cache \
-    rm -rf "${BUILD_ENV_SOURCE}" \
+RUN rm -rf "${BUILD_ENV_SOURCE}" \
     rm -rf "${BUILD_ENV_BUILD}"
 
 # Change working directory
