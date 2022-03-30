@@ -146,32 +146,50 @@ contain all build essentials to both build cura-build-environment and cura-build
 
 Build the docker file
 ```bash
-docker build -t cura-build -f docker/linux/Dockerfile
+cd docker/linux
+docker build -t cura-build-env:<branch_name> -f Dockerfile .
 ```
 
-This docker image can be used to create a cura-build-environment and a cura-build.
+This docker image can be used to create a cura-builder which helps us build the cura-build and cura-build-environment.
 
 First we need to create a build environment
 ```bash
-docker run --name cura-builder \
+docker create -t cura-env-builder:<branch_name \
 -v <source_path_cura-build-environment>:/home/ultimaker/source \
 -v <build_path_cura-build-environment>:/home/ultimaker/build \
 -v <install_path_cura-build-environment>:/home/ultimaker/install \
--v ~/.conan/data:/home/ultimaker/.conan/data
+-v ~/.conan/data:/home/ultimaker/.conan/data cura-build-env:<branch_name>
 ```
 > NOTE:
 > By specifying the conan data folder we ensure that big dependencies, such as Python
 > and Boost can be used in multiple environments and are reused when we are recreating
 > the environment from scratch.
 
+We can then build the environment with:
+```bash
+cd <root_cura_build_environment>
+docker run cura-env-builder:cura-8640 \
+-DLIBNEST2D_BRANCH_OR_TAG=<branch> \
+-DCMAKE_......
+```
+
 Once the environment is build and installed in the path `<install_path_cura-build-environment>` we can then check out
 the cura-build repository and build Cura using the cura-builder and the previously build cura-build-environment.
 
 ```bash
-docker run --name cura-builder \
--v <source_path_cura-build>:/home/ultimaker/source \
--v <build_path_cura-build>:/home/ultimaker/build \
--v <install_path_cura-build>:/home/ultimaker/install \
+docker create -t cura-builder:<branch_name \
+-v <source_path_cura-build-environment>:/home/ultimaker/source \
+-v <build_path_cura-build-environment>:/home/ultimaker/build \
+-v <install_path_cura-build-environment>:/home/ultimaker/install \
 -v <install_path_cura-build-environment>:/home/ultimaker/env \
--v ~/.conan/data:/home/ultimaker/.conan/data
+-v ~/.conan/data:/home/ultimaker/.conan/data cura-build-env:<branch_name
+```
+Notice the extra volume, which contains the previous build environment
+
+We can then build Cura with:
+```bash
+cd <root_cura_build>
+docker run cura-builder:cura-8640 \
+-DURANIUM_BRANCH_OR_TAG=<branch> \
+-DCMAKE_......
 ```

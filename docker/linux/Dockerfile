@@ -6,10 +6,10 @@ LABEL linux_distro="debian-buster" \
       qt_version="6.2.2"
 
 # Set build time arguments
-ARG SOURCE="/home/ultimaker/source"
-ARG INSTALL="/home/ultimaker/install"
-ARG BUILD="/home/ultimaker/build"
-ARG ENVIRONMENT="/home/ultimaker/env"
+ARG SOURCE_DIR="/home/ultimaker/source"
+ARG INSTALL_DIR="/home/ultimaker/install"
+ARG BUILD_DIR="/home/ultimaker/build"
+ARG ENVIRONMENT_DIR="/home/ultimaker/env"
 ARG CONAN_DATA="/home/ultimaker/.conan/data"
 
 # Create unprivileged user
@@ -31,10 +31,18 @@ RUN apt update -y && \
         libxcb-keysyms1-dev libxcb-randr0-dev libxcb-shape0-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-xinerama0-dev \
         xkb-data libxcb-dri3-dev uuid-dev libxcb-util0-dev
 
-ENV PATH="/home/ultimaker/env/bin:/home/ultimaker/install/bin:/usr/local/bin/:${PATH}" \
-    LD_LIBRARY_PATH="/home/ultimaker/env/lib:/home/ultimaker/install/lib:/usr/lib/x86_64-linux-gnu/:/usr/lib/:/lib/:/lib/x86_64-linux-gnu/:${LD_LIBRARY_PATH}" \
+ENV PATH="${INSTALL_DIR}/bin:${INSTALL_DIR}/bin:${BUILD_DIR}/bin:/usr/local/bin/:${PATH}" \
+    LD_LIBRARY_PATH="${INSTALL_DIR}/lib:${INSTALL_DIR}/lib:${BUILD_DIR}/lib:/usr/lib/x86_64-linux-gnu/:/usr/lib/:/lib/:/lib/x86_64-linux-gnu/:${LD_LIBRARY_PATH}" \
     HOME=/home/ultimaker \
-    USER=ultimaker
+    USER=ultimaker \
+    SOURCE_PATH=${SOURCE_DIR} \
+    INSTALL_PATH=${INSTALL_DIR} \
+    BUILD_PATH=${BUILD_DIR} \
+    CONAN_PATH="${BUILD_DIR}/conan" \
+    ENVIRONMENT_PATH=${ENVIRONMENT_DIR}
+
+# Change working directory
+WORKDIR /home/ultimaker/
 
 FROM base AS base_cmake
 
@@ -45,7 +53,7 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.21.5/cmake-3.21.5
     make -j $(nproc) && \
     make install && \
     cd .. && \
-    rm -rf cmake-3.21.5 && \
+    rm -rf cmake-3.21.5* && \
     apt-get remove -y cmake
 
 FROM base_cmake AS base_python
@@ -55,7 +63,9 @@ RUN wget https://www.python.org/ftp/python/3.10.2/Python-3.10.2.tgz && \
     cd Python-3.10.2 && \
     ./configure --enable-optimizations && \
     make -j $(nproc) && \
-    make install
+    make install && \
+    cd .. && \
+    rm -rf Python-3.10.2*
 
 FROM base_python AS base_conan
 
@@ -64,7 +74,8 @@ RUN python3 -m pip install conan && \
     conan profile update settings.compiler.libcxx=libstdc++11 default && \
     conan config install https://github.com/ultimaker/conan-config.git && \
     conan config set general.revisions_enabled=1 && \
-    conan config set general.scm_to_conandata=1
+    conan config set general.scm_to_conandata=1 && \
+    chown -R ultimaker:ultimaker "$HOME/.conan"
 
 FROM base_conan AS cura_build_environment
 
@@ -75,9 +86,18 @@ RUN rm -rf /tmp/* && \
     rm -rf /var/cache
 
 # Set up the build folders
-RUN mkdir -p /home/ultimaker/source /home/ultimaker/build /home/ultimaker/install /home/ultimaker/env && \
-    chown -R ultimaker:ultimaker /home/ultimaker
 
-# Change working directory
+RUN mkdir -p "$SOURCE_PATH" "$BUILD_PATH" "$BUILD_PATH/conan" "$INSTALL_PATH" $ENVIRONMENT_PATH && \
+    chown -R ultimaker:ultimaker "$SOURCE_PATH" && \
+    chown -R ultimaker:ultimaker "$BUILD_PATH" && \
+    chown -R ultimaker:ultimaker "$INSTALL_PATH" && \
+    chown -R ultimaker:ultimaker $ENVIRONMENT_PATH && \
+    chown -R ultimaker:ultimaker $HOME
+
 USER ultimaker:ultimaker
-WORKDIR /home/ultimaker/
+
+WORKDIR ${HOME}
+COPY ./entrypoint.py .
+WORKDIR ${BUILD_DIR}
+
+ENTRYPOINT ["python3", "../entrypoint.py"]
