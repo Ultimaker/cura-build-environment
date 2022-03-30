@@ -7,9 +7,11 @@ gtest/1.8.1
 nlopt/2.7.0
 
 [generators]
-virtualrunenv
+VirtualRunEnv
+VirtualBuildEnv
 CMakeDeps
 CMakeToolchain
+json
 
 [options]
 cpython:optimizations=True
