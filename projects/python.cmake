@@ -40,3 +40,4 @@ add_custom_command(
         COMMAND ${Python_EXECUTABLE} -m venv ${CMAKE_INSTALL_PREFIX}
         COMMAND ${CMAKE_COMMAND} -E env "PYTHONPATH=${Python_SITEARCH}" ${Python_EXECUTABLE} -m pip install --prefix ${CMAKE_INSTALL_PREFIX} --require-hashes -r  ${CMAKE_SOURCE_DIR}/projects/requirements.txt
         MAIN_DEPENDENCY Python)
+add_dependencies(projects Python)

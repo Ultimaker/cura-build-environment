@@ -22,6 +22,10 @@ if(N_PROC EQUAL 0)
     set(N_PROC 1)
 endif()
 
+add_custom_target(projects)
+
+message(STATUS "Using toolchain: ${CMAKE_TOOLCHAIN_FILE}")
+
 include(projects/python.cmake)
 include(projects/libnest2d.cmake)
 include(projects/pynest2d.cmake)
