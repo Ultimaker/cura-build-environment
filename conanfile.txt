@@ -1,5 +1,4 @@
 [requires]
-cpython/3.10.0
 protobuf/3.17.1
 clipper/6.4.2
 boost/1.70.0
@@ -14,7 +13,3 @@ CMakeToolchain
 json
 
 [options]
-cpython:optimizations=True
-cpython:lto=True
-cpython:shared=True
-cpython:pymalloc=False
