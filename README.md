@@ -5,6 +5,27 @@
 This repository contains helper scripts for building Cura from source. It will create a base environment from which
 you can (re)build Cura on a regular basis, in an time efficient matter. It consists of the following tools.
 
+## System Requirements
+
+- Python 3.10.2
+- conan >= 1.46
+
+### Linux
+- GCC >= 8.0
+- CMake >= 3.16
+- GNU Make >= 4
+- Docker >= 20
+
+### MacOS
+- MacOS SDK 
+- clang-apple
+- MacOS
+
+### Windows
+- Visual Studio >= 16
+- NMake
+- Docker
+
 ## CMake script
 
 The CMake project will ensure that the following dependencies are build and can be installed in a location for future
