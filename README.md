@@ -175,6 +175,11 @@ This docker image can be used to create a cura-builder which helps us build the 
 
 First we need to create a build environment
 ```bash
+DOCKER_BUILDKIT=1 docker build --build-arg JFROG_PASSWORD=JmZofe2*EjvoN=?9=4 -f Dockerfile -t cura-build-env 
+docker run -v /mnt/projects/ultimaker/cura/cura-build-environment:/home/ultimaker/source -v /mnt/projects/ultimaker/cura/cura-build-environment/cmake-build-release-docker/:/home/ultimaker/build -v /mnt/projects/ultimaker/cura/cura-build-environment/install/:/home/ultimaker/install -v /home/peer23peer/.conan/data:/home/ultimaker/.conan/data --name blerker cura-env-builder:latest 
+```
+
+```bash
 docker create -t cura-env-builder:<branch_name \
 -v <source_path_cura-build-environment>:/home/ultimaker/source \
 -v <build_path_cura-build-environment>:/home/ultimaker/build \

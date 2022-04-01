@@ -13,6 +13,8 @@ GetFromEnvironmentOrCache(
 project(cura-build-environment)
 cmake_minimum_required(VERSION 3.18)
 
+include(cmake/conan.cmake)
+
 include(ExternalProject)
 include(GNUInstallDirs)
 include(ProcessorCount)
@@ -24,10 +26,8 @@ endif()
 
 add_custom_target(projects)
 
-message(STATUS "Using toolchain: ${CMAKE_TOOLCHAIN_FILE}")
-
 include(projects/python.cmake)
 include(projects/libnest2d.cmake)
 include(projects/pynest2d.cmake)
-include(projects/arcus.cmake)
-include(projects/savitar.cmake)
+#include(projects/arcus.cmake)
+#include(projects/savitar.cmake)
