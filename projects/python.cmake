@@ -38,6 +38,6 @@ add_custom_target(Python ALL COMMENT "Create Virtual Environment")
 add_custom_command(
         TARGET Python
         COMMAND ${Python_EXECUTABLE} -m venv ${CMAKE_INSTALL_PREFIX}
-        COMMAND ${CMAKE_COMMAND} -E env "PYTHONPATH=${PYTHONPATH}" ${CMAKE_INSTALL_PREFIX}/bin/python3 -m pip install --prefix ${CMAKE_INSTALL_PREFIX} --require-hashes -r  ${CMAKE_SOURCE_DIR}/projects/requirements.txt
+        COMMAND ${CMAKE_COMMAND} -E env "PYTHONPATH=${PYTHONPATH}" ${Python_EXECUTABLE} -m pip install --prefix ${CMAKE_INSTALL_PREFIX} --require-hashes -r  ${CMAKE_SOURCE_DIR}/projects/requirements.txt
         MAIN_DEPENDENCY Python)
 add_dependencies(projects Python)
