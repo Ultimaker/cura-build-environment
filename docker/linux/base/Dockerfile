@@ -59,6 +59,8 @@ RUN apt-get -qq update \
        llvm \
        libxml2-dev \
        libxmlsec1-dev \
+       g++-5 \
+       gcc-5 \
     && rm -rf /var/lib/apt/lists/* \
     && wget -q --no-check-certificate https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION_FULL}/cmake-${CMAKE_VERSION_FULL}.tar.gz \
     && tar -xzf cmake-${CMAKE_VERSION_FULL}.tar.gz \
