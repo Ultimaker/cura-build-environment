@@ -329,6 +329,10 @@ services:
     image: ${DOCKER_USERNAME}/gcc5-${DISTRO}:${DOCKER_TAG}
     container_name: gcc5
     tty: true
+    ports:
+      - 2222:22
+    volumes:
+      - $HOME/.conan/data:/home/conan/.conan/data
   gcc6:
     build:
       context: gcc
@@ -339,6 +343,10 @@ services:
     image: ${DOCKER_USERNAME}/gcc6-${DISTRO}:${DOCKER_TAG}
     container_name: gcc6
     tty: true
+    ports:
+      - 2222:22
+    volumes:
+      - $HOME/.conan/data:/home/conan/.conan/data
   gcc7:
     build:
       context: gcc
@@ -349,6 +357,10 @@ services:
     image: ${DOCKER_USERNAME}/gcc7-${DISTRO}:${DOCKER_TAG}
     container_name: gcc7
     tty: true
+    ports:
+      - 2222:22
+    volumes:
+      - $HOME/.conan/data:/home/conan/.conan/data
   gcc8:
     build:
       context: gcc
@@ -359,6 +371,10 @@ services:
     image: ${DOCKER_USERNAME}/gcc8-${DISTRO}:${DOCKER_TAG}
     container_name: gcc8
     tty: true
+    ports:
+      - 2222:22
+    volumes:
+      - $HOME/.conan/data:/home/conan/.conan/data
   gcc9:
     build:
       context: gcc
@@ -369,6 +385,10 @@ services:
     image: ${DOCKER_USERNAME}/gcc9-${DISTRO}:${DOCKER_TAG}
     container_name: gcc9
     tty: true
+    ports:
+      - 2222:22
+    volumes:
+      - $HOME/.conan/data:/home/conan/.conan/data
   gcc10:
     build:
       context: gcc
@@ -379,6 +399,10 @@ services:
     image: ${DOCKER_USERNAME}/gcc10-${DISTRO}:${DOCKER_TAG}
     container_name: gcc10
     tty: true
+    ports:
+      - 2222:22
+    volumes:
+      - $HOME/.conan/data:/home/conan/.conan/data
   gcc11:
     build:
       context: gcc
@@ -389,6 +413,10 @@ services:
     image: ${DOCKER_USERNAME}/gcc11-${DISTRO}:${DOCKER_TAG}
     container_name: gcc11
     tty: true
+    ports:
+      - 2222:22
+    volumes:
+      - $HOME/.conan/data:/home/conan/.conan/data
   clang10:
     build:
       context: clang
@@ -399,6 +427,10 @@ services:
     image: ${DOCKER_USERNAME}/clang10-${DISTRO}:${DOCKER_TAG}
     container_name: clang10
     tty: true
+    ports:
+      - 2222:22
+    volumes:
+      - $HOME/.conan/data:/home/conan/.conan/data
   clang11:
     build:
       context: clang
@@ -409,6 +441,10 @@ services:
     image: ${DOCKER_USERNAME}/clang11-${DISTRO}:${DOCKER_TAG}
     container_name: clang11
     tty: true
+    ports:
+      - 2222:22
+    volumes:
+      - $HOME/.conan/data:/home/conan/.conan/data
   clang12:
     build:
       context: clang
@@ -419,7 +455,10 @@ services:
     image: ${DOCKER_USERNAME}/clang12-${DISTRO}:${DOCKER_TAG}
     container_name: clang12
     tty: true
-
+    ports:
+      - 2222:22
+    volumes:
+      - $HOME/.conan/data:/home/conan/.conan/data
   clang13:
     build:
       context: clang
@@ -430,3 +469,7 @@ services:
     image: ${DOCKER_USERNAME}/clang13-${DISTRO}:${DOCKER_TAG}
     container_name: clang13
     tty: true
+    ports:
+      - 2222:22
+    volumes:
+      - $HOME/.conan/data:/home/conan/.conan/data
