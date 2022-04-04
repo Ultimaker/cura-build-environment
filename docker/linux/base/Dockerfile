@@ -9,7 +9,7 @@ ARG PYTHON_VERSION_FULL
 
 ENV PYENV_ROOT=/opt/pyenv \
     PATH=/usr/local/bin/:/opt/pyenv/versions/${PYTHON_VERSION_FULL}/bin/:/opt/conan/binutils/bin:${PATH} \
-    LD_LIBRARY_PATH="/home/conan/env${LD_LIBRARY_PATH}" \
+    LD_LIBRARY_PATH="/home/conan/env:${LD_LIBRARY_PATH}" \
     CONAN_USER_HOME=/home/conan
 
 ARG CMAKE_VERSION
@@ -59,30 +59,65 @@ RUN apt-get -qq update \
        llvm \
        libxml2-dev \
        libxmlsec1-dev \
-       g++-5 \
-       gcc-5 \
+       libgl1-mesa-dev \
+       libx11-dev \
+       libx11-xcb-dev \
+       libfontenc-dev \
+       libice-dev \
+       libsm-dev \
+       libxau-dev \
+       libxaw7-dev \
+       libxcomposite-dev \
+       libxcursor-dev \
+       libxdamage-dev \
+       libxdmcp-dev \
+       libxext-dev \
+       libxfixes-dev \
+       libxft-dev \
+       libxi-dev \
+       libxinerama-dev \
+       libxkbfile-dev \
+       libxmu-dev \
+       libxmuu-dev \
+       libxpm-dev \
+       libxrandr-dev \
+       libxrender-dev \
+       libxres-dev \
+       libxss-dev \
+       libxt-dev \
+       libxtst-dev \
+       libxv-dev \
+       libxvmc-dev \
+       libxxf86vm-dev \
+       xtrans-dev \
+       libxcb-render0-dev \
+       libxcb-render-util0-dev \
+       libxcb-xkb-dev \
+       libxcb-icccm4-dev \
+       libxcb-image0-dev \
+       libxcb-keysyms1-dev \
+       libxcb-randr0-dev \
+       libxcb-shape0-dev \
+       libxcb-sync-dev \
+       libxcb-xfixes0-dev \
+       libxcb-xinerama0-dev \
+       xkb-data \
+       libxcb-dri3-dev \
+       uuid-dev \
+       libxcb-util-dev \
     && rm -rf /var/lib/apt/lists/* \
-    && wget -q --no-check-certificate https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION_FULL}/cmake-${CMAKE_VERSION_FULL}.tar.gz \
-    && tar -xzf cmake-${CMAKE_VERSION_FULL}.tar.gz \
-       --exclude=bin/cmake-gui \
-       --exclude=doc/cmake \
-       --exclude=share/cmake-${CMAKE_VERSION}/Help \
-       --exclude=share/vim \
-       --exclude=share/vim \
-    && cp -fR cmake-${CMAKE_VERSION_FULL}/* /usr \
-    && rm -rf /root/cmake-${CMAKE_VERSION_FULL} \
-    && rm /root/cmake-${CMAKE_VERSION_FULL}.tar.gz \
-    && curl -fL https://getcli.jfrog.io | sh -s 1.48.1 \
-    && mv jfrog /usr/local/bin/jfrog \
-    && chmod +x /usr/local/bin/jfrog \
-    && groupadd 1001 -g 1001 \
-    && groupadd 1000 -g 1000 \
-    && groupadd 2000 -g 2000 \
-    && groupadd 999 -g 999 \
-    && useradd -ms /bin/bash conan -g 1001 -G 1000,2000,999 \
+    && useradd -ms /bin/bash conan \
     && printf "conan:conan" | chpasswd \
     && adduser conan sudo \
     && printf "conan ALL= NOPASSWD: ALL\\n" >> /etc/sudoers \
+    && wget -q --no-check-certificate https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION_FULL}/cmake-${CMAKE_VERSION_FULL}.tar.gz \
+    && tar -xzf cmake-${CMAKE_VERSION_FULL}.tar.gz \
+    && cd cmake-${CMAKE_VERSION_FULL} \
+    && ./bootstrap \
+    && make -j $(nproc) \
+    && make install \
+    && cd .. \
+    && rm /root/cmake-${CMAKE_VERSION_FULL}.tar.gz \
     && wget --no-check-certificate --quiet -O pyenv-installer https://raw.githubusercontent.com/pyenv/pyenv-installer/56d708c8bda56370c4bc1e2fce68087cfcd007eb/bin/pyenv-installer \
     && chmod +x pyenv-installer \
     && ./pyenv-installer \
@@ -111,7 +146,7 @@ RUN apt-get -qq update \
     && mv /etc/ld.so.conf.d/libc.conf /etc/ld.so.conf.d/10libc.conf \
     && rm /etc/ld.so.cache \
     && ldconfig -C /etc/ld.so.cache \
-    && apt-get -qq purge -y g++-multilib gcc gcc-5 \
+    && apt-get -qq purge -y g++-multilib \
     && apt-get -qq autoremove -y \
     && apt-get -qq autoclean \
     && apt-get -qq update \
@@ -120,8 +155,8 @@ RUN apt-get -qq update \
     && runuser -u conan -- printf 'eval "$(pyenv init -)"\n' >> /home/conan/.bashrc \
     && runuser -u conan -- printf 'eval "$(pyenv virtualenv-init -)"\n' >> ~/.bashrc \
     && mkdir -p /home/conan/env \
-    && chown -R conan:1001 /opt/pyenv \
-    && chown -R conan:1001 /opt/conan
+    && chown -R conan:conan /opt/pyenv \
+    && chown -R conan:conan /opt/conan
 
 USER conan
 WORKDIR /home/conan
@@ -129,4 +164,5 @@ WORKDIR /home/conan
 RUN python -m pip install conan==${CONAN_VERSION} \
     && CONAN_REVISIONS_ENABLED=1 CONAN_USER_HOME=/tmp/conan conan install -r conancenter -g deploy -if /opt/conan -l /opt/conan/conan.lock /opt/conan/conanfile.txt \
     && rm -rf /tmp/conan \
-    && conan config set general.revisions_enabled=1
+    && conan config set general.revisions_enabled=1 \
+    && conan config install https://github.com/ultimaker/conan-config.git
