@@ -19,5 +19,6 @@ ExternalProject_Add(Savitar
                    -DSIP_BUILD_EXECUTABLE=${CMAKE_INSTALL_PREFIX}/bin/sip-build
                    -DPYTHONPATH=${PYTHONPATH}
                    -DPython_SITEARCH=${Python_SITEARCH}
+                   -DPython_ROOT=${Python_ROOT}
         DEPENDS Python)
 add_dependencies(projects Savitar)

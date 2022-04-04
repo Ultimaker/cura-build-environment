@@ -18,6 +18,6 @@ ExternalProject_Add(pynest2d
                    -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
                    -DSIP_BUILD_EXECUTABLE=${CMAKE_INSTALL_PREFIX}/bin/sip-build
                    -DPYTHONPATH=${PYTHONPATH}
-                   -DPython_SITEARCH=${Python_SITEARCH}
+                   -DPython_ROOT=${Python_ROOT}
         DEPENDS libnest2d Python)
 add_dependencies(projects pynest2d)
