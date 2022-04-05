@@ -177,6 +177,9 @@ pyinstaller-hooks-contrib==2022.2 \
 pefile==2021.9.3; \
     sys_platform=="win32" \
     --hash=sha256:344a49e40a94e10849f0fe34dddc80f773a12b40675bf2f7be4b8be578bdd94a
+future==0.18.2; \
+    sys_platform=="win32" \
+    --hash=sha256:b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d
 macholib==1.15.2; \
     sys_platform=="darwin" \
     --hash=sha256:1542c41da3600509f91c165cb897e7e54c0e74008bd8da5da7ebbee519d593d2 \
