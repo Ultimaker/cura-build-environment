@@ -18,9 +18,7 @@ GetFromEnvironmentOrCache(
 
 ExternalProject_Add(CuraEngine
     GIT_REPOSITORY https://github.com/ultimaker/CuraEngine
-    GIT_TAG origin/${CURAENGINE_BRANCH_OR_TAG}
-    GIT_SHALLOW 1
-    STEP_TARGETS update
+    GIT_TAG ${CURAENGINE_BRANCH_OR_TAG}
     CMAKE_GENERATOR "$<IF:$<PLATFORM_ID:Windows>,MinGW Makefiles,${CMAKE_GENERATOR}>"
 	CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
 			   -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}

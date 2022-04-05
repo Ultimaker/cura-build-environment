@@ -2,6 +2,7 @@
 
 # Setting the MACOSX_DEPLOYMENT_TARGET needs to be done before the first project() call. Setting this value should also
 # take care of the CMAKE_OSX_SYSROOT. The variable is ignored on non-Apple systems.
+
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(GetFromEnvironmentOrCache)
 GetFromEnvironmentOrCache(
@@ -27,8 +28,13 @@ endif()
 add_custom_target(projects)
 
 include(projects/python.cmake)
+include(projects/uranium.cmake)
+include(projects/charon.cmake)
 include(projects/libnest2d.cmake)
 include(projects/pynest2d.cmake)
 include(projects/arcus.cmake)
 include(projects/savitar.cmake)
 include(projects/curaengine.cmake)
+include(projects/cura.cmake)
+include(projects/fdm_materials.cmake)
+include(projects/cura-binary-data.cmake)
