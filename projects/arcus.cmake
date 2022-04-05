@@ -18,7 +18,7 @@ ExternalProject_Add(Arcus
                    -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
                    -DSIP_BUILD_EXECUTABLE=${CMAKE_INSTALL_PREFIX}/bin/sip-build
                    -DPYTHONPATH=${PYTHONPATH}
-                   -DPython_SITEARCH=${Python_SITEARCH}
+                   -DPython_SITELIB_LOCAL=${CMAKE_INSTALL_PREFIX}/lib/python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}/site-packages/
                    -DPython_ROOT=${Python_ROOT}
         DEPENDS Python)
 add_dependencies(projects Arcus)
