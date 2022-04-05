@@ -31,6 +31,21 @@ add_custom_command(
         WORKING_DIRECTORY
             ${installer_DIR}
         COMMAND
-            ${CMAKE_COMMAND} -E env "PYTHONPATH=${PYTHONPATH}" ${pyinstaller_EXECUTABLE} ${cura_EXECUTABLE} --collect-all cura --collect-all UM --hidden-import pySavitar --hidden-import pyArcus --hidden-import pynest2d --add-binary "${curaengine_EXECUTABLE}:." --add-data "${CMAKE_INSTALL_PREFIX}/lib/cura/plugins:plugins" --add-data "${CMAKE_INSTALL_PREFIX}/lib/uranium/plugins:plugins" --add-data "${CMAKE_INSTALL_PREFIX}/share/cura/resources:resources" --add-data "${CMAKE_INSTALL_PREFIX}/share/uranium/resources:resources" --add-data "${Python_SITELIB_LOCAL}/UM/Qt/qml/UM/:resources/qml/UM/" --windowed --clean --noconfirm --log-level INFO ${extra_pyinstaller_args} --name "Ultimaker-Cura"
+            ${CMAKE_COMMAND} -E env "PYTHONPATH=${PYTHONPATH}" ${pyinstaller_EXECUTABLE} ${cura_EXECUTABLE}
+            --collect-all cura
+            --collect-all UM
+            --collect-all serial #Used only in plug-ins.
+            --collect-all Charon
+            --hidden-import pySavitar
+            --hidden-import pyArcus
+            --hidden-import pynest2d
+            --add-binary "${curaengine_EXECUTABLE}:."
+            --add-data "${CMAKE_INSTALL_PREFIX}/lib/cura/plugins:plugins"
+            --add-data "${CMAKE_INSTALL_PREFIX}/lib/uranium/plugins:plugins"
+            --add-data "${CMAKE_INSTALL_PREFIX}/share/cura/resources:resources"
+            --add-data "${CMAKE_INSTALL_PREFIX}/share/uranium/resources:resources"
+            --add-data "${Python_SITELIB_LOCAL}/UM/Qt/qml/UM/:resources/qml/UM/"
+            --windowed --clean --noconfirm --log-level INFO ${extra_pyinstaller_args}
+            --name "Ultimaker-Cura"
         DEPENDS install-python-requirements Cura create_installer_dir)
 add_dependencies(Installer install-python-requirements Cura create_installer_dir)
