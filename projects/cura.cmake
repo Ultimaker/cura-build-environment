@@ -92,6 +92,8 @@ GetFromEnvironmentOrCache(
 ExternalProject_Add(Cura
     GIT_REPOSITORY https://github.com/ultimaker/Cura
     GIT_TAG ${CURA_BRANCH_OR_TAG}
+    GIT_SHALLOW 1
+    STEP_TARGETS update
     CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
                -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
                -DCMAKE_PREFIX_PATH=${CMAKE_INSTALL_PREFIX}
