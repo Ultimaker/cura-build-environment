@@ -99,7 +99,7 @@ ExternalProject_Add(Cura
                -DCMAKE_PREFIX_PATH=${CMAKE_INSTALL_PREFIX}
                -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
                -DPython_ROOT=${Python_ROOT}
-               -DPython_SITELIB_LOCAL=${CMAKE_INSTALL_PREFIX}/lib/python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}/site-packages/
+               -DPython_SITELIB_LOCAL=${Python_SITELIB_LOCAL}
                -DURANIUM_SCRIPTS_DIR=${URANIUM_SCRIPTS_DIR}
                -DCURA_VERSION=${CURA_VERSION}
                -DCURA_BUILDTYPE=${CURA_BUILDTYPE}

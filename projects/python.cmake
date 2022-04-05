@@ -3,15 +3,6 @@
 #
 # Sets up a virtual environment using the Python interpreter
 
-if(WIN32)
-    set(ext .pyd)
-    set(env_path_sep ";")
-else()
-    set(ext .so)
-    set(env_path_sep ":")
-endif()
-
-
 if(NOT DEFINED Python_VERSION)
     set(Python_VERSION
             3.10
@@ -27,13 +18,28 @@ if(NOT TARGET cpython::python)
 else()
     add_library(Python::Python ALIAS cpython::python)
     set(Python_SITEARCH "${CMAKE_INSTALL_PREFIX}/lib/python3.10/site-packages")
-    set(Python_EXECUTABLE ${cpython_PACKAGE_FOLDER_RELEASE}/bin/python3)
+    set(Python_EXECUTABLE ${cpython_PACKAGE_FOLDER_RELEASE}/bin/python${exe_ext})
     set(ENV{PYTHONPATH} ${Python_SITEARCH})
 endif()
 message(STATUS "Using Python ${Python_VERSION}")
 
-set(PYTHONPATH ${CMAKE_INSTALL_PREFIX}/lib/python3.10/site-packages)
-set(Python_VENV_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/python)
+if(WIN32)
+    set(ext .pyd)
+    set(env_path_sep ";")
+    set(exe_ext ".exe")
+    set(exe_path "Scripts")
+    set(lib_path "lib/python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}")
+else()
+    set(ext .so)
+    set(env_path_sep ":")
+    set(exe_ext "")
+    set(exe_path "bin")
+    set(lib_path "Lib")
+endif()
+
+set(PYTHONPATH ${CMAKE_INSTALL_PREFIX}/${lib_path}/site-packages)
+set(Python_VENV_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/${exe_path}/python${exe_ext})
+set(Python_SITELIB_LOCAL ${CMAKE_INSTALL_PREFIX}/${lib_path}/site-packages/)
 
 add_custom_target(create-virtual-env ALL COMMENT "Create Virtual Environment")
 add_custom_command(
