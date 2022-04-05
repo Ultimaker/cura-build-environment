@@ -33,12 +33,19 @@ endif()
 message(STATUS "Using Python ${Python_VERSION}")
 
 set(PYTHONPATH ${CMAKE_INSTALL_PREFIX}/lib/python3.10/site-packages)
-add_custom_target(Python ALL COMMENT "Create Virtual Environment")
+set(Python_VENV_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/python)
 
+add_custom_target(create-virtual-env ALL COMMENT "Create Virtual Environment")
 add_custom_command(
-        TARGET Python
+        TARGET create-virtual-env
         COMMAND ${Python_EXECUTABLE} -m venv ${CMAKE_INSTALL_PREFIX}
-        COMMAND . ${CMAKE_INSTALL_PREFIX}/bin/activate
-        COMMAND ${CMAKE_COMMAND} -E env "PYTHONPATH=${PYTHONPATH}" ${Python_EXECUTABLE} -m pip install --prefix ${CMAKE_INSTALL_PREFIX} --require-hashes -r  ${CMAKE_SOURCE_DIR}/projects/requirements.txt
-        MAIN_DEPENDENCY Python)
-add_dependencies(projects Python)
+        MAIN_DEPENDENCY ${Python_EXECUTABLE})
+
+add_custom_target(install-python-requirements ALL COMMENT "Install python requirements in virtual environment")
+add_custom_command(
+        TARGET install-python-requirements
+        COMMAND ${CMAKE_COMMAND} -E env "PYTHONPATH=${PYTHONPATH}" ${Python_VENV_EXECUTABLE} -m pip install --prefix ${CMAKE_INSTALL_PREFIX} --require-hashes -r  ${CMAKE_SOURCE_DIR}/projects/requirements.txt
+        MAIN_DEPENDENCY ${Python_VENV_EXECUTABLE}
+        DEPENDS create-virtual-env)
+
+add_dependencies(install-python-requirements create-virtual-env)

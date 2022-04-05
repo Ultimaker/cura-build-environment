@@ -20,5 +20,5 @@ ExternalProject_Add(Arcus
                    -DPYTHONPATH=${PYTHONPATH}
                    -DPython_SITELIB_LOCAL=${CMAKE_INSTALL_PREFIX}/lib/python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}/site-packages/
                    -DPython_ROOT=${Python_ROOT}
-        DEPENDS Python)
+        DEPENDS install-python-requirements)
 add_dependencies(projects Arcus)

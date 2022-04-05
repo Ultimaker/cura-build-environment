@@ -110,6 +110,6 @@ ExternalProject_Add(Cura
                -DCURA_DIGITAL_FACTORY_URL=${CURA_DIGITAL_FACTORY_URL}
                -DCURA_MARKETPLACE_ROOT=${CURA_MARKETPLACE_ROOT}
                -DCURA_NO_INSTALL_PLUGINS=${CURA_NO_INSTALL_PLUGINS}
-    DEPENDS Python CuraEngine Uranium pynest2d Charon Savitar fdm_materials cura-binary-data
+    DEPENDS install-python-requirements CuraEngine Uranium pynest2d Charon Savitar fdm_materials cura-binary-data
 )
 add_dependencies(projects Cura)

@@ -25,5 +25,5 @@ ExternalProject_Add(Uranium
                -DPython_ROOT=${Python_ROOT}
                -DPython_SITELIB_LOCAL=${CMAKE_INSTALL_PREFIX}/lib/python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}/site-packages/
                -DUM_NO_INSTALL_PLUGINS=${CURA_NO_INSTALL_PLUGINS}
-    DEPENDS Python)
+    DEPENDS install-python-requirements)
 add_dependencies(projects Uranium)
