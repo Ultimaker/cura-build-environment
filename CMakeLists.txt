@@ -38,3 +38,6 @@ include(projects/curaengine.cmake)
 include(projects/cura.cmake)
 include(projects/fdm_materials.cmake)
 include(projects/cura-binary-data.cmake)
+
+# Collect the artifacts with pyinstaller
+include(projects/pyinstaller.cmake)
