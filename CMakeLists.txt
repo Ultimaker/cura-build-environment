@@ -35,9 +35,9 @@ include(projects/pynest2d.cmake)
 include(projects/arcus.cmake)
 include(projects/savitar.cmake)
 include(projects/curaengine.cmake)
-include(projects/cura.cmake)
 include(projects/fdm_materials.cmake)
 include(projects/cura-binary-data.cmake)
+include(projects/cura.cmake)
 
 # Collect the artifacts with pyinstaller
 include(projects/pyinstaller.cmake)
