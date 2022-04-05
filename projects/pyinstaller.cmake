@@ -39,6 +39,8 @@ add_custom_command(
             --hidden-import pySavitar
             --hidden-import pyArcus
             --hidden-import pynest2d
+            --hidden-import PyQt6.QtNetwork
+            --hidden-import zeroconf
             --add-binary "${curaengine_EXECUTABLE}:."
             --add-data "${CMAKE_INSTALL_PREFIX}/lib/cura/plugins:plugins"
             --add-data "${CMAKE_INSTALL_PREFIX}/lib/uranium/plugins:plugins"
