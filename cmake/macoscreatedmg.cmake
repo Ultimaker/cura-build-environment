@@ -13,7 +13,7 @@ GetFromEnvironmentOrCache(
 
 GetFromEnvironmentOrCache(
         NAME
-            REX_EXECUTABLE
+            REZ_EXECUTABLE
         DEFAULT
             /Library/Developer/CommandLineTools/usr/bin/Rez
         DESCRIPTION
@@ -33,7 +33,7 @@ add_custom_command(
             --app-drop-link 520 272
             --eula "${CMAKE_SOURCE_DIR}/packaging/cura_license.txt"
             --background "$source_dir/packaging/cura_background_dmg.png"
-            --rez /Library/Developer/CommandLineTools/usr/bin/Rez
+            --rez ${REZ_EXECUTABLE}
             "${installer_DIR}"
             "${installer_DIR}/dist/Ultimaker-Cura.app"
         DEPENDS pyinstaller install-python-requirements Cura create_installer_dir)
