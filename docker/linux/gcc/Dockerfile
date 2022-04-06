@@ -28,6 +28,8 @@ RUN apt-get -qq update \
        dh-autoreconf \
        libffi-dev \
        libssl-dev \
+       fuse \
+       libfuse2 \
        pkg-config
 
 RUN wget -q --no-check-certificate http://mirrors.concertpass.com/gcc/releases/gcc-${GCC_VERSION}/gcc-${GCC_VERSION}.tar.xz \
