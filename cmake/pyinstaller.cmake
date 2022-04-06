@@ -20,7 +20,7 @@ if(APPLE)
                                 CODESIGN_IDENTITY
                         DESCRIPTION
                                 "The Apple codesign identity")
-
+        set(SIGN_DMG ON)
         set(extra_pyinstaller_args "--codesign-identity \"${CODESIGN_IDENTITY}\" --osx-entitlements-file \"${CMAKE_SOURCE_DIR}\\signing\\cura.entitlements\" --osx-bundle-identifier \"nl.ultimaker.cura.dmg\" ")
         endif()
 else()

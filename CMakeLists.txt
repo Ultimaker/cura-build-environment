@@ -41,7 +41,9 @@ include(projects/cura.cmake)
 
 # Collect the artifacts with pyinstaller
 include(cmake/pyinstaller.cmake)
+
 if(APPLE)
-    include(cmake/macoscreatedmg.cmake)
-    include(cmake/macossigninstaller.cmake)
+    include(cmake/macos-create-dmg.cmake)
+    include(cmake/macos-sign-dmg.cmake)
+    include(cmake/macos-notarize-dmg.cmake)
 endif()
