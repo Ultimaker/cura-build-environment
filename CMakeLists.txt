@@ -30,21 +30,21 @@ GetFromEnvironmentOrCache(
         NAME
             CURA_VERSION_MAJOR
         DEFAULT
-            5
+            "5"
         DESCRIPTION
             "Cura Major Version")
 GetFromEnvironmentOrCache(
         NAME
             CURA_VERSION_MINOR
         DEFAULT
-            0
+            "0"
         DESCRIPTION
             "Cura Minor Version")
 GetFromEnvironmentOrCache(
         NAME
             CURA_VERSION_PATCH
         DEFAULT
-            0
+            "0"
         DESCRIPTION
             "Cura Patch Version")
 GetFromEnvironmentOrCache(
@@ -56,12 +56,11 @@ if(NOT ${CURA_VERSION_EXTRA} STREQUAL "")
     set(CURA_VERSION_EXTRA "-${CURA_VERSION_EXTRA}")
 endif()
 set(_default_cura_version "${CURA_VERSION_MAJOR}.${CURA_VERSION_MINOR}.${CURA_VERSION_PATCH}${CURA_VERSION_EXTRA}")
-if(${_default_cura_version} VERSION_GREATER 0.0.0)
-    set(CURA_VERSION ${_default_cura_version})
-endif()
 GetFromEnvironmentOrCache(
         NAME
             CURA_VERSION
+        DEFAULT
+            ${_default_cura_version}
         DESCRIPTION
             "Cura Extra Version Information"
         REQUIRED)
