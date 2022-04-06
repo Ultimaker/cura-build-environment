@@ -19,6 +19,7 @@ GetFromEnvironmentOrCache(
         DESCRIPTION
             "The path to the Rez (Resource compiler)")
 
+add_custom_target(create-dmg ALL COMMENT "Create the MacOS dmg")
 add_custom_command(
         TARGET
             create-dmg
