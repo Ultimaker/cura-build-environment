@@ -40,4 +40,7 @@ include(projects/cura-binary-data.cmake)
 include(projects/cura.cmake)
 
 # Collect the artifacts with pyinstaller
-include(projects/pyinstaller.cmake)
+include(cmake/pyinstaller.cmake)
+if(APPLE)
+    include(cmake/macoscreatedmg.cmake)
+endif()
