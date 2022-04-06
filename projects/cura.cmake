@@ -6,45 +6,6 @@ GetFromEnvironmentOrCache(
         DESCRIPTION
             "The name of the tag or branch to build for Cura")
 
-# Create the version-related variables
-GetFromEnvironmentOrCache(
-        NAME
-            CURA_VERSION_MAJOR
-        DESCRIPTION
-            "Cura Major Version")
-GetFromEnvironmentOrCache(
-        NAME
-            CURA_VERSION_MINOR
-        DEFAULT
-            0
-        DESCRIPTION
-            "Cura Minor Version")
-GetFromEnvironmentOrCache(
-        NAME
-            CURA_VERSION_PATCH
-        DEFAULT
-            0
-        DESCRIPTION
-            "Cura Patch Version")
-GetFromEnvironmentOrCache(
-        NAME
-            CURA_VERSION_EXTRA
-        DESCRIPTION
-            "Cura Extra Version Information")
-if(NOT ${CURA_VERSION_EXTRA} STREQUAL "")
-    set(CURA_VERSION_EXTRA "-${CURA_VERSION_EXTRA}")
-endif()
-set(_default_cura_version "${CURA_VERSION_MAJOR}.${CURA_VERSION_MINOR}.${CURA_VERSION_PATCH}${CURA_VERSION_EXTRA}")
-if(${_default_cura_version} VERSION_GREATER 0.0.0)
-    set(CURA_VERSION ${_default_cura_version})
-endif()
-GetFromEnvironmentOrCache(
-        NAME
-            CURA_VERSION
-        DESCRIPTION
-            "Cura Extra Version Information"
-        REQUIRED)
-
 GetFromEnvironmentOrCache(
         NAME
             CURA_DEBUGMODE
