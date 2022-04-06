@@ -15,15 +15,9 @@ conan_check(VERSION 1.46.0 REQUIRED)
 conan_cmake_run(
         BASIC_SETUP
         CONANFILE
-            conanfile.txt
-        GENERATORS
-            VirtualRunEnv
-            VirtualBuildEnv
-            CMakeDeps
-            CMakeToolchain
-            json
+            conanfile.py
         PROFILE
-            cura_release.jinja
+            default
         BUILD
             missing
         )

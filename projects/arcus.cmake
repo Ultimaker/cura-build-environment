@@ -12,13 +12,15 @@ GetFromEnvironmentOrCache(
 ExternalProject_Add(Arcus
         GIT_REPOSITORY https://github.com/Ultimaker/libArcus.git
         GIT_TAG ${ARCUS_BRANCH_OR_TAG}
+        CMAKE_GENERATOR ${CMAKE_GENERATOR}
         CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
                    -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
                    -DCMAKE_PREFIX_PATH=${CMAKE_INSTALL_PREFIX}
                    -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
-                   -DSIP_BUILD_EXECUTABLE=${CMAKE_INSTALL_PREFIX}/bin/sip-build
+                   -DSIP_BUILD_EXECUTABLE=${CMAKE_INSTALL_PREFIX}/${exe_path}/sip-build
                    -DPYTHONPATH=${PYTHONPATH}
                    -DPython_SITELIB_LOCAL=${Python_SITELIB_LOCAL}
-                   -DPython_ROOT=${Python_ROOT}
+                   -DPython_ROOT=${CMAKE_INSTALL_PREFIX}
+                   -DPython_EXECUTABLE=${Python_VENV_EXECUTABLE}
         DEPENDS install-python-requirements)
 add_dependencies(projects Arcus)
