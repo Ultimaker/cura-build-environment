@@ -1,8 +1,6 @@
 # Copyright (c) 2022 Ultimaker B.V.
 # cura-build-environment is released under the terms of the AGPLv3 or higher.
 
-add_custom_target(create-dmg ALL COMMENT "Create the dmg from the pyinstaller output")
-
 GetFromEnvironmentOrCache(
         NAME
             CREATE_DMG_EXECUTABLE

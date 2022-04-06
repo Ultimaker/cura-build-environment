@@ -6,7 +6,7 @@ if(SIGN_DMG)
             NAME
                 NOTARIZE_DMG
             DEFAULT
-                ON
+                TRUE
             BOOL
             DESCRIPTION
                 "Notarize the dmg")
