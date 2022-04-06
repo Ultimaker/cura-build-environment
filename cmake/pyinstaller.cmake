@@ -9,15 +9,20 @@ set(pyinstaller_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/pyinstaller)
 set(cura_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/cura_app.py)
 set(curaengine_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/CuraEngine)
 set(installer_DIR ${CMAKE_INSTALL_PREFIX}/installer)
+set(ULTIMAKER_CURA_PATH ${installer_DIR}/dist/Ultimaker-Cura)
 
+if(APPLE)
+        set(ULTIMAKER_CURA_APP_PATH ${ULTIMAKER_CURA_PATH}.app)
 
-if(APPLE AND DEFINED CODESIGN_IDENTITY)
-        GetFromEnvironmentOrCache(
-                NAME
-                        CODESIGN_IDENTITY
-                DESCRIPTION
-                        "The Apple codesign identity")
-set(extra_pyinstaller_args "--codesign-identity \"${CODESIGN_IDENTITY}\" --osx-entitlements-file \"${CMAKE_SOURCE_DIR}\\signing\\cura.entitlements\" --osx-bundle-identifier \"nl.ultimaker.cura.dmg\" ")
+        if(DEFINED CODESIGN_IDENTITY)
+                GetFromEnvironmentOrCache(
+                        NAME
+                                CODESIGN_IDENTITY
+                        DESCRIPTION
+                                "The Apple codesign identity")
+
+        set(extra_pyinstaller_args "--codesign-identity \"${CODESIGN_IDENTITY}\" --osx-entitlements-file \"${CMAKE_SOURCE_DIR}\\signing\\cura.entitlements\" --osx-bundle-identifier \"nl.ultimaker.cura.dmg\" ")
+        endif()
 else()
         set(extra_pyinstaller_args )
 endif()
