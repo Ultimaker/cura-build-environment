@@ -1,15 +1,6 @@
 # Copyright (c) 2022 Ultimaker B.V.
 # cura-build-environment is released under the terms of the AGPLv3 or higher.
 
-GetFromEnvironmentOrCache(
-        NAME
-            SIGN_DMG
-        DEFAULT
-            ON
-        BOOL
-        DESCRIPTION
-            "Sign the dmg")
-
 if(SIGN_DMG)
     GetFromEnvironmentOrCache(
             NAME
@@ -43,14 +34,6 @@ if(SIGN_DMG)
                 FILEPATH
                 DESCRIPTION
                     "The path to the altool executable")
-
-        GetFromEnvironmentOrCache(
-                NAME
-                    ULTIMAKER_CURA_DOMAIN
-                DEFAULT
-                    nl.ultimaker.cura.dmg
-                DESCRIPTION
-                    "The Ultimaker Cura domain to be used (usually reversed)")
 
         add_custom_target(notarize-dmg ALL COMMENT "Notarize the MacOS dmg")
         add_custom_command(
