@@ -10,7 +10,7 @@ set(curaengine_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/CuraEngine${exe_ext})
 set(installer_DIR "${CMAKE_INSTALL_PREFIX}/installer")
 set(ULTIMAKER_CURA_PATH "${installer_DIR}/dist/Ultimaker-Cura" CACHE INTERNAL "ultimaker_cura_path")
 
-if (APPLE)
+if(APPLE)
     set(ULTIMAKER_CURA_APP_PATH "${ULTIMAKER_CURA_PATH}.app")
     GetFromEnvironmentOrCache(
             NAME
@@ -36,7 +36,9 @@ if (APPLE)
                 "The Ultimaker Cura domain to be used (usually reversed)")
         set(extra_pyinstaller_args --codesign-identity "${CODESIGN_IDENTITY}" --osx-entitlements-file "${CMAKE_SOURCE_DIR}/signing/cura.entitlements" --osx-bundle-identifier "${ULTIMAKER_CURA_DOMAIN}" )
     endif ()
-else ()
+elseif(WIN32)
+    set(extra_pyinstaller_args --hidden-import fcntl --collect-all win32ctypes)
+else()
     set(extra_pyinstaller_args)
 endif ()
 
@@ -59,7 +61,9 @@ add_custom_command(
                 --hidden-import pynest2d
                 --hidden-import PyQt6.QtNetwork
                 --hidden-import logging.handlers
+                --collect-all sqlite3
                 --hidden-import zeroconf
+                --collect-all trimesh
                 --add-binary "${curaengine_EXECUTABLE}${env_path_sep}."
                 --add-data "${CMAKE_INSTALL_PREFIX}/${lib_path}/cura/plugins${env_path_sep}plugins"
                 --add-data "${CMAKE_INSTALL_PREFIX}/${lib_path}/uranium/plugins${env_path_sep}plugins"
