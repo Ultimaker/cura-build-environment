@@ -25,6 +25,5 @@ ExternalProject_Add(Uranium
                -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
                -DPython_ROOT=${Python_ROOT}
                -DPython_SITELIB_LOCAL=${Python_SITELIB_LOCAL}
-               -DUM_NO_INSTALL_PLUGINS=${CURA_NO_INSTALL_PLUGINS}
-    DEPENDS install-python-requirements)
-add_dependencies(projects Uranium)
+               -DUM_NO_INSTALL_PLUGINS=${CURA_NO_INSTALL_PLUGINS})
+add_dependencies(Uranium install-python-requirements Arcus Savitar)

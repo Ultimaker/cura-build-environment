@@ -18,6 +18,5 @@ ExternalProject_Add(Charon
                -DCMAKE_PREFIX_PATH=${CMAKE_INSTALL_PREFIX}
                -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
                -DPython_ROOT=${Python_ROOT}
-               -DPython_SITELIB_LOCAL=${Python_SITELIB_LOCAL}
-    DEPENDS create-virtual-env)
-add_dependencies(projects Charon)
+               -DPython_SITELIB_LOCAL=${Python_SITELIB_LOCAL})
+add_dependencies(Charon install-python-requirements)

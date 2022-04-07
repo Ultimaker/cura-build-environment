@@ -26,6 +26,5 @@ ExternalProject_Add(CuraEngine
 			   -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
 		       -DCMAKE_PREFIX_PATH=${CMAKE_INSTALL_PREFIX}
 		       -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
-		       -DCURA_ENGINE_VERSION=${CURA_ENGINE_VERSION}
-	DEPENDS Arcus)
-add_dependencies(projects CuraEngine)
+		       -DCURA_ENGINE_VERSION=${CURA_ENGINE_VERSION})
+add_dependencies(CuraEngine Arcus)

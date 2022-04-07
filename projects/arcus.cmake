@@ -21,6 +21,5 @@ ExternalProject_Add(Arcus
                    -DPYTHONPATH=${PYTHONPATH}
                    -DPython_SITELIB_LOCAL=${Python_SITELIB_LOCAL}
                    -DPython_ROOT=${CMAKE_INSTALL_PREFIX}
-                   -DPython_EXECUTABLE=${Python_VENV_EXECUTABLE}
-        DEPENDS install-python-requirements)
-add_dependencies(projects Arcus)
+                   -DPython_EXECUTABLE=${Python_VENV_EXECUTABLE})
+add_dependencies(Arcus install-python-requirements)

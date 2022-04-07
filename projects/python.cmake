@@ -44,14 +44,11 @@ set(Python_SITELIB_LOCAL ${CMAKE_INSTALL_PREFIX}/${lib_path}/site-packages/)
 add_custom_target(create-virtual-env ALL COMMENT "Create Virtual Environment")
 add_custom_command(
         TARGET create-virtual-env
-        COMMAND ${Python_EXECUTABLE} -m venv ${CMAKE_INSTALL_PREFIX}
-        MAIN_DEPENDENCY ${Python_EXECUTABLE})
+        COMMAND ${Python_EXECUTABLE} -m venv ${CMAKE_INSTALL_PREFIX})
 
 add_custom_target(install-python-requirements ALL COMMENT "Install python requirements in virtual environment")
 add_custom_command(
         TARGET install-python-requirements
-        COMMAND ${CMAKE_COMMAND} -E env "PYTHONPATH=${PYTHONPATH}" ${Python_VENV_EXECUTABLE} -m pip install --prefix ${CMAKE_INSTALL_PREFIX} --require-hashes -r  ${CMAKE_SOURCE_DIR}/projects/requirements.txt
-        MAIN_DEPENDENCY ${Python_VENV_EXECUTABLE}
-        DEPENDS create-virtual-env)
+        COMMAND ${CMAKE_COMMAND} -E env "PYTHONPATH=${PYTHONPATH}" ${Python_VENV_EXECUTABLE} -m pip install --prefix ${CMAKE_INSTALL_PREFIX} --require-hashes -r  ${CMAKE_SOURCE_DIR}/projects/requirements.txt)
 
 add_dependencies(install-python-requirements create-virtual-env)

@@ -19,4 +19,4 @@ ExternalProject_Add(fdm_materials
                    -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
                    -DCMAKE_PREFIX_PATH=${CMAKE_INSTALL_PREFIX}
                    -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE})
-add_dependencies(projects fdm_materials)
+add_dependencies(fdm_materials Cura)

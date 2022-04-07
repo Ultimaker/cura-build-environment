@@ -21,6 +21,5 @@ ExternalProject_Add(pynest2d
                    -DPYTHONPATH=${PYTHONPATH}
                    -DPython_SITELIB_LOCAL=${Python_SITELIB_LOCAL}
                    -DPython_ROOT=${CMAKE_INSTALL_PREFIX}
-                   -DPython_EXECUTABLE=${Python_VENV_EXECUTABLE}
-        DEPENDS libnest2d install-python-requirements)
-add_dependencies(projects pynest2d)
+                   -DPython_EXECUTABLE=${Python_VENV_EXECUTABLE})
+add_dependencies(pynest2d install-python-requirements libnest2d)
