@@ -27,7 +27,7 @@ class CuraBuildEnvironemtConan(ConanFile):
     def requirements(self):
         self.requires("protobuf/3.17.1")
         self.requires("clipper/6.4.2")
-        self.requires("boost/1.70.0")
+        self.requires("boost/1.78.0")
         self.requires("gtest/1.8.1")
         self.requires("nlopt/2.7.0")
 
@@ -36,6 +36,12 @@ class CuraBuildEnvironemtConan(ConanFile):
         cmake.generate()
 
         tc = CMakeToolchain(self)
+
+        # Don't use Visual Studio as the CMAKE_GENERATOR
+        if self.settings.compiler == "Visual Studio":
+            tc.blocks["generic_system"].values["generator_platform"] = None
+            tc.blocks["generic_system"].values["toolset"] = None
+
         tc.variables["CHARON_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6_upgrade"
         tc.variables["CURA_BRANCH_OR_TAG"] = "origin/qt6_beyond_the_splash"
         tc.variables["URANIUM_BRANCH_OR_TAG"] = "origin/qt6_beyond_the_splash"
