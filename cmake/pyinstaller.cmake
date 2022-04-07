@@ -42,7 +42,7 @@ endif ()
 
 add_custom_target(create_installer_dir ALL COMMAND ${CMAKE_COMMAND} -E make_directory ${installer_DIR})
 add_custom_target(pyinstaller ALL COMMENT "Collect the build artifacts in a single installer")
-
+include(${CMAKE_SOURCE_DIR}/cmake/os.cmake)
 add_custom_command(
         TARGET
             pyinstaller
@@ -58,6 +58,7 @@ add_custom_command(
                 --hidden-import pyArcus
                 --hidden-import pynest2d
                 --hidden-import PyQt6.QtNetwork
+                --hidden-import logging.handlers
                 --hidden-import zeroconf
                 --add-binary "${curaengine_EXECUTABLE}${env_path_sep}."
                 --add-data "${CMAKE_INSTALL_PREFIX}/${lib_path}/cura/plugins${env_path_sep}plugins"
@@ -67,4 +68,4 @@ add_custom_command(
                 --add-data "${Python_SITELIB_LOCAL}/UM/Qt/qml/UM/${env_path_sep}resources/qml/UM/"
                 --windowed --clean --noconfirm --log-level INFO ${extra_pyinstaller_args}
                 --name "Ultimaker-Cura")
-#add_dependencies(pyinstaller create_installer_dir install-python-requirements Cura fdm_materials cura-binary-data)
+add_dependencies(pyinstaller create_installer_dir)# install-python-requirements Cura fdm_materials cura-binary-data)
