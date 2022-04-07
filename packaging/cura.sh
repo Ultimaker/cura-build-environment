@@ -11,4 +11,4 @@ export QT_XKB_CONFIG_ROOT=/usr/share/X11/xkb
 # Use the openssl.cnf packaged in the AppImage
 export OPENSSL_CONF="$scriptdir/openssl.cnf"
 
-Ultimaker-Cura "$@"
+$scriptdir/Ultimaker-Cura "$@"
