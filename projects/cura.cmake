@@ -48,7 +48,7 @@ GetFromEnvironmentOrCache(
         NAME
             CURA_BUILDTYPE
         DESCRIPTION
-            "Build type of Cura, eg. 'testing'")
+            "Build type of Cura, eg. 'Enterprise'")
 
 ExternalProject_Add(Cura
     GIT_REPOSITORY https://github.com/ultimaker/Cura
