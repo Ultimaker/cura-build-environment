@@ -50,11 +50,11 @@ else ()
     set(CPACK_PACKAGE_NAME "Ultimaker Cura ${CURA_BUILDTYPE} ${CURA_VERSION}")
 endif ()
 
-set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/packaging/Cura.ico")
+set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}\\\\packaging\\\\Cura.ico")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Ultimaker Cura - 3D Printing Software")
 set(CPACK_PACKAGE_CONTACT "Ultimaker Cura <software-cura@ultimaker.com>")
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/packaging/cura_license.txt")
-set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/packaging/Cura.ico")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}\\\\packaging\\\\cura_license.txt")
+set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}\\\\packaging\\\\Cura.ico")
 
 # Differentiate between a normal Cura installation and that of a different build type
 if (CURA_BUILDTYPE STREQUAL "")
