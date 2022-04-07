@@ -4,9 +4,9 @@
 # Sets up a virtual environment using the Python interpreter
 
 
-set(pyinstaller_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/pyinstaller)
+set(pyinstaller_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/${exe_path}/pyinstaller)
 set(cura_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/cura_app.py)
-set(curaengine_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/CuraEngine)
+set(curaengine_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/CuraEngine${exe_ext})
 set(installer_DIR "${CMAKE_INSTALL_PREFIX}/installer")
 set(ULTIMAKER_CURA_PATH "${installer_DIR}/dist/Ultimaker-Cura")
 
