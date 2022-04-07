@@ -60,11 +60,11 @@ add_custom_command(
                 --hidden-import PyQt6.QtNetwork
                 --hidden-import zeroconf
                 --add-binary "${curaengine_EXECUTABLE}${env_path_sep}."
-                --add-data "${CMAKE_INSTALL_PREFIX}/lib/cura/plugins${env_path_sep}plugins"
-                --add-data "${CMAKE_INSTALL_PREFIX}/lib/uranium/plugins${env_path_sep}plugins"
+                --add-data "${CMAKE_INSTALL_PREFIX}/${lib_path}/cura/plugins${env_path_sep}plugins"
+                --add-data "${CMAKE_INSTALL_PREFIX}/${lib_path}/uranium/plugins${env_path_sep}plugins"
                 --add-data "${CMAKE_INSTALL_PREFIX}/share/cura/resources${env_path_sep}resources"
                 --add-data "${CMAKE_INSTALL_PREFIX}/share/uranium/resources${env_path_sep}resources"
                 --add-data "${Python_SITELIB_LOCAL}/UM/Qt/qml/UM/${env_path_sep}resources/qml/UM/"
                 --windowed --clean --noconfirm --log-level INFO ${extra_pyinstaller_args}
                 --name "Ultimaker-Cura")
-add_dependencies(pyinstaller create_installer_dir install-python-requirements Cura fdm_materials cura-binary-data)
+#add_dependencies(pyinstaller create_installer_dir install-python-requirements Cura fdm_materials cura-binary-data)
