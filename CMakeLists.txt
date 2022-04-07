@@ -65,7 +65,6 @@ GetFromEnvironmentOrCache(
             "Cura Extra Version Information"
         REQUIRED)
 
-include(projects/appimagekit.cmake)
 include(projects/python.cmake)
 include(projects/charon.cmake)
 include(projects/savitar.cmake)
@@ -85,4 +84,8 @@ if(APPLE)
     include(cmake/macos-create-dmg.cmake)
     include(cmake/macos-sign-dmg.cmake)
     include(cmake/macos-notarize-dmg.cmake)
+endif()
+
+if(Linux)
+    include(cmake/appimagekit.cmake)
 endif()
