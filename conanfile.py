@@ -17,10 +17,6 @@ class CuraBuildEnvironemtConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     build_policy = "missing"
 
-    @property
-    def _site_packages(self):
-        return "site-packages"
-
     def configure(self):
         self.options["boost"].header_only = True
 
