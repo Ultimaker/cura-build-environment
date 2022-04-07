@@ -68,4 +68,4 @@ add_custom_command(
                 --add-data "${Python_SITELIB_LOCAL}/UM/Qt/qml/UM/${env_path_sep}resources/qml/UM/"
                 --windowed --clean --noconfirm --log-level INFO ${extra_pyinstaller_args}
                 --name "Ultimaker-Cura")
-add_dependencies(pyinstaller create_installer_dir)# install-python-requirements Cura fdm_materials cura-binary-data)
+add_dependencies(pyinstaller create_installer_dir Cura fdm_materials cura-binary-data)

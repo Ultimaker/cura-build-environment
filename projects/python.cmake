@@ -30,9 +30,14 @@ add_custom_command(
         TARGET create-virtual-env
         COMMAND ${Python_EXECUTABLE} -m venv ${CMAKE_INSTALL_PREFIX})
 
+add_custom_target(install-base-python-requirements ALL COMMENT "Install base python requirements in virtual environment")
+add_custom_command(
+        TARGET install-base-python-requirements
+        COMMAND ${CMAKE_COMMAND} -E env "PYTHONPATH=${PYTHONPATH}" ${Python_VENV_EXECUTABLE} -m pip install --prefix ${CMAKE_INSTALL_PREFIX} --require-hashes -r  ${CMAKE_SOURCE_DIR}/projects/base_requirements.txt)
+add_dependencies(install-base-python-requirements create-virtual-env)
+
 add_custom_target(install-python-requirements ALL COMMENT "Install python requirements in virtual environment")
 add_custom_command(
         TARGET install-python-requirements
         COMMAND ${CMAKE_COMMAND} -E env "PYTHONPATH=${PYTHONPATH}" ${Python_VENV_EXECUTABLE} -m pip install --prefix ${CMAKE_INSTALL_PREFIX} --require-hashes -r  ${CMAKE_SOURCE_DIR}/projects/requirements.txt)
-
-add_dependencies(install-python-requirements create-virtual-env)
+add_dependencies(install-python-requirements install-base-python-requirements)
