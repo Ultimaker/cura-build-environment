@@ -48,10 +48,8 @@ class CuraBuildEnvironemtConan(ConanFile):
         tc.variables["LIBNEST2D_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6_upgrade"
         tc.variables["PYNEST2D_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6_upgrade"
         tc.variables["ARCUS_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6_upgrade"
-        tc.variables["ARCUS_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6_upgrade"
-        tc.variables["ARCUS_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6_upgrade"
-        tc.variables["ARCUS_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6_upgrade"
         tc.variables["CURAENGINE_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6_upgrade"
+        tc.variables["CURABINARYDATA_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6"
 
         tc.variables["CURA_VERSION_MAJOR"] = "5"
         tc.variables["CURA_VERSION_EXTRA"] = "a+1"
