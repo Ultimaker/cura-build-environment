@@ -65,6 +65,7 @@ GetFromEnvironmentOrCache(
             "Cura Extra Version Information"
         REQUIRED)
 
+include(projects/appimagekit.cmake)
 include(projects/python.cmake)
 include(projects/charon.cmake)
 include(projects/savitar.cmake)
