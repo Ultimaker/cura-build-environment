@@ -26,6 +26,8 @@ class CuraBuildEnvironemtConan(ConanFile):
         self.requires("boost/1.78.0")
         self.requires("gtest/1.8.1")
         self.requires("nlopt/2.7.0")
+        self.requires("rapidjson/1.1.0")
+        self.requires("stb/20200203")
 
     def generate(self):
         cmake = CMakeDeps(self)
