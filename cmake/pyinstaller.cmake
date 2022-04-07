@@ -1,7 +1,5 @@
 # Copyright (c) 2022 Ultimaker B.V.
 # cura-build-environment is released under the terms of the AGPLv3 or higher.
-#
-# Sets up a virtual environment using the Python interpreter
 
 
 set(pyinstaller_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/${exe_path}/pyinstaller)
@@ -9,8 +7,9 @@ set(cura_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/cura_app.py)
 set(curaengine_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/CuraEngine${exe_ext})
 set(installer_DIR "${CMAKE_INSTALL_PREFIX}/installer")
 set(ULTIMAKER_CURA_PATH "${installer_DIR}/dist/Ultimaker-Cura" CACHE INTERNAL "ultimaker_cura_path")
+set(extra_pyinstaller_args )
 
-if(APPLE)
+if (APPLE)
     set(ULTIMAKER_CURA_APP_PATH "${ULTIMAKER_CURA_PATH}.app")
     GetFromEnvironmentOrCache(
             NAME
@@ -27,19 +26,20 @@ if(APPLE)
                 REQUIRED
                 DESCRIPTION
                     "The Apple codesign identity")
-    GetFromEnvironmentOrCache(
-            NAME
-                ULTIMAKER_CURA_DOMAIN
-            DEFAULT
-                nl.ultimaker.cura.dmg
-            DESCRIPTION
-                "The Ultimaker Cura domain to be used (usually reversed)")
-        set(extra_pyinstaller_args --codesign-identity "${CODESIGN_IDENTITY}" --osx-entitlements-file "${CMAKE_SOURCE_DIR}/signing/cura.entitlements" --osx-bundle-identifier "${ULTIMAKER_CURA_DOMAIN}" )
+        GetFromEnvironmentOrCache(
+                NAME
+                    ULTIMAKER_CURA_DOMAIN
+                DEFAULT
+                    nl.ultimaker.cura.dmg
+                DESCRIPTION
+                    "The Ultimaker Cura domain to be used (usually reversed)")
+        list(APPEND extra_pyinstaller_args --codesign-identity "${CODESIGN_IDENTITY}" --osx-entitlements-file "${CMAKE_SOURCE_DIR}/signing/cura.entitlements" --osx-bundle-identifier "${ULTIMAKER_CURA_DOMAIN}")
     endif ()
-elseif(WIN32)
-    set(extra_pyinstaller_args --hidden-import fcntl --collect-all win32ctypes)
-else()
-    set(extra_pyinstaller_args)
+    list(APPEND extra_pyinstaller_args --icon ${CMAKE_SOURCE_DIR}/packaging/cura.icns)
+endif ()
+
+if (WIN32)
+    list(APPEND extra_pyinstaller_args --hidden-import fcntl --collect-all win32ctypes --icon ${CMAKE_SOURCE_DIR}/packaging/Cura.ico)
 endif ()
 
 add_custom_target(create_installer_dir ALL COMMAND ${CMAKE_COMMAND} -E make_directory ${installer_DIR})
