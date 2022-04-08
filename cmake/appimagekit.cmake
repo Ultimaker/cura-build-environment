@@ -1,7 +1,8 @@
 # Copyright (c) 2022 Ultimaker B.V.
 # Cura's build system is released under the terms of the AGPLv3 or higher.
+
 set(INSTALLER_EXT AppImage)
-include(installer-filename.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/installer-filename.cmake)
 
 #Put correct version in cura.desktop.
 configure_file(${CMAKE_SOURCE_DIR}/packaging/cura.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/cura.desktop @ONLY)
@@ -16,4 +17,4 @@ add_custom_target(packaging ALL
     COMMAND appimage --appimage-extract-and-run ${ULTIMAKER_CURA_PATH} ${CMAKE_CURRENT_BINARY_DIR}/${INSTALLER_FILENAME}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 )
-add_dependencies(packaging pyinstaller AppImageKit)
+add_dependencies(packaging pyinstaller)

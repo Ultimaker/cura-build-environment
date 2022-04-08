@@ -19,7 +19,9 @@ GetFromEnvironmentOrCache(
         DESCRIPTION
             "The path to the Rez (Resource compiler)")
 
-set(DMG_PATH "${installer_DIR}/Ultimaker-Cura-${CURA_VERSION}-MacOS.dmg")
+set(INSTALLER_EXT dmg)
+include(${CMAKE_SOURCE_DIR}/cmake/installer-filename.cmake)
+set(DMG_PATH ${installer_DIR}/${INSTALLER_FILENAME})
 
 add_custom_target(create-dmg ALL COMMENT "Create the MacOS dmg")
 add_custom_command(

@@ -24,7 +24,7 @@ install (PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION ".")
 # ========================================
 # CPack Common Settings
 # ========================================
-include(installer-filename.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/installer-filename.cmake)
 
 if (CURA_BUILDTYPE STREQUAL "")
     set(CPACK_PACKAGE_NAME "Ultimaker Cura")
