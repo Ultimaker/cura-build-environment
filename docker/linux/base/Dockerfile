@@ -113,6 +113,9 @@ RUN apt-get -qq update \
        fakeroot \
        strace \
        fuse \
+       libwayland-cursor0 \
+       libwayland-client0 \
+       libwayland-egl1 \
     && rm -rf /var/lib/apt/lists/* \
     && useradd -ms /bin/bash conan \
     && printf "conan:conan" | chpasswd \
