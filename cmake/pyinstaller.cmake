@@ -38,7 +38,7 @@ if (APPLE)
 endif ()
 
 if(LINUX)
-    list(APPEND extra_pyinstaller_args --add-binary "/usr/lib/libwayland-cursor.so.0${env_path_sep}.")
+    list(APPEND extra_pyinstaller_args --add-binary "/usr/lib/x86_64-linux-gnu/libwayland-cursor.so.0.0.0${env_path_sep}.")
 endif()
 
 if (WIN32)
