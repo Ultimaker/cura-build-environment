@@ -7,12 +7,6 @@ install(DIRECTORY ${CMAKE_INSTALL_PREFIX}/arduino
         COMPONENT "arduino"
         )
 
-install(FILES ${CMAKE_INSTALL_PREFIX}/VC_redist.x64.exe
-        DESTINATION "."
-        COMPONENT "vcredist"
-        )
-
-cpack_add_component(vcredist DISPLAY_NAME "Visual Studio 2015-2022 Redistributable")
 cpack_add_component(arduino DISPLAY_NAME "Arduino Drivers")
 
 set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON)
