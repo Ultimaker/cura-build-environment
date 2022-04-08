@@ -10,7 +10,8 @@ ARG PYTHON_VERSION_FULL
 ENV PYENV_ROOT=/opt/pyenv \
     PATH=/usr/local/bin/:/opt/pyenv/versions/${PYTHON_VERSION_FULL}/bin/:/opt/conan/binutils/bin:${PATH} \
     LD_LIBRARY_PATH="/home/conan/env:${LD_LIBRARY_PATH}" \
-    CONAN_USER_HOME=/home/conan
+    CONAN_USER_HOME=/home/conan \
+    APPIMAGE_EXTRA_AND_RUN=1
 
 ARG CMAKE_VERSION
 ARG CMAKE_VERSION_FULL
