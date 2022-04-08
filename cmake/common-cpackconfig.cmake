@@ -24,13 +24,13 @@ install (PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION ".")
 # ========================================
 # CPack Common Settings
 # ========================================
+include(installer-filename.cmake)
 
 if (CURA_BUILDTYPE STREQUAL "")
     set(CPACK_PACKAGE_NAME "Ultimaker Cura")
 else ()
     set(CPACK_PACKAGE_NAME "Ultimaker Cura ${CURA_BUILDTYPE}")
 endif ()
-string(REPLACE " " "_" CPACK_FILE_NAME_NO_SPACES "${CPACK_PACKAGE_NAME}")
 
 set(CPACK_PACKAGE_VENDOR "Ultimaker B.V.")
 set(CPACK_PACKAGE_HOMEPAGE_URL "https://ultimaker.com")
@@ -70,6 +70,6 @@ endif ()
 
 # Use processor name
 STRING(TOLOWER "${CMAKE_SYSTEM_PROCESSOR}" CPACK_SYSTEM_NAME)
-set(CPACK_PACKAGE_FILE_NAME "${CPACK_FILE_NAME_NO_SPACES}-${CURA_VERSION}-${CPACK_SYSTEM_NAME}")
+set(CPACK_PACKAGE_FILE_NAME ${INSTALLER_FILENAME})
 
 set(CPACK_THREADS -1)
