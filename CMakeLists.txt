@@ -86,7 +86,7 @@ if(APPLE)
     include(cmake/macos-notarize-dmg.cmake)
 endif()
 
-if(Linux)
+if(UNIX)
     include(cmake/appimagekit.cmake)
 endif()
 
