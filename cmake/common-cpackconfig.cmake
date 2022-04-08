@@ -39,6 +39,7 @@ set(CPACK_PACKAGE_HOMEPAGE_URL "https://ultimaker.com")
 set(CPACK_PACKAGE_VERSION_MAJOR ${CURA_VERSION_MAJOR})
 set(CPACK_PACKAGE_VERSION_MINOR ${CURA_VERSION_MINOR})
 set(CPACK_PACKAGE_VERSION_PATCH ${CURA_VERSION_PATCH})
+set(NSIS_CURA_VERSION ${CURA_VERSION_MAJOR}.${CURA_VERSION_MINOR}.${CURA_VERSION_PATCH})
 
 # Use full version x.x.x string in install directory for both installers,
 # so that IT can easily automatically upgrade to a newer patch version,
@@ -58,13 +59,13 @@ set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}\\\\packaging\\\\Cura.ico")
 
 # Differentiate between a normal Cura installation and that of a different build type
 if (CURA_BUILDTYPE STREQUAL "")
-    set(CPACK_CREATE_DESKTOP_LINKS Cura "Ultimaker Cura ${CURA_VERSION}")
-    set(CPACK_PACKAGE_EXECUTABLES Cura "Ultimaker Cura ${CURA_VERSION}")
-    set(CPACK_PACKAGE_INSTALL_DIRECTORY "Ultimaker Cura ${CURA_VERSION}")
+    set(CPACK_CREATE_DESKTOP_LINKS Cura "Ultimaker Cura ${NSIS_CURA_VERSION}")
+    set(CPACK_PACKAGE_EXECUTABLES Cura "Ultimaker Cura ${NSIS_CURA_VERSION}")
+    set(CPACK_PACKAGE_INSTALL_DIRECTORY "Ultimaker Cura ${NSIS_CURA_VERSION}")
 else ()
-    set(CPACK_CREATE_DESKTOP_LINKS Cura "Ultimaker Cura ${CURA_BUILDTYPE} ${CURA_VERSION}")
-    set(CPACK_PACKAGE_EXECUTABLES Cura "Ultimaker Cura ${CURA_BUILDTYPE} ${CURA_VERSION}")
-    set(CPACK_PACKAGE_INSTALL_DIRECTORY "Ultimaker Cura ${CURA_BUILDTYPE} ${CURA_VERSION}")
+    set(CPACK_CREATE_DESKTOP_LINKS Cura "Ultimaker Cura ${CURA_BUILDTYPE} ${NSIS_CURA_VERSION}")
+    set(CPACK_PACKAGE_EXECUTABLES Cura "Ultimaker Cura ${CURA_BUILDTYPE} ${NSIS_CURA_VERSION}")
+    set(CPACK_PACKAGE_INSTALL_DIRECTORY "Ultimaker Cura ${CURA_BUILDTYPE} ${NSIS_CURA_VERSION}")
 endif ()
 
 # Use processor name
