@@ -105,6 +105,13 @@ RUN apt-get -qq update \
        libxcb-dri3-dev \
        uuid-dev \
        libxcb-util-dev \
+       ninja-build \
+       patchelf \
+       desktop-file-utils \
+       libgdk-pixbuf2.0-dev \
+       fakeroot \
+       strace \
+       fuse \
     && rm -rf /var/lib/apt/lists/* \
     && useradd -ms /bin/bash conan \
     && printf "conan:conan" | chpasswd \
@@ -154,7 +161,8 @@ RUN apt-get -qq update \
     && rm -rf /tmp/* \
     && runuser -u conan -- printf 'eval "$(pyenv init -)"\n' >> /home/conan/.bashrc \
     && runuser -u conan -- printf 'eval "$(pyenv virtualenv-init -)"\n' >> ~/.bashrc \
-    && mkdir -p /home/conan/env \
+    && wget --no-check-certificate --quiet https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O /usr/local/bin/appimagetool \
+    && chmod +x /usr/local/bin/appimagetool \
     && chown -R conan:conan /opt/pyenv \
     && chown -R conan:conan /opt/conan
 
