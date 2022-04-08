@@ -19,7 +19,9 @@ else ()
 endif ()
 
 include(InstallRequiredSystemLibraries)
+set(CMAKE_INSTALL_SYSTEM_RUNTIME_COMPONENT VC_Runtime_Libs)
 install (PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION ".")
+cpack_add_component(VC_Runtime_Libs DISPLAY_NAME "Windows Runtime libraries")
 
 # ========================================
 # CPack Common Settings
