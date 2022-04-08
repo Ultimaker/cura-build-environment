@@ -23,10 +23,10 @@ set(INSTALLER_EXT dmg)
 include(${CMAKE_SOURCE_DIR}/cmake/installer-filename.cmake)
 set(DMG_PATH ${installer_DIR}/${INSTALLER_FILENAME})
 
-add_custom_target(create-dmg ALL COMMENT "Create the MacOS dmg")
+add_custom_target(packaging ALL COMMENT "Create the MacOS dmg")
 add_custom_command(
         TARGET
-            create-dmg
+            packaging
         WORKING_DIRECTORY
             ${installer_DIR}
         COMMAND
@@ -40,6 +40,5 @@ add_custom_command(
             --background "${CMAKE_SOURCE_DIR}/packaging/cura_background_dmg.png"
             --rez ${REZ_EXECUTABLE}
             ${DMG_PATH}
-            ${ULTIMAKER_CURA_APP_PATH}
-        DEPENDS pyinstaller install-python-requirements Cura create_installer_dir)
-add_dependencies(create-dmg pyinstaller install-python-requirements Cura create_installer_dir)
+            ${ULTIMAKER_CURA_APP_PATH})
+add_dependencies(packaging pyinstaller install-python-requirements Cura create_installer_dir)

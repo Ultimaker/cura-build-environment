@@ -15,6 +15,5 @@ add_custom_target(packaging ALL
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/packaging/cura.appdata.xml ${ULTIMAKER_CURA_PATH}/cura.appdata.xml
     COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_CURRENT_BINARY_DIR}/${INSTALLER_FILENAME}
     COMMAND appimage ${ULTIMAKER_CURA_PATH} ${CMAKE_CURRENT_BINARY_DIR}/${INSTALLER_FILENAME}
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-)
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 add_dependencies(packaging pyinstaller)

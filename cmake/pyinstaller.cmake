@@ -1,7 +1,6 @@
 # Copyright (c) 2022 Ultimaker B.V.
 # cura-build-environment is released under the terms of the AGPLv3 or higher.
 
-
 set(pyinstaller_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/${exe_path}/pyinstaller)
 set(cura_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/cura_app.py)
 set(curaengine_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/CuraEngine${exe_ext})
@@ -38,13 +37,17 @@ if (APPLE)
     list(APPEND extra_pyinstaller_args --icon ${CMAKE_SOURCE_DIR}/packaging/cura.icns)
 endif ()
 
+if(LINUX)
+    list(APPEND extra_pyinstaller_args --add-binary "/usr/lib/libwayland-cursor.so.0${env_path_sep}.")
+endif()
+
 if (WIN32)
     list(APPEND extra_pyinstaller_args --hidden-import fcntl --collect-all win32ctypes --icon ${CMAKE_SOURCE_DIR}/packaging/Cura.ico)
 endif ()
 
 add_custom_target(create_installer_dir ALL COMMAND ${CMAKE_COMMAND} -E make_directory ${installer_DIR})
 add_custom_target(pyinstaller ALL COMMENT "Collect the build artifacts in a single installer")
-include(${CMAKE_SOURCE_DIR}/cmake/os.cmake)
+
 add_custom_command(
         TARGET
             pyinstaller

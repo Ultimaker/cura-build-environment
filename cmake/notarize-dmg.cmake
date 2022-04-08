@@ -35,18 +35,17 @@ if(SIGN_DMG)
                 DESCRIPTION
                     "The path to the altool executable")
 
-        add_custom_target(notarize-dmg ALL COMMENT "Notarize the MacOS dmg")
+        add_custom_target(notarize ALL COMMENT "Notarize the MacOS dmg")
         add_custom_command(
                 TARGET
-                    notarize-dmg
+                    notarize
                 WORKING_DIRECTORY
                     ${installer_DIR}
                 COMMAND xcrun ${ALTOOL_EXECUTABLE} --notarize-app
                     --primary-bundle-id "${ULTIMAKER_CURA_DOMAIN}"
                     --username "${NOTARIZE_USER}"
                     --password "${NOTARIZE_PASSWORD}"
-                    --file "${DMG_PATH}"
-                DEPENDS sign-dmg create-dmg pyinstaller install-python-requirements Cura create_installer_dir)
-        add_dependencies(notarize-dmg create-dmg pyinstaller install-python-requirements Cura create_installer_dir)
+                    --file "${DMG_PATH}")
+        add_dependencies(notarize signing pyinstaller install-python-requirements Cura create_installer_dir)
     endif()
 endif()

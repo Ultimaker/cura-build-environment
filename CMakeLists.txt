@@ -15,6 +15,7 @@ project(cura-build-environment)
 cmake_minimum_required(VERSION 3.20)
 
 include(cmake/conan.cmake)
+include(cmake/os.cmake)
 
 include(ExternalProject)
 include(GNUInstallDirs)
@@ -81,13 +82,14 @@ include(projects/cura-binary-data.cmake)
 include(cmake/pyinstaller.cmake)
 
 if(APPLE)
-    include(cmake/macos-create-dmg.cmake)
-    include(cmake/macos-sign-dmg.cmake)
-    include(cmake/macos-notarize-dmg.cmake)
+    include(cmake/create-dmg.cmake)
+    include(cmake/sign-dmg.cmake)
+    include(cmake/notarize-dmg.cmake)
 endif()
 
-if(UNIX)
-    include(cmake/appimagekit.cmake)
+if(LINUX)
+    include(cmake/create-appimage.cmake)
+    include(cmake/sign-appimage.cmake)
 endif()
 
 if(WIN32)

@@ -23,8 +23,6 @@ else()
 endif()
 message(STATUS "Using Python ${Python_VERSION}")
 
-include(${CMAKE_SOURCE_DIR}/cmake/os.cmake)
-
 add_custom_target(create-virtual-env ALL COMMENT "Create Virtual Environment")
 add_custom_command(
         TARGET create-virtual-env
