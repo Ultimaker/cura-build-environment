@@ -18,14 +18,10 @@ else ()
             )
 endif ()
 
-include(InstallRequiredSystemLibraries)
-set(CMAKE_INSTALL_SYSTEM_RUNTIME_COMPONENT VC_Runtime_Libs)
-install (PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION ".")
-cpack_add_component(VC_Runtime_Libs DISPLAY_NAME "Windows Runtime libraries")
-
 # ========================================
 # CPack Common Settings
 # ========================================
+set(CPACK_THREADS -1)
 include(${CMAKE_SOURCE_DIR}/cmake/installer-filename.cmake)
 
 if (CURA_BUILDTYPE STREQUAL "")
@@ -53,11 +49,11 @@ else ()
     set(CPACK_PACKAGE_NAME "Ultimaker Cura ${CURA_BUILDTYPE} ${CURA_VERSION}")
 endif ()
 
-set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}\\\\packaging\\\\Cura.ico")
+set(CPACK_PACKAGE_ICON ${CMAKE_SOURCE_DIR}\\\\packaging\\\\Cura.ico)
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Ultimaker Cura - 3D Printing Software")
 set(CPACK_PACKAGE_CONTACT "Ultimaker Cura <software-cura@ultimaker.com>")
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}\\\\packaging\\\\cura_license.txt")
-set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}\\\\packaging\\\\Cura.ico")
+set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_SOURCE_DIR}\\\\packaging\\\\cura_license.txt)
+set(CPACK_PACKAGE_ICON ${CMAKE_SOURCE_DIR}\\\\packaging\\\\Cura.ico)
 
 # Differentiate between a normal Cura installation and that of a different build type
 if (CURA_BUILDTYPE STREQUAL "")
@@ -71,7 +67,4 @@ else ()
 endif ()
 
 # Use processor name
-STRING(TOLOWER "${CMAKE_SYSTEM_PROCESSOR}" CPACK_SYSTEM_NAME)
 set(CPACK_PACKAGE_FILE_NAME ${INSTALLER_FILENAME})
-
-set(CPACK_THREADS -1)

@@ -2,20 +2,24 @@
 # Cura's build system is released under the terms of the AGPLv3 or higher.
 
 # Only NSIS needs to have arduino and vcredist
+include(InstallRequiredSystemLibraries)
+install (PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION "." COMPONENT VC_Runtime_Libs)
+cpack_add_component(VC_Runtime_Libs DISPLAY_NAME "Windows Runtime libraries")
+
 install(DIRECTORY ${CMAKE_INSTALL_PREFIX}/arduino
         DESTINATION "."
         COMPONENT "arduino"
         )
-
 cpack_add_component(arduino DISPLAY_NAME "Arduino Drivers")
 
+set(CPACK_NSIS_COMPRESSOR zlib)
 set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON)
 set(CPACK_NSIS_EXECUTABLES_DIRECTORY ".")
 set(CPACK_NSIS_STARTMENU_DIRECTORY "Ultimaker Cura")
 set(CPACK_NSIS_DISPLAY_NAME "Ultimaker Cura")
-set(CPACK_NSIS_MUI_ICON "${CMAKE_SOURCE_DIR}\\\\packaging\\\\Cura.ico")
-set(CPACK_NSIS_MUI_UNIICON "${CMAKE_SOURCE_DIR}\\\\packaging\\\\Cura.ico")
-set(CPACK_NSIS_INSTALLED_ICON_NAME "Ultimaker-Cura.exe")
+set(CPACK_NSIS_MUI_ICON ${CMAKE_SOURCE_DIR}\\\\packaging\\\\Cura.ico)
+set(CPACK_NSIS_MUI_UNIICON ${CMAKE_SOURCE_DIR}\\\\packaging\\\\Cura.ico)
+set(CPACK_NSIS_INSTALLED_ICON_NAME "Cura.ico")
 set(CPACK_NSIS_HELP_LINK "https://github.com/Ultimaker/Cura")
 set(CPACK_NSIS_URL_INFO_ABOUT "https://ultimaker.com/en/support/software")
 set(CPACK_NSIS_MENU_LINKS
