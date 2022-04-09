@@ -74,5 +74,8 @@ add_custom_command(
                 --add-data "${CMAKE_INSTALL_PREFIX}/share/uranium/resources${env_path_sep}share/uranium/resources"
                 --add-data "${Python_SITELIB_LOCAL}/UM/Qt/qml/UM/${env_path_sep}PyQt6/Qt6/qml/UM"
                 --windowed --clean --noconfirm --log-level INFO ${extra_pyinstaller_args}
-                --name "Ultimaker-Cura")
+                --name "Ultimaker-Cura"
+        COMMAND
+            ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/packaging/Cura.ico ${ULTIMAKER_CURA_PATH}/
+)
 add_dependencies(pyinstaller create_installer_dir Cura fdm_materials cura-binary-data)
