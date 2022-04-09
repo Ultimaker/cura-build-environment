@@ -53,5 +53,13 @@ class CuraBuildEnvironemtConan(ConanFile):
 
         tc.variables["CURA_VERSION_MAJOR"] = "5"
         tc.variables["CURA_VERSION_EXTRA"] = "a+1"
+        tc.variables["CURA_DEBUGMODE"] = "OFF"
+
+        tc.variables["CURA_CLOUD_API_VERSION"] = "1"
+        tc.variables["CURA_CLOUD_API_ROOT"] = "https://api.ultimaker.com"
+        tc.variables["CURA_CLOUD_ACCOUNT_API_ROOT"] = "https://account.ultimaker.com"
+        tc.variables["CURA_MARKETPLACE_ROOT"] = "https://marketplace.ultimaker.com"
+        tc.variables["CURA_DIGITAL_FACTORY_URL"] = "https://digitalfactory.ultimaker.com"
+
 
         tc.generate()
