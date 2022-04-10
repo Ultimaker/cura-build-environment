@@ -7,7 +7,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/installer-filename.cmake)
 #Put correct version in cura.desktop.
 configure_file(${CMAKE_SOURCE_DIR}/packaging/cura.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/cura.desktop @ONLY)
 
-file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/apprun-attr.cmake" "file(COPY ${CMAKE_SOURCE_DIR}/packaging/cura.sh DESTINATION ${ULTIMAKER_CURA_PATH}/ FILE_PERMISSIONS OWNER_READ OWNER_WRITE GROUP_WRITE GROUP_READ WORLD_READ OWNER_EXECUTE)")
+file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/apprun-attr.cmake" "file(COPY ${CMAKE_SOURCE_DIR}/packaging/AppRun DESTINATION ${ULTIMAKER_CURA_PATH} FILE_PERMISSIONS OWNER_READ OWNER_WRITE GROUP_WRITE GROUP_READ WORLD_READ OWNER_EXECUTE)")
 
 add_custom_target(packaging ALL
     COMMENT "Package into an AppImage file."
@@ -15,7 +15,7 @@ add_custom_target(packaging ALL
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/packaging/cura-icon_256x256.png ${ULTIMAKER_CURA_PATH}/cura-icon.png
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/cura.desktop ${ULTIMAKER_CURA_PATH}/cura.desktop
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/packaging/cura.appdata.xml ${ULTIMAKER_CURA_PATH}/cura.appdata.xml
-    COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_CURRENT_BINARY_DIR}/${INSTALLER_FILENAME}
-    COMMAND appimagetool --appimage-extract-and-run ${ULTIMAKER_CURA_PATH} ${CMAKE_CURRENT_BINARY_DIR}/${INSTALLER_FILENAME}
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
-#add_dependencies(packaging pyinstaller)
+    COMMAND ${CMAKE_COMMAND} -E remove ${installer_DIR}/dist/${INSTALLER_FILENAME}
+    COMMAND appimagetool --appimage-extract-and-run ${ULTIMAKER_CURA_PATH}/ ${installer_DIR}/dist/${INSTALLER_FILENAME}
+    WORKING_DIRECTORY ${ULTIMAKER_CURA_PATH})
+add_dependencies(packaging pyinstaller)
