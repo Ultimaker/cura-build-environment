@@ -52,8 +52,10 @@ class CuraBuildEnvironemtConan(ConanFile):
         tc.variables["CURABINARYDATA_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6"
 
         tc.variables["CURA_VERSION_MAJOR"] = "5"
-        tc.variables["CURA_VERSION_EXTRA"] = "a+1"
-        tc.variables["CURA_DEBUGMODE"] = "OFF"
+        tc.variables["CURA_VERSION_MINOR"] = "0"
+        tc.variables["CURA_VERSION_PATCH"] = "0"
+        tc.variables["CURA_VERSION_PRE_RELEASE_TAG"] = "a"
+        tc.variables["CURA_VERSION_BUILD"] = "2"
 
         tc.variables["CURA_CLOUD_API_VERSION"] = "1"
         tc.variables["CURA_CLOUD_API_ROOT"] = "https://api.ultimaker.com"

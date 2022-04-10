@@ -3,40 +3,36 @@
 
 # Only NSIS needs to have arduino and vcredist
 include(InstallRequiredSystemLibraries)
-install (PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION "." COMPONENT VC_Runtime_Libs)
-cpack_add_component(VC_Runtime_Libs DISPLAY_NAME "Windows Runtime libraries")
+install(PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION "." COMPONENT VC_Runtime_Libs)
+add_custom_target(packaging ALL COMMENT "Package into a NSIS installer.")
 
-install(DIRECTORY ${CMAKE_INSTALL_PREFIX}/arduino
-        DESTINATION "."
-        COMPONENT "arduino"
-        )
-cpack_add_component(arduino DISPLAY_NAME "Arduino Drivers")
+set(INSTALLER_EXT exe)
+include(${CMAKE_SOURCE_DIR}/cmake/installer-filename.cmake)
 
-set(CPACK_NSIS_COMPRESSOR zlib)
-set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON)
-set(CPACK_NSIS_EXECUTABLES_DIRECTORY ".")
-set(CPACK_NSIS_STARTMENU_DIRECTORY "Ultimaker Cura")
-set(CPACK_NSIS_DISPLAY_NAME "Ultimaker Cura")
-set(CPACK_NSIS_MUI_ICON ${CMAKE_SOURCE_DIR}\\\\packaging\\\\Cura.ico)
-set(CPACK_NSIS_MUI_UNIICON ${CMAKE_SOURCE_DIR}\\\\packaging\\\\Cura.ico)
-set(CPACK_NSIS_INSTALLED_ICON_NAME "Cura.ico")
-set(CPACK_NSIS_HELP_LINK "https://github.com/Ultimaker/Cura")
-set(CPACK_NSIS_URL_INFO_ABOUT "https://ultimaker.com/en/support/software")
-set(CPACK_NSIS_MENU_LINKS
-        "https://ultimaker.com/en/support/software" "Online Documentation"
-        "https://github.com/Ultimaker/Cura" "Development Resources"
-        )
-
-set(CPACK_NSIS_MUI_WELCOMEFINISHPAGE_BITMAP ${CMAKE_SOURCE_DIR}\\\\packaging\\\\cura_banner_nsis.bmp)
-set(CPACK_NSIS_MUI_UNWELCOMEFINISHPAGE_BITMAP ${CMAKE_SOURCE_DIR}\\\\packaging\\\\cura_banner_nsis.bmp)
-set(CPACK_NSIS_INSTALLER_MUI_FINISHPAGE_RUN_CODE "!define MUI_FINISHPAGE_RUN \\\"$WINDIR\\\\explorer.exe\\\"\n!define MUI_FINISHPAGE_RUN_PARAMETERS \\\"$INSTDIR\\\\Ultimaker-Cura.exe\\\"") # Hack to ensure Cura is not started with admin rights
-
-add_custom_target(packaging
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/packaging/NSIS "${CMAKE_CURRENT_BINARY_DIR}/_CPack_Packages/${CPACK_SYSTEM_NAME}/NSIS"
-        COMMENT "Copying NSIS scripts from [${CMAKE_SOURCE_DIR}/packaging/NSIS] to [${CMAKE_CURRENT_BINARY_DIR}/_CPack_Packages/${CPACK_SYSTEM_NAME}/NSIS]"
-        COMMAND "${CMAKE_COMMAND}" --build . --target package
-        WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+add_custom_command(
+        TARGET
+            packaging
+        WORKING_DIRECTORY
+            ${installer_DIR}/dist
+        COMMAND
+            ${Python_EXECUTABLE} ${CMAKE_SOURCE_DIR}/packaging/NSIS/nsis-configurator.py
+            ${ULTIMAKER_CURA_PATH}
+            ${CMAKE_SOURCE_DIR}/packaging/NSIS/Ultimaker-Cura.nsi.jinja
+            "Ultimaker Cura"
+            "Ultimaker-Cura.exe"
+            ${CURA_VERSION_MAJOR}
+            ${CURA_VERSION_MINOR}
+            ${CURA_VERSION_PATCH}
+            ${CURA_VERSION_BUILD}
+            "Ultimaker B.V."
+            "https://ultimaker.com/software/ultimaker-cura"
+            ${CMAKE_SOURCE_DIR}/packaging/cura_license.txt
+            LZMA
+            ${CMAKE_SOURCE_DIR}/packaging/cura_banner_nsis.bmp
+            ${CMAKE_SOURCE_DIR}/packaging/Cura.ico
+            ${installer_DIR}/dist/${INSTALLER_FILENAME}
+        COMMAND
+            makensis /V2 /P4 ${installer_DIR}/dist/Ultimaker-Cura.nsi
         COMMENT  "Package into a NSIS installer."
-        VERBATIM
         )
-add_dependencies(packaging pyinstaller)
+#add_dependencies(packaging pyinstaller)

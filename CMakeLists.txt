@@ -50,11 +50,17 @@ GetFromEnvironmentOrCache(
             "Cura Patch Version")
 GetFromEnvironmentOrCache(
         NAME
-            CURA_VERSION_EXTRA
+            CURA_VERSION_PRE_RELEASE_TAG
         DESCRIPTION
-            "Cura Extra Version Information")
-if(NOT ${CURA_VERSION_EXTRA} STREQUAL "")
-    set(CURA_VERSION_EXTRA "-${CURA_VERSION_EXTRA}")
+            "Cura pre release tag Version Information a, b or rc")
+GetFromEnvironmentOrCache(
+        NAME
+            CURA_VERSION_BUILD
+        DESCRIPTION
+            "Cura Version build")
+set(CURA_VERSION_EXTRA )
+if(NOT ${CURA_VERSION_PRE_RELEASE_TAG} STREQUAL "")
+    set(CURA_VERSION_EXTRA "-${CURA_VERSION_PRE_RELEASE_TAG}+${CURA_VERSION_BUILD}")
 endif()
 set(_default_cura_version "${CURA_VERSION_MAJOR}.${CURA_VERSION_MINOR}.${CURA_VERSION_PATCH}${CURA_VERSION_EXTRA}")
 GetFromEnvironmentOrCache(
@@ -93,8 +99,5 @@ if(LINUX)
 endif()
 
 if(WIN32)
-    include(CPackComponent)
-    include(cmake/common-cpackconfig.cmake)
     include(cmake/nsis.cmake)
-    include(CPack)
 endif()
