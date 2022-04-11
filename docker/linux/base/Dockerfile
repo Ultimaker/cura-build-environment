@@ -120,6 +120,8 @@ RUN apt-get -qq update \
     && useradd -ms /bin/bash conan \
     && printf "conan:conan" | chpasswd \
     && adduser conan sudo \
+    && groupadd ultimaker \
+    && usermod -a -G ultimaker conan \
     && printf "conan ALL= NOPASSWD: ALL\\n" >> /etc/sudoers \
     && wget -q --no-check-certificate https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION_FULL}/cmake-${CMAKE_VERSION_FULL}.tar.gz \
     && tar -xzf cmake-${CMAKE_VERSION_FULL}.tar.gz \
