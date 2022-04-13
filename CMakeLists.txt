@@ -101,3 +101,5 @@ endif()
 if(WIN32)
     include(cmake/nsis.cmake)
 endif()
+
+include(cmake/dev.cmake)
