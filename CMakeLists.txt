@@ -19,12 +19,6 @@ include(cmake/os.cmake)
 
 include(ExternalProject)
 include(GNUInstallDirs)
-include(ProcessorCount)
-
-ProcessorCount(N_PROC)
-if(N_PROC EQUAL 0)
-    set(N_PROC 1)
-endif()
 
 # Create the version-related variables
 GetFromEnvironmentOrCache(
