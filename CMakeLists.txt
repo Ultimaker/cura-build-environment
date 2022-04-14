@@ -51,7 +51,7 @@ GetFromEnvironmentOrCache(
         NAME
             CURA_VERSION_BUILD
         DESCRIPTION
-            "Cura Version build")
+            "Cura Version buildmetadata ignored when determining version precedence. Only used to identify a build.")
 set(CURA_VERSION_EXTRA )
 if(NOT ${CURA_VERSION_PRE_RELEASE_TAG} STREQUAL "")
     set(CURA_VERSION_EXTRA "-${CURA_VERSION_PRE_RELEASE_TAG}+${CURA_VERSION_BUILD}")
