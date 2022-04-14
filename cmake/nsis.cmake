@@ -25,7 +25,7 @@ add_custom_command(
             ${CURA_VERSION_PATCH}
             ${CURA_VERSION_BUILD}
             "Ultimaker B.V."
-            "https://ultimaker.com/software/ultimaker-cura"
+            "https://ultimaker.com"
             ${CMAKE_SOURCE_DIR}/packaging/cura_license.txt
             LZMA
             ${CMAKE_SOURCE_DIR}/packaging/cura_banner_nsis.bmp

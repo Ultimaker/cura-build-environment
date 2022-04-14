@@ -7,6 +7,23 @@ from pathlib import Path
 from jinja2 import Template
 
 if __name__ == "__main__":
+    """
+    - dist_loc: Location of distribution folder, as output by pyinstaller
+    - nsi_jinja_loc: Jinja2 template to use
+    - app_name: Should be "Ultimaker Cura".
+    - main_app: Name of executable, e.g. Ultimaker-Cura.exe?
+    - version_major: Major version number of Semver (e.g. 5).
+    - version_minor: Minor version number of Semver (e.g. 0).
+    - version_patch: Patch version number of Semver (e.g. 0).
+    - version_build: A version number that gets manually incremented at each build.
+    - company: Publisher of the application. Should be "Ultimaker B.V."
+    - web_site: Website to find more information. Should be "https://ultimaker.com".
+    - cura_license_file: Path to a license file in Cura. Should point to packaging/cura_license.txt in this repository.
+    - compression_method: Compression algorithm to use to compress the data inside the executable. Should be ZLIB, ZBIP2 or LZMA.
+    - cura_banner_img: Path to an image shown on the left in the installer. Should point to packaging/cura_banner_nsis.bmp in this repository.
+    - icon_path: Path to the icon to use on the installer
+    - destination: Where to put the installer after it's generated.
+`    """
     for i, v in enumerate(sys.argv):
         print(f"{i} = {v}")
     dist_loc = Path(sys.argv[1])
