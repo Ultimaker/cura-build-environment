@@ -28,12 +28,12 @@ GetFromEnvironmentOrCache(
         NAME
             CURA_DIGITAL_FACTORY_URL
         DESCRIPTION
-            "The Digit factory url")
+            "The Ultimaker Digital Factory URL")
 GetFromEnvironmentOrCache(
         NAME
             CURA_MARKETPLACE_ROOT
         DESCRIPTION
-            "The marketplace root")
+            "The Cura Marketplace API root URL")
 GetFromEnvironmentOrCache(
         NAME
             URANIUM_SCRIPTS_DIR
