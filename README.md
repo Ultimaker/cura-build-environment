@@ -3,7 +3,7 @@
 **WIP**
 
 This repository contains helper scripts for building Cura from source. It will create a base environment from which
-you can (re)build Cura on a regular basis, in an time efficient matter. It consists of the following tools.
+which are used to build an installer for the specific OS.
 
 ## System Requirements
 
@@ -25,6 +25,8 @@ you can (re)build Cura on a regular basis, in an time efficient matter. It consi
 - Visual Studio >= 16
 - NMake
 - Docker
+- makensis (should be on the PATH)
+- jinja2 (should be parth of Conan)
 
 ## CMake script
 
@@ -141,81 +143,18 @@ pip install conan
 > conan config install https://github.com/ultimaker/conan-config.git
 > ```
 
-
 Once Conan is installed and configured, installing the cura-build-environment is easy. The steps below should do the
 trick.
 
 ```bash
 mkdir build && cd build
-conan install .. --build=missing
-cmake -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_PREFIX_PATH=<install_path> -DCMAKE_INSTALL_PREFIX=<install_path>
-. activate_run.sh
+cmake -DCMAKE_PREFIX_PATH=<install_path> -DCMAKE_INSTALL_PREFIX=<install_path> ..
 cmake --build .
-cmake --install .
-```
-_For more detailed explanation and options see the [Conan online documentation](https://docs.conan.io/en/latest/)._
-
-The `<install_path>` should now contain all used dependencies which can be used by the
-[cura-build](https://github.com/Ultimaker/cura-build) repository.
-
-# Recommended usage with Docker image
-
-This repository also contains dockerfiles which will build a cura-builder image for either Windows or Linux. These images
-contain all build essentials to both build cura-build-environment and cura-build
-
-## Linux
-
-Build the docker file
-```bash
-cd docker/linux
-docker build -t cura-build-env:<branch_name> -f Dockerfile .
 ```
 
-This docker image can be used to create a cura-builder which helps us build the cura-build and cura-build-environment.
+The Installer for your OS can now be found in the `<install_path>/installer/dist/`
 
-First we need to create a build environment
-```bash
-DOCKER_BUILDKIT=1 docker build --build-arg JFROG_PASSWORD=JmZofe2*EjvoN=?9=4 -f Dockerfile -t cura-build-env 
-docker run -v /mnt/projects/ultimaker/cura/cura-build-environment:/home/ultimaker/source -v /mnt/projects/ultimaker/cura/cura-build-environment/cmake-build-release-docker/:/home/ultimaker/build -v /mnt/projects/ultimaker/cura/cura-build-environment/install/:/home/ultimaker/install -v /home/peer23peer/.conan/data:/home/ultimaker/.conan/data --name blerker cura-env-builder:latest 
-```
+> On Windows make sure you are working in the x64 Visual Studio 2019/2022 Command Prompt and specify the NMake generator using the
+> `cmake -G "NMake Makefiles" -DCMAKE_PREFIX_PATH=<install_path> -DCMAKE_INSTALL_PREFIX=<install_path> ..`
 
-```bash
-docker create -t cura-env-builder:<branch_name \
--v <source_path_cura-build-environment>:/home/ultimaker/source \
--v <build_path_cura-build-environment>:/home/ultimaker/build \
--v <install_path_cura-build-environment>:/home/ultimaker/install \
--v ~/.conan/data:/home/ultimaker/.conan/data cura-build-env:<branch_name>
-```
-> NOTE:
-> By specifying the conan data folder we ensure that big dependencies, such as Python
-> and Boost can be used in multiple environments and are reused when we are recreating
-> the environment from scratch.
-
-We can then build the environment with:
-```bash
-cd <root_cura_build_environment>
-docker run cura-env-builder:cura-8640 \
--DLIBNEST2D_BRANCH_OR_TAG=<branch> \
--DCMAKE_......
-```
-
-Once the environment is build and installed in the path `<install_path_cura-build-environment>` we can then check out
-the cura-build repository and build Cura using the cura-builder and the previously build cura-build-environment.
-
-```bash
-docker create -t cura-builder:<branch_name \
--v <source_path_cura-build-environment>:/home/ultimaker/source \
--v <build_path_cura-build-environment>:/home/ultimaker/build \
--v <install_path_cura-build-environment>:/home/ultimaker/install \
--v <install_path_cura-build-environment>:/home/ultimaker/env \
--v ~/.conan/data:/home/ultimaker/.conan/data cura-build-env:<branch_name
-```
-Notice the extra volume, which contains the previous build environment
-
-We can then build Cura with:
-```bash
-cd <root_cura_build>
-docker run cura-builder:cura-8640 \
--DURANIUM_BRANCH_OR_TAG=<branch> \
--DCMAKE_......
-```
+> If you want to see all the options available use a tool such as `ccmake` or `cmake-gui` 
