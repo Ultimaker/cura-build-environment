@@ -1,0 +1,52 @@
+{
+ "graph_lock": {
+  "nodes": {
+   "0": {
+    "options": "readline:fPIC=True\nreadline:shared=False\nreadline:with_library=termcap\ntermcap:fPIC=True\ntermcap:shared=False\nzlib:fPIC=True\nzlib:shared=False",
+    "requires": [
+     "1"
+    ],
+    "path": "conanfile.txt",
+    "context": "host"
+   },
+   "1": {
+    "ref": "binutils/2.37#7e1081ddda1762c3f97d47399c4b1691",
+    "options": "readline:fPIC=True\nreadline:shared=False\nreadline:with_library=termcap\ntermcap:fPIC=True\ntermcap:shared=False\nzlib:fPIC=True\nzlib:shared=False",
+    "package_id": "8e7714e05da644d1474247995163817b009f35ad",
+    "prev": "92231e81212010b1f015f78125760d49",
+    "requires": [
+     "2",
+     "3"
+    ],
+    "context": "host"
+   },
+   "2": {
+    "ref": "zlib/1.2.11#b46bf663179824c23085bb71666ba8e6",
+    "options": "fPIC=True\nshared=False",
+    "package_id": "76f87539fc90ff313e0b3182641a9bb558a717d2",
+    "prev": "a4730ad7fc025658ed1806f0b0d5ba1f",
+    "context": "host"
+   },
+   "3": {
+    "ref": "readline/8.0#6bfe51715475f7b96c43adfa7b6aef96",
+    "options": "fPIC=True\nshared=False\nwith_library=termcap\ntermcap:fPIC=True\ntermcap:shared=False",
+    "package_id": "ad3074fd90ef13789cde8b160ab25ce883db3c6e",
+    "prev": "15a274e05579977eaebf58e1bdb8b51e",
+    "requires": [
+     "4"
+    ],
+    "context": "host"
+   },
+   "4": {
+    "ref": "termcap/1.3.1#a75d9f61bf0d1899b64967958dfa6538",
+    "options": "fPIC=True\nshared=False",
+    "package_id": "76f87539fc90ff313e0b3182641a9bb558a717d2",
+    "prev": "34552acd6624780a5f6251750f40d9c5",
+    "context": "host"
+   }
+  },
+  "revisions_enabled": true
+ },
+ "version": "0.4",
+ "profile_host": "[settings]\narch=x86_64\narch_build=x86_64\nbuild_type=Release\ncompiler=gcc\ncompiler.libcxx=libstdc++11\ncompiler.version=5\nos=Linux\nos_build=Linux\n[options]\n[build_requires]\n[env]\n"
+}

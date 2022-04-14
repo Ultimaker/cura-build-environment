@@ -1,74 +1,99 @@
-#Copyright (c) 2020 Ultimaker B.V.
-#cura-build-environment is released under the terms of the AGPLv3 or higher.
+# Copyright 2022 Ultimaker
 
-project(cura-build-environment)
-
-cmake_minimum_required(VERSION 3.6)
-
-if(NOT CURA_ARCUS_BRANCH_OR_TAG)
-    set(CURA_ARCUS_BRANCH_OR_TAG "master")
-endif()
-if(NOT CURA_SAVITAR_BRANCH_OR_TAG)
-    set(CURA_SAVITAR_BRANCH_OR_TAG "master")
-endif()
-
-# This should care that our CMAKE_INSTALL_PREFIX is absolute at the end...
-get_filename_component(CMAKE_INSTALL_PREFIX
-                       ${CMAKE_INSTALL_PREFIX}
-                       ABSOLUTE
-                       CACHE FORCE)
+# Setting the MACOSX_DEPLOYMENT_TARGET needs to be done before the first project() call. Setting this value should also
+# take care of the CMAKE_OSX_SYSROOT. The variable is ignored on non-Apple systems.
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+include(GetFromEnvironmentOrCache)
+GetFromEnvironmentOrCache(
+        NAME
+            CMAKE_OSX_DEPLOYMENT_TARGET
+        DESCRIPTION
+            "Specify the minimum version of the target platform (e.g. macOS or iOS)")
+
+project(cura-build-environment)
+cmake_minimum_required(VERSION 3.20)
+
+include(cmake/conan.cmake)
+include(cmake/os.cmake)
 
 include(ExternalProject)
 include(GNUInstallDirs)
 
-include(BuildPlatformDetection)
-include(SetProjectDependencies)
+# Create the version-related variables
+GetFromEnvironmentOrCache(
+        NAME
+            CURA_VERSION_MAJOR
+        DEFAULT
+            "5"
+        DESCRIPTION
+            "Cura Major Version")
+GetFromEnvironmentOrCache(
+        NAME
+            CURA_VERSION_MINOR
+        DEFAULT
+            "0"
+        DESCRIPTION
+            "Cura Minor Version")
+GetFromEnvironmentOrCache(
+        NAME
+            CURA_VERSION_PATCH
+        DEFAULT
+            "0"
+        DESCRIPTION
+            "Cura Patch Version")
+GetFromEnvironmentOrCache(
+        NAME
+            CURA_VERSION_PRE_RELEASE_TAG
+        DESCRIPTION
+            "Cura pre release tag Version Information a, b or rc")
+GetFromEnvironmentOrCache(
+        NAME
+            CURA_VERSION_BUILD
+        DESCRIPTION
+            "Cura Version buildmetadata ignored when determining version precedence. Only used to identify a build.")
+set(CURA_VERSION_EXTRA )
+if(NOT ${CURA_VERSION_PRE_RELEASE_TAG} STREQUAL "")
+    set(CURA_VERSION_EXTRA "-${CURA_VERSION_PRE_RELEASE_TAG}+${CURA_VERSION_BUILD}")
+endif()
+set(_default_cura_version "${CURA_VERSION_MAJOR}.${CURA_VERSION_MINOR}.${CURA_VERSION_PATCH}${CURA_VERSION_EXTRA}")
+GetFromEnvironmentOrCache(
+        NAME
+            CURA_VERSION
+        DEFAULT
+            ${_default_cura_version}
+        DESCRIPTION
+            "Cura Extra Version Information"
+        REQUIRED)
 
-# Hard-code the CPython executable to use later because all find_package()
-# commands are executed when the Makefiles are generated. Because we need to
-# compile CPython first, all other projects that require Python must use our
-# compiled one. Because we cannot use find_package() to find Python at runtime,
-# we have to hard-code the CPython executable that will be created later. All
-# projects that requires Python must use the variable Python3_EXECUTABLE so they
-# will use the right CPython.
-if(BUILD_OS_WINDOWS)
-    # Minimalistic preinstalled Python on Windows:
-    set(Python3_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/python.exe)
-else()
-    # All other OSs like OSX
-    set(Python3_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/bin/python3)
+include(projects/python.cmake)
+include(projects/charon.cmake)
+include(projects/savitar.cmake)
+include(projects/arcus.cmake)
+include(projects/uranium.cmake)
+include(projects/libnest2d.cmake)
+include(projects/pynest2d.cmake)
+include(projects/curaengine.cmake)
+include(projects/cura.cmake)
+include(projects/fdm_materials.cmake)
+include(projects/cura-binary-data.cmake)
+
+# Collect the artifacts with pyinstaller
+include(cmake/pyinstaller.cmake)
+
+if(APPLE)
+    include(cmake/create-dmg.cmake)
+    include(cmake/sign-dmg.cmake)
+    include(cmake/notarize-dmg.cmake)
 endif()
 
-# Build projects step
-add_custom_target(projects ALL COMMENT "Building Projects...")
-
-# On Linux, make sure that we use "lib" for libraries and create a symlink "lib64" pointing to "lib".
-if(BUILD_OS_LINUX)
-    message(STATUS "Prepare lib and lib64 on Linux...")
-    execute_process(
-        COMMAND mkdir -p "${CMAKE_INSTALL_PREFIX}/lib"
-    )
-    execute_process(
-        COMMAND ln -s "lib" "lib64"
-        WORKING_DIRECTORY "${CMAKE_INSTALL_PREFIX}"
-    )
+if(LINUX)
+    include(cmake/create-appimage.cmake)
+    include(cmake/sign-appimage.cmake)
 endif()
 
-# Some extra post build additions are needed on macOS, as the eventual Cura build will fail, because otool
-# throws an error while copying pynest2d.so to the Ultimaker Cura.app bundle.
-if(BUILD_OS_OSX)
-    add_custom_command(
-        TARGET projects POST_BUILD
-        COMMAND /Library/Developer/CommandLineTools/usr/bin/install_name_tool -change @rpath/libnlopt.0.dylib "${CMAKE_INSTALL_PREFIX}/lib/libnlopt.0.dylib" "${CMAKE_INSTALL_PREFIX}/lib/python3.10/site-packages/pynest2d.so"
-        COMMENT "Changing the RPATH of pynest2d"
-    )
+if(WIN32)
+    include(cmake/nsis.cmake)
 endif()
 
-file(GLOB _projects projects/*.cmake)
-foreach(_project ${_projects})
-    include(${_project})
-endforeach()
-
-ProcessProjectDependencies(TARGET projects)
+include(cmake/dev.cmake)
