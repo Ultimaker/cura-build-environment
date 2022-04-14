@@ -35,4 +35,4 @@ add_custom_command(
             makensis /V2 /P4 ${installer_DIR}/dist/Ultimaker-Cura.nsi
         COMMENT  "Package into a NSIS installer."
         )
-#add_dependencies(packaging pyinstaller)
+add_dependencies(packaging pyinstaller)
