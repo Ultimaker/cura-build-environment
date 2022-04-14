@@ -55,7 +55,7 @@ class CuraBuildEnvironemtConan(ConanFile):
         tc.variables["CURA_VERSION_MINOR"] = "0"
         tc.variables["CURA_VERSION_PATCH"] = "0"
         tc.variables["CURA_VERSION_PRE_RELEASE_TAG"] = "a"
-        tc.variables["CURA_VERSION_BUILD"] = "6"
+        tc.variables["CURA_VERSION_BUILD"] = "7"
 
         tc.variables["CURA_CLOUD_API_VERSION"] = "1"
         tc.variables["CURA_CLOUD_API_ROOT"] = "https://api.ultimaker.com"
