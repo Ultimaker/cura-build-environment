@@ -36,84 +36,84 @@ use.  It will download and install the following projects:
 - libsavitar
 - libarcus
 - Python dependencies
-  - wheel
-  - cython
-  - pybind11
-  - pytest
-  - more-itertools
-  - wcwidth
-  - pluggy
-  - attrs
-  - py
-  - atomicwrites
-  - colorama
-  - packaging
-  - pyparsing
-  - six
-  - pytest-benchmark
-  - py-cpuinfo
-  - pytest-cov
-  - coverage
-  - tomli
-  - mypy-extensions
-  - typing-extensions
-  - typed-ast
-  - mypy
-  - cffi
-  - pycparser
-  - cryptography
-  - sys_platform
-  - cryptography
-  - sys_platform
-  - cryptography
-  - sys_platform
-  - toml
-  - sip
-  - pyinstaller
+  - Automat
+  - PyQt6
+  - PyQt6-NetworkAuth
+  - PyQt6-NetworkAuth-Qt6
+  - PyQt6-Qt6
+  - PyQt6-sip
+  - SecretStorage
+  - Twisted
   - altgraph
-  - pyinstaller-hooks-contrib
-  - pefile
-  - macholib
   - appdirs
+  - atomicwrites
+  - attrs
   - certifi
+  - cffi
   - chardet
+  - colorama
+  - constantly
+  - coverage
+  - cryptography
+  - cx-Logging
+  - cython
   - decorator
+  - future
+  - hyperlink
   - idna
+  - ifaddr
+  - importlib-metadata
+  - incremental
+  - jeepney
+  - keyring
+  - lxml
+  - macholib
+  - more-itertools
+  - mypy
+  - mypy-extensions
   - netifaces
   - networkx
+  - numpy
   - numpy-stl
+  - packaging
+  - pefile
+  - pluggy
+  - py
+  - py-cpuinfo
+  - pybind11
+  - pyclipper
   - pycollada
-  - PyQt6-sip
-  - PyQt6
-  - PyQt6-Qt6
+  - pycparser
+  - pyinstaller
+  - pyinstaller-hooks-contrib
+  - pyparsing
   - pyserial
+  - pytest
+  - pytest-benchmark
+  - pytest-cov
   - python-dateutil
   - python-utils
-  - requests
-  - sentry-sdk
-  - trimesh
-  - urllib3
-  - importlib-metadata
-  - zipp
-  - jeepney
-  - SecretStorage
-  - keyring
-  - Twisted
-  - constantly
-  - hyperlink
-  - incremental
-  - zope.interface
-  - Automat
-  - twisted-iocpsupport
-  - zeroconf
-  - ifaddr
-  - numpy
-  - scipy
-  - pyclipper
-  - lxml
   - pywin32
   - pywin32-ctypes
-  - cx-Logging
+  - requests
+  - scipy
+  - sentry-sdk
+  - setuptools
+  - sip
+  - six
+  - sys_platform
+  - toml
+  - tomli
+  - trimesh
+  - twisted-iocpsupport
+  - typed-ast
+  - typing-extensions
+  - urllib3
+  - wcwidth
+  - wheel
+  - zeroconf
+  - zipp
+  - zope.interface
 
 The list of dependencies above also have their own dependencies, such as:
 
