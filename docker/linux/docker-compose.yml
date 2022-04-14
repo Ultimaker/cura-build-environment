@@ -14,12 +14,6 @@ x-common-args: &common-args
   DISTRO: ${DISTRO}
   DISTRO_VERSION: ${DISTRO_VERSION}
 
-x-gcc5: &gcc5
-  GCC_VERSION: ${GCC5_VERSION}
-
-x-gcc6: &gcc6
-  GCC_VERSION: ${GCC6_VERSION}
-
 x-gcc7: &gcc7
   GCC_VERSION: ${GCC7_VERSION}
 
@@ -61,28 +55,6 @@ services:
     tty: true
 
   # Builder images
-  gcc5-builder:
-    build:
-      context: gcc
-      dockerfile: Dockerfile
-      target: gcc-builder
-      args:
-        <<: *common-args
-        <<: *gcc5
-    image: ${DOCKER_USERNAME}/gcc5-builder-${DISTRO}:${DOCKER_TAG}
-    container_name: gcc5-builder
-    tty: true
-  gcc6-builder:
-    build:
-      context: gcc
-      dockerfile: Dockerfile
-      target: gcc-builder
-      args:
-        <<: *common-args
-        <<: *gcc6
-    image: ${DOCKER_USERNAME}/gcc6-builder-${DISTRO}:${DOCKER_TAG}
-    container_name: gcc6-builder
-    tty: true
   gcc7-builder:
     build:
       context: gcc
@@ -184,30 +156,6 @@ services:
     tty: true
 
   # Deploy images
-  gcc5-deploy:
-    build:
-      context: gcc
-      dockerfile: Dockerfile
-      target: deploy
-      cache_from:
-        - ${DOCKER_USERNAME}/gcc5-builder-${DISTRO}:${DOCKER_TAG}
-      args:
-        <<: *common-args
-    image: ${DOCKER_USERNAME}/gcc5-deploy-${DISTRO}:${DOCKER_TAG}
-    container_name: gcc5-deploy
-    tty: true
-  gcc6-deploy:
-    build:
-      context: gcc
-      dockerfile: Dockerfile
-      target: deploy
-      cache_from:
-        - ${DOCKER_USERNAME}/gcc6-builder-${DISTRO}:${DOCKER_TAG}
-      args:
-        <<: *common-args
-    image: ${DOCKER_USERNAME}/gcc6-deploy-${DISTRO}:${DOCKER_TAG}
-    container_name: gcc6-deploy
-    tty: true
   gcc7-deploy:
     build:
       context: gcc
@@ -304,7 +252,6 @@ services:
     image: ${DOCKER_USERNAME}/clang12-deploy-${DISTRO}:${DOCKER_TAG}
     container_name: clang12-deploy
     tty: true
-
   clang13-deploy:
     build:
       context: clang
@@ -319,34 +266,6 @@ services:
     tty: true
 
   # Images
-  gcc5:
-    build:
-      context: gcc
-      dockerfile: Dockerfile
-      args:
-        <<: *common-args
-        <<: *gcc5
-    image: ${DOCKER_USERNAME}/gcc5-${DISTRO}:${DOCKER_TAG}
-    container_name: gcc5
-    tty: true
-    ports:
-      - 2222:22
-    volumes:
-      - conan_data:/home/conan/.conan/data
-  gcc6:
-    build:
-      context: gcc
-      dockerfile: Dockerfile
-      args:
-        <<: *common-args
-        <<: *gcc6
-    image: ${DOCKER_USERNAME}/gcc6-${DISTRO}:${DOCKER_TAG}
-    container_name: gcc6
-    tty: true
-    ports:
-      - 2222:22
-    volumes:
-      - conan_data:/home/conan/.conan/data
   gcc7:
     build:
       context: gcc
