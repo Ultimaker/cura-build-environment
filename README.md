@@ -135,6 +135,7 @@ Installation of Conan is simple:
 
 ```bash
 pip install conan
+conan profile new default --detect
 ```
 
 > Ultimaker has its own standard Conan configuration, you could apply these with the command below. Keep in mind that
