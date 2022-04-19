@@ -40,6 +40,7 @@ class CuraBuildEnvironemtConan(ConanFile):
             tc.blocks["generic_system"].values["generator_platform"] = None
             tc.blocks["generic_system"].values["toolset"] = None
 
+        # FIXME: These need to be removed once we got Rundeck up and running
         tc.variables["CHARON_BRANCH_OR_TAG"] = "origin/5.0"
         tc.variables["CURA_BRANCH_OR_TAG"] = "origin/5.0"
         tc.variables["URANIUM_BRANCH_OR_TAG"] = "origin/5.0"
@@ -50,7 +51,6 @@ class CuraBuildEnvironemtConan(ConanFile):
         tc.variables["ARCUS_BRANCH_OR_TAG"] = "origin/5.0"
         tc.variables["CURAENGINE_BRANCH_OR_TAG"] = "origin/5.0"
         tc.variables["CURABINARYDATA_BRANCH_OR_TAG"] = "origin/5.0"
-
         tc.variables["CURA_VERSION_MAJOR"] = "5"
         tc.variables["CURA_VERSION_MINOR"] = "0"
         tc.variables["CURA_VERSION_PATCH"] = "0"
