@@ -40,22 +40,22 @@ class CuraBuildEnvironemtConan(ConanFile):
             tc.blocks["generic_system"].values["generator_platform"] = None
             tc.blocks["generic_system"].values["toolset"] = None
 
-        tc.variables["CHARON_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6_upgrade"
-        tc.variables["CURA_BRANCH_OR_TAG"] = "origin/qt6_beyond_the_splash"
-        tc.variables["URANIUM_BRANCH_OR_TAG"] = "origin/qt6_beyond_the_splash"
-        tc.variables["ARCUS_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6_upgrade"
-        tc.variables["SAVITAR_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6_upgrade"
-        tc.variables["LIBNEST2D_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6_upgrade"
-        tc.variables["PYNEST2D_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6_upgrade"
-        tc.variables["ARCUS_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6_upgrade"
-        tc.variables["CURAENGINE_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6_upgrade"
-        tc.variables["CURABINARYDATA_BRANCH_OR_TAG"] = "origin/CURA-8640_PyQt6"
-
+        # FIXME: These need to be removed once we got Rundeck up and running
+        tc.variables["CHARON_BRANCH_OR_TAG"] = "origin/5.0"
+        tc.variables["CURA_BRANCH_OR_TAG"] = "origin/5.0"
+        tc.variables["URANIUM_BRANCH_OR_TAG"] = "origin/5.0"
+        tc.variables["ARCUS_BRANCH_OR_TAG"] = "origin/5.0"
+        tc.variables["SAVITAR_BRANCH_OR_TAG"] = "origin/5.0"
+        tc.variables["LIBNEST2D_BRANCH_OR_TAG"] = "origin/5.0"
+        tc.variables["PYNEST2D_BRANCH_OR_TAG"] = "origin/5.0"
+        tc.variables["ARCUS_BRANCH_OR_TAG"] = "origin/5.0"
+        tc.variables["CURAENGINE_BRANCH_OR_TAG"] = "origin/5.0"
+        tc.variables["CURABINARYDATA_BRANCH_OR_TAG"] = "origin/5.0"
         tc.variables["CURA_VERSION_MAJOR"] = "5"
         tc.variables["CURA_VERSION_MINOR"] = "0"
         tc.variables["CURA_VERSION_PATCH"] = "0"
         tc.variables["CURA_VERSION_PRE_RELEASE_TAG"] = "a"
-        tc.variables["CURA_VERSION_BUILD"] = "7"
+        tc.variables["CURA_VERSION_BUILD"] = "9"
 
         tc.variables["CURA_CLOUD_API_VERSION"] = "1"
         tc.variables["CURA_CLOUD_API_ROOT"] = "https://api.ultimaker.com"
