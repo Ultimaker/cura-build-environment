@@ -7,6 +7,7 @@ export LD_LIBRARY_PATH=$scriptdir
 export QT_PLUGIN_PATH="$scriptdir/qt/plugins"
 export QML2_IMPORT_PATH="$scriptdir/qt/qml"
 export QT_QPA_FONTDIR=/usr/share/fonts
+export QT_QPA_PLATFORMTHEME=xdgdesktopportal
 export QT_XKB_CONFIG_ROOT=/usr/share/X11/xkb
 
 # Use the openssl.cnf packaged in the AppImage
