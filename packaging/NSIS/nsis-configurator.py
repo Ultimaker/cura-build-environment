@@ -32,12 +32,11 @@ if __name__ == "__main__":
     mapped_out_paths = {}
     for dist_path in dist_paths:
         if "__pycache__" not in dist_path.parts:
-            out_path = instdir.joinpath(dist_path.parent)
+            out_path = instdir.joinpath(dist_path).parent
             if out_path not in mapped_out_paths:
-                mapped_out_paths[out_path] = [dist_loc.joinpath(dist_path)]
+                mapped_out_paths[out_path] = [(dist_loc.joinpath(dist_path), instdir.joinpath(dist_path))]
             else:
-                mapped_out_paths[out_path].append(dist_loc.joinpath(dist_path))
-
+                mapped_out_paths[out_path].append((dist_loc.joinpath(dist_path), instdir.joinpath(dist_path)))
     jinja_template_path = Path(sys.argv[2])
     with open(jinja_template_path, "r") as f:
         template = Template(f.read())

@@ -88,7 +88,7 @@ Section -MainProgram
 ${INSTALL_TYPE}
 SetOverwrite ifnewer
 {% for out_path, files in mapped_out_paths.items() %}SetOutPath "{{ out_path }}"{% for file in files %}
-File "{{ file }}"{% endfor %}
+File "{{ file[0] }}"{% endfor %}
 {% endfor %}SectionEnd
 
 ######################################################################
@@ -142,8 +142,8 @@ SectionEnd
 
 Section Uninstall
 ${INSTALL_TYPE}{% for files in mapped_out_paths.values() %}{% for file in files %}
-Delete "$INSTDIR\{{ file }}"{% endfor %}{% endfor %}{% for rem_dir in mapped_out_paths.keys() %}
-RmDir "$INSTDIR\{{ rem_dir }}"{% endfor %}
+Delete "{{ file[1] }}"{% endfor %}{% endfor %}{% for rem_dir in mapped_out_paths.keys() %}
+RmDir "{{ rem_dir }}"{% endfor %}
 
 Delete "$INSTDIR\uninstall.exe"
 !ifdef WEB_SITE
