@@ -37,6 +37,17 @@ if __name__ == "__main__":
                 mapped_out_paths[out_path] = [(dist_loc.joinpath(dist_path), instdir.joinpath(dist_path))]
             else:
                 mapped_out_paths[out_path].append((dist_loc.joinpath(dist_path), instdir.joinpath(dist_path)))
+
+    rmdir_paths = []
+    for rmdir_p in mapped_out_paths.keys():
+        if rmdir_p not in rmdir_paths:
+            rmdir_paths.append(rmdir_p)
+        for rmdir in rmdir_p.parents:
+            if rmdir not in rmdir_paths:
+                rmdir_paths.append(rmdir)
+
+    rmdir_paths = sorted(rmdir_paths, reverse = True)[:-2]
+
     jinja_template_path = Path(sys.argv[2])
     with open(jinja_template_path, "r") as f:
         template = Template(f.read())
@@ -56,6 +67,7 @@ if __name__ == "__main__":
         cura_banner_img = Path(sys.argv[13]),
         cura_icon = Path(sys.argv[14]),
         mapped_out_paths = mapped_out_paths,
+        rmdir_paths = rmdir_paths,
         destination = Path(sys.argv[15])
     )
 
