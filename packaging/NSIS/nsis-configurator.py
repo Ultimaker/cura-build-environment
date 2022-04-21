@@ -38,15 +38,13 @@ if __name__ == "__main__":
             else:
                 mapped_out_paths[out_path].append((dist_loc.joinpath(dist_path), instdir.joinpath(dist_path)))
 
-    rmdir_paths = []
-    for rmdir_p in mapped_out_paths.keys():
-        if rmdir_p not in rmdir_paths:
-            rmdir_paths.append(rmdir_p)
-        for rmdir in rmdir_p.parents:
-            if rmdir not in rmdir_paths:
-                rmdir_paths.append(rmdir)
+    rmdir_paths = set()
+    for rmdir_f in mapped_out_paths.values():
+        for _, rmdir_p in rmdir_f:
+            for rmdir in rmdir_p.parents:
+                rmdir_paths.add(rmdir)
 
-    rmdir_paths = sorted(rmdir_paths, reverse = True)[:-2]
+    rmdir_paths = sorted(list(rmdir_paths), reverse = True)[:-2]
 
     jinja_template_path = Path(sys.argv[2])
     with open(jinja_template_path, "r") as f:
