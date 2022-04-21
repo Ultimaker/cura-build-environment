@@ -142,8 +142,8 @@ SectionEnd
 
 Section Uninstall
 ${INSTALL_TYPE}{% for files in mapped_out_paths.values() %}{% for file in files %}
-Delete "{{ file }}"{% endfor %}{% endfor %}{% for rem_dir in mapped_out_paths.keys() %}
-RmDir "{{ rem_dir }}"{% endfor %}
+Delete "$INSTDIR\{{ file }}"{% endfor %}{% endfor %}{% for rem_dir in mapped_out_paths.keys() %}
+RmDir "$INSTDIR\{{ rem_dir }}"{% endfor %}
 
 Delete "$INSTDIR\uninstall.exe"
 !ifdef WEB_SITE
