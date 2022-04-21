@@ -147,6 +147,15 @@ ${INSTALL_TYPE}{% for files in mapped_out_paths.values() %}{% for file in files 
 Delete "{{ file[1] }}"{% endfor %}{% endfor %}{% for rem_dir in rmdir_paths %}
 RmDir "{{ rem_dir }}"{% endfor %}
 
+# FIXME: dirty solution, but for some reason these directories aren't removed
+RmDir "$INSTDIR\share\cura\resources\scripts"
+RmDir "$INSTDIR\share\cura\resources"
+RmDir "$INSTDIR\share\cura"
+RmDir "$INSTDIR\share\uranium\resources\scripts"
+RmDir "$INSTDIR\share\uranium\resources"
+RmDir "$INSTDIR\share\uranium"
+RmDir "$INSTDIR\share"
+
 Delete "$INSTDIR\uninstall.exe"
 !ifdef WEB_SITE
 Delete "$INSTDIR\${APP_NAME} website.url"
