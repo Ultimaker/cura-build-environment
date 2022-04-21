@@ -43,11 +43,13 @@ InstallDir "$PROGRAMFILES64\${APP_NAME}"
 
 ######################################################################
 
-!include "MUI.nsh"
+!include "MUI2.nsh"
 !include fileassoc.nsh
 
 !define MUI_ABORTWARNING
 !define MUI_UNABORTWARNING
+
+!define MUI_ICON "{{ cura_icon }}"
 
 !define MUI_WELCOMEFINISHPAGE_BITMAP "{{ cura_banner_img }}"
 !define MUI_UNWELCOMEFINISHPAGE_BITMAP "{{ cura_banner_img }}"

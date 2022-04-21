@@ -54,6 +54,7 @@ if __name__ == "__main__":
         cura_license_file = Path(sys.argv[11]),
         compression_method = sys.argv[12],  # ZLIB, BZIP2 or LZMA
         cura_banner_img = Path(sys.argv[13]),
+        cura_icon = Path(sys.argv[14]),
         mapped_out_paths = mapped_out_paths,
         destination = Path(sys.argv[15])
     )
