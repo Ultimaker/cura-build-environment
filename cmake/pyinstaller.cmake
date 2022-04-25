@@ -42,7 +42,7 @@ if(LINUX)
 endif()
 
 if (WIN32)
-    list(APPEND extra_pyinstaller_args --hidden-import fcntl --collect-all win32ctypes)
+    list(APPEND extra_pyinstaller_args --hidden-import fcntl --collect-all win32ctypes --icon ${CMAKE_SOURCE_DIR}/packaging/Cura.ico)
 endif ()
 
 add_custom_target(create_installer_dir ALL COMMAND ${CMAKE_COMMAND} -E make_directory ${installer_DIR})
