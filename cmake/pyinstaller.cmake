@@ -42,7 +42,6 @@ if(LINUX)
 endif()
 
 if (WIN32)
-    set(PYINSTALLER_COMPILE_BOOTLOADER=1)
     list(APPEND extra_pyinstaller_args --hidden-import fcntl --collect-all win32ctypes --icon ${CMAKE_SOURCE_DIR}/packaging/Cura.ico)
 endif ()
 
