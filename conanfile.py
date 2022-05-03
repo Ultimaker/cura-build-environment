@@ -40,28 +40,4 @@ class CuraBuildEnvironemtConan(ConanFile):
             tc.blocks["generic_system"].values["generator_platform"] = None
             tc.blocks["generic_system"].values["toolset"] = None
 
-        # FIXME: These need to be removed once we got Rundeck up and running
-        tc.variables["CHARON_BRANCH_OR_TAG"] = "origin/5.0"
-        tc.variables["CURA_BRANCH_OR_TAG"] = "origin/5.0"
-        tc.variables["URANIUM_BRANCH_OR_TAG"] = "origin/5.0"
-        tc.variables["ARCUS_BRANCH_OR_TAG"] = "origin/5.0"
-        tc.variables["SAVITAR_BRANCH_OR_TAG"] = "origin/5.0"
-        tc.variables["LIBNEST2D_BRANCH_OR_TAG"] = "origin/5.0"
-        tc.variables["PYNEST2D_BRANCH_OR_TAG"] = "origin/5.0"
-        tc.variables["ARCUS_BRANCH_OR_TAG"] = "origin/5.0"
-        tc.variables["CURAENGINE_BRANCH_OR_TAG"] = "origin/5.0"
-        tc.variables["CURABINARYDATA_BRANCH_OR_TAG"] = "origin/5.0"
-        tc.variables["CURA_VERSION_MAJOR"] = "5"
-        tc.variables["CURA_VERSION_MINOR"] = "0"
-        tc.variables["CURA_VERSION_PATCH"] = "0"
-        tc.variables["CURA_VERSION_PRE_RELEASE_TAG"] = "a"
-        tc.variables["CURA_VERSION_BUILD"] = "9"
-
-        tc.variables["CURA_CLOUD_API_VERSION"] = "1"
-        tc.variables["CURA_CLOUD_API_ROOT"] = "https://api.ultimaker.com"
-        tc.variables["CURA_CLOUD_ACCOUNT_API_ROOT"] = "https://account.ultimaker.com"
-        tc.variables["CURA_MARKETPLACE_ROOT"] = "https://marketplace.ultimaker.com"
-        tc.variables["CURA_DIGITAL_FACTORY_URL"] = "https://digitalfactory.ultimaker.com"
-
-
         tc.generate()

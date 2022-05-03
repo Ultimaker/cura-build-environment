@@ -43,11 +43,13 @@ InstallDir "$PROGRAMFILES64\${APP_NAME}"
 
 ######################################################################
 
-!include "MUI.nsh"
+!include "MUI2.nsh"
 !include fileassoc.nsh
 
 !define MUI_ABORTWARNING
 !define MUI_UNABORTWARNING
+
+!define MUI_ICON "{{ cura_icon }}"
 
 !define MUI_WELCOMEFINISHPAGE_BITMAP "{{ cura_banner_img }}"
 !define MUI_UNWELCOMEFINISHPAGE_BITMAP "{{ cura_banner_img }}"
@@ -88,7 +90,7 @@ Section -MainProgram
 ${INSTALL_TYPE}
 SetOverwrite ifnewer
 {% for out_path, files in mapped_out_paths.items() %}SetOutPath "{{ out_path }}"{% for file in files %}
-File "{{ file }}"{% endfor %}
+File "{{ file[0] }}"{% endfor %}
 {% endfor %}SectionEnd
 
 ######################################################################
@@ -142,8 +144,17 @@ SectionEnd
 
 Section Uninstall
 ${INSTALL_TYPE}{% for files in mapped_out_paths.values() %}{% for file in files %}
-Delete "{{ file }}"{% endfor %}{% endfor %}{% for rem_dir in mapped_out_paths.keys() %}
+Delete "{{ file[1] }}"{% endfor %}{% endfor %}{% for rem_dir in rmdir_paths %}
 RmDir "{{ rem_dir }}"{% endfor %}
+
+# FIXME: dirty solution, but for some reason these directories aren't removed
+RmDir "$INSTDIR\share\cura\resources\scripts"
+RmDir "$INSTDIR\share\cura\resources"
+RmDir "$INSTDIR\share\cura"
+RmDir "$INSTDIR\share\uranium\resources\scripts"
+RmDir "$INSTDIR\share\uranium\resources"
+RmDir "$INSTDIR\share\uranium"
+RmDir "$INSTDIR\share"
 
 Delete "$INSTDIR\uninstall.exe"
 !ifdef WEB_SITE
