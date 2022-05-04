@@ -73,7 +73,9 @@ InstallDir "$PROGRAMFILES64\${APP_NAME}"
 
 !insertmacro MUI_PAGE_INSTFILES
 
-!define MUI_FINISHPAGE_RUN "$INSTDIR\${MAIN_APP_EXE}"
+# Set up explorer to run Cura instead of directly, so it's not executed elevated (with all negative consequences that brings for an unelevated user).
+!define MUI_FINISHPAGE_RUN "$WINDIR\explorer.exe"
+!define MUI_FINISHPAGE_RUN_PARAMETERS "$INSTDIR\${MAIN_APP_EXE}"
 !insertmacro MUI_PAGE_FINISH
 
 !insertmacro MUI_UNPAGE_CONFIRM
