@@ -66,17 +66,10 @@ GetFromEnvironmentOrCache(
             "Cura Extra Version Information"
         REQUIRED)
 
-include(projects/python.cmake)
-include(projects/charon.cmake)
-include(projects/savitar.cmake)
-include(projects/arcus.cmake)
-include(projects/uranium.cmake)
-include(projects/libnest2d.cmake)
-include(projects/pynest2d.cmake)
-include(projects/curaengine.cmake)
-include(projects/cura.cmake)
-include(projects/fdm_materials.cmake)
-include(projects/cura-binary-data.cmake)
+file(GLOB _projects projects/*.cmake)
+foreach(_project ${_projects})
+    include(${_project})
+endforeach()
 
 # Collect the artifacts with pyinstaller
 include(cmake/pyinstaller.cmake)
@@ -89,7 +82,6 @@ endif()
 
 if(LINUX)
     include(cmake/create-appimage.cmake)
-    include(cmake/sign-appimage.cmake)
 endif()
 
 if(WIN32)
