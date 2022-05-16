@@ -7,7 +7,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/installer-filename.cmake)
 #Put correct version in cura.desktop.
 configure_file(${CMAKE_SOURCE_DIR}/packaging/cura.desktop.in ${CMAKE_CURRENT_BINARY_DIR}/cura.desktop @ONLY)
 
-file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/apprun-attr.cmake" "file(COPY ${CMAKE_SOURCE_DIR}/packaging/AppRun DESTINATION ${ULTIMAKER_CURA_PATH} FILE_PERMISSIONS WORLD_READ WORLD_EXECUTE OWNER_WRITE)")
+file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/apprun-attr.cmake" "file(COPY ${CMAKE_SOURCE_DIR}/packaging/AppRun DESTINATION ${ULTIMAKER_CURA_PATH} FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)")
 
 add_custom_target(packaging ALL
     COMMENT "Package into an AppImage file."
