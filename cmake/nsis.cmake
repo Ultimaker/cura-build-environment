@@ -23,7 +23,7 @@ add_custom_command(
             ${CURA_VERSION_MAJOR}
             ${CURA_VERSION_MINOR}
             ${CURA_VERSION_PATCH}
-            ${CURA_VERSION_BUILD}
+            0
             "Ultimaker B.V."
             "https://ultimaker.com"
             ${CMAKE_SOURCE_DIR}/packaging/cura_license.txt
