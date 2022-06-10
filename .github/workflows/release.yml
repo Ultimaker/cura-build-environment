@@ -179,19 +179,19 @@ jobs:
         
       - name: Activate Build Environment (Bash)
         if: ${{ runner.os != 'Windows' }}
-        run: cmake-build-release/conan/activate_github_actions_buildenv.sh
+        run: $GITHUB_WORKSPACE/cmake-build-release/conan/activate_github_actions_buildenv.sh
         
       - name: Activate Build Environment (Powershell)
         if: ${{ runner.os == 'Windows' }}
-        run: cmake-build-release/conan/activate_github_actions_buildenv.ps1
+        run: $env:GITHUB_WORKSPACE\cmake-build-release\conan\activate_github_actions_buildenv.ps1
         
       - name: Activate Run Environment (Bash)
         if: ${{ runner.os != 'Windows' }}
-        run: cmake-build-release/conan/activate_github_actions_runenv.sh
+        run: $GITHUB_WORKSPACE/cmake-build-release/conan/activate_github_actions_runenv.sh
         
       - name: Activate Run Environment (Powershell)
         if: ${{ runner.os == 'Windows' }}
-        run: cmake-build-release/conan/activate_github_actions_runenv.ps1
+        run: $env:GITHUB_WORKSPACE\cmake-build-release\conan\activate_github_actions_runenv.ps1
         
       - name: Upload the Package(s)
         run: conan upload "*" -r ultimaker --all -c
