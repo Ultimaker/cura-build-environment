@@ -35,8 +35,8 @@ on:
         required: true
         default: false
         type: boolean
-      no_install_lugins:
-        description: 'FDMMaterials branch to base the installer on'
+      no_install_plugins:
+        description: 'list of plugins to exclude'
         required: false
         default: ''
 
@@ -96,9 +96,8 @@ jobs:
       CHARON_BRANCH_OR_TAG: ${{ inputs.charon_branch }}
       FDMMATERIALS_BRANCH_OR_TAG: ${{ inputs.fdmmaterials_branch }}
       CURABINARYDATA_BRANCH_OR_TAG: ${{ inputs.curabinarydata_branch }}
-      CURA_BUILD_TYPE: ${{ inputs.cura_build_type ) }}
-      ENABLE_DEBUG_MODE: ${{ inputs.enable_debug_mode ) }}
-      NO_INSTALL_PLUGINS: ${{ inputs.no_install_lugins ) }}
+      ENABLE_DEBUG_MODE: ${{ inputs.enable_debug_mode }}
+      NO_INSTALL_PLUGINS: ${{ inputs.no_install_plugins }}
 
       CURA_VERSION_MAJOR: ${{ needs.get-semver.outputs.semver_major }}
       CURA_VERSION_MINOR: ${{ needs.get-semver.outputs.semver_minor }}
