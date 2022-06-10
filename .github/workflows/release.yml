@@ -81,9 +81,7 @@ jobs:
       
       - name: Get short PreReleaseTag
         id: prereleasetag
-        run: echo "::set-output name=PreReleaseTag::${${FULL_BUILDMETADATA:0:9}}"
-        env:
-          FULL_PRERELEASETAG: ${{ steps.date.outputs.PreReleaseTag }}
+        run: echo "::set-output name=PreReleaseTag::${${{ steps.date.outputs.PreReleaseTag }}:0:9}}"
 
   cura-installer-create:
     runs-on: ${{ matrix.os }}
