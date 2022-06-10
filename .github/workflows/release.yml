@@ -78,11 +78,10 @@ jobs:
       - name: Get build number based on data
         id: date
         run: echo "::set-output name=BuildMetaData::$(date +'%Y%m%d%H%M')"
-        
       
       - name: Get short PreReleaseTag
         id: prereleasetag
-        run: echo "::set-output name=PreReleaseTag::${$FULL_BUILDMETADATA:0:9}"
+        run: echo "::set-output name=PreReleaseTag::${$FULL_BUILDMETADATA:0:9}}"
         env:
           FULL_PRERELEASETAG: ${{ steps.date.outputs.PreReleaseTag }}
 
