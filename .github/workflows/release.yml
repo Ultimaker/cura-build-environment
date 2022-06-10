@@ -208,7 +208,8 @@ jobs:
           -DCURA_NO_INSTALL_PLUGINS="$NO_INSTALL_PLUGINS" \
           -DCODESIGN_IDENTITY="$CODESIGN_IDENTITY" \
           -DNOTARIZE_USER="$NOTARIZE_USER" \
-          -DNOTARIZE_PASSWORD="$NOTARIZE_PASSWORD"          
+          -DNOTARIZE_PASSWORD="$NOTARIZE_PASSWORD" \
+          ..
 
       - name: Configure the cura-build-environment (Powershell)
         if: ${{ runner.os == 'Windows' }}
@@ -238,7 +239,8 @@ jobs:
           -DCURA_NO_INSTALL_PLUGINS="$env:NO_INSTALL_PLUGINS" ^
           -DCODESIGN_IDENTITY="$env:CODESIGN_IDENTITY" ^
           -DNOTARIZE_USER="$env:NOTARIZE_USER" ^
-          -DNOTARIZE_PASSWORD="$env:NOTARIZE_PASSWORD"
+          -DNOTARIZE_PASSWORD="$env:NOTARIZE_PASSWORD" ^
+          ..
 
       - name: Build the installer
         run: |
