@@ -175,8 +175,24 @@ jobs:
           key: ${{ runner.os }}-conan
 
       - name: Install the Conan dependencies
-        run: conan install . -pr:b cura_build.jinja -pr:h cura_release.jinja --build=missing --update
-
+        run: conan install . -pr:b cura_build.jinja -pr:h cura_release.jinja --build=missing --update -g GitHubActionsBuildEnv -g GitHubActionsRunEnv
+        
+      - name: Activate Build Environment (Bash)
+        if: ${{ runner.os != 'Windows' }}
+        run: cmake-build-release/conan/activate_github_actions_buildenv.sh
+        
+      - name: Activate Build Environment (Powershell)
+        if: ${{ runner.os == 'Windows' }}
+        run: cmake-build-release/conan/activate_github_actions_buildenv.ps1
+        
+      - name: Activate Run Environment (Bash)
+        if: ${{ runner.os != 'Windows' }}
+        run: cmake-build-release/conan/activate_github_actions_runenv.sh
+        
+      - name: Activate Run Environment (Powershell)
+        if: ${{ runner.os == 'Windows' }}
+        run: cmake-build-release/conan/activate_github_actions_runenv.ps1
+        
       - name: Upload the Package(s)
         run: conan upload "*" -r ultimaker --all -c
 
