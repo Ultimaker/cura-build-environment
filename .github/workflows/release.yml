@@ -180,7 +180,7 @@ jobs:
       - name: Activate Build Environment (Bash)
         if: ${{ runner.os != 'Windows' }}
         run: |
-          chmode +x $GITHUB_WORKSPACE/cmake-build-release/conan/activate_github_actions_buildenv.sh
+          chmod +x $GITHUB_WORKSPACE/cmake-build-release/conan/activate_github_actions_buildenv.sh
           $GITHUB_WORKSPACE/cmake-build-release/conan/activate_github_actions_buildenv.sh
         
       - name: Activate Build Environment (Powershell)
