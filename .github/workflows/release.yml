@@ -24,7 +24,7 @@ on:
         description: 'Build Cura as an Enterprise edition'
         required: true
         default: false
-        type: bool
+        type: boolean
       enable_debug_mode:
         description: 'Enable debug mode'
         required: true
