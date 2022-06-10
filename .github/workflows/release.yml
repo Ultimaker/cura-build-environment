@@ -20,14 +20,11 @@ on:
         description: 'FDMMaterials branch to base the installer on'
         required: true
         default: 'origin/CURA-9365_fix_building_cura_main'
-      cura_build_type:
-        description: 'Community or Enterprise'
+      enterprise:
+        description: 'Build Cura as an Enterprise edition'
         required: true
-        default: ' '
-        type: choice
-        options:
-          - ' '
-          - 'Enterprise'
+        default: false
+        type: bool
       enable_debug_mode:
         description: 'Enable debug mode'
         required: true
@@ -119,6 +116,14 @@ jobs:
           python-version: '3.10.4'
           architecture: 'x64'
           cache: 'pip'
+          
+      - name: Build Cura as Community
+        if: ${{ !inputs.enterprise }}
+        run: echo "CURA_BUILD_TYPE=" >> $GITHUB_ENV
+        
+      - name: Build Cura as Enterprise
+        if: ${{ inputs.enterprise }}
+        run: echo "CURA_BUILD_TYPE=Enterprise" >> $GITHUB_ENV
 
       - name: Cloud urls
         if: ${{ !inputs.staging }}
