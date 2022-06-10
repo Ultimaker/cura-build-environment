@@ -101,11 +101,6 @@ jobs:
       CURABINARYDATA_BRANCH_OR_TAG: ${{ inputs.curabinarydata_branch }}
       CURA_BUILD_TYPE: ${{ inputs.cura_build_type ) }}
       ENABLE_DEBUG_MODE: ${{ inputs.enable_debug_mode ) }}
-      CLOUD_API_ROOT: ${{ inputs.cloud_api_root ) }}
-      CLOUD_API_VERSION: ${{ inputs.cloud_api_version ) }}
-      ACCOUNT_API_ROOT: ${{ inputs.account_api_root ) }}
-      MARKETPLACE_API_ROOT: ${{ inputs.marketplace_api_root ) }}
-      DIGITAL_FACTORY_API_ROOT: ${{ inputs.digital_factory_api_root ) }}
       NO_INSTALL_PLUGINS: ${{ inputs.no_install_lugins ) }}
 
       CURA_VERSION_MAJOR: ${{ needs.get-semver.outputs.semver_major }}
