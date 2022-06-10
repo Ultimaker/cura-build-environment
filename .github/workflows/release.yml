@@ -1,0 +1,258 @@
+---
+name: cura-installer
+
+on:
+  workflow_dispatch:
+    inputs:
+      cura_branch:
+        description: 'Cura branch to base the installer on'
+        required: true
+        default: 'origin/CURA-9365_fix_building_cura_main'
+      uranium_branch:
+        description: 'Uranium branch to base the installer on'
+        required: true
+        default: 'origin/CURA-9365_fix_building_cura_main'
+      fdmmaterials_branch:
+        description: 'FDMMaterials branch to base the installer on'
+        required: true
+        default: 'origin/CURA-9365_fix_building_cura_main'
+      curabinarydata_branch:
+        description: 'FDMMaterials branch to base the installer on'
+        required: true
+        default: 'origin/CURA-9365_fix_building_cura_main'
+      cura_build_type:
+        description: 'Community or Enterprise'
+        required: true
+        default: ' '
+        type: choice
+        options:
+          - ' '
+          - 'Enterprise'
+      enable_debug_mode:
+        description: 'Enable debug mode'
+        required: true
+        default: false
+        type: boolean
+      staging:
+        description: 'Use staging API'
+        required: true
+        default: false
+        type: boolean
+      no_install_lugins:
+        description: 'FDMMaterials branch to base the installer on'
+        required: false
+        default: ''
+
+env:
+  CONAN_USER: ${{ secrets.CONAN_USER }}
+  CONAN_PASS: ${{ secrets.CONAN_PASS }}
+  CODESIGN_IDENTITY: ${{ secrets.CODESIGN_IDENTITY }}
+  NOTARIZE_USER: ${{ secrets.NOTARIZE_USER }}
+  NOTARIZE_PASSWORD: ${{ secrets.NOTARIZE_PASSWORD }}
+
+jobs:
+  get-semver:
+
+    runs-on: ubuntu-20.04
+
+    outputs:
+      semver_major: ${{ steps.git-tool.outputs.Major }}
+      semver_minor: ${{ steps.git-tool.outputs.Minor }}
+      semver_patch: ${{ steps.git-tool.outputs.Patch }}
+      semver_prereleasetag: ${{ steps.git-tool.outputs.PreReleaseTag }}
+      semver_build: ${{ steps.date.outputs.BuildMetaData }}
+
+    steps:
+      - name: Checkout Arcus
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.13
+        with:
+          versionSpec: '5.x'
+
+      - id: git-tool
+        name: GitTools
+        uses: gittools/actions/gitversion/execute@v0.9.13
+
+      - name: Get build number based on data
+        id: date
+        run: echo "::set-output name=BuildMetaData::$(date +'%Y%m%d%H%M')"
+
+  cura-installer-create:
+    if: ${{ github.event_name == 'push' && (github.ref_name == 'main' || github.ref_name == 'CURA-9365_fix_building_main') }}
+    runs-on: ${{ matrix.os }}
+
+    needs: [ get-semver ]
+
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ macos-10.15, windows-2022, ubuntu-20.04]
+
+    env:
+      CURA_BRANCH_OR_TAG: ${{ inputs.cura_branch }}
+      URANIUM_BRANCH_OR_TAG: ${{ inputs.uranium_branch }}
+      CHARON_BRANCH_OR_TAG: ${{ inputs.charon_branch }}
+      FDMMATERIALS_BRANCH_OR_TAG: ${{ inputs.fdmmaterials_branch }}
+      CURABINARYDATA_BRANCH_OR_TAG: ${{ inputs.curabinarydata_branch }}
+      CURA_BUILD_TYPE: ${{ inputs.cura_build_type ) }}
+      ENABLE_DEBUG_MODE: ${{ inputs.enable_debug_mode ) }}
+      CLOUD_API_ROOT: ${{ inputs.cloud_api_root ) }}
+      CLOUD_API_VERSION: ${{ inputs.cloud_api_version ) }}
+      ACCOUNT_API_ROOT: ${{ inputs.account_api_root ) }}
+      MARKETPLACE_API_ROOT: ${{ inputs.marketplace_api_root ) }}
+      DIGITAL_FACTORY_API_ROOT: ${{ inputs.digital_factory_api_root ) }}
+      NO_INSTALL_PLUGINS: ${{ inputs.no_install_lugins ) }}
+
+      CURA_VERSION_MAJOR: ${{ needs.get-semver.outputs.semver_major }}
+      CURA_VERSION_MINOR: ${{ needs.get-semver.outputs.semver_minor }}
+      CURA_VERSION_PATCH: ${{ needs.get-semver.outputs.semver_patch }}
+      CURA_VERSION_PRERELEASETAG: ${{ needs.get-semver.outputs.semver_prereleasetag }}
+      CURA_VERSION_BUILD: ${{ needs.get-semver.outputs.semver_build }}
+
+    steps:
+      - name: Checkout cura-build-environment
+        uses: actions/checkout@v3
+
+      - name: Setup Python and pip
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.10.4'
+          architecture: 'x64'
+          cache: 'pip'
+
+      - name: Cloud urls
+        if: ${{ !inputs.staging }}
+        run: |
+          echo "CLOUD_API_ROOT=https://api.ultimaker.com" >> $GITHUB_ENV
+          echo "CLOUD_API_VERSION=1" >> $GITHUB_ENV
+          echo "ACCOUNT_API_ROOT=https://account.ultimaker.com" >> $GITHUB_ENV
+          echo "MARKETPLACE_API_ROOT=https://marketplace.ultimaker.com" >> $GITHUB_ENV
+          echo "DIGITAL_FACTORY_API_ROOT=https://digitalfactory.ultimaker.com" >> $GITHUB_ENV
+
+      - name: Cloud urls staging
+        if: ${{ inputs.staging }}
+        run: |
+          echo "CLOUD_API_ROOT=https://api-staging.ultimaker.com" >> $GITHUB_ENV
+          echo "CLOUD_API_VERSION=1" >> $GITHUB_ENV
+          echo "ACCOUNT_API_ROOT=https://account-staging.ultimaker.com" >> $GITHUB_ENV
+          echo "MARKETPLACE_API_ROOT=https://marketplace-staging.ultimaker.com" >> $GITHUB_ENV
+          echo "DIGITAL_FACTORY_API_ROOT=https://digitalfactory-staging.ultimaker.com" >> $GITHUB_ENV
+
+      - name: Prepare Conan and sip-build (Bash)
+        if: ${{ runner.os != 'Windows' }}
+        run: |
+          pip install --require-hashes -r requirements.txt
+          conan config install https://github.com/Ultimaker/conan-config.git -a "-b CURA-9177_Fix_CI_CD" -tf $HOME/.conan
+          conan profile new default --detect
+          conan user -p $CONAN_PASS -r ultimaker $CONAN_USER
+
+      - name: Prepare Conan and sip-build (Powershell)
+        if: ${{ runner.os == 'Windows' }}
+        run: |
+          pip install --require-hashes -r requirements.txt
+          conan config install https://github.com/Ultimaker/conan-config.git -a "-b CURA-9177_Fix_CI_CD" -tf C:\Users\runneradmin\.conan
+          conan profile new default --detect
+          conan user -p $env:CONAN_PASS -r ultimaker $env:CONAN_USER
+
+      - name: Cache Conan local repository packages (Bash)
+        uses: actions/cache@v3
+        if: ${{ runner.os != 'Windows' }}
+        with:
+          path: |
+            $HOME/.conan/data
+          key: ${{ runner.os }}-conan
+
+      - name: Cache Conan local repository packages (Powershell)
+        uses: actions/cache@v3
+        if: ${{ runner.os == 'Windows' }}
+        with:
+          path: |
+            C:\Users\runneradmin\.conan\data
+            C:\.conan
+          key: ${{ runner.os }}-conan
+
+      - name: Install the Conan dependencies
+        run: conan install . -pr:b cura_build.jinja -pr:h cura_release.jinja --build=missing --update
+
+      - name: Upload the Package(s)
+        run: conan upload "*" -r ultimaker --all -c
+
+      - name: Configure the cura-build-environment (Bash)
+        if: ${{ runner.os != 'Windows' }}
+        run: |
+          cd cmake-build-release
+          cmake --toolchain=conan/conan_toolchain.cmake \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_INSTALL_PREFIX=../install \
+          -DCMAKE_PREFIX_PATH=../install \
+          -DCURA_BRANCH_OR_TAG=$CURA_BRANCH_OR_TAG \
+          -DURANIUM_BRANCH_OR_TAG=$URANIUM_BRANCH_OR_TAG \
+          -DCHARON_BRANCH_OR_TAG=$CHARON_BRANCH_OR_TAG \
+          -DFDMMATERIALS_BRANCH_OR_TAG=$FDMMATERIALS_BRANCH_OR_TAG \
+          -DCURABINARYDATA_BRANCH_OR_TAG=$CURABINARYDATA_BRANCH_OR_TAG \
+          -DCURA_VERSION_MAJOR=$CURA_VERSION_MAJOR \
+          -DCURA_VERSION_MINOR=$CURA_VERSION_MINOR \
+          -DCURA_VERSION_PATCH=$CURA_VERSION_PATCH \
+          -DCURA_VERSION_PRE_RELEASE_TAG=$CURA_VERSION_PRERELEASETAG \
+          -DCURA_VERSION_BUILD=$CURA_VERSION_BUILD \
+          -DCURA_BUILDTYPE="$CURA_BUILD_TYPE" \
+          -DCURA_DEBUGMODE="$ENABLE_DEBUG_MODE" \
+          -DCURA_CLOUD_API_ROOT="$CLOUD_API_ROOT" \
+          -DCURA_CLOUD_API_VERSION="$CLOUD_API_VERSION" \
+          -DCURA_CLOUD_ACCOUNT_API_ROOT="$ACCOUNT_API_ROOT" \
+          -DCURA_MARKETPLACE_ROOT="$MARKETPLACE_API_ROOT" \
+          -DCURA_DIGITAL_FACTORY_URL="$DIGITAL_FACTORY_API_ROOT" \
+          -DCURA_NO_INSTALL_PLUGINS="$NO_INSTALL_PLUGINS" \
+          -DCODESIGN_IDENTITY="$CODESIGN_IDENTITY" \
+          -DNOTARIZE_USER="$NOTARIZE_USER" \
+          -DNOTARIZE_PASSWORD="$NOTARIZE_PASSWORD"          
+
+      - name: Configure the cura-build-environment (Powershell)
+        if: ${{ runner.os == 'Windows' }}
+        run: |
+          cd cmake-build-release
+          cmake --toolchain=conan/conan_toolchain.cmake ^
+          -DCMAKE_BUILD_TYPE=Release ^
+          -DCMAKE_INSTALL_PREFIX=../install $
+          -DCMAKE_PREFIX_PATH=../install ^
+          -DCURA_BRANCH_OR_TAG=$env:CURA_BRANCH_OR_TAG ^
+          -DURANIUM_BRANCH_OR_TAG=$env:URANIUM_BRANCH_OR_TAG ^
+          -DCHARON_BRANCH_OR_TAG=$env:CHARON_BRANCH_OR_TAG ^
+          -DFDMMATERIALS_BRANCH_OR_TAG=$env:FDMMATERIALS_BRANCH_OR_TAG ^
+          -DCURABINARYDATA_BRANCH_OR_TAG=$env:CURABINARYDATA_BRANCH_OR_TAG ^
+          -DCURA_VERSION_MAJOR=$env:CURA_VERSION_MAJOR ^
+          -DCURA_VERSION_MINOR=$env:CURA_VERSION_MINOR ^
+          -DCURA_VERSION_PATCH=$env:CURA_VERSION_PATCH ^
+          -DCURA_VERSION_PRE_RELEASE_TAG=$env:CURA_VERSION_PRERELEASETAG ^
+          -DCURA_VERSION_BUILD=$env:CURA_VERSION_BUILD ^
+          -DCURA_BUILDTYPE="$env:CURA_BUILD_TYPE" ^
+          -DCURA_DEBUGMODE="$env:ENABLE_DEBUG_MODE" ^
+          -DCURA_CLOUD_API_ROOT="$env:CLOUD_API_ROOT" ^
+          -DCURA_CLOUD_API_VERSION="$env:CLOUD_API_VERSION" ^
+          -DCURA_CLOUD_ACCOUNT_API_ROOT="$env:ACCOUNT_API_ROOT" ^
+          -DCURA_MARKETPLACE_ROOT="$env:MARKETPLACE_API_ROOT" ^
+          -DCURA_DIGITAL_FACTORY_URL="$env:DIGITAL_FACTORY_API_ROOT" ^
+          -DCURA_NO_INSTALL_PLUGINS="$env:NO_INSTALL_PLUGINS" ^
+          -DCODESIGN_IDENTITY="$env:CODESIGN_IDENTITY" ^
+          -DNOTARIZE_USER="$env:NOTARIZE_USER" ^
+          -DNOTARIZE_PASSWORD="$env:NOTARIZE_PASSWORD"
+
+      - name: Build the installer
+        run: |
+          cd cmake-build-release
+          ninja
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: installer
+          path: |
+            install/dist/*.exe
+            install/dist/*.Appimage
+            install/dist/*.dmg
+            retention-days: 2
