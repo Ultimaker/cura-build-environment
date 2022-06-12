@@ -87,6 +87,9 @@ jobs:
                 cache: 'pip'
                 cache-dependency-path: requirements-runner.txt
 
+        -   name: Prepare Python environment runner
+            run: pip install -r requirements-runner.txt
+
         -   name: Cache Conan local repository packages (Bash)
             uses: actions/cache@v3
             if: ${{ runner.os != 'Windows' }}
