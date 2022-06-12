@@ -110,14 +110,15 @@ jobs:
         -   name: Prepare Conan (Bash)
             if: ${{ runner.os != 'Windows' }}
             run: |
+                # FIXME: Once Cura is also a full package
+                echo "CURA_VERSION={{ needs.get-semver.outputs.semver_full }}" >> $GITHUB_ENV
+                echo $CURA_VERSION
+                
                 conan config install https://github.com/Ultimaker/conan-config.git -a "-b ${{ github.event.inputs.conan_config }}" -tf $HOME/.conan
                 conan profile new default --detect
                 conan user -p $CONAN_PASS -r ultimaker $CONAN_USER
                 conan install . -pr:b cura_build.jinja -pr:h cura_release.jinja --build=missing --update -g GitHubActionsBuildEnv -g GitHubActionsRunEnv
                 conan source .
-                
-                # FIXME: Once Cura is also a full package
-                echo "CURA_VERSION={{ needs.get-semver.outputs.semver_full }}" >> $GITHUB_ENV
                 
                 cd cura
                 conan install . -pr:b cura_build.jinja -pr:h cura_release.jinja -o cura:devtools=True -o cura:staging=${{ github.event.inputs.staging }} -o cura:enterprise=${{ github.event.inputs.enterprise }} --build=missing --update -g GitHubActionsBuildEnv -g GitHubActionsRunEnv
@@ -130,14 +131,15 @@ jobs:
         -   name: Prepare Conan (Powershell)
             if: ${{ runner.os == 'Windows' }}
             run: |
+                # FIXME: Once Cura is also a full package
+                echo "CURA_VERSION={{ needs.get-semver.outputs.semver_full }}" >> $Env:GITHUB_ENV
+                echo $Env:CURA_VERSION
+                
                 conan config install https://github.com/Ultimaker/conan-config.git -a "-b ${{ github.event.inputs.conan_config }}" -tf C:\Users\runneradmin\.conan
                 conan profile new default --detect
                 conan user -p $env:CONAN_PASS -r ultimaker $env:CONAN_USER
                 conan install . -pr:b cura_build.jinja -pr:h cura_release.jinja --build=missing --update -g GitHubActionsBuildEnv -g GitHubActionsRunEnv
                 conan source .
-                
-                # FIXME: Once Cura is also a full package
-                echo "CURA_VERSION={{ needs.get-semver.outputs.semver_full }}" >> $Env:GITHUB_ENV
                 
                 cd cura
                 conan install . -pr:b cura_build.jinja -pr:h cura_release.jinja -o cura:devtools=True -o cura:staging=${{ github.event.inputs.staging }} -o cura:enterprise=${{ github.event.inputs.enterprise }} --build=missing --update -g GitHubActionsBuildEnv -g GitHubActionsRunEnv
