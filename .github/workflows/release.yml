@@ -24,6 +24,10 @@ on:
                 default: false
                 type: boolean
 
+# Run the nightly at 5:25 UTC on working days
+    schedule:
+    - cron: '25 5 * * 1-5'
+
 env:
     CONAN_USER: ${{ secrets.CONAN_USER }}
     CONAN_PASS: ${{ secrets.CONAN_PASS }}
@@ -62,11 +66,25 @@ jobs:
             name: GitTools
             uses: gittools/actions/gitversion/execute@v0.9.13
 
+        -   name: Get nightly build number
+            if: ${{ github.event.schedule == '25 5 * * 1-5' }}
+            id: date
+            run: echo "::set-output name=BuildMetaData::$(date +'%Y%m%d')"
+
         -   name: Get build number based on data
+            if: ${{ github.event.schedule != '25 5 * * 1-5' }}
             id: date
             run: echo "::set-output name=BuildMetaData::$(date +'%Y%m%d%H%M')"
 
+        -   name: Get nightly short PreReleaseTag
+            if: ${{ github.event.schedule == '25 5 * * 1-5' }}
+            id: prereleasetag
+            run: |
+                pre_release_tag=${{ steps.git-tool.outputs.PreReleaseTag }}
+                echo "::set-output name=PreReleaseTag::nightly"
+
         -   name: Get short PreReleaseTag
+            if: ${{ github.event.schedule != '25 5 * * 1-5' }}
             id: prereleasetag
             run: |
                 pre_release_tag=${{ steps.git-tool.outputs.PreReleaseTag }}
