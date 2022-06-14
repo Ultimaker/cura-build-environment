@@ -172,13 +172,13 @@ jobs:
             working-directory: cmake-build-release/cura
 
         -   name: Archive the artifacts (bash)
-            if: ${{ ! github.event.inputs.installer && runner.os != 'Windows' }}
-            run: tar -zcvf ./Ultimaker-Cura/ -DestinationPath ./Ultimaker-Cura-${{ needs.get-semver.outputs.semver_full }}-${{ runner.os }}-${{ runner.arch }}.tar.gz
+            if: ${{ github.event.inputs.installer == 'false' && runner.os != 'Windows' }}
+            run: tar -zcf "./Ultimaker-Cura-${{ needs.get-semver.outputs.semver_full }}-${{ runner.os }}-${{ runner.arch }}.tar.gz" "./Ultimaker-Cura/"
             working-directory: cmake-build-release/cura/dist
 
         -   name: Archive the artifacts (Powershell)
-            if: ${{ ! github.event.inputs.installer && runner.os == 'Windows' }}
-            run: Compress-Archive -Path .\Ultimaker-Cura\ -DestinationPath .\Ultimaker-Cura-${{ needs.get-semver.outputs.semver_full }}-${{ runner.os }}-${{ runner.arch }}.zip
+            if: ${{ github.event.inputs.installer == 'true' && runner.os == 'Windows' }}
+            run: Compress-Archive -Path ".\Ultimaker-Cura" -DestinationPath ".\Ultimaker-Cura-${{ needs.get-semver.outputs.semver_full }}-${{ runner.os }}-${{ runner.arch }}.zip"
             working-directory: cmake-build-release/cura/dist
 
         -   name: Upload the artifacts
