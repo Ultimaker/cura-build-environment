@@ -177,8 +177,15 @@ jobs:
             working-directory: cmake-build-release/cura/dist
 
         -   name: Archive the artifacts (Powershell)
-            if: ${{ github.event.inputs.installer == 'true' && runner.os == 'Windows' }}
+            if: ${{ github.event.inputs.installer == 'false' && runner.os == 'Windows' }}
             run: Compress-Archive -Path ".\Ultimaker-Cura" -DestinationPath ".\Ultimaker-Cura-${{ needs.get-semver.outputs.semver_full }}-${{ runner.os }}-${{ runner.arch }}.zip"
+            working-directory: cmake-build-release/cura/dist
+
+        -   name: Create the Windows exe installer (Powershell)
+            if: ${{ github.event.inputs.installer == 'true' && runner.os == 'Windows' }}
+            run: |
+                python "$Env:GITHUB_WORKSPACE\packaging\NSIS\nsis-configurator.py" um_path "$Env:GITHUB_WORKSPACE\packaging\NSIS\Ultimaker-Cura.nsi.jinja" "Ultimaker Cura" "Ultimaker-Cura.exe" "${{ needs.get-semver.outputs.semver_major }}" "${{ needs.get-semver.outputs.semver_minor }}" "${{ needs.get-semver.outputs.semver_patch }}" "0" "Ultimaker B.V." "https://ultimaker.com" "$Env:GITHUB_WORKSPACE\packaging\cura_license.txt" "LZMA" "$Env:GITHUB_WORKSPACE\packaging\cura_banner_nsis.bmp" "$Env:GITHUB_WORKSPACE\packaging\Cura.ico" "Ultimaker-Cura-${{ needs.get-semver.outputs.semver_full }}-${{ runner.os }}-${{ runner.arch }}.exe"
+                makensis /V2 /P4 Ultimaker-Cura.nsi
             working-directory: cmake-build-release/cura/dist
 
         -   name: Upload the artifacts
