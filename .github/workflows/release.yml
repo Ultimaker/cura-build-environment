@@ -66,29 +66,26 @@ jobs:
             name: GitTools
             uses: gittools/actions/gitversion/execute@v0.9.13
 
-        -   name: Get nightly build number
-            if: ${{ github.event.schedule == '25 5 * * 1-5' }}
-            id: date
-            run: echo "::set-output name=BuildMetaData::$(date +'%Y%m%d')"
-
         -   name: Get build number based on data
-            if: ${{ github.event.schedule != '25 5 * * 1-5' }}
             id: date
-            run: echo "::set-output name=BuildMetaData::$(date +'%Y%m%d%H%M')"
-
-        -   name: Get nightly short PreReleaseTag
-            if: ${{ github.event.schedule == '25 5 * * 1-5' }}
-            id: prereleasetag
             run: |
-                pre_release_tag=${{ steps.git-tool.outputs.PreReleaseTag }}
-                echo "::set-output name=PreReleaseTag::nightly"
+                if [ "${{ github.event.schedule != '25 5 * * 1-5' }}" == "true" ]; then
+                    build_metadata_tag=$(date +'%Y%m%d%H%M')
+                else
+                    build_metadata_tag=$(date +'%Y%m%d')
+                fi
+                echo "::set-output name=BuildMetaData::$build_metadata_tag"
 
         -   name: Get short PreReleaseTag
-            if: ${{ github.event.schedule != '25 5 * * 1-5' }}
             id: prereleasetag
             run: |
-                pre_release_tag=${{ steps.git-tool.outputs.PreReleaseTag }}
-                echo "::set-output name=PreReleaseTag::${pre_release_tag:0:9}"
+                if [ "${{ github.event.schedule != '25 5 * * 1-5' }}" == "true" ]; then
+                    long_pre_release_tag=${{ steps.git-tool.outputs.PreReleaseTag }}
+                    pre_release_tag=${pre_release_tag:0:9}
+                else
+                    pre_release_tag="nightly"
+                fi
+                echo "::set-output name=PreReleaseTag::$pre_release_tag"
 
     cura-installer-create:
         runs-on: ${{ matrix.os }}

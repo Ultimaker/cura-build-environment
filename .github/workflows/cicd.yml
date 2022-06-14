@@ -56,3 +56,4 @@ jobs:
         fetch-depth: 1
     - name: Build the environment on macOS
       run: .github/workflows/build-macOS.sh
+
