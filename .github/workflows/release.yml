@@ -152,7 +152,6 @@ jobs:
             run: |
                 . activate_github_actions_buildenv.sh
                 . activate_github_actions_runenv.sh
-                echo "PYTHONPATH=../..:$PYTHONPATH" >> $GHITHUB_ENV
             working-directory: cmake-build-release/cura/venv/conan
 
         -   name: Set Environment variables for Cura (Powershell)
@@ -160,7 +159,6 @@ jobs:
             run: |
                 .\activate_github_actions_buildenv.ps1
                 .\activate_github_actions_runenv.ps1
-                echo "Env:PYTHONPATH=../..;$Env:PYTHONPATH" >> $Env:GHITHUB_ENV
             working-directory: cmake-build-release/cura/venv/conan
 
         -   name: Install Cura Python requirements
