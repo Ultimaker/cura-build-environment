@@ -179,6 +179,14 @@ jobs:
                 .\activate_github_actions_runenv.ps1
             working-directory: cmake-build-release/cura/venv/conan
 
+        -   name: Set pythonpath for cura, uranium, libcharon (bash)
+            if: ${{ runner.os != 'Windows' }}
+            run: echo "PYTHONPATH=$GITHUB_WORKSPACE/cmake-build-release/cura:$GITHUB_WORKSPACE/cmake-build-release/uranium:$GITHUB_WORKSPACE/cmake-build-release/libcharon:$PYTHONPATH" >> $GITHUB_ENV
+
+        -   name: Set pythonpath for cura, uranium, libcharon (Powershell)
+            if: ${{ runner.os == 'Windows' }}
+            run: echo "PYTHONPATH=$Env:GITHUB_WORKSPACE\cmake-build-release\cura;$Env:GITHUB_WORKSPACE\cmake-build-release\uranium;$Env:GITHUB_WORKSPACE\cmake-build-release\libcharon;$Env:PYTHONPATH" >> $Env:GITHUB_ENV
+
         -   name: Install Cura Python requirements
             run: |
                 pip install -r requirements.txt
