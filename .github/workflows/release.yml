@@ -193,6 +193,10 @@ jobs:
             with:
                 name: Ultimaker-Cura-${{ needs.get-semver.outputs.semver_full }}-${{ runner.os }}-${{ runner.arch }}
                 path: |
-                    cmake-build-release/cura/dist/Ultimaker-Cura/*.tar.gz
-                    cmake-build-release/cura/dist/Ultimaker-Cura/*.zip
+                    cmake-build-release/cura/dist/*.tar.gz
+                    cmake-build-release/cura/dist/*.zip
+                    cmake-build-release/cura/dist/*.exe
+                    cmake-build-release/cura/dist/*.msi
+                    cmake-build-release/cura/dist/*.dmg
+                    cmake-build-release/cura/dist/*.AppImage
                 retention-days: 2
