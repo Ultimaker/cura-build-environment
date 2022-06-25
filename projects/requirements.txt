@@ -358,3 +358,8 @@ pywin32-ctypes==0.2.0; \
     sys_platform=="win32" \
     --hash=sha256:24ffc3b341d457d48e8922352130cf2644024a4ff09762a2261fd34c36ee5942 \
     --hash=sha256:9dc2d991b3479cc2df15930958b674a48a227d5361d413827a4cfd0b5876fc98
+
+# macOS specific requirements
+pyobjc==8.5; \
+sys_platform=="darwin" \
+    --hash=sha256:72917dfb2cf138c06464c25ccf0b528877b997bbf0fd9854ce0523e7e739d955
