@@ -1,2 +1,0 @@
-[requires]
-binutils/2.37
