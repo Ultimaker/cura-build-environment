@@ -5,7 +5,7 @@ GetFromEnvironmentOrCache(
         NAME
             SAVITAR_BRANCH_OR_TAG
         DEFAULT
-            master
+            main
         DESCRIPTION
             "The name of the tag (e.q.: v4.13.0), branch (e.q.: origin/CURA-8640) or commit hash (e.q.: 961dabf) for Savitar")
 
